@@ -1,0 +1,40 @@
+body {
+    background-color: #1E1E75; /* Dark blue background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container {
+    background-color: white;
+    width: 60%;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.left-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.right-section {
+    width: 50%;
+    padding: 50px;
+}
+.btn-custom {
+    background-color: #1E1E75;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+}
+.btn-custom:hover {
+    background-color: #15155C;
+}
+.form-control {
+    border-radius: 20px;
+}
