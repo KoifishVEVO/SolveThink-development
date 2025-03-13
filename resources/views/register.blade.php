@@ -11,7 +11,7 @@
             height: 100vh;
         }
         .left-panel {
-            border-right: 5px solid #dee2e6;
+          
             height: 100%;
             
         }
@@ -48,6 +48,14 @@
             color: #272780;
             text-decoration: none; 
         }
+        .left-shadow{
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .alert-text{
+            font-size: 14px;
+            color: red;
+            padding: 1px;
+        }
     </style>
 </head>
 <body class="d-flex align-items-center justify-content-center">
@@ -56,17 +64,19 @@
             <!-- Left Panel with Logo -->
             <div class="col-md-5 d-flex align-items-center justify-content-center bg-white left-panel">
                 <div class="text-center">
-                    <img src="https://via.placeholder.com/150x80" alt="SolveThink Logo" class="mb-2">
+                    <img src="{{asset('assets/images/solvethink_transparent.png')}}" alt="SolveThink Logo" class="mb-2 img-fluid max-width: 100%">
 
                 </div>
             </div>
             
             <!-- Right Panel with Form -->
-            <div class="col-md-7 p-5 d-flex flex-column justify-content-center">
+            <div class="col-md-7 p-5 d-flex flex-column justify-content-center left-shadow">
                 <div class="form-header-container text-center">
                     <h1 class="fw-bold display-4">Buat Akun Baru</h1>
                 </div>
-                <form>
+                <form method="POST" action = "{{ url('/register') }}">
+                    @csrf
+
                     <div class="mb-3">
                         <input type="text" class="form-control rounded-pill" placeholder="Nama Lengkap" id="nama">
                     </div>
@@ -81,6 +91,12 @@
                             <input type="password" class="form-control rounded-pill" placeholder="Ketik Ulang Password" id="confirmPassword">
                         </div>
                     </div>
+
+                    @if (session('error'))
+                    <div class="alert alert-text text-center p2 small" role="alert">
+                        {{ session('error') }}
+                    </div>
+                    @endif
                     <div class="d-grid gap-2 mt-4">
                         <button type="submit" class="btn btn-custom-primary rounded-pill py-2 fw-bold">Buat Akun</button>
                     </div>
