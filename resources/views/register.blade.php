@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container login-container">
-        <div class="row h-100 bg-white shadow">
+        <div class="row h-100  bg-white shadow">
             <!-- Left Panel(logo) -->
             <div class="col-md-5 d-flex align-items-center justify-content-center bg-white left-panel d-none d-lg-flex">
 
