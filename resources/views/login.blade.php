@@ -16,7 +16,7 @@
             </div>
 
             <!-- Right Panel(form)-->
-            <div class="col-md-12 col-lg-7 col-sm-12 p-3 d-flex flex-column justify-content-center left-shadow">
+            <div class="col-md-12 col-lg-7 col-sm-12 p-8 d-flex flex-column justify-content-center left-shadow">
                 <div class="form-header-container text-center">
                     <h1 class="fw-bold display-4">Login</h1>
                 </div>
