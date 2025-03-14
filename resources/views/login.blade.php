@@ -95,7 +95,7 @@
                     @endif
                     <div class="mb-3">
                         <input type="number" class="form-control rounded-pill" placeholder="Nomor HP" id="hp"
-                            name="no_hp" required>
+                            name="no_hp" required autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control rounded-pill" placeholder="Password" id="password"
