@@ -17,11 +17,9 @@
         }
 
         .login-container {  
-            height: 90vh; 
+            height: 80vh; 
             width: 80%; 
-            max-width: 1200px;
-            max-height: 800px;
-
+            max-width: 2000px;
         }  
 
         .form-control {
@@ -46,7 +44,7 @@
         }
 
         .form-header-container {
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             margin-top: -3rem;
         }
 
