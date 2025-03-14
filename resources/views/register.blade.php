@@ -17,8 +17,8 @@
             </div>
 
             <!-- Right Panel(form)-->
-            <div class="col-md-12 col-lg-7 col-sm-12 p-2 d-flex flex-column justify-content-center left-shadow">
-                <div class="form-header-container text-center">
+            <div class="col-md-12 col-lg-7 col-sm-12 p-8 d-flex flex-column justify-content-center left-shadow">
+                <div class="form-header-container text-center mt-1">
                     <h1 class="fw-bold h-2 ">Buat Akun Baru</h1>
                 </div>
                 <form method="POST" action = "{{ url('/register') }}">
@@ -44,7 +44,7 @@
                         {{ session('error') }}
                     </div>
                     @endif
-                    <div class="d-grid gap-2 mt-4">
+                    <div class="d-grid gap-2 mt-5">
                         <button type="submit" class="btn btn-custom-primary rounded-pill py-2 fw-bold">Buat Akun</button>
                     </div>
                 </form>

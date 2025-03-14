@@ -44,7 +44,7 @@
         }
 
         .form-header-container {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             margin-top: -3rem;
         }
 
