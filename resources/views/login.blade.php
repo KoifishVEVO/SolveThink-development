@@ -6,9 +6,9 @@
 
 @section('content')
     <div class="container login-container" >
-        <div class="row h-100 bg-white shadow">
+        <div class="row h-100 bg-white shadow rounded-3">
             <!-- Left Panel(logo) -->
-            <div class="col-md-5 d-flex align-items-center justify-content-center bg-white left-panel d-none d-lg-flex">
+            <div class="col-md-5 d-flex align-items-center justify-content-center bg-white left-panel d-none d-lg-flex rounded-3">
                 <div class="d-flex align-items-center justify-content-center w-100 h-100">
                     <img src="{{ asset('assets/images/solvethink_transparent.png') }}" alt="SolveThink Logo"
                         class="img-fluid" style="max-width: 100%;">

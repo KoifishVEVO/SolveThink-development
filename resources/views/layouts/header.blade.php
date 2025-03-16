@@ -20,6 +20,7 @@
             height: 80vh; 
             width: 80%; 
             max-width: 2000px;
+            border-radius: 10px;
         }  
 
         .form-control {

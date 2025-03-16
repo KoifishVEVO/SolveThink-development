@@ -6,9 +6,9 @@
 
 @section('content')
     <div class="container login-container">
-        <div class="row h-100  bg-white shadow">
+        <div class="row h-100  bg-white shadow rounded-3">
             <!-- Left Panel(logo) -->
-            <div class="col-md-5 d-flex align-items-center justify-content-center bg-white left-panel d-none d-lg-flex">
+            <div class="col-md-5 d-flex align-items-center justify-content-center bg-white left-panel d-none d-lg-flex rounded-3">
 
                 <div class="text-center">
                     <img src="{{asset('assets/images/solvethink_transparent.png')}}" alt="SolveThink Logo" class="mb-2 img-fluid max-width: 100%">
@@ -18,7 +18,7 @@
 
             <!-- Right Panel(form)-->
             <div class="col-md-12 col-lg-7 col-sm-12 p-8 d-flex flex-column justify-content-center left-shadow">
-                <div class="form-header-container text-center mt-1">
+                <div class="form-header-container text-center mt-1 ">
                     <h1 class="fw-bold h-2 ">Buat Akun Baru</h1>
                 </div>
                 <form method="POST" action = "{{ url('/register') }}">
