@@ -11,12 +11,8 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
 
-<<<<<<< Updated upstream
-// example
-Route::get('/dashboard', function() {
-=======
+
 // dashboard
 Route::post('/dashboard', function() {
->>>>>>> Stashed changes
     return view('dashboard');
 });
