@@ -20,7 +20,7 @@
                 <div class="form-header-container text-center">
                     <h1 class="fw-bold display-4">Login</h1>
                 </div>
-                <form method="POST" action = "{{ url('/login') }}">
+                <form method="POST" action = "{{ url('/dashboard') }}">
                     @csrf
 
                     <div class="mb-3">
