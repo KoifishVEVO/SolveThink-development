@@ -21,6 +21,7 @@ class AuthController extends Controller
     }
 
     public function Register(Request $request) {
+
         $request->validate([
             'nama' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15|unique:users,no_hp',
@@ -31,7 +32,7 @@ class AuthController extends Controller
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
-            'role' => "pegawai"
+            'role' => "admin"
         ]);
 
         return redirect('/')->with('success', 'Registrasi berhasil! Silakan login.');
