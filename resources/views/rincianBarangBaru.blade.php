@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>Dashboard</h1>
-    <p>This is the dashboard page.</p>
+    <h1>Rincian Barang baru</h1>
+    <p>This is the barang baru page</p>
 @endsection
 
