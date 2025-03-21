@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    //
     public function showLogin()
     {
         return view('login');
@@ -24,7 +23,7 @@ class AuthController extends Controller
 
         $request->validate([
             'nama' => 'required|string|max:255',
-            'no_hp' => 'required|string|max:15|unique:users,no_hp',
+            'no_hp' => 'required|string|max:13|min:11|unique:users,no_hp',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
