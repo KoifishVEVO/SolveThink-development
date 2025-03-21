@@ -5,6 +5,6 @@
 @endsection
 
 @section('content')
-        <h1>Rincian Barang Bekas</h1>
+        <h1>Rincian Nama Barang</h1>
 @endsection
 
