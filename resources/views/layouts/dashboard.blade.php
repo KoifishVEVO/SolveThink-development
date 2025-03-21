@@ -53,7 +53,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{('/')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span class = "sidebar-item-color">Dashboard</span>
                 </a>
@@ -63,7 +63,7 @@
             <div class="sidebar-heading">Pengelolaan Barang</div>
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link " href="#">
+                <a class="nav-link " href="{{('/rincianNamaBarang')}}">
                     <i class="fas fa-list"></i>
                     <span>Rincian Nama Barang</span>
                 </a>
@@ -220,7 +220,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{('/login')}}">Logout</a>
                 </div>
             </div>
         </div>

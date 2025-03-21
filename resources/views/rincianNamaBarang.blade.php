@@ -4,11 +4,7 @@
     Dashboard
 @endsection
 
-@section('styles')
-
-
-@endsection
-
 @section('content')
-<x-rincian-barang />
+        <h1>Rincian Nama Barang</h1>
 @endsection
+
