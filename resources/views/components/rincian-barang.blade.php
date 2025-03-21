@@ -1,4 +1,5 @@
 
+
 <style>
 
 .heading-text {
@@ -97,8 +98,8 @@
 </style>
 
 <div class="table-container">
-        <h2 class="fw-bold heading-text"></h2>
-        <p class=" heading-text">{{ $headingText }}</p>
+        <h2 class="fw-bold heading-text">ASSET BARANG BARU</h2>
+        <p class=" heading-text">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
         
         <div class="card">
             <div class="card-header card-color text-white">

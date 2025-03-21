@@ -4,7 +4,11 @@
     Dashboard
 @endsection
 
-@section('content')
-        <h1>Rincian Barang Bekas</h1>
+@section('styles')
+
+
 @endsection
 
+@section('content')
+<x-rincian-barang />
+@endsection
