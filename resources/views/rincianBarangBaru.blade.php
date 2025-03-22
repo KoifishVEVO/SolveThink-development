@@ -110,6 +110,7 @@
 </style>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="table-container">
         <h2 class="fw-bold heading-text">ASSET BARANG BARU</h2>
         <p class=" heading-text">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
@@ -136,6 +137,8 @@
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
+=======
+>>>>>>> Stashed changes
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
@@ -160,6 +163,9 @@
                 </div>
                 <div class="d-flex flex-wrap gap-2">
                     <div class="search-container mr-2">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                         <label for="search">Search:</label>
                         <input type="text" id="search" class="form-control d-inline w-auto">
@@ -167,17 +173,23 @@
                     <button class="btn btn-success" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
                 </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 </div>
                 
                 <!-- main table -->
                 <table class="table ">
                     <thead >
 =======
+=======
+>>>>>>> Stashed changes
             </div>
 
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                         <tr>
                             <th>ID</th>
@@ -208,6 +220,7 @@
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
                                 </div>
                             </td>
+<<<<<<< Updated upstream
                         </tr>
 <<<<<<< Updated upstream
                         
@@ -217,6 +230,12 @@
                 </table>
             </div>
             
+=======
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+>>>>>>> Stashed changes
             <div class="d-sm-flex justify-content-between align-items-center">
                 <p id="showing-info">Showing 1 to 10 of 20 entries</p>
                 <nav aria-label="Page navigation">
