@@ -18,26 +18,31 @@ class BarangBaruController extends Controller
         return view('aset_barang.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama_barang' => 'required|max:255',
-            'gambar_barang' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'harga_jual_barang' => 'required|integer',
-            'total_barang' => 'required|integer',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'nama_barang' => 'required|max:255',
+        'gambar_barang' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'harga_jual_barang' => 'required|integer',
+        'total_barang' => 'required|integer',
+    ]);
 
-        $imagePath = $request->file('gambar_barang')->store('uploads', 'public');
-
-        AsetBarangBaru::create([
-            'nama_barang' => $request->nama_barang,
-            'gambar_barang' => $imagePath,
-            'harga_jual_barang' => $request->harga_jual_barang,
-            'total_barang' => $request->total_barang,
-        ]);
-
-        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
+    if ($request->hasFile('gambar_barang')) {
+        $file = $request->file('gambar_barang');
+        $newFileName = 'barang_baru' . time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('uploads', $newFileName, 'public');
+        $imagePath = 'uploads/' . $newFileName;
     }
+
+    AsetBarangBaru::create([
+        'nama_barang' => $request->nama_barang,
+        'gambar_barang' => $imagePath,
+        'harga_jual_barang' => $request->harga_jual_barang,
+        'total_barang' => $request->total_barang,
+    ]);
+
+    return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
+}
 
     public function edit($id)
     {

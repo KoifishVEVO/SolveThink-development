@@ -202,7 +202,7 @@
                 </button>
             </div>
 
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('aset_barang.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                             <!-- image upload  -->
