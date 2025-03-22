@@ -107,6 +107,8 @@
     border-bottom: none !important;
     border-color: #DEDDDD !important;
 }
+
+
 </style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -252,11 +254,11 @@
                                 </div>
 
                                 <!-- Image Preview -->
-                                <div id="image-preview" style="display: none; height: 100%; width: 100%;">
+                                <div id="image-preview" style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
                                     <img id="preview-img" src="" alt="Preview"
-                                        style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
                                     <h6 id="change-image-btn" class="position-absolute"
-                                        style="top: 10px; right: 10px; cursor: pointer;">
+                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
                                         Click to Change Image
                                     </h6>
                                 </div>
