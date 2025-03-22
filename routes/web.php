@@ -37,4 +37,5 @@ Route::get('/rincianBarangBekas', function() {
 
 //rincian barang
 Route::post('/aset-barang', [BarangBaruController::class, 'store'])->name('aset_barang.store');
+Route::put('/aset-barang/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
 
