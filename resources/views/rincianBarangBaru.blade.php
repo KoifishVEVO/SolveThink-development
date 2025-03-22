@@ -163,10 +163,22 @@
                             <td>Stok barang 01</td>
                             <td class= "px-3 d-flex align-items-center justify-content-center border-0">
                                 <button class="btn btn-sm rincian-btn ml-3" data-toggle="modal" data-target="#rincianAssetModal">
-                                <i class="fa fa-eye"></i>
-                                Rincian
+                                                                <i class="fa fa-eye"></i>
+                                                                Rincian
+                                                                </button>
+                                                                <button
+                                    class="btn btn-sm btn-warning ml-3 btn-update"
+                                    data-id="1"
+                                    data-nama="Nama barang 01"
+                                    data-harga="10000"
+                                    data-stok="25"
+                                    data-gambar="{{ asset('storage/uploads/gambar01.png') }}"
+                                    data-url="{{ route('aset_barang.update', 1) }}"
+                                    data-toggle="modal"
+                                    data-target="#updateAssetModal"
+                                >
+                                    Update
                                 </button>
-                                <button class="btn btn-sm btn-warning ml-3" data-toggle="modal" data-target="#updateAssetModal">Update</button>
                                 <button class="btn btn-sm btn-danger ml-3" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
                             </td>
                         </tr>
@@ -420,6 +432,43 @@
             reader.readAsDataURL(file);
         }
     });
+
+    // Tombol Update - Isi otomatis modal
+    document.querySelectorAll('.btn-update').forEach(button => {
+        button.addEventListener('click', function () {
+            // Ambil data dari tombol
+            const id = this.dataset.id;
+            const nama = this.dataset.nama;
+            const harga = this.dataset.harga;
+            const stok = this.dataset.stok;
+            const gambar = this.dataset.gambar;
+            const url = this.dataset.url;
+
+            // Isi form di modal
+            document.getElementById('update-id').value = id;
+            document.getElementById('update-nama').value = nama;
+            document.getElementById('update-harga').value = harga;
+            document.getElementById('update-stok').value = stok;
+
+            // Set form action ke URL update
+            document.querySelector('#updateAssetModal form').action = url;
+
+            // Preview gambar
+            const previewImg = document.getElementById('update-preview-img');
+            const previewWrapper = document.getElementById('update-image-preview');
+            const uploadView = document.getElementById('update-button-view');
+
+            if (gambar) {
+                previewImg.src = gambar;
+                previewWrapper.style.display = 'block';
+                uploadView.style.display = 'none';
+            } else {
+                previewWrapper.style.display = 'none';
+                uploadView.style.display = 'flex';
+            }
+        });
+    });
+
 </script>
 
 @endsection
