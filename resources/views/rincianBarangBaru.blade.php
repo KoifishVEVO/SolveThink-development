@@ -108,31 +108,6 @@
     border-color: #DEDDDD !important;
 }
 </style>
-
-
-<div class="table-container">
-        <h2 class="fw-bold heading-text">ASSET BARANG BARU</h2>
-        <p class=" heading-text">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
-
-        <div class="card">
-            <div class="card-header card-color text-white">
-                <strong>Data Tabel Asset Barang Baru</strong>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <!-- entries -->
-                        <label for="showEntries" >Show</label>
-                        <select id="showEntries" class="form-select d-inline w-auto">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select> entries
-                    </div>
-                    <!-- search -->
-                    <div class="d-flex gap-2">
-                    <div class = "mr-3">
-
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <!-- Begin Page Content -->
@@ -164,11 +139,6 @@
                     </div>
                     <button class="btn btn-success" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
                 </div>
-                </div>
-
-                <!-- main table -->
-                <table class="table ">
-                    <thead >
             </div>
 
             <div class="table-responsive">
@@ -219,10 +189,7 @@
                     </tbody>
                 </table>
             </div>
-            
-                            </tr>
-                    </tbody>
-                </table>
+
             </div>
             <div class="d-sm-flex justify-content-between align-items-center">
                 <p id="showing-info">Showing 1 to 10 of 20 entries</p>
@@ -247,6 +214,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
     <!-- Modal -->
      <!-- Add Asset Modal -->
