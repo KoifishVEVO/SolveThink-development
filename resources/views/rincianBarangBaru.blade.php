@@ -341,26 +341,34 @@
 
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <!-- Image Upload Area -->
-                    <div id="update-image-container" class="modal-color position-relative mb-4"
-                        style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px; text-align: center;
-                            background-color: #f8f9fa; height: 200px; overflow: hidden; cursor: pointer;">
-                        <!-- Clickable Area -->
-                        <div id="update-button-view" style="display: flex; flex-direction: column; align-items: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                            <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                            <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                            <input type="file" id="updateFileInput" name="gambar_barang" style="display: none;" accept="image/*">
-                        </div>
+                    <!-- image upload  -->
+                    <div id="image-upload-container" class="modal-color position-relative mb-4"
+                                style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
+                                    cursor: pointer; position: relative; text-align: center;">
 
-                        <div id="update-image-preview" style="display: none; height: 100%; width: 100%;">
-                            <img id="update-preview-img" src="" alt="Preview"
-                                style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                            <h6 id="update-change-btn" class="position-absolute"
-                                style="top: 10px; right: 10px;">
-                                Click to Change Image
-                            </h6>
-                        </div>
-                    </div>
+
+                                <div id="upload-button-view"
+                                    style="display: flex; flex-direction: column; align-items: center;
+                                        justify-content: center; position: absolute; top: 50%; left: 50%;
+                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
+                                    <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
+                                    <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
+                                    <input type="file" id="updateFileInput" name="gambar_barang"
+                                        style="display: none;" accept="image/*" required>
+                                </div>
+
+                                <!-- Image Preview -->
+                                <div id="update-image-preview" style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
+                                    <img id="update-preview-img" src="" alt="Preview"
+                                        style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
+                                    <h6 id="update-change-btn" class="position-absolute"
+                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
+                                        Click to Change Image
+                                    </h6>
+                                </div>
+                            </div>
+                    
 
                     <label class="font-weight-bold">Nama Barang</label>
                     <input type="text" name="nama_barang" id="update-nama" class="form-control mb-3" required>
