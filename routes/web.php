@@ -29,14 +29,13 @@ Route::get('/rincianNamaBarang', function() {
 
 Route::get('/rincianBarangBaru', function() {
     return view('rincianBarangBaru');
-});
+})->name('aset_barang.index');
 
 Route::get('/rincianBarangBekas', function() {
     return view('rincianBarangBekas');
+});
 
 //rincian barang
-Route::post('/storeAsetBarangBaru', [App\Http\Controllers\BarangBaruController::class, 'store'])->name('aset_barang_baru.store');
-
-
-});
+Route::post('/aset-barang', [BarangBaruController::class, 'store'])->name('aset_barang.store');
+Route::put('/aset-barang/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
 
