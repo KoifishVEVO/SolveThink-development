@@ -191,7 +191,7 @@
                 <!-- Drag & Drop Area -->
                 <div id="drop-add" class="drop-zone">
                     <i class="fa fa-image" style="font-size: 24px; display: block; margin-bottom: 10px;"></i>
-                    <div style="font-size: 16px; font-weight: bold;">Drag&Drop foto di sini</div>
+                    <div style="font-size: 16px; font-weight: bold;">Drag&Drop foto di siasdasdsani</div>
                     <input type="file" id="fileInput" name="image_file" style="display: none;" accept="image/*">
                 </div>
                 
@@ -272,7 +272,7 @@
                 <!-- Drag & Drop Area -->
                 <div class="drop-zone d-flex flex-column align-items-center justify-content-center">
                     <i class="fa fa-image fa-2x"></i>
-                    <p class="mt-2 font-weight-bold">Drag & Drop foto di sini</p>
+                    <p class="mt-2 font-weight-bold">Drag & Drop foto di siniasdsadsa</p>
                 </div>
 
                 <!-- OR Divider -->
