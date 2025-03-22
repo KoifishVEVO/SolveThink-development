@@ -78,7 +78,7 @@
                 </form>
 
                 <div class="text-center mt-3 bottomtext">
-                    <span> Sudah Punya Akun? <a href="{{ url('/') }}" class="fw-bold">Login!</a></span>
+                    <span> Sudah Punya Akun? <a href="{{ route('login.show') }}" class="fw-bold">Login!</a></span>
                 </div>
             </div>
         </div>

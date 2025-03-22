@@ -45,19 +45,14 @@
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar-color sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="text-center">
-                    <h3>Welcome, Admin</h3>
+            
+                <div class="text-center sidebar-brand-text"  style="text-transform: none;">
+                    <h3 class="welcome-text font-weight-bold">Welcome, Admin</h3>
                 </div>
+               
             </a>
 
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="{{('/')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span class = "sidebar-item-color">Dashboard</span>
-                </a>
-            </li>
+            
 
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Pengelolaan Barang</div>
@@ -202,9 +197,9 @@
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
+    <a class="scroll-to-top rounded " href="#page-top">
         <i class="fas fa-angle-up"></i>
-    </a>
+    </a> 
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
