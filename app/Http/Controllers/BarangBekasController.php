@@ -36,7 +36,7 @@ class BarangBekasController extends Controller
             'total_barang' => $request->total_barang,
         ]);
 
-        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -67,7 +67,7 @@ class BarangBekasController extends Controller
 
         $barang->save();
 
-        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil diupdate');
+        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil diupdate');
     }
 
     public function destroy($id)
@@ -79,6 +79,6 @@ class BarangBekasController extends Controller
         }
 
         $barang->delete();
-        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil dihapus');
+        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil dihapus');
     }
 }

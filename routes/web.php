@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangBaruController;
 use App\Http\Controllers\BarangBekasController;
 use App\Models\AsetBarangBaru;
+use App\Models\AsetBarangBekas;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,11 +35,16 @@ Route::get('/rincianBarangBaru', function() {
 })->name('aset_barang.index');
 
 Route::get('/rincianBarangBekas', function() {
-    return view('rincianBarangBekas');
-});
+   $barang = AsetBarangBekas::all();
+    return view('rincianBarangBekas', compact('barang'));
+})->name('aset_barang_bekas.index');
 
-//rincian barang
+// rincian barang
 Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
 Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
 Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
 
+// rincian barang bekas
+Route::post('/aset-barang-bekas', [BarangBaruController::class, 'store'])->name('aset_barang_bekas.store');
+Route::put('/aset-barang-bekas/{id}', [BarangBaruController::class, 'update'])->name('aset_barang_bekas.update');
+Route::delete('/aset-barang-bekas/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang_bekas.destroy');
