@@ -22,11 +22,11 @@
     background-color: transparent !important;
     color: #A9B5DF !important;
     border: 2px solid #A9B5DF !important;
-    font-weight: normal !important; 
+    font-weight: normal !important;
     border-radius: 5px !important;
-    padding: 0.25rem 0.5rem !important; 
-    line-height: 1.5 !important; 
-    white-space: nowrap !important; 
+    padding: 0.25rem 0.5rem !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -124,7 +124,7 @@
 }
 
 .page-link {
- 
+
     color: #272780
 }
 
@@ -379,7 +379,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <!-- image upload  -->
-                    <div id="image-upload-container" class="modal-color position-relative mb-4"
+                    <div id="update-image-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
@@ -405,7 +405,7 @@
                                     </h6>
                                 </div>
                             </div>
-                    
+
 
                     <label class="font-weight-bold">Nama Barang</label>
                     <input type="text" name="nama_barang" id="update-nama" class="form-control mb-3" required>

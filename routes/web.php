@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangBaruController;
 use App\Http\Controllers\BarangBekasController;
+use App\Models\AsetBarangBaru;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,7 +29,8 @@ Route::get('/rincianNamaBarang', function() {
 });
 
 Route::get('/rincianBarangBaru', function() {
-    return view('rincianBarangBaru');
+    $barang = AsetBarangBaru::all();
+    return view('rincianBarangBaru', compact('barang'));
 })->name('aset_barang.index');
 
 Route::get('/rincianBarangBekas', function() {
@@ -36,6 +38,7 @@ Route::get('/rincianBarangBekas', function() {
 });
 
 //rincian barang
-Route::post('/aset-barang', [BarangBaruController::class, 'store'])->name('aset_barang.store');
-Route::put('/aset-barang/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
+Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
+Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
+Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
 
