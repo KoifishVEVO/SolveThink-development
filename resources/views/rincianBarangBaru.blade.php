@@ -22,10 +22,16 @@
     background-color: transparent !important;
     color: #A9B5DF !important;
     border: 2px solid #A9B5DF !important;
-    font-weight: bold !important;
+    font-weight: normal !important; 
     border-radius: 5px !important;
-
+    padding: 0.25rem 0.5rem !important; 
+    line-height: 1.5 !important; 
+    white-space: nowrap !important; 
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
+
 
 
 .rincian-btn i {
@@ -120,7 +126,7 @@
 
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3 card-color">
+        <div class="card-header py-5 card-color">
             <h6 class="m-0 font-weight-bold text-white">Data Tabel Asset Barang Baru</h6>
         </div>
         <div class="card-body">
@@ -167,7 +173,7 @@
                             <td>Nama barang 01</td>
                             <td>Stok barang 01</td>
                             <td class= "px-3 d-flex align-items-center justify-content-center border-0">
-                                <button class="btn btn-sm rincian-btn ml-3" data-toggle="modal" data-target="#rincianAssetModal">
+                                <button class="btn btn-sm rincian-btn ml-3 " data-toggle="modal" data-target="#rincianAssetModal">
                                                                 <i class="fa fa-eye"></i>
                                                                 Rincian
                                                                 </button>
@@ -193,22 +199,33 @@
             </div>
 
             </div>
-            <div class="d-sm-flex justify-content-between align-items-center">
-                <p id="showing-info">Showing 1 to 10 of 20 entries</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <p id="showing-info" class="ml-3 mb-0 fs-sm">Showing 1 to 10 of 20 entries</p>
                 <nav aria-label="Page navigation">
-                    <ul class="pagination">
+                    <ul class="pagination mb-0 border rounded">
                         <li class="page-item">
-                            <a class="page-link" href="#" id="prev" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
+                            <a class="page-link border-0 rounded-0" href="#">Previous</a>
                         </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item active">
+                            <a class="page-link border-0 rounded-0" href="#">1</a>
+                        </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" id="next" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
+                            <a class="page-link border-0 rounded-0" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-0" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-0" href="#">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-0" href="#">5</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-0" href="#">6</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-0" href="#">Next</a>
                         </li>
                     </ul>
                 </nav>
