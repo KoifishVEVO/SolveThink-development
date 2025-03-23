@@ -114,26 +114,6 @@
     border-color: #DEDDDD !important;
 }
 
-.pagination {
-    overflow: hidden;
-}
-
-.page-item.active .page-link {
-    background-color: #3f51b5;
-    border-color: #3f51b5;
-}
-
-.page-link {
-
-    color: #272780
-}
-
-
-/* Add separator lines between items */
-.page-item .page-link {
-    border-right: 1px solid #dee2e6;
-}
-
 
 </style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -182,37 +162,59 @@
                     </thead>
                     <tbody id="table-body">
                         <!-- Sample row -->
-                        <tr>
-                            <td>1</td>
+                        @foreach ($barang as $item)
+                    <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <img src="{{ asset('assets/images/solvethink_transparent.png') }}" alt="Gambar"
+                                    <img src="{{ 'storage/' . $item->gambar_barang }}" alt="Gambar"
                                         class="img-fluid" style="max-width: 100px; height: auto;">
                                 </div>
                             </td>
-                            <td>Nama barang 01</td>
-                            <td>Stok barang 01</td>
-                            <td class= "px-3 d-flex align-items-center justify-content-center border-0">
-                                <button class="btn btn-sm rincian-btn ml-3 " data-toggle="modal" data-target="#rincianAssetModal">
-                                                                <i class="fa fa-eye"></i>
-                                                                Rincian
-                                                                </button>
-                                                                <button
+                            <td>{{ $item->nama_barang }}</td>
+                            <td>{{ $item->total_barang }}</td>
+                            <td class="px-3 d-flex align-items-center justify-content-center border-0">
+                                <!-- Rincian Button -->
+                                <button class="btn btn-sm rincian-btn ml-3" data-toggle="modal" data-target="#rincianAssetModal"
+                                    onclick="
+                                        document.getElementById('rincian-id').innerText = '{{ $item->id }}';
+                                        document.getElementById('rincian-nama').innerText = '{{ $item->nama_barang }}';
+                                        document.getElementById('rincian-stok').innerText = '{{ $item->total_barang }}';
+                                    ">
+                                    <i class="fa fa-eye"></i> Rincian
+                                </button>
+
+                                <!-- Update Button -->
+                                <button
                                     class="btn btn-sm btn-warning ml-3 btn-update"
-                                    data-id="1"
-                                    data-nama="Nama barang 01"
-                                    data-harga="10000"
-                                    data-stok="25"
-                                    data-gambar="{{ asset('storage/uploads/gambar01.png') }}"
-                                    data-url="{{ route('aset_barang.update', 1) }}"
+                                    data-id="{{ $item->id }}"
+                                    data-nama="{{ $item->nama_barang }}"
+                                    data-harga="{{ $item->harga_jual_barang }}"
+                                    data-stok="{{ $item->total_barang }}"
+                                    data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                    data-url="{{ route('aset_barang_bekas.update', $item->id) }}"
                                     data-toggle="modal"
                                     data-target="#updateAssetModal"
                                 >
                                     Update
                                 </button>
-                                <button class="btn btn-sm btn-danger ml-3" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
+
+                                <!-- Delete Button -->
+                                <button
+                                    class="btn btn-sm btn-danger ml-3"
+                                    data-toggle="modal"
+                                    data-target="#deleteAssetModal"
+                                    onclick="
+                                        document.getElementById('delete-id').value = '{{ $item->id }}';
+                                        document.getElementById('delete-item-name').innerText = '{{ $item->nama_barang }}';
+                                        document.querySelector('#deleteAssetModal form').action = '{{ route('aset_barang_bekas.destroy', $item->id) }}';
+                                    ">
+                                    Hapus
+                                </button>
                             </td>
                         </tr>
+                        @endforeach
+
 
                     </tbody>
                 </table>
@@ -255,9 +257,6 @@
 </div>
 
 
-
-
-
     <!-- Modal -->
      <!-- Add Asset Modal -->
 <div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetLabel" aria-hidden="true">
@@ -270,7 +269,7 @@
                 </button>
             </div>
 
-            <form action="{{ route('aset_barang.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('aset_barang_bekas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                             <!-- image upload  -->
@@ -379,6 +378,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <!-- image upload  -->
+
                     <div id="update-image-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
