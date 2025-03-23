@@ -114,26 +114,6 @@
     border-color: #DEDDDD !important;
 }
 
-.pagination {
-    overflow: hidden;
-}
-
-.page-item.active .page-link {
-    background-color: #3f51b5;
-    border-color: #3f51b5;
-}
-
-.page-link {
- 
-    color: #272780
-}
-
-
-/* Add separator lines between items */
-.page-item .page-link {
-    border-right: 1px solid #dee2e6;
-}
-
 
 </style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -141,117 +121,140 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 heading-text">ASSET BARANG BARU</h1>
-    <p class="mb-4 heading-text">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
+    <h1 class="h3 mb-4 heading-text">ASSET BARANG BEKAS</h1>
+    <p class="mb-4 heading-text">Tabel asset barang bekas adalah tabel yang berisikan informasi terkait barang bekas</p>
 
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-5 card-color">
-            <h6 class="m-0 font-weight-bold text-white">Data Tabel Asset Barang Baru</h6>
+            <h6 class="m-0 font-weight-bold text-white">Data Tabel Asset Barang Bekas</h6>
         </div>
         <div class="card-body">
-            <div class="table-controls d-sm-flex justify-content-between align-items-center mb-3">
-                <div class="entries-container">
-                    <label for="showEntries">Show</label>
-                    <select id="showEntries" class="entries mx-2">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
-                    <span>entries</span>
-                </div>
-                <div class="d-flex flex-wrap gap-2">
-                    <div class="search-container mr-2">
-                        <label for="search">Search:</label>
-                        <input type="text" id="search" class="form-control d-inline w-auto">
+
+        <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row mb-3">
+                <!-- Show entries -->
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="dataTable_length">
+                        <label>Show 
+                            <select id="showEntries" name="dataTable_length" class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries
+                        </label>
                     </div>
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
+                </div>
+                
+                <!-- Search box -->
+                <div class="col-sm-12 col-md-6">
+                    <div id="dataTable_filter" class="dataTables_filter d-flex justify-content-md-end">
+                        <label class="mr-2">Search:
+                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                        </label>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Gambar Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Stok Barang</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <!-- Sample row -->
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <img src="{{ asset('assets/images/solvethink_transparent.png') }}" alt="Gambar"
-                                        class="img-fluid" style="max-width: 100px; height: auto;">
-                                </div>
-                            </td>
-                            <td>Nama barang 01</td>
-                            <td>Stok barang 01</td>
-                            <td class= "px-3 d-flex align-items-center justify-content-center border-0">
-                                <button class="btn btn-sm rincian-btn ml-3 " data-toggle="modal" data-target="#rincianAssetModal">
-                                                                <i class="fa fa-eye"></i>
-                                                                Rincian
-                                                                </button>
-                                                                <button
-                                    class="btn btn-sm btn-warning ml-3 btn-update"
-                                    data-id="1"
-                                    data-nama="Nama barang 01"
-                                    data-harga="10000"
-                                    data-stok="25"
-                                    data-gambar="{{ asset('storage/uploads/gambar01.png') }}"
-                                    data-url="{{ route('aset_barang.update', 1) }}"
-                                    data-toggle="modal"
-                                    data-target="#updateAssetModal"
-                                >
-                                    Update
-                                </button>
-                                <button class="btn btn-sm btn-danger ml-3" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
+            
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Gambar Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Harga Jual Barang</th>
+                                <th>Stok Barang</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Sample row -->
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="{{ asset('assets/images/solvethink_transparent.png') }}" alt="Gambar"
+                                            class="img-fluid" style="max-width: 100px; height: auto;">
+                                    </div>
+                                </td>
+                                <td>Nama barang 01</td>
+                                <td>Harga Jual barang 01</td>
+                                <td>Stok barang 01</td>
+                                <td class="px-3">
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <button class="btn btn-sm rincian-btn m-1" data-toggle="modal" data-target="#rincianAssetModal">
+                                            <i class="fa fa-eye"></i> Rincian
+                                        </button>
+                                        <button 
+                                            class="btn btn-sm btn-warning m-1 btn-update"
+                                            data-id="1"
+                                            data-nama="Nama barang 01"
+                                            data-harga="10000"
+                                            data-stok="25"
+                                            data-gambar="{{ asset('storage/uploads/gambar01.png') }}"
+                                            data-url="{{ route('aset_barang.update', 1) }}"
+                                            data-toggle="modal"
+                                            data-target="#updateAssetModal">
+                                            Update
+                                        </button>
+                                        <button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-                <p id="showing-info" class="ml-3 mb-0 fs-sm">Showing 1 to 10 of 20 entries</p>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination mb-0 border rounded">
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">Previous</a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link border-0 rounded-0" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">5</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">6</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link border-0 rounded-0" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+            
+            <!-- pagination -->
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                        Showing 1 to 10 of 57 entries
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                        <ul class="pagination justify-content-end">
+                            <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link ">Previous</a>
+                            </li>
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                            </li>
+                            <li class="paginate_button page-item">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                            </li>
+                            <li class="paginate_button page-item">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                            </li>
+                            <li class="paginate_button page-item">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                            </li>
+                            <li class="paginate_button page-item">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                            </li>
+                            <li class="paginate_button page-item">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                            </li>
+                            <li class="paginate_button page-item next" id="dataTable_next">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+    </div>
+</div>
 </div>
 
 
@@ -334,9 +337,16 @@
                 </button>
             </div>
             <div class="modal-body d-flex p-4">
-                <!-- images -->
-                <div class="drop-zone" style="width: 250px; height: 250px; padding: 0; display: flex; align-items: center; justify-content: center;">
-                    <i class="fa fa-image fa-3x" style="color: white;"></i>
+                <!-- Image container -->
+                <div class="modal-color position-relative" style="width: 250px; height: 250px; border: 2px dashed #ccc; border-radius: 5px; overflow: hidden;">
+                    <div id="rincian-default-view" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
+                        <i class="fa fa-image fa-3x" style="color: white;"></i>
+                    </div>
+                    
+                    <!-- image  -->
+                    <div id="rincian-image-view" style="display: none; height: 100%; width: 100%; position: relative;">
+                        <img id="rincian-preview-img" src="" alt="Preview" style="height: 100%; width: 100%; object-fit: contain;">
+                    </div>
                 </div>
 
                 <div class="ml-4">
@@ -379,7 +389,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <!-- image upload  -->
-                    <div id="image-upload-container" class="modal-color position-relative mb-4"
+                    <div id="update-image-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
@@ -532,6 +542,8 @@
             }
         });
     });
+
+    
 
 </script>
 
