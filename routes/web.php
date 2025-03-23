@@ -22,7 +22,7 @@ Route::get('dashboard', function() {
 
 // dashboard
 Route::get('/dashboard', function() {
-    return view('dashboard');
+    return view('rincianNamaBarang');
 })->name('dashboard')->middleware('auth');
 
 Route::get('/rincianNamaBarang', function() {
