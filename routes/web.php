@@ -45,6 +45,6 @@ Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->n
 Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
 
 // rincian barang bekas
-Route::post('/aset-barang-bekas', [BarangBaruController::class, 'store'])->name('aset_barang_bekas.store');
-Route::put('/aset-barang-bekas/{id}', [BarangBaruController::class, 'update'])->name('aset_barang_bekas.update');
-Route::delete('/aset-barang-bekas/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang_bekas.destroy');
+Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
+Route::put('/aset-barang-bekas/{id}', [BarangBekasController::class, 'update'])->name('aset_barang_bekas.update');
+Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
