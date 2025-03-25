@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AsetBarangBekas;
+use App\Models\AsetBarangBaru;
 
 class BarangBaruController extends Controller
 {
     public function index()
     {
-        $barang = AsetBarangBekas::all();
-        return view('aset_barang_bekas.index', compact('barang'));
+        $barang = AsetBarangBaru::all();
+        return view('aset_barang.index', compact('barang'));
     }
 
 
@@ -30,20 +30,20 @@ class BarangBaruController extends Controller
             $imagePath = 'uploads/' . $newFileName;
         }
 
-        AsetBarangBekas::create([
+        AsetBarangBaru::create([
             'nama_barang' => $request->nama_barang,
             'gambar_barang' => $imagePath,
             'harga_jual_barang' => $request->harga_jual_barang,
             'total_barang' => $request->total_barang,
         ]);
 
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
     }
 
     public function edit($id)
     {
-        $barang = AsetBarangBekas::findOrFail($id);
-        return view('aset_barang_bekas.edit', compact('barang'));
+        $barang = AsetBarangBaru::findOrFail($id);
+        return view('aset_barang_baru.edit', compact('barang'));
     }
 
     public function update(Request $request, $id)
@@ -55,7 +55,7 @@ class BarangBaruController extends Controller
             'gambar_barang' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $barang = AsetBarangBekas::findOrFail($id);
+        $barang = AsetBarangBaru::findOrFail($id);
 
         if ($request->hasFile('gambar_barang')) {
             $file = $request->file('gambar_barang');
@@ -71,18 +71,18 @@ class BarangBaruController extends Controller
 
         $barang->save();
 
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil diupdate');
+        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil diupdate');
     }
 
     public function destroy($id)
     {
-        $barang = AsetBarangBekas::findOrFail($id);
+        $barang = AsetBarangBaru::findOrFail($id);
 
         if ($barang->gambar_barang && file_exists(public_path('storage/' . $barang->gambar_barang))) {
             unlink(public_path('storage/' . $barang->gambar_barang));
         }
 
         $barang->delete();
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil dihapus');
+        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil dihapus');
     }
 }

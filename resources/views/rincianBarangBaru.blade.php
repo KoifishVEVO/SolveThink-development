@@ -22,11 +22,11 @@
     background-color: transparent !important;
     color: #A9B5DF !important;
     border: 2px solid #A9B5DF !important;
-    font-weight: normal !important; 
+    font-weight: normal !important;
     border-radius: 5px !important;
-    padding: 0.25rem 0.5rem !important; 
-    line-height: 1.5 !important; 
-    white-space: nowrap !important; 
+    padding: 0.25rem 0.5rem !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -137,7 +137,7 @@
                 <!-- Show entries -->
                 <div class="col-sm-12 col-md-6">
                     <div class="dataTables_length" id="dataTable_length">
-                        <label>Show 
+                        <label>Show
                             <select id="showEntries" name="dataTable_length" class="custom-select custom-select-sm form-control form-control-sm">
                                 <option value="10">10</option>
                                 <option value="25">25</option>
@@ -147,7 +147,7 @@
                         </label>
                     </div>
                 </div>
-                
+
                 <!-- Search box -->
                 <div class="col-sm-12 col-md-6">
                     <div id="dataTable_filter" class="dataTables_filter d-flex justify-content-md-end">
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Table row -->
             <div class="row">
                 <div class="col-sm-12">
@@ -175,43 +175,56 @@
                         </thead>
                         <tbody id="table-body">
                             <!-- Sample row -->
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <img src="{{ asset('assets/images/solvethink_transparent.png') }}" alt="Gambar"
-                                            class="img-fluid" style="max-width: 100px; height: auto;">
-                                    </div>
-                                </td>
-                                <td>Nama barang 01</td>
-                                <td>Harga Jual barang 01</td>
-                                <td>Stok barang 01</td>
-                                <td class="px-3">
-                                    <div class="d-flex flex-wrap justify-content-center">
-                                        <button class="btn btn-sm rincian-btn m-1" data-toggle="modal" data-target="#rincianAssetModal">
-                                            <i class="fa fa-eye"></i> Rincian
-                                        </button>
-                                        <button 
-                                            class="btn btn-sm btn-warning m-1 btn-update"
-                                            data-id="1"
-                                            data-nama="Nama barang 01"
-                                            data-harga="10000"
-                                            data-stok="25"
-                                            data-gambar="{{ asset('storage/uploads/gambar01.png') }}"
-                                            data-url="{{ route('aset_barang.update', 1) }}"
-                                            data-toggle="modal"
-                                            data-target="#updateAssetModal">
-                                            Update
-                                        </button>
-                                        <button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
-                                    </div>
-                                </td>
-                            </tr>
+                           @foreach ($barang as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <img src="{{ asset('storage/' . $item->gambar_barang) }}" alt="Gambar" class="img-fluid" style="max-width: 100px; height: auto;">
+                                </div>
+                            </td>
+                            <td>{{ $item->nama_barang }}</td>
+                            <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
+                            <td>{{ $item->total_barang }}</td>
+                            <td class="px-3">
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <button class="btn btn-sm rincian-btn m-1"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}"
+                                        data-harga="{{ $item->harga_jual_barang }}"
+                                        data-stok="{{ $item->total_barang }}"
+                                        data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                        data-toggle="modal"
+                                        data-target="#rincianAssetModal">
+                                        <i class="fa fa-eye"></i> Rincian
+                                    </button>
+                                    <button
+                                        class="btn btn-sm btn-warning m-1 btn-update"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}"
+                                        data-harga="{{ $item->harga_jual_barang }}"
+                                        data-stok="{{ $item->total_barang }}"
+                                        data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                        data-url="{{ route('aset_barang.update', $item->id) }}"
+                                        data-toggle="modal"
+                                        data-target="#updateAssetModal">
+                                        Update
+                                    </button>
+                                   <button class="btn btn-sm btn-danger m-1 btn-delete"
+                                    data-id="{{ $item->id }}"
+                                    data-nama="{{ $item->nama_barang }}"
+                                    data-url="{{ route('aset_barang.destroy', $item->id) }}"
+                                    data-toggle="modal"
+                                    data-target="#deleteAssetModal">Hapus</button>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            
+
             <!-- pagination -->
             <div class="row">
                 <div class="col-sm-12 col-md-5">
@@ -342,7 +355,7 @@
                     <div id="rincian-default-view" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
                         <i class="fa fa-image fa-3x" style="color: white;"></i>
                     </div>
-                    
+
                     <!-- image  -->
                     <div id="rincian-image-view" style="display: none; height: 100%; width: 100%; position: relative;">
                         <img id="rincian-preview-img" src="" alt="Preview" style="height: 100%; width: 100%; object-fit: contain;">
@@ -402,7 +415,7 @@
                                     <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
                                     <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
                                     <input type="file" id="updateFileInput" name="gambar_barang"
-                                        style="display: none;" accept="image/*" required>
+                                        style="display: none;" accept="image/*">
                                 </div>
 
                                 <!-- Image Preview -->
@@ -415,7 +428,7 @@
                                     </h6> -->
                                 </div>
                             </div>
-                    
+
 
                     <label class="font-weight-bold">Nama Barang</label>
                     <input type="text" name="nama_barang" id="update-nama" class="form-control mb-3" required>
@@ -470,6 +483,41 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
+    // Tombol Rincian - Isi otomatis modal dengan data
+    document.querySelectorAll('.rincian-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const nama = this.dataset.nama;
+            const harga = this.dataset.harga;
+            const stok = this.dataset.stok;
+            const gambar = this.dataset.gambar;
+
+            console.log(stok)
+
+            $('#rincianAssetModal').on('shown.bs.modal', function () {
+            // Isi data ke modal setelah modal benar-benar ditampilkan
+            document.getElementById('rincian-id').innerText = id;
+            document.getElementById('rincian-nama').innerText = nama;
+            document.getElementById('rincian-stok').innerText = stok;
+
+            // Preview gambar
+            const rincianImageView = document.getElementById('rincian-image-view');
+            const rincianDefaultView = document.getElementById('rincian-default-view');
+            const rincianPreviewImg = document.getElementById('rincian-preview-img');
+
+            if (gambar) {
+                rincianPreviewImg.src = gambar;
+                rincianImageView.style.display = 'block';
+                rincianDefaultView.style.display = 'none';
+            } else {
+                rincianImageView.style.display = 'none';
+                rincianDefaultView.style.display = 'flex';
+            }
+        });
+    })
+    });
+
+
     // Untuk modal "Tambah"
     document.getElementById("image-upload-container").addEventListener("click", function () {
         document.getElementById("fileInput").click();
@@ -507,6 +555,26 @@
         }
     });
 
+    // Tombol Delete - Isi otomatis modal dan set form action
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const nama = this.dataset.nama;
+            const url = this.dataset.url;
+
+            // Tampilkan nama di modal
+            document.getElementById('delete-item-name').innerText = `Apakah kamu yakin ingin menghapus "${nama}"?`;
+
+            // Set form action
+            const deleteForm = document.querySelector('#deleteAssetModal form');
+            deleteForm.action = url;
+
+            // Set ID hidden (opsional, kalau diperlukan)
+            document.getElementById('delete-id').value = id;
+        });
+    });
+
+
     // Tombol Update - Isi otomatis modal
     document.querySelectorAll('.btn-update').forEach(button => {
         button.addEventListener('click', function () {
@@ -543,7 +611,7 @@
         });
     });
 
-    
+
 
 </script>
 
