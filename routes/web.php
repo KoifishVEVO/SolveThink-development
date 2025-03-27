@@ -30,7 +30,10 @@ Route::get('/rincianNamaBarang', function() {
 });
 
 Route::get('/rincianBarangBaru', function() {
-    $barang = AsetBarangBaru::all();
+    // $barang = AsetBarangBaru::all();
+    $barang = AsetBarangBaru::whereIn('id', function ($query) {
+    $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
+    })->get();
     return view('rincianBarangBaru', compact('barang'));
 })->name('aset_barang.index');
 
