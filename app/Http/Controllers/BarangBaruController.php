@@ -15,6 +15,26 @@ class BarangBaruController extends Controller
     }
 
 
+    public function storeSame(Request $request)
+    {
+            $request->validate([
+                'nama_barang' => 'required|string',
+                'harga_jual_barang' => 'required|numeric',
+                'total_barang' => 'required|integer',
+                'gambar_barang' => 'required|string',
+            ]);
+
+            $barang = AsetBarangBaru::create($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Barang berhasil ditambahkan!',
+                'data' => $barang
+            ]);
+
+    }
+
+
      public function store(Request $request)
     {
         $request->validate([
@@ -75,42 +95,81 @@ class BarangBaruController extends Controller
         ]);
 
         $barang = AsetBarangBaru::findOrFail($id);
+        $namaBarangLama = $barang->nama_barang;
+
+        $barangList = AsetBarangBaru::where('nama_barang', $namaBarangLama)->get();
+
+        $imagePath = null;
 
         if ($request->hasFile('gambar_barang')) {
-            if ($barang->gambar_barang && Storage::disk('public')->exists($barang->gambar_barang)) {
-                Storage::disk('public')->delete($barang->gambar_barang);
+            foreach ($barangList as $item) {
+                if ($item->gambar_barang && Storage::disk('public')->exists($item->gambar_barang)) {
+                    Storage::disk('public')->delete($item->gambar_barang);
+                }
             }
 
             $file = $request->file('gambar_barang');
             $newFileName = 'barang_bekas_' . time() . '.' . $file->getClientOriginalExtension();
-            $imagePath = storage_path('app/public/uploads/' . $newFileName);
+            $imagePath = 'uploads/' . $newFileName;
 
+            $imageFullPath = storage_path('app/public/' . $imagePath);
             $image = imagecreatefromstring(file_get_contents($file));
-
-            imagejpeg($image, $imagePath, 75);
-
-            $barang->gambar_barang = 'uploads/' . $newFileName;
+            imagejpeg($image, $imageFullPath, 75);
         }
 
-        $barang->nama_barang = $request->nama_barang;
-        $barang->harga_jual_barang = $request->harga_jual_barang;
-        $barang->total_barang = $request->total_barang;
+        foreach ($barangList as $item) {
+            $item->nama_barang = $request->nama_barang;
+            $item->harga_jual_barang = $request->harga_jual_barang;
+            $item->total_barang = $request->total_barang;
+            if ($imagePath) {
+                $item->gambar_barang = $imagePath;
+            }
+            $item->save();
+        }
 
-        $barang->save();
-
-        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil diupdate');
+        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarangLama . '" berhasil diperbarui');
     }
 
 
-    public function destroy($id)
+
+   public function destroy($id)
     {
+
         $barang = AsetBarangBaru::findOrFail($id);
 
-        if ($barang->gambar_barang && file_exists(public_path('storage/' . $barang->gambar_barang))) {
-            unlink(public_path('storage/' . $barang->gambar_barang));
+        $namaBarang = $barang->nama_barang;
+
+        $barangList = AsetBarangBaru::where('nama_barang', $namaBarang)->get();
+
+        foreach ($barangList as $item) {
+            if ($item->gambar_barang && file_exists(public_path('storage/' . $item->gambar_barang))) {
+                unlink(public_path('storage/' . $item->gambar_barang));
+            }
+        }
+        AsetBarangBaru::where('nama_barang', $namaBarang)->delete();
+
+        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarang . '" berhasil dihapus');
+    }
+
+    public function deleteOne($nama_barang)
+    {
+        // Cari semua barang dengan nama yang sama
+        $barangList = AsetBarangBaru::where('nama_barang', $nama_barang)->get();
+
+        if ($barangList->isNotEmpty()) {
+            $barang = $barangList->first(); // Ambil satu data untuk dihapus
+
+            // Jika hanya ada satu data tersisa, hapus juga gambar
+            if ($barangList->count() == 1 && $barang->gambar_barang) {
+                $gambarPath = public_path('storage/' . $barang->gambar_barang);
+                if (file_exists($gambarPath)) {
+                    unlink($gambarPath); // Hapus gambar
+                }
+            }
+
+            $barang->delete(); // Hapus satu data barang
         }
 
-        $barang->delete();
-        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil dihapus');
+        return response()->json(['success' => true]);
     }
 }
