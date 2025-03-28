@@ -185,7 +185,7 @@
                             </td>
                             <td>{{ $item->nama_barang }}</td>
                             <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
-                            <td>{{ $item->total_barang }}</td>
+                            <td>{{ $item->jumlah }}</td>
                             <td class="px-3">
                                 <div class="d-flex flex-wrap justify-content-center">
                                     <button class="btn btn-sm rincian-btn m-1"
