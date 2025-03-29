@@ -109,7 +109,7 @@ class BarangBaruController extends Controller
             }
 
             $file = $request->file('gambar_barang');
-            $newFileName = 'barang_bekas_' . time() . '.' . $file->getClientOriginalExtension();
+            $newFileName = 'barang_baru_' . time() . '.' . $file->getClientOriginalExtension();
             $imagePath = 'uploads/' . $newFileName;
 
             $imageFullPath = storage_path('app/public/' . $imagePath);
