@@ -19,6 +19,25 @@ class BarangBekasController extends Controller
         return view('aset_barang.create');
     }
 
+    public function storeSame(Request $request)
+    {
+            $request->validate([
+                'nama_barang' => 'required|string',
+                'harga_jual_barang' => 'required|numeric',
+                'total_barang' => 'required|integer',
+                'gambar_barang' => 'required|string',
+            ]);
+
+            $barang = AsetBarangBekas::create($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Barang berhasil ditambahkan!',
+                'data' => $barang
+            ]);
+
+    }
+
     // public function store(Request $request)
     // {
     //     $request->validate([
@@ -92,7 +111,7 @@ class BarangBekasController extends Controller
     public function edit($id)
     {
         $barang = AsetBarangBekas::find($id);
-        return view('aset_barang.edit', compact('barang'));
+        return view('aset_barang_bekas.edit', compact('barang'));
     }
 
     // public function update(Request $request, $id)
@@ -133,41 +152,77 @@ class BarangBekasController extends Controller
         ]);
 
         $barang = AsetBarangBekas::findOrFail($id);
+        $namaBarangLama = $barang->nama_barang;
+
+        $barangList = AsetBarangBekas::where('nama_barang', $namaBarangLama)->get();
+
+        $imagePath = null;
 
         if ($request->hasFile('gambar_barang')) {
-            if ($barang->gambar_barang && Storage::disk('public')->exists($barang->gambar_barang)) {
-                Storage::disk('public')->delete($barang->gambar_barang);
+            foreach ($barangList as $item) {
+                if ($item->gambar_barang && Storage::disk('public')->exists($item->gambar_barang)) {
+                    Storage::disk('public')->delete($item->gambar_barang);
+                }
             }
 
             $file = $request->file('gambar_barang');
             $newFileName = 'barang_bekas_' . time() . '.' . $file->getClientOriginalExtension();
-            $imagePath = storage_path('app/public/uploads/' . $newFileName);
+            $imagePath = 'uploads/' . $newFileName;
 
+            $imageFullPath = storage_path('app/public/' . $imagePath);
             $image = imagecreatefromstring(file_get_contents($file));
-
-            imagejpeg($image, $imagePath, 75);
-
-            $barang->gambar_barang = 'uploads/' . $newFileName;
+            imagejpeg($image, $imageFullPath, 75);
         }
 
-        $barang->nama_barang = $request->nama_barang;
-        $barang->harga_jual_barang = $request->harga_jual_barang;
-        $barang->total_barang = $request->total_barang;
+        foreach ($barangList as $item) {
+            $item->nama_barang = $request->nama_barang;
+            $item->harga_jual_barang = $request->harga_jual_barang;
+            $item->total_barang = $request->total_barang;
+            if ($imagePath) {
+                $item->gambar_barang = $imagePath;
+            }
+            $item->save();
+        }
 
-        $barang->save();
-
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil diupdate');
+        return redirect()->route('aset_barang_bekas.index')->with('success', 'Semua barang dengan nama "' . $namaBarangLama . '" berhasil diperbarui');
     }
 
     public function destroy($id)
     {
-        $barang = AsetBarangBekas::find($id);
 
-        if ($barang->gambar_barang) {
-            unlink(public_path('storage/' . $barang->gambar_barang));
+        $barang = AsetBarangBekas::findOrFail($id);
+
+        $namaBarang = $barang->nama_barang;
+
+        $barangList = AsetBarangBekas::where('nama_barang', $namaBarang)->get();
+
+        foreach ($barangList as $item) {
+            if ($item->gambar_barang && file_exists(public_path('storage/' . $item->gambar_barang))) {
+                unlink(public_path('storage/' . $item->gambar_barang));
+            }
+        }
+        AsetBarangBekas::where('nama_barang', $namaBarang)->delete();
+
+        return redirect()->route('aset_barang_bekas.index')->with('success', 'Semua barang dengan nama "' . $namaBarang . '" berhasil dihapus');
+    }
+
+    public function deleteOne($nama_barang)
+    {
+        $barangList = AsetBarangBekas::where('nama_barang', $nama_barang)->get();
+
+        if ($barangList->isNotEmpty()) {
+            $barang = $barangList->first();
+
+            if ($barangList->count() == 1 && $barang->gambar_barang) {
+                $gambarPath = public_path('storage/' . $barang->gambar_barang);
+                if (file_exists($gambarPath)) {
+                    unlink($gambarPath);
+                }
+            }
+
+            $barang->delete();
         }
 
-        $barang->delete();
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil dihapus');
+        return response()->json(['success' => true]);
     }
 }

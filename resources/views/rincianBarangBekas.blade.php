@@ -187,12 +187,28 @@
                             <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
                             <td>{{ $item->jumlah }}</td>
                             <td class="px-3">
+
                                 <div class="d-flex flex-wrap justify-content-center">
-                                    <button class="btn btn-sm rincian-btn m-1"
+                                    <button class="btn btn-sm btn-success m-1 btn-tambah"
                                         data-id="{{ $item->id }}"
                                         data-nama="{{ $item->nama_barang }}"
                                         data-harga="{{ $item->harga_jual_barang }}"
                                         data-stok="{{ $item->total_barang }}"
+                                        data-gambar="{{ $item->gambar_barang }}">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm btn-danger m-1 btn-kurangi"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm rincian-btn m-1"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}"
+                                        data-harga="{{ $item->harga_jual_barang }}"
+                                        data-stok="{{ $item->stok_barang }}"
                                         data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
                                         data-toggle="modal"
                                         data-target="#rincianAssetModal">
@@ -611,6 +627,49 @@
         });
     });
 
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".btn-tambah")) {
+        let button = event.target.closest(".btn-tambah");
+
+        let data = {
+            nama_barang: button.getAttribute("data-nama"),
+            harga_jual_barang: parseInt(button.getAttribute("data-harga")),
+            total_barang: parseInt(button.getAttribute("data-stok")),
+            gambar_barang: button.getAttribute("data-gambar"),
+            _token: "{{ csrf_token() }}"
+        };
+
+        fetch("{{ route('aset_barang_bekas.storeSame') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": data._token
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(() => location.reload())
+        .catch(error => console.error("Error:", error));
+        }
+    });
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".btn-kurangi")) {
+        let button = event.target.closest(".btn-kurangi");
+        let namaBarang = button.getAttribute("data-nama");
+
+        fetch("{{ route('aset_barang_bekas.deleteOne', ':nama_barang') }}".replace(':nama_barang', encodeURIComponent(namaBarang)), {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            }
+        })
+        .then(response => response.json())
+        .then(() => location.reload())
+        .catch(error => console.error("Error:", error));
+    }
+});
 
 
 </script>

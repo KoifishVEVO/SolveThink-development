@@ -78,5 +78,9 @@ Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::cla
 
 // rincian barang bekas
 Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
+Route::post('/aset-barang-baru/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
 Route::put('/aset-barang-bekas/{id}', [BarangBekasController::class, 'update'])->name('aset_barang_bekas.update');
 Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
+Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
+Route::delete('/aset_barang-bekas/deleteOne/{nama_barang}', [BarangBekasController::class, 'deleteOne'])
+    ->name('aset_barang_bekas.deleteOne');
