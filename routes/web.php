@@ -6,6 +6,7 @@ use App\Http\Controllers\BarangBekasController;
 use App\Models\AsetBarangBaru;
 use App\Models\AsetBarangBekas;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 
 // authentication
@@ -28,9 +29,10 @@ Route::get('/rincianNamaBarang', function() {
     return view('rincianNamaBarang');
 });
 
-Route::get('/rincianBarangBaru', function() {
-    // $barang = AsetBarangBaru::all();
-   $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
+Route::get('/rincianBarangBaru', function (Request $request) {
+    $search = $request->input('search');
+
+    $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
         ->joinSub(
             AsetBarangBaru::select('nama_barang')
                 ->selectRaw('COUNT(*) as jumlah')
@@ -42,15 +44,21 @@ Route::get('/rincianBarangBaru', function() {
         )
         ->whereIn('aset_barang_baru.id', function ($query) {
             $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
-        })
-        ->paginate(3);
+        });
 
-    return view('rincianBarangBaru', compact('barang'));
+    if ($search) {
+        $barang->where('aset_barang_baru.nama_barang', 'LIKE', "%{$search}%");
+    }
+
+    $barang = $barang->paginate(3)->appends(['search' => $search]);
+
+    return view('rincianBarangBaru', compact('barang', 'search'));
 })->name('aset_barang.index');
 
-Route::get('/rincianBarangBekas', function() {
-//    $barang = AsetBarangBekas::all();
-        $barang = AsetBarangBekas::select('aset_barang_bekas.*', 'jumlah_per_nama.jumlah')
+Route::get('/rincianBarangBekas', function (Request $request) {
+    $search = $request->input('search');
+
+    $barang = AsetBarangBekas::select('aset_barang_bekas.*', 'jumlah_per_nama.jumlah')
         ->joinSub(
             AsetBarangBekas::select('nama_barang')
                 ->selectRaw('COUNT(*) as jumlah')
@@ -62,8 +70,14 @@ Route::get('/rincianBarangBekas', function() {
         )
         ->whereIn('aset_barang_bekas.id', function ($query) {
             $query->selectRaw('MAX(id)')->from('aset_barang_bekas')->groupBy('nama_barang');
-        })
-        ->paginate(3);
+        });
+
+    if ($search) {
+        $barang->where('aset_barang_bekas.nama_barang', 'LIKE', "%{$search}%");
+    }
+
+    $barang = $barang->paginate(3)->appends(['search' => $search]);
+
     return view('rincianBarangBekas', compact('barang'));
 })->name('aset_barang_bekas.index');
 
