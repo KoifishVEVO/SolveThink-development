@@ -30,20 +30,20 @@ Route::get('/rincianNamaBarang', function() {
 
 Route::get('/rincianBarangBaru', function() {
     // $barang = AsetBarangBaru::all();
-    $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
-    ->joinSub(
-        AsetBarangBaru::select('nama_barang')
-            ->selectRaw('COUNT(*) as jumlah')
-            ->groupBy('nama_barang'),
-        'jumlah_per_nama',
-        'aset_barang_baru.nama_barang',
-        '=',
-        'jumlah_per_nama.nama_barang'
-    )
-    ->whereIn('aset_barang_baru.id', function ($query) {
-        $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
-    })
-    ->get();
+   $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
+        ->joinSub(
+            AsetBarangBaru::select('nama_barang')
+                ->selectRaw('COUNT(*) as jumlah')
+                ->groupBy('nama_barang'),
+            'jumlah_per_nama',
+            'aset_barang_baru.nama_barang',
+            '=',
+            'jumlah_per_nama.nama_barang'
+        )
+        ->whereIn('aset_barang_baru.id', function ($query) {
+            $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
+        })
+        ->paginate(3);
 
     return view('rincianBarangBaru', compact('barang'));
 })->name('aset_barang.index');
