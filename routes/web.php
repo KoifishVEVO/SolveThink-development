@@ -63,7 +63,7 @@ Route::get('/rincianBarangBekas', function() {
         ->whereIn('aset_barang_bekas.id', function ($query) {
             $query->selectRaw('MAX(id)')->from('aset_barang_bekas')->groupBy('nama_barang');
         })
-        ->get();
+        ->paginate(3);
     return view('rincianBarangBekas', compact('barang'));
 })->name('aset_barang_bekas.index');
 

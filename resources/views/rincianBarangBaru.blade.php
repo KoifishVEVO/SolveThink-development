@@ -243,34 +243,34 @@
 
             <!-- pagination -->
             <div class="row">
-    <div class="col-sm-12 col-md-5">
-        <div class="dataTables_info" role="status" aria-live="polite">
-            Showing {{ $barang->firstItem() }} to {{ $barang->lastItem() }} of {{ $barang->total() }} entries
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-7">
-        <div class="dataTables_paginate paging_simple_numbers">
-            <ul class="pagination justify-content-end">
-                {{-- Tombol Previous --}}
-                <li class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
-                    <a href="{{ $barang->previousPageUrl() ?? '#' }}" class="page-link">Previous</a>
-                </li>
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" role="status" aria-live="polite">
+                        Showing {{ $barang->firstItem() }} to {{ $barang->lastItem() }} of {{ $barang->total() }} entries
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination justify-content-end">
+                            {{-- Tombol Previous --}}
+                            <li class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
+                                <a href="{{ $barang->previousPageUrl() ?? '#' }}" class="page-link">Previous</a>
+                            </li>
 
-                {{-- Nomor Halaman --}}
-                @for ($i = 1; $i <= $barang->lastPage(); $i++)
-                    <li class="paginate_button page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
-                        <a href="{{ $barang->url($i) }}" class="page-link">{{ $i }}</a>
-                    </li>
-                @endfor
+                            {{-- Nomor Halaman --}}
+                            @for ($i = 1; $i <= $barang->lastPage(); $i++)
+                                <li class="paginate_button page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
+                                    <a href="{{ $barang->url($i) }}" class="page-link">{{ $i }}</a>
+                                </li>
+                            @endfor
 
-                {{-- Tombol Next --}}
-                <li class="paginate_button page-item {{ $barang->hasMorePages() ? '' : 'disabled' }}">
-                    <a href="{{ $barang->nextPageUrl() ?? '#' }}" class="page-link">Next</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+                            {{-- Tombol Next --}}
+                            <li class="paginate_button page-item {{ $barang->hasMorePages() ? '' : 'disabled' }}">
+                                <a href="{{ $barang->nextPageUrl() ?? '#' }}" class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
