@@ -35,7 +35,7 @@ class BarangBaruController extends Controller
     }
 
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nama_barang' => 'required|max:255',
@@ -46,7 +46,8 @@ class BarangBaruController extends Controller
 
         if ($request->hasFile('gambar_barang')) {
             $file = $request->file('gambar_barang');
-            $newFileName = 'barang_bekas_' . time() . '.' . $file->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension();
+            $newFileName = 'barang_baru_' . time() . '.' . $extension;
             $destinationPath = storage_path('app/public/uploads');
 
             if (!file_exists($destinationPath)) {
@@ -54,14 +55,20 @@ class BarangBaruController extends Controller
             }
 
             list($width, $height) = getimagesize($file);
-            $newWidth = 800; // Resize width
+            $newWidth = 800;
             $newHeight = ($height / $width) * $newWidth;
 
-            $source = imagecreatefromjpeg($file);
+            $source = imagecreatefromstring(file_get_contents($file));
             $imageResized = imagecreatetruecolor($newWidth, $newHeight);
             imagecopyresampled($imageResized, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-            imagejpeg($imageResized, $destinationPath . '/' . $newFileName, 75);
+            $outputPath = $destinationPath . '/' . $newFileName;
+
+            if ($extension === 'png') {
+                imagepng($imageResized, $outputPath, 6);
+            } else {
+                imagejpeg($imageResized, $outputPath, 75);
+            }
 
             imagedestroy($source);
             imagedestroy($imageResized);
@@ -78,6 +85,7 @@ class BarangBaruController extends Controller
 
         return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
     }
+
 
     public function edit($id)
     {
@@ -96,27 +104,38 @@ class BarangBaruController extends Controller
 
         $barang = AsetBarangBaru::findOrFail($id);
         $namaBarangLama = $barang->nama_barang;
-
         $barangList = AsetBarangBaru::where('nama_barang', $namaBarangLama)->get();
 
         $imagePath = null;
 
         if ($request->hasFile('gambar_barang')) {
+            // Hapus gambar lama jika ada
             foreach ($barangList as $item) {
                 if ($item->gambar_barang && Storage::disk('public')->exists($item->gambar_barang)) {
                     Storage::disk('public')->delete($item->gambar_barang);
                 }
             }
 
+            // Upload gambar baru
             $file = $request->file('gambar_barang');
-            $newFileName = 'barang_baru_' . time() . '.' . $file->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension();
+            $newFileName = 'barang_baru_' . time() . '.' . $extension;
             $imagePath = 'uploads/' . $newFileName;
 
+            // Simpan gambar sesuai formatnya
             $imageFullPath = storage_path('app/public/' . $imagePath);
             $image = imagecreatefromstring(file_get_contents($file));
-            imagejpeg($image, $imageFullPath, 75);
+
+            if ($extension === 'png') {
+                imagepng($image, $imageFullPath, 6);
+            } else {
+                imagejpeg($image, $imageFullPath, 75);
+            }
+
+            imagedestroy($image);
         }
 
+        // Update semua barang dengan nama yang sama
         foreach ($barangList as $item) {
             $item->nama_barang = $request->nama_barang;
             $item->harga_jual_barang = $request->harga_jual_barang;
@@ -129,6 +148,7 @@ class BarangBaruController extends Controller
 
         return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarangLama . '" berhasil diperbarui');
     }
+
 
 
 

@@ -8,7 +8,6 @@ use App\Models\AsetBarangBekas;
 use Illuminate\Support\Facades\Route;
 
 
-
 // authentication
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show')->middleware('guest');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show')->middleware('guest');
@@ -78,7 +77,7 @@ Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::cla
 
 // rincian barang bekas
 Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
-Route::post('/aset-barang-baru/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
+Route::post('/aset-barang-bekas/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
 Route::put('/aset-barang-bekas/{id}', [BarangBekasController::class, 'update'])->name('aset_barang_bekas.update');
 Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
 Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
