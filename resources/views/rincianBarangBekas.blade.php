@@ -152,9 +152,11 @@
                 <div class="col-sm-12 col-md-6">
                     <div id="dataTable_filter" class="dataTables_filter d-flex justify-content-md-end">
                         <label class="mr-2">Search:
-                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                            <form id="searchForm" method="GET" action="{{ route('aset_barang_bekas.index') }}" class="d-inline">
+                                <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm d-inline" placeholder="Cari barang..." aria-controls="dataTable">
+                            </form>
                         </label>
-                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
+                        <button class="btn btn-success btn-sm ml-2" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
                     </div>
                 </div>
             </div>
@@ -491,6 +493,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
+     document.querySelector('input[name="search"]').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('searchForm').submit();
+        }
+    });
+
     // Tombol Rincian - Isi otomatis modal dengan data
     document.querySelectorAll('.rincian-btn').forEach(button => {
         button.addEventListener('click', function () {
