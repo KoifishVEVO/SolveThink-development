@@ -101,7 +101,7 @@
                     <img src="{{ asset('assets/images/welcome_icon.png') }}" alt="SolveThink" class="welcome-icon">
                 </div>
                 <div class="text-center sidebar-brand-text" style="text-transform: none;">
-                    <h3 class="welcome-text font-weight-bold">Welcome, Admin</h3>
+                <img src="{{ asset('assets/images/solvethink.png') }}" alt="SolveThink Logo" class="img-fluid rounded" style="max-width: 100%;">
                 </div>
             </a>
 

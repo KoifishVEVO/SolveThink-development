@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // authentication
+Route::get('/', [AuthController::class, 'showLogin'])->name('login.show')->middleware('guest');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show')->middleware('guest');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show')->middleware('guest');
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
