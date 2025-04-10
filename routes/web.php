@@ -31,74 +31,94 @@ Route::get('/rincianNamaBarang', function() {
     return view('rincianNamaBarang');
 });
 
-Route::get('/rincianBarangBaru', function (Request $request) {
-    $search = $request->input('search');
-
-    $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
-        ->joinSub(
-            AsetBarangBaru::select('nama_barang')
-                ->selectRaw('COUNT(*) as jumlah')
-                ->groupBy('nama_barang'),
-            'jumlah_per_nama',
-            'aset_barang_baru.nama_barang',
-            '=',
-            'jumlah_per_nama.nama_barang'
-        )
-        ->whereIn('aset_barang_baru.id', function ($query) {
-            $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
-        });
-
-    if ($search) {
-        $barang->where('aset_barang_baru.nama_barang', 'LIKE', "%{$search}%");
-    }
-
-    $barang = $barang->paginate(3)->appends(['search' => $search]);
-
-    return view('rincianBarangBaru', compact('barang', 'search'));
-})->name('aset_barang.index');
-
-Route::get('/rincianBarangBekas', function (Request $request) {
-    $search = $request->input('search');
-
-    $barang = AsetBarangBekas::select('aset_barang_bekas.*', 'jumlah_per_nama.jumlah')
-        ->joinSub(
-            AsetBarangBekas::select('nama_barang')
-                ->selectRaw('COUNT(*) as jumlah')
-                ->groupBy('nama_barang'),
-            'jumlah_per_nama',
-            'aset_barang_bekas.nama_barang',
-            '=',
-            'jumlah_per_nama.nama_barang'
-        )
-        ->whereIn('aset_barang_bekas.id', function ($query) {
-            $query->selectRaw('MAX(id)')->from('aset_barang_bekas')->groupBy('nama_barang');
-        });
-
-    if ($search) {
-        $barang->where('aset_barang_bekas.nama_barang', 'LIKE', "%{$search}%");
-    }
-
-    $barang = $barang->paginate(3)->appends(['search' => $search]);
-
-    return view('rincianBarangBekas', compact('barang'));
-})->name('aset_barang_bekas.index');
 
 // rincian barang baru
-Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
-Route::post('/aset-barang-baru/same', [BarangBaruController::class, 'storeSame'])->name('aset_barang.storeSame');
-Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
-Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
-Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::class, 'deleteOne'])
-    ->name('aset_barang.deleteOne');
+// Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
+// Route::post('/aset-barang-baru/same', [BarangBaruController::class, 'storeSame'])->name('aset_barang.storeSame');
+// Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
+// Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
+// Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::class, 'deleteOne'])
+//     ->name('aset_barang.deleteOne');
+
+Route::middleware(['auth'])->group(function () {
+    // rincian barang baru
+    Route::get('/rincianBarangBaru', function (Request $request) {
+        $search = $request->input('search');
+
+        $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
+            ->joinSub(
+                AsetBarangBaru::select('nama_barang')
+                    ->selectRaw('COUNT(*) as jumlah')
+                    ->groupBy('nama_barang'),
+                'jumlah_per_nama',
+                'aset_barang_baru.nama_barang',
+                '=',
+                'jumlah_per_nama.nama_barang'
+            )
+            ->whereIn('aset_barang_baru.id', function ($query) {
+                $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
+            });
+
+        if ($search) {
+            $barang->where('aset_barang_baru.nama_barang', 'LIKE', "%{$search}%");
+        }
+
+        $barang = $barang->paginate(3)->appends(['search' => $search]);
+
+        return view('rincianBarangBaru', compact('barang', 'search'));
+    })->name('aset_barang.index');
+    Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
+    Route::post('/aset-barang-baru/same', [BarangBaruController::class, 'storeSame'])->name('aset_barang.storeSame');
+    Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
+    Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
+    Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::class, 'deleteOne'])->name('aset_barang.deleteOne');
+});
+
+
+
 
 // rincian barang bekas
-Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
-Route::post('/aset-barang-bekas/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
-Route::put('/aset-barang-bekas/{id}', [BarangBekasController::class, 'update'])->name('aset_barang_bekas.update');
-Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
-Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
-Route::delete('/aset_barang-bekas/deleteOne/{nama_barang}', [BarangBekasController::class, 'deleteOne'])
-    ->name('aset_barang_bekas.deleteOne');
+// Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
+// Route::post('/aset-barang-bekas/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
+// Route::put('/aset-barang-bekas/{id}', [BarangBekasController::class, 'update'])->name('aset_barang_bekas.update');
+// Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
+// Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
+// Route::delete('/aset_barang-bekas/deleteOne/{nama_barang}', [BarangBekasController::class, 'deleteOne'])
+//     ->name('aset_barang_bekas.deleteOne');
+
+Route::middleware(['auth'])->group(function () {
+    // rincian barang bekas
+    Route::get('/rincianBarangBekas', function (Request $request) {
+        $search = $request->input('search');
+
+        $barang = AsetBarangBekas::select('aset_barang_bekas.*', 'jumlah_per_nama.jumlah')
+            ->joinSub(
+                AsetBarangBekas::select('nama_barang')
+                    ->selectRaw('COUNT(*) as jumlah')
+                    ->groupBy('nama_barang'),
+                'jumlah_per_nama',
+                'aset_barang_bekas.nama_barang',
+                '=',
+                'jumlah_per_nama.nama_barang'
+            )
+            ->whereIn('aset_barang_bekas.id', function ($query) {
+                $query->selectRaw('MAX(id)')->from('aset_barang_bekas')->groupBy('nama_barang');
+            });
+
+        if ($search) {
+            $barang->where('aset_barang_bekas.nama_barang', 'LIKE', "%{$search}%");
+        }
+
+        $barang = $barang->paginate(3)->appends(['search' => $search]);
+
+        return view('rincianBarangBekas', compact('barang'));
+    })->name('aset_barang_bekas.index');
+    Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
+    Route::post('/aset-barang-bekas/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
+    Route::put('/aset-barang-bekas/{id}', [BarangBekasController::class, 'update'])->name('aset_barang_bekas.update');
+    Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
+    Route::delete('/aset_barang-bekas/deleteOne/{nama_barang}', [BarangBekasController::class, 'deleteOne'])->name('aset_barang_bekas.deleteOne');
+});
 
 
 
