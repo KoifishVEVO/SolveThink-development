@@ -24,7 +24,8 @@
     font-weight: 600; /* Slightly bolder header text */
     color: #495057;   /* Dark grey text */
     background-color: #fff; /* Ensure white background */
-    border: none !important; /* Remove all borders */
+    border: 1px solid black !important;
+    border-color: #DEDDDD !important;
     border-bottom: 2px solid #dee2e6 !important; /* Add thick bottom border */
     padding: 0.9rem;
     text-align: left; /* Default left align */
@@ -269,6 +270,22 @@
     border-color:  #272780 !important;
 }
 
+/* calendar */
+/* Optional: Make Flatpickr calendar match theme colors */
+.flatpickr-calendar .flatpickr-day.selected {
+            background: #272780;
+            border-color: #272780;
+        }
+         /* Make input look less like it's disabled when readonly */
+         input[readonly].form-control {
+             background-color: #fff; /* Keep background white */
+             cursor: default; /* Indicate it's not for typing */
+         }
+         /* Make icon clickable */
+         .datepicker-trigger {
+             cursor: pointer;
+         }
+
 
 
 </style>
@@ -277,11 +294,11 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     {{-- Update heading text --}}
-    <h1 class="h3 mb-4 heading-text font-weight-bold">DATA PERIODE</h1>
+    <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">DATA PERIODE</h1>
     <p class="mb-4 heading-text font-weight-bold">Tabel data periode berisikan informasi terkait periode yang telah dibuat.</p>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3 card-color"> {{-- Adjusted padding --}}
+        <div class="card-header py-5 card-color"> 
             <h6 class="m-0 font-weight-bold text-white">Data Tabel Periode</h6>
         </div>
         <div class="card-body">
@@ -320,7 +337,7 @@
                     {{-- Table Row --}}
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table dataTable" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Nama Periode</th>
@@ -374,16 +391,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                     {{-- --- END EXAMPLE DATA --- --}}
-
-                                     {{-- Use this block when using backend data and @forelse --}}
-                                     {{-- @forelse ($periodeItems as $item)
-                                        <tr> ... (your row structure) ... </tr>
-                                     @empty
-                                        <tr>
-                                            <td colspan="4" class="text-center">Tidak ada data periode.</td>
-                                        </tr>
-                                     @endforelse --}}
                                 </tbody>
                             </table>
                         </div>
@@ -451,18 +458,30 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="add-tanggal-mulai" class="form-label fw-bold">Tanggal Mulai</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control rounded-start-3" placeholder="DD/MM/YYYY" id="add-tanggal-mulai" name="tanggal_mulai" required>
-                                    <span class="input-group-text rounded-end-3"><i class="fa fa-calendar"></i></span>
+                                {{-- Wrap input and trigger for Flatpickr's 'wrap' option --}}
+                                <div class="input-group flatpickr" data-wrap="true" data-click-opens="false">
+                                    <input type="text" class="form-control rounded-start-3" placeholder="DD/MM/YYYY"
+                                        id="add-tanggal-mulai" name="tanggal_mulai" required readonly data-input> {{-- Added readonly, data-input --}}
+                                    <span class="input-group-text rounded-end-3 datepicker-trigger" data-toggle> {{-- Added class, data-toggle --}}
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    {{-- Optional: Add clear button --}}
+                                    {{-- <span class="input-group-text" data-clear><i class="fa fa-times"></i></span> --}}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                             <div class="form-group mb-3">
+                            <div class="form-group mb-3">
                                 <label for="add-tanggal-akhir" class="form-label fw-bold">Tanggal Akhir</label>
-                                 <div class="input-group">
-                                    <input type="text" class="form-control rounded-start-3" placeholder="DD/MM/YYYY" id="add-tanggal-akhir" name="tanggal_akhir" required>
-                                    <span class="input-group-text rounded-end-3"><i class="fa fa-calendar"></i></span>
+                                {{-- Wrap input and trigger for Flatpickr's 'wrap' option --}}
+                                <div class="input-group flatpickr" data-wrap="true" data-click-opens="false">
+                                    <input type="text" class="form-control rounded-start-3" placeholder="DD/MM/YYYY"
+                                        id="add-tanggal-akhir" name="tanggal_akhir" required readonly data-input> {{-- Added readonly, data-input --}}
+                                    <span class="input-group-text rounded-end-3 datepicker-trigger" data-toggle> {{-- Added class, data-toggle --}}
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    {{-- Optional: Add clear button --}}
+                                    {{-- <span class="input-group-text" data-clear><i class="fa fa-times"></i></span> --}}
                                 </div>
                             </div>
                         </div>
@@ -509,27 +528,26 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="update-tanggal-mulai" class="form-label fw-bold">Tanggal Mulai</label>
-                                <div class="input-group">
-                                    {{-- Input field for Tanggal Mulai. Use type="date" for native picker,
-                                         or type="text" if using a JS picker library. --}}
-                                    <input type="text" class="form-control rounded-start-3" {{-- Specific rounding for input group --}}
-                                           placeholder="DD/MM/YYYY"
-                                           id="update-tanggal-mulai" name="tanggal_mulai" required>
-                                    {{-- Calendar icon using Input Group Append --}}
-                                    <span class="input-group-text rounded-end-3"><i class="fa fa-calendar"></i></span>
+                                {{-- Wrap input and trigger for Flatpickr's 'wrap' option --}}
+                                <div class="input-group flatpickr" data-wrap="true" data-click-opens="false">
+                                    <input type="text" class="form-control rounded-start-3" placeholder="DD/MM/YYYY"
+                                        id="update-tanggal-mulai" name="tanggal_mulai" required readonly data-input> {{-- Added readonly, data-input --}}
+                                    <span class="input-group-text rounded-end-3 datepicker-trigger" data-toggle> {{-- Added class, data-toggle --}}
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                             <div class="form-group mb-3">
+                            <div class="form-group mb-3">
                                 <label for="update-tanggal-akhir" class="form-label fw-bold">Tanggal Akhir</label>
-                                 <div class="input-group">
-                                     {{-- Input field for Tanggal Akhir --}}
-                                    <input type="text" class="form-control rounded-start-3" {{-- Specific rounding --}}
-                                           placeholder="DD/MM/YYYY"
-                                           id="update-tanggal-akhir" name="tanggal_akhir" required>
-                                    {{-- Calendar icon --}}
-                                    <span class="input-group-text rounded-end-3"><i class="fa fa-calendar"></i></span>
+                                {{-- Wrap input and trigger for Flatpickr's 'wrap' option --}}
+                                <div class="input-group flatpickr" data-wrap="true" data-click-opens="false">
+                                    <input type="text" class="form-control rounded-start-3" placeholder="DD/MM/YYYY"
+                                        id="update-tanggal-akhir" name="tanggal_akhir" required readonly data-input> {{-- Added readonly, data-input --}}
+                                    <span class="input-group-text rounded-end-3 datepicker-trigger" data-toggle> {{-- Added class, data-toggle --}}
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -577,8 +595,61 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<!-- masih kopasan dri barangbaru -->
+
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+
+// Configuration for Flatpickr
+    const flatpickrConfig = {
+        wrap: true,         // Enables wrapping, allows trigger from external element
+        clickOpens: false,  // Disable opening picker on input click
+        dateFormat: "d/m/Y", // Set the date format to DD/MM/YYYY
+        allowInput: false,   // Double-ensure typing is disabled (use readonly on input too)
+        // You can add more options here like locale, minDate, maxDate etc.
+        // locale: "id" // Example for Indonesian locale (requires importing locale file)
+    };
+
+    // Initialize Flatpickr for all elements with class 'flatpickr'
+    // Flatpickr automatically finds data-input, data-toggle, data-clear within the wrap element
+    flatpickr(".flatpickr", flatpickrConfig);
+
+    // --- Optional: Logic to pre-fill Update Modal ---
+    // Make sure this runs *after* Flatpickr initialization if needed,
+    // or better, within your existing 'show.bs.modal' event for #updatePeriodeModal
+    $('#updatePeriodeModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+
+        // Example: Assume dates are passed like data-tanggal-mulai="2025-04-10" (YYYY-MM-DD format)
+        var tanggalMulaiDb = button.data('tanggal-mulai'); // Get value in YYYY-MM-DD
+        var tanggalAkhirDb = button.data('tanggal-akhir'); // Get value in YYYY-MM-DD
+
+        // Get Flatpickr instances for the update modal inputs
+        var fpMulai = document.querySelector('#update-tanggal-mulai')._flatpickr;
+        var fpAkhir = document.querySelector('#update-tanggal-akhir')._flatpickr;
+
+        // Set the date using Flatpickr's API (it handles formatting)
+        if (tanggalMulaiDb && fpMulai) {
+            fpMulai.setDate(tanggalMulaiDb, true); // 'true' triggers onChange if needed
+        }
+        if (tanggalAkhirDb && fpAkhir) {
+            fpAkhir.setDate(tanggalAkhirDb, true);
+        }
+
+        // ... rest of your update modal population logic (ID, name, etc.)
+    });
+
+    // --- Optional: Clear dates when Add modal is hidden ---
+    $('#addPeriodeModal').on('hidden.bs.modal', function () {
+        var fpMulaiAdd = document.querySelector('#add-tanggal-mulai')._flatpickr;
+        var fpAkhirAdd = document.querySelector('#add-tanggal-akhir')._flatpickr;
+        if(fpMulaiAdd) fpMulaiAdd.clear();
+        if(fpAkhirAdd) fpAkhirAdd.clear();
+        // Also reset other form fields
+        $(this).find('form').trigger('reset');
+    });
+
+    });
 
      document.querySelector('input[name="search"]').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
