@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    HargaJualBarang
+    RincianBarangBekas
 @endsection
 
 @section('styles')
@@ -121,8 +121,13 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
+<<<<<<< Updated upstream
     <h1 class="h3 mb-4 heading-text">ASSET BARANG BEKAS</h1>
     <p class="mb-4 heading-text">Tabel asset barang bekas adalah tabel yang berisikan informasi terkait barang bekas</p>
+=======
+    <h1 class="h3 mb-4 heading-tex font-weight-bold">ASSET BARANG BEKAS</h1>
+    <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
+>>>>>>> Stashed changes
 
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
@@ -306,8 +311,17 @@
 
 
                     <!-- Other Inputs -->
-                    <label class="font-weight-bold">Nama Barang</label>
-                    <input type="text" name="nama_barang" class="form-control mb-3" required>
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                        <select name="nama_barang" id="add-nama-barang" class="form-control" required>
+                            <option value="" disabled selected>Pilih Nama Barang...</option>
+                            <option value="Sensor">Sensor</option>
+                            <option value="Actuator">Actuator</option>
+                            <option value="Power">Power</option>
+                            <option value="Equipment">Equipment</option>
+                            
+                        </select>
+                    </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
                     <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
@@ -417,8 +431,16 @@
                             </div>
                     
 
-                    <label class="font-weight-bold">Nama Barang</label>
-                    <input type="text" name="nama_barang" id="update-nama" class="form-control mb-3" required>
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                        <select name="nama_barang" id="update-nama" class="form-control" required>
+                            <option value="" disabled selected>Pilih Nama Barang...</option>
+                            <option value="Sensor">Sensor</option>
+                            <option value="Actuator">Actuator</option>
+                            <option value="Power">Power</option>
+                            <option value="Equipment">Equipment</option>            
+                        </select>
+                    </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
                     <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3" required>

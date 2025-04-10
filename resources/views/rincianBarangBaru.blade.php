@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    HargaJualBarang
+    RincianBarangBaru
 @endsection
 
 @section('styles')
@@ -114,6 +114,62 @@
     border-color: #DEDDDD !important;
 }
 
+/* Pagination */
+
+/* Style the main pagination container */
+.dataTables_paginate .pagination {
+    border: 1px solid #272780; 
+    border-radius: 0.3rem;     
+    display: inline-flex;      
+    overflow: hidden;         
+    margin-bottom: 0;          
+}
+
+
+.dataTables_paginate .pagination .page-item + .page-item .page-link {
+    margin-left: 0;
+}
+
+/* Style individual links (default state) */
+.dataTables_paginate .pagination .page-link {
+    border: black !important;             
+    color: #272780;                     
+    background-color: transparent;       
+    padding: 0.5rem 0.85rem;           
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out; 
+}
+
+/* Hover state for non-active, non-disabled links */
+.dataTables_paginate .pagination .page-item:not(.active):not(.disabled) .page-link:hover {
+    background-color: #e9ecef;        
+    color: #272780;                    
+}
+
+/* Remove default focus outline if desired */
+.dataTables_paginate .pagination .page-link:focus {
+     box-shadow: none;
+}
+
+/* Active page style */
+.dataTables_paginate .pagination .page-item.active .page-link {
+    background-color: #272780 !important; 
+    color: #fff !important;              
+    border: none !important;
+}
+
+/* Disabled page style (Previous/Next) */
+.dataTables_paginate .pagination .page-item.disabled .page-link {
+    color: #adb5bd !important;        
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.batal-btn{
+    color: #272780 !important; 
+    border-color:  #272780 !important;
+}
+
+
 
 </style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -121,8 +177,8 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 heading-text">ASSET BARANG BARU</h1>
-    <p class="mb-4 heading-text">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
+    <h1 class="h3 mb-4 heading-text font-weight-bold">ASSET BARANG BARU</h1>
+    <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
 
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
@@ -152,7 +208,13 @@
                 <div class="col-sm-12 col-md-6">
                     <div id="dataTable_filter" class="dataTables_filter d-flex justify-content-md-end">
                         <label class="mr-2">Search:
+<<<<<<< Updated upstream
                             <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+=======
+                            <form id="searchForm" method="GET" action="{{ route('aset_barang.index') }}" class="d-inline">
+                                <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm d-inline" aria-controls="dataTable">
+                            </form>
+>>>>>>> Stashed changes
                         </label>
                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
                     </div>
@@ -306,8 +368,17 @@
 
 
                     <!-- Other Inputs -->
-                    <label class="font-weight-bold">Nama Barang</label>
-                    <input type="text" name="nama_barang" class="form-control mb-3" required>
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                        <select name="nama_barang" id="add-nama-barang" class="form-control" required>
+                            <option value="" disabled selected>Pilih Nama Barang...</option>
+                            <option value="Sensor">Sensor</option>
+                            <option value="Actuator">Actuator</option>
+                            <option value="Power">Power</option>
+                            <option value="Equipment">Equipment</option>
+                            
+                        </select>
+                    </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
                     <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
@@ -318,7 +389,7 @@
 
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link text-muted font-weight-bold" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn text-muted font-weight-bold batal-btn mr-4" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn modal-color text-white font-weight-bold">Tambah</button>
                 </div>
             </form>
@@ -417,8 +488,16 @@
                             </div>
                     
 
-                    <label class="font-weight-bold">Nama Barang</label>
-                    <input type="text" name="nama_barang" id="update-nama" class="form-control mb-3" required>
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                        <select name="nama_barang" id="update-nama" class="form-control" required>
+                            <option value="" disabled selected>Pilih Nama Barang...</option>
+                            <option value="Sensor">Sensor</option>
+                            <option value="Actuator">Actuator</option>
+                            <option value="Power">Power</option>
+                            <option value="Equipment">Equipment</option>
+                        </select>
+                    </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
                     <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3" required>
@@ -428,7 +507,8 @@
                 </div>
 
                 <div class="modal-footer d-flex justify-content-end">
-                    <button type="button" class="btn btn-link text-muted font-weight-bold" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn font-weight-bold border px-3 batal-btn mr-4"  data-dismiss="modal">Batal</button>
+
                     <button type="submit" class="btn modal-color text-white font-weight-bold">Simpan</button>
                 </div>
             </form>
@@ -459,7 +539,7 @@
 
                 <!-- footer -->
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-link text-muted font-weight-bold" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-link text-muted font-weight-bold batal-btn mr-4" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn modal-color text-white font-weight-bold">Hapus</button>
                 </div>
             </form>
