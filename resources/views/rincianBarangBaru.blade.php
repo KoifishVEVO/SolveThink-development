@@ -171,13 +171,71 @@
 
 
 
+/* Dropdown */
+
+/* Custom Searchable Dropdown Styles */
+.searchable-dropdown-container .dropdown {
+    position: relative; /* Ensure dropdown menu positions correctly */
+}
+
+.searchable-dropdown-container .dropdown-toggle {
+    display: flex;
+    justify-content: space-between; /* Pushes arrow to the right */
+    align-items: center;
+    border-color: #ced4da; /* Match Bootstrap */
+}
+.searchable-dropdown-container .dropdown-toggle .selected-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Ensure dropdown menu takes full width and scrolls */
+.searchable-dropdown-menu {
+    width: 100%;
+    max-height: 250px; /* Limit height and enable scroll */
+    overflow-y: auto;
+    padding-top: 0; /* Remove default padding */
+}
+
+.searchable-dropdown-menu .search-box {
+    position: sticky; /* Make search box stick to top */
+    top: 0;
+    background-color: #fff; /* Ensure background */
+    padding-top: 0.5rem; /* Add padding back */
+    z-index: 10; /* Keep above list items */
+    border-bottom: 1px solid #eee; /* Separator */
+}
+
+.searchable-dropdown-menu .search-input {
+    /* Add any specific search input styling */
+}
+
+.searchable-dropdown-menu .dropdown-items-list {
+    /* Container for items */
+}
+
+.searchable-dropdown-menu .dropdown-item {
+    cursor: pointer;
+}
+
+.searchable-dropdown-menu .dropdown-item:hover {
+    background-color: #e9ecef;
+}
+
+/* Class to hide items during search */
+.searchable-item.d-none {
+    display: none;
+}
+
+
 </style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 heading-text font-weight-bold">ASSET BARANG BARU</h1>
+    <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">ASSET BARANG BARU</h1>
     <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
 
     <!-- DataTables Example -->
@@ -394,16 +452,47 @@
 
 
                     <!-- Other Inputs -->
-                    <div class="form-group mb-3">
-                        <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                        <select name="nama_barang" id="add-nama-barang" class="form-control" required>
-                            <option value="" disabled selected>Pilih Nama Barang...</option>
-                            <option value="Sensor">Sensor</option>
-                            <option value="Actuator">Actuator</option>
-                            <option value="Power">Power</option>
-                            <option value="Equipment">Equipment</option>
-                            
-                        </select>
+                    <div class="form-group mb-3 searchable-dropdown-container">
+                        <label class="font-weight-bold" for="add-nama-barang-trigger">Nama Barang</label>
+
+                        {{-- Hidden input to store the actual selected value for the form --}}
+                        <input type="hidden" name="nama_barang" id="add-nama-barang-value" required>
+
+                        {{-- The visible part that looks like a select box --}}
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle form-control text-left" type="button"
+                                    id="add-nama-barang-trigger" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <span class="selected-text">Pilih Nama Barang...</span>
+                            </button>
+                            {{-- The dropdown panel with search and list --}}
+                            <div class="dropdown-menu searchable-dropdown-menu" aria-labelledby="add-nama-barang-trigger">
+                            <div class="search-box px-2 pb-2">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white border-right-0">
+                                            <i class="fa fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="search" class="form-control search-input border-left-0" aria-controls="add-nama-barang-list">
+                                </div>
+                            </div>
+                                <div class="dropdown-items-list" id="add-nama-barang-list">
+                                    {{-- Options will be added/filtered by JS, or you can pre-populate --}}
+                                    {{-- Note: It's often better to populate this list via JS for easier filtering --}}
+                                    <a class="dropdown-item searchable-item" href="#" data-value="">Pilih Nama Barang...</a>
+                                    <a class="dropdown-item searchable-item" href="#" data-value="Sensor">Sensor</a>
+                                    <a class="dropdown-item searchable-item" href="#" data-value="Actuator">Actuator</a>
+                                    <a class="dropdown-item searchable-item" href="#" data-value="Power">Power</a>
+                                    <a class="dropdown-item searchable-item" href="#" data-value="Equipment">Equipment</a>
+                                    {{-- Add other options here --}}
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Backend Note: This uses a custom vanilla JS dropdown. The selected value is --}}
+                        {{-- stored in the hidden input 'nama_barang' (#add-nama-barang-value). --}}
+                        {{-- Filtering is purely client-side based on the available item text. --}}
+                        {{-- Validation must check if the hidden input has a valid selected value. --}}
                     </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
@@ -514,16 +603,45 @@
                             </div>
 
 
-                    <div class="form-group mb-3">
-                        <label class="font-weight-bold" for="update-nama">Nama Barang</label>
-                        <select name="nama_barang" id="update-nama" class="form-control" required>
-                            <option value="" disabled selected>Pilih Nama Barang...</option>
-                            <option value="Sensor">Sensor</option>
-                            <option value="Actuator">Actuator</option>
-                            <option value="Power">Power</option>
-                            <option value="Equipment">Equipment</option>
-                        </select>
-                    </div>
+                            <div class="form-group mb-3 searchable-dropdown-container">
+                                <label class="font-weight-bold" for="update-nama-trigger">Nama Barang</label>
+
+                                {{-- Hidden input to store the actual selected value for the form --}}
+                                <input type="hidden" name="nama_barang" id="update-nama-value" required>
+
+                                {{-- The visible part that looks like a select box --}}
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle form-control text-left" type="button"
+                                            id="update-nama-trigger" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        <span class="selected-text">Pilih Nama Barang...</span>
+                                    </button>
+                                    {{-- The dropdown panel with search and list --}}
+                                    <div class="dropdown-menu searchable-dropdown-menu" aria-labelledby="update-nama-trigger">
+                                    <div class="search-box px-2 pb-2">
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-white border-right-0">
+                                                    <i class="fa fa-search text-muted"></i>
+                                                </span>
+                                            </div>
+                                            <input type="search" class="form-control search-input border-left-0" aria-controls="add-nama-barang-list">
+                                        </div>
+                                    </div>
+                                        <div class="dropdown-items-list" id="update-nama-list">
+                                            {{-- Options can be pre-populated or added via JS --}}
+                                            <a class="dropdown-item searchable-item" href="#" data-value="">Pilih Nama Barang...</a>
+                                            <a class="dropdown-item searchable-item" href="#" data-value="Sensor">Sensor</a>
+                                            <a class="dropdown-item searchable-item" href="#" data-value="Actuator">Actuator</a>
+                                            <a class="dropdown-item searchable-item" href="#" data-value="Power">Power</a>
+                                            <a class="dropdown-item searchable-item" href="#" data-value="Equipment">Equipment</a>
+                                            {{-- Add other options here --}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Backend Note: Same as add modal. Ensure JS pre-selects the correct value --}}
+                                {{-- by setting the hidden input value AND the trigger button text. --}}
+                            </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
                     <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3" required>
@@ -576,6 +694,120 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
+// (search in modal)
+document.addEventListener('DOMContentLoaded', function() {
+
+function setupSearchableDropdown(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    const triggerButton = container.querySelector('.dropdown-toggle');
+    const hiddenInput = container.querySelector('input[type="hidden"]');
+    const dropdownMenu = container.querySelector('.dropdown-menu');
+    const searchInput = container.querySelector('.search-input');
+    const itemsList = container.querySelector('.dropdown-items-list');
+    const selectedTextSpan = triggerButton.querySelector('.selected-text');
+
+    // --- Filter items based on search input ---
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const items = itemsList.querySelectorAll('.searchable-item');
+
+        items.forEach(item => {
+            const itemText = item.textContent.toLowerCase();
+            // Show/hide based on match. Skip the placeholder item.
+            if (item.dataset.value === "") { // Keep placeholder always visible or handle differently
+                // item.style.display = 'block'; // Or hide it: item.style.display = 'none';
+                return; // Skip filtering the placeholder
+            }
+
+            if (itemText.includes(searchTerm)) {
+                item.classList.remove('d-none'); // Use Bootstrap class for consistency
+            } else {
+                item.classList.add('d-none');
+            }
+        });
+    });
+
+    // --- Handle item selection ---
+    itemsList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('searchable-item')) {
+            e.preventDefault();
+            const selectedValue = e.target.dataset.value;
+            const selectedText = e.target.textContent;
+
+            // Update hidden input and visible text
+            hiddenInput.value = selectedValue;
+            selectedTextSpan.textContent = selectedText;
+
+            // Manually close dropdown (using Bootstrap's jQuery dependency here)
+            $(triggerButton).dropdown('toggle');
+
+            // Trigger change event for any other scripts listening
+            var event = new Event('change', { bubbles: true });
+            hiddenInput.dispatchEvent(event);
+        }
+    });
+
+    // --- Reset search when dropdown is shown ---
+    // Need jQuery here because Bootstrap's dropdown events rely on it
+    $(triggerButton).on('shown.bs.dropdown', function () {
+         searchInput.value = ''; // Clear search box
+         // Show all items except placeholder if needed
+         const items = itemsList.querySelectorAll('.searchable-item');
+         items.forEach(item => item.classList.remove('d-none'));
+         searchInput.focus(); // Focus search input
+    });
+
+     // Reset to placeholder text if hidden input is empty (useful for Update modal init)
+     if (!hiddenInput.value && hiddenInput.required) { // Check if required and empty
+        const placeholderItem = itemsList.querySelector('.searchable-item[data-value=""]');
+         selectedTextSpan.textContent = placeholderItem ? placeholderItem.textContent : 'Pilih...';
+     }
+}
+
+// Initialize for Add Modal
+setupSearchableDropdown('#addAssetModal .searchable-dropdown-container');
+
+// Initialize for Update Modal
+setupSearchableDropdown('#updateAssetModal .searchable-dropdown-container');
+
+
+// --- Populate Update Modal (Example - NEEDS to be in your 'show.bs.modal' event) ---
+$('#updateAssetModal').on('show.bs.modal', function (event) {
+     var button = $(event.relatedTarget); // Button that triggered the modal
+     var assetNamaValue = button.data('nama'); // Get the value (e.g., "Sensor")
+
+     // Find the corresponding item text
+     var selectedItemText = 'Pilih Nama Barang...'; // Default
+     var itemLink = $(this).find('#update-nama-list .searchable-item[data-value="' + assetNamaValue + '"]');
+     if (itemLink.length) {
+         selectedItemText = itemLink.text();
+     }
+
+     // Set the hidden input value
+     $(this).find('#update-nama-value').val(assetNamaValue);
+     // Set the visible button text
+     $(this).find('#update-nama-trigger .selected-text').text(selectedItemText);
+
+     // Other update modal population logic (ID, price, stock, image)...
+ });
+
+  // --- Reset Add Modal state on close ---
+  $('#addAssetModal').on('hidden.bs.modal', function () {
+      const container = document.querySelector('#addAssetModal .searchable-dropdown-container');
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const selectedTextSpan = container.querySelector('.selected-text');
+      const placeholderItem = container.querySelector('.searchable-item[data-value=""]');
+
+      hiddenInput.value = ""; // Clear hidden value
+      selectedTextSpan.textContent = placeholderItem ? placeholderItem.textContent : 'Pilih...'; // Reset text
+
+      // Also reset other form fields if not done by form.reset()
+      $(this).find('form').trigger('reset'); // Reset other standard fields
+  });
+
+});
 
      document.querySelector('input[name="search"]').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {

@@ -175,11 +175,11 @@
 
 <div class="container-fluid">
 
-    <h1 class="h3 mb-2 heading-text">RINCIAN NAMA BARANG</h1> 
+    <h1 class="h3 mb-2 mt-4 heading-text">RINCIAN NAMA BARANG</h1> 
     <p class="mb-4 heading-text">Tabel rincian nama barang adalah tabel yang berisikan barang-barang yang ada</p>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3 card-color"> {{-- Adjusted padding --}}
+        <div class="card-header py-5 card-color"> {{-- Adjusted padding --}}
             <h6 class="m-0 font-weight-bold text-white">Data Tabel Nama Barang</h6> {{-- Updated Card Title --}}
         </div>
         <div class="card-body">
@@ -227,7 +227,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
-                                    {{-- --- START EXAMPLE DATA (Remove when using backend loop) --- --}}
                                     @php
                                         $exampleItems = [
                                             ['id' => 1, 'nama' => 'Barang 01'],

@@ -12,6 +12,8 @@
     <title>@yield('title')</title> <!-- Dynamic Title -->
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+ 
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -19,80 +21,113 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <style>
-
-
-        .sidebar.toggled .nav-item .nav-link span{
-            display: none;
-        }
-        .sidebar.toggled .sidebar-heading span{
-            display: none;
-        }
-        .sidebar-color {
-            background-color: #272780;
-        }
-
-        .sidebar-item-color {
-            color: #A9B5DF;
-        }
-        .sidebar.toggled .welcome-text {
-            display: none;
-        }
-        .sidebar.toggled .welcome-icon {
-            display: block;
-            max-width: 40px;
-            margin: 0 auto;
-        }
-        .sidebar.toggled .sidebar-heading-icon {
-            display: block;
-            text-align: center;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .sidebar .sidebar-heading-icon {
-            display: none;
-        }
-        
-        .welcome-icon {
-            display: none;
-        }
-
-        .sidebar-item-color:hover {
-            background-color: #A9B5DF;
-            color: #FFFFFF; 
-        }
-     
-
-        .bg-footer{
-            background-color: white;
-            color: #272780;
-            font-weight: 500;
-        }
+ /* --- Existing Base Styles (Keep As Is) --- */
+ .sidebar.toggled .nav-item .nav-link span{ display: none; }
+        .sidebar.toggled .sidebar-heading span{ display: none; }
+        .sidebar-color { background-color: #272780; }
+        .sidebar-item-color { color: #A9B5DF; }
+        .sidebar.toggled .welcome-text { display: none; }
+        /* Icon display logic is refined below */
+        .sidebar.toggled .sidebar-heading-icon { display: block; text-align: center; font-size: 1rem; margin-bottom: 0.5rem; }
+        .sidebar .sidebar-heading-icon { display: none; }
+        .sidebar-item-color:hover { background-color: #A9B5DF; color: #FFFFFF; }
+        .bg-footer{ background-color: white; color: #272780; font-weight: 500; }
 
         .scroll-to-top {
-            position: fixed;
-            right: 1rem;
-            bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background-color: #272780 !important; 
-            border-radius: 50%;
-            z-index: 1000;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-            text-decoration: none;
+             position: fixed; right: 1rem; bottom: 1rem; display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: #272780 !important; border-radius: 50%; z-index: 1030; /* Lower than topbar/sidebar overlay */ opacity: 0.7; transition: opacity 0.3s; text-decoration: none;
+        }
+        .scroll-to-top i { color: white; font-size: 1rem; }
+        .scroll-to-top:hover { opacity: 1; }
+
+
+        /* --- Layout Adjustments --- */
+
+        /* Define Topbar Height Variable (adjust if your topbar height differs) */
+        :root {
+             --topbar-height: 68px; /* Default SB Admin 2 topbar height */
         }
 
-        
-
-        .scroll-to-top i {
-            color: white;
-            font-size: 1rem;
+        /* 1. Content Padding for Fixed Topbar */
+        #content {
+             padding-top: var(--topbar-height);
         }
+
+        /* 2. Sticky Topbar z-index */
+        .navbar.fixed-top {
+             z-index: 1035; /* Ensure topbar is above most content but potentially below modals/mobile sidebar overlay initially */
+        }
+        /* Ensure mobile toggle button is high enough */
+        #sidebarToggleTop {
+             z-index: 1036; /* Slightly higher than topbar itself */
+             position: relative; /* Needed for z-index to work reliably on buttons */
+        }
+
+        /* 3. Sticky Sidebar (Desktop) */
+        @media (min-width: 768px) {
+             #accordionSidebar {
+                 position: sticky;
+                 top: var(--topbar-height); /* Stick BELOW the topbar */
+                 height: calc(100vh - var(--topbar-height)); /* Full height minus topbar */
+                 z-index: 1000; /* Below topbar */
+                 overflow-y: auto; /* Allow internal scrolling */
+                 overflow-x: hidden; /* Prevent horizontal scroll */
+            }
+            /* Desktop Toggled Icon */
+             .sidebar.toggled .welcome-icon {
+                 display: block;
+                 max-width: 40px;
+                 margin: 0 auto;
+            }
+            .sidebar:not(.toggled) .welcome-icon { /* Hide icon explicitly when not toggled */
+                 display: none;
+             }
+         }
+
+        /* 4. Sticky Footer Flexbox */
+        #content-wrapper {
+             display: flex;
+             flex-direction: column;
+             min-height: 100vh;
+        }
+        #content {
+             flex-grow: 1;
+        }
+
+        /* 5. Mobile Sidebar Adjustments */
+        @media (max-width: 767.98px) {
+            /* When mobile sidebar is shown (usually adds .show class via Bootstrap JS) */
+             #accordionSidebar.show {
+                 z-index: 1040; /* Make sure sidebar overlay is above content, slightly above topbar */
+                 /* SB Admin 2 default CSS handles the slide-in */
+            }
+
+            /* Mobile - Show small icon, hide text when sidebar is active/shown */
+             #accordionSidebar.show .sidebar-brand-icon .welcome-icon {
+                 display: block; /* Show the small icon */
+                 max-width: 40px;
+                 margin: 0 auto 0.5rem auto; /* Add some bottom margin */
+            }
+             #accordionSidebar.show .sidebar-brand-text {
+                 display: none; /* Hide the full logo text */
+             }
+
+            /* Mobile - Hide small icon when sidebar is hidden */
+             #accordionSidebar:not(.show) .welcome-icon {
+                 display: none;
+             }
+            /* Mobile - Ensure full logo text shows when hidden */
+             #accordionSidebar:not(.show) .sidebar-brand-text {
+                 display: block; /* Or inline, depending on original style */
+             }
+         }
+
+        /* Default state for welcome icon (hidden) */
+        .welcome-icon {
+             display: none;
+         }
+
     </style>
+
 
     @yield('styles') 
 
@@ -105,34 +140,23 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar-color sidebar sidebar-dark accordion" id="accordionSidebar">
-<<<<<<< Updated upstream
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                    <img src="{{ asset('assets/images/welcome_icon.png') }}" alt="SolveThink" class="welcome-icon">
-                </div>
-                <div class="text-center sidebar-brand-text" style="text-transform: none;">
-                <img src="{{ asset('assets/images/solvethink.png') }}" alt="SolveThink Logo" class="img-fluid rounded" style="max-width: 100%;">
-                </div>
-            </a>
-=======
         <div class="sidebar-brand d-flex flex-column align-items-center justify-content-center">
         <!-- Logo Icon -->
         <div class = "sidebar-brand-icon">
-        <a href="index.html" class="mb-2 text-gray-400">
+        <a href="{{ url('/') }}" class="mb-2 text-gray-400">
             <img src="{{ asset('assets/images/welcome_icon.png') }}" alt="SolveThink" class="welcome-icon">
         </a>
         </div>
         
         <!-- Logo Text -->
         <div class="sidebar-brand-text ">
-        <a href="index.html" class=" text-center sidebar-brand-text ">
+        <a href="{{ url('/') }}" class=" text-center sidebar-brand-text ">
             <img src="{{ asset('assets/images/solvethink.png') }}" alt="SolveThink Logo" class="img-fluid rounded"
                 style="max-width: 100%;">
         </a>
         </div>
     </div>
    
->>>>>>> Stashed changes
 
             
 
@@ -211,7 +235,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top">
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -276,13 +300,13 @@
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
-            <footer class="sticky-footer bg-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span class="font-weight-bold text-medium fs-5">Copyright &copy; 2025 SolveThink. All rights reserved.</span>
-                    </div>
-                </div>
-            </footer>
+                <footer class="sticky-footer bg-footer">
+                 <div class="container my-auto">
+                     <div class="copyright text-center my-auto">
+                         <span class="font-weight-bold text-medium fs-5">Copyright &copy; 2025 SolveThink. All rights reserved.</span>
+                     </div>
+                 </div>
+             </footer>
             <!-- End of Footer -->
 
             </div>
@@ -317,6 +341,9 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
