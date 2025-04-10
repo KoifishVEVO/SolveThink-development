@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangBaruController;
+use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\BarangBekasController;
 use App\Models\AsetBarangBaru;
 use App\Models\AsetBarangBekas;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 
 
 // authentication
+Route::get('/', [AuthController::class, 'showLogin'])->name('login.show')->middleware('guest');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show')->middleware('guest');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show')->middleware('guest');
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
@@ -97,3 +99,9 @@ Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy
 Route::delete('/aset-barang-bekas/{id}', [BarangBekasController::class, 'destroy'])->name('aset_barang_bekas.destroy');
 Route::delete('/aset_barang-bekas/deleteOne/{nama_barang}', [BarangBekasController::class, 'deleteOne'])
     ->name('aset_barang_bekas.deleteOne');
+
+
+
+
+    // periode
+Route::get('/periode', [PeriodeController::class, 'show'])->name('periode.show');

@@ -19,6 +19,14 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <style>
+
+
+        .sidebar.toggled .nav-item .nav-link span{
+            display: none;
+        }
+        .sidebar.toggled .sidebar-heading span{
+            display: none;
+        }
         .sidebar-color {
             background-color: #272780;
         }
@@ -56,8 +64,9 @@
      
 
         .bg-footer{
-            background-color: #272780;
-            color: white;
+            background-color: white;
+            color: #272780;
+            font-weight: 500;
         }
 
         .scroll-to-top {
@@ -96,40 +105,60 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar-color sidebar sidebar-dark accordion" id="accordionSidebar">
+<<<<<<< Updated upstream
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('assets/images/welcome_icon.png') }}" alt="SolveThink" class="welcome-icon">
                 </div>
                 <div class="text-center sidebar-brand-text" style="text-transform: none;">
-                    <h3 class="welcome-text font-weight-bold">Welcome, Admin</h3>
+                <img src="{{ asset('assets/images/solvethink.png') }}" alt="SolveThink Logo" class="img-fluid rounded" style="max-width: 100%;">
                 </div>
             </a>
+=======
+        <div class="sidebar-brand d-flex flex-column align-items-center justify-content-center">
+        <!-- Logo Icon -->
+        <div class = "sidebar-brand-icon">
+        <a href="index.html" class="mb-2 text-gray-400">
+            <img src="{{ asset('assets/images/welcome_icon.png') }}" alt="SolveThink" class="welcome-icon">
+        </a>
+        </div>
+        
+        <!-- Logo Text -->
+        <div class="sidebar-brand-text ">
+        <a href="index.html" class=" text-center sidebar-brand-text ">
+            <img src="{{ asset('assets/images/solvethink.png') }}" alt="SolveThink Logo" class="img-fluid rounded"
+                style="max-width: 100%;">
+        </a>
+        </div>
+    </div>
+   
+>>>>>>> Stashed changes
 
             
 
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 <i class="fas fa-th-large sidebar-heading-icon"></i>
-                Pengelolaan Barang
+                <span>Pengelolaan Barang</span>
             </div>
 
             <li class="nav-item sidebar-item-color">
                 <a class="nav-link " href="{{('/rincianNamaBarang')}}">
-                    <i class="fas fa-list"></i>
+                    <i class="fas fa-list text-gray-400"></i>
                     <span>Rincian Nama Barang</span>
                 </a>
             </li>
 
             <li class="nav-item sidebar-item-color">
                 <a class="nav-link" href="{{ url('/rincianBarangBaru') }}">
-                    <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-file-alt text-gray-400"></i>
                     <span>Asset Barang Baru</span>
                 </a>
             </li>
 
             <li class="nav-item sidebar-item-color">
                 <a class="nav-link" href="{{ url('/rincianBarangBekas') }}">
-                    <i class="fas fa-sync-alt"></i>
+                    <i class="fas fa-sync-alt text-gray-400"></i>
                     <span>Asset Barang Bekas</span>
                 </a>
             </li>
@@ -137,30 +166,32 @@
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 <i class="fas fa-chart-line sidebar-heading-icon"></i>
-                Pengelolaan Keuangan
+                <span>Pengelolaan Keuangan</span>
             </div>
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="#">
-                    <span>Keuangan SolveThink</span>
+                <a class="nav-link" href="{{ url( '/periode') }}">
+                <i class="fa fa-calendar text-gray-400"></i>
+                    <span>Periode</span>
                 </a>
             </li>
 
             <li class="nav-item sidebar-item-color">
                 <a class="nav-link" href="{{ url('/rincianBarangBaru') }}">
-                    <span>Rincian Belanja</span>
+                    <!-- temporary small, use span later when icon exist -->
+                    <small>Rincian Belanja</small>
                 </a>
             </li>
 
             <li class="nav-item sidebar-item-color">
                 <a class="nav-link" href="{{ url('/rincianBarangBekas') }}">
-                    <span>Penjualan Barang</span>
+                    <small>Penjualan Barang</small>
                 </a>
             </li>
 
             <li class="nav-item sidebar-item-color">
                 <a class="nav-link" href="{{ url('/rincianBarangBekas') }}">
-                    <span>Penyewaan Barang</span>
+                    <small>Penyewaan Barang</small>
                 </a>
             </li>
 
@@ -191,14 +222,14 @@
                             <!-- Notification Icon -->
                             <li class="nav-item">
                                 <a class="nav-link" href="#" role="button">
-                                    <i class="fas fa-bell"></i>
+                                    <i class="fas fa-bell text-dark fa-lg"></i>
                                 </a>
                             </li>
 
                             <!-- Message Icon -->
                             <li class="nav-item">
                                 <a class="nav-link" href="#" role="button">
-                                    <i class="fas fa-envelope"></i>
+                                    <i class="fas fa-envelope text-dark fa-lg"></i>
                                 </a>
                             </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -207,24 +238,28 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span> -->
-                                <i class="fas fa-user"></i>
+                                <span class="mr-3 d-none d-lg-inline text-dark small">Lorem Ipsum</span>
+                                <i class="fas fa-user text-dark fa-lg"></i>
 
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                            <div class="px-3 py-2 d-lg-none fs-5">
+                                <span class="text-dark text-center ml-2 fs-5">Lorem Ipsum</span>
+                                <hr class="my-1"> 
+                            </div>
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-dark"></i>
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-dark"></i>
                                     Settings
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{('/login')}}" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-dark"></i>
                                     Logout
                                 </a>
                             </div>
@@ -244,7 +279,7 @@
             <footer class="sticky-footer bg-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; 2025 SolveThink. All rights reserved.</span>
+                        <span class="font-weight-bold text-medium fs-5">Copyright &copy; 2025 SolveThink. All rights reserved.</span>
                     </div>
                 </div>
             </footer>
