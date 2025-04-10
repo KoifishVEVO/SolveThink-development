@@ -3,14 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AsetBarangBekas;
+use App\Models\AsetBarangBaru;
+use Illuminate\Support\Facades\Storage;
 
 class BarangBaruController extends Controller
 {
     public function index()
     {
-        $barang = AsetBarangBekas::all();
-        return view('aset_barang_bekas.index', compact('barang'));
+        $barang = AsetBarangBaru::all();
+        return view('aset_barang.index', compact('barang'));
+    }
+
+
+    public function storeSame(Request $request)
+    {
+            $request->validate([
+                'nama_barang' => 'required|string',
+                'harga_jual_barang' => 'required|numeric',
+                'total_barang' => 'required|integer',
+                'gambar_barang' => 'required|string',
+            ]);
+
+            $barang = AsetBarangBaru::create($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Barang berhasil ditambahkan!',
+                'data' => $barang
+            ]);
+
     }
 
 
@@ -18,32 +39,58 @@ class BarangBaruController extends Controller
     {
         $request->validate([
             'nama_barang' => 'required|max:255',
-            'gambar_barang' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar_barang' => 'required|image|mimes:jpeg,png,jpg',
             'harga_jual_barang' => 'required|integer',
             'total_barang' => 'required|integer',
         ]);
 
         if ($request->hasFile('gambar_barang')) {
             $file = $request->file('gambar_barang');
-            $newFileName = 'barang_baru_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('uploads', $newFileName, 'public');
+            $extension = $file->getClientOriginalExtension();
+            $newFileName = 'barang_baru_' . time() . '.' . $extension;
+            $destinationPath = storage_path('app/public/uploads');
+
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+
+            list($width, $height) = getimagesize($file);
+            $newWidth = 800;
+            $newHeight = ($height / $width) * $newWidth;
+
+            $source = imagecreatefromstring(file_get_contents($file));
+            $imageResized = imagecreatetruecolor($newWidth, $newHeight);
+            imagecopyresampled($imageResized, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+            $outputPath = $destinationPath . '/' . $newFileName;
+
+            if ($extension === 'png') {
+                imagepng($imageResized, $outputPath, 6);
+            } else {
+                imagejpeg($imageResized, $outputPath, 75);
+            }
+
+            imagedestroy($source);
+            imagedestroy($imageResized);
+
             $imagePath = 'uploads/' . $newFileName;
         }
 
-        AsetBarangBekas::create([
+        AsetBarangBaru::create([
             'nama_barang' => $request->nama_barang,
             'gambar_barang' => $imagePath,
             'harga_jual_barang' => $request->harga_jual_barang,
             'total_barang' => $request->total_barang,
         ]);
 
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
     }
+
 
     public function edit($id)
     {
-        $barang = AsetBarangBekas::findOrFail($id);
-        return view('aset_barang_bekas.edit', compact('barang'));
+        $barang = AsetBarangBaru::findOrFail($id);
+        return view('aset_barang_baru.edit', compact('barang'));
     }
 
     public function update(Request $request, $id)
@@ -52,37 +99,97 @@ class BarangBaruController extends Controller
             'nama_barang' => 'required|max:255',
             'harga_jual_barang' => 'required|integer',
             'total_barang' => 'required|integer',
-            'gambar_barang' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'gambar_barang' => 'image|mimes:jpeg,png,jpg',
         ]);
 
-        $barang = AsetBarangBekas::findOrFail($id);
+        $barang = AsetBarangBaru::findOrFail($id);
+        $namaBarangLama = $barang->nama_barang;
+        $barangList = AsetBarangBaru::where('nama_barang', $namaBarangLama)->get();
+
+        $imagePath = null;
 
         if ($request->hasFile('gambar_barang')) {
+            // Hapus gambar lama jika ada
+            foreach ($barangList as $item) {
+                if ($item->gambar_barang && Storage::disk('public')->exists($item->gambar_barang)) {
+                    Storage::disk('public')->delete($item->gambar_barang);
+                }
+            }
+
+            // Upload gambar baru
             $file = $request->file('gambar_barang');
-            $newFileName = 'barang_baru_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('uploads', $newFileName, 'public');
+            $extension = $file->getClientOriginalExtension();
+            $newFileName = 'barang_baru_' . time() . '.' . $extension;
             $imagePath = 'uploads/' . $newFileName;
-            $barang->gambar_barang = $imagePath;
+
+            // Simpan gambar sesuai formatnya
+            $imageFullPath = storage_path('app/public/' . $imagePath);
+            $image = imagecreatefromstring(file_get_contents($file));
+
+            if ($extension === 'png') {
+                imagepng($image, $imageFullPath, 6);
+            } else {
+                imagejpeg($image, $imageFullPath, 75);
+            }
+
+            imagedestroy($image);
         }
 
-        $barang->nama_barang = $request->nama_barang;
-        $barang->harga_jual_barang = $request->harga_jual_barang;
-        $barang->total_barang = $request->total_barang;
+        // Update semua barang dengan nama yang sama
+        foreach ($barangList as $item) {
+            $item->nama_barang = $request->nama_barang;
+            $item->harga_jual_barang = $request->harga_jual_barang;
+            $item->total_barang = $request->total_barang;
+            if ($imagePath) {
+                $item->gambar_barang = $imagePath;
+            }
+            $item->save();
+        }
 
-        $barang->save();
-
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil diupdate');
+        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarangLama . '" berhasil diperbarui');
     }
 
-    public function destroy($id)
-    {
-        $barang = AsetBarangBekas::findOrFail($id);
 
-        if ($barang->gambar_barang && file_exists(public_path('storage/' . $barang->gambar_barang))) {
-            unlink(public_path('storage/' . $barang->gambar_barang));
+
+
+   public function destroy($id)
+    {
+
+        $barang = AsetBarangBaru::findOrFail($id);
+
+        $namaBarang = $barang->nama_barang;
+
+        $barangList = AsetBarangBaru::where('nama_barang', $namaBarang)->get();
+
+        foreach ($barangList as $item) {
+            if ($item->gambar_barang && file_exists(public_path('storage/' . $item->gambar_barang))) {
+                unlink(public_path('storage/' . $item->gambar_barang));
+            }
+        }
+        AsetBarangBaru::where('nama_barang', $namaBarang)->delete();
+
+        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarang . '" berhasil dihapus');
+    }
+
+    public function deleteOne($nama_barang)
+    {
+        // Cari semua barang dengan nama yang sama
+        $barangList = AsetBarangBaru::where('nama_barang', $nama_barang)->get();
+
+        if ($barangList->isNotEmpty()) {
+            $barang = $barangList->first(); // Ambil satu data untuk dihapus
+
+            // Jika hanya ada satu data tersisa, hapus juga gambar
+            if ($barangList->count() == 1 && $barang->gambar_barang) {
+                $gambarPath = public_path('storage/' . $barang->gambar_barang);
+                if (file_exists($gambarPath)) {
+                    unlink($gambarPath); // Hapus gambar
+                }
+            }
+
+            $barang->delete(); // Hapus satu data barang
         }
 
-        $barang->delete();
-        return redirect()->route('aset_barang_bekas.index')->with('success', 'Barang berhasil dihapus');
+        return response()->json(['success' => true]);
     }
 }

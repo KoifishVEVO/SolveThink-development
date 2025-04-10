@@ -22,11 +22,11 @@
     background-color: transparent !important;
     color: #A9B5DF !important;
     border: 2px solid #A9B5DF !important;
-    font-weight: normal !important; 
+    font-weight: normal !important;
     border-radius: 5px !important;
-    padding: 0.25rem 0.5rem !important; 
-    line-height: 1.5 !important; 
-    white-space: nowrap !important; 
+    padding: 0.25rem 0.5rem !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -121,28 +121,23 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-<<<<<<< Updated upstream
-    <h1 class="h3 mb-4 heading-text">ASSET BARANG BEKAS</h1>
-    <p class="mb-4 heading-text">Tabel asset barang bekas adalah tabel yang berisikan informasi terkait barang bekas</p>
-=======
     <h1 class="h3 mb-4 heading-tex font-weight-bold">ASSET BARANG BEKAS</h1>
     <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait barang baru</p>
->>>>>>> Stashed changes
 
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-5 card-color">
-            <h6 class="m-0 font-weight-bold text-white">Data Tabel Asset Barang Bekas</h6>
+            <h6 class="m-0 font-weight-bold text-white">Data Tabel Asset Barang Baru</h6>
         </div>
         <div class="card-body">
 
-        <div class="table-responsive">
+    <div class="table-responsive">
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row mb-3">
                 <!-- Show entries -->
                 <div class="col-sm-12 col-md-6">
                     <div class="dataTables_length" id="dataTable_length">
-                        <label>Show 
+                        <label>Show
                             <select id="showEntries" name="dataTable_length" class="custom-select custom-select-sm form-control form-control-sm">
                                 <option value="10">10</option>
                                 <option value="25">25</option>
@@ -152,18 +147,20 @@
                         </label>
                     </div>
                 </div>
-                
+
                 <!-- Search box -->
                 <div class="col-sm-12 col-md-6">
                     <div id="dataTable_filter" class="dataTables_filter d-flex justify-content-md-end">
                         <label class="mr-2">Search:
-                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                            <form id="searchForm" method="GET" action="{{ route('aset_barang_bekas.index') }}" class="d-inline">
+                                <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm d-inline" placeholder="Cari barang..." aria-controls="dataTable">
+                            </form>
                         </label>
-                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
+                        <button class="btn btn-success btn-sm ml-2" data-toggle="modal" data-target="#addAssetModal">Tambah</button>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Table row -->
             <div class="row">
                 <div class="col-sm-12">
@@ -180,76 +177,97 @@
                         </thead>
                         <tbody id="table-body">
                             <!-- Sample row -->
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <img src="{{ asset('assets/images/solvethink_transparent.png') }}" alt="Gambar"
-                                            class="img-fluid" style="max-width: 100px; height: auto;">
-                                    </div>
-                                </td>
-                                <td>Nama barang 01</td>
-                                <td>Harga Jual barang 01</td>
-                                <td>Stok barang 01</td>
-                                <td class="px-3">
-                                    <div class="d-flex flex-wrap justify-content-center">
-                                        <button class="btn btn-sm rincian-btn m-1" data-toggle="modal" data-target="#rincianAssetModal">
-                                            <i class="fa fa-eye"></i> Rincian
-                                        </button>
-                                        <button 
-                                            class="btn btn-sm btn-warning m-1 btn-update"
-                                            data-id="1"
-                                            data-nama="Nama barang 01"
-                                            data-harga="10000"
-                                            data-stok="25"
-                                            data-gambar="{{ asset('storage/uploads/gambar01.png') }}"
-                                            data-url="{{ route('aset_barang.update', 1) }}"
-                                            data-toggle="modal"
-                                            data-target="#updateAssetModal">
-                                            Update
-                                        </button>
-                                        <button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#deleteAssetModal">Hapus</button>
-                                    </div>
-                                </td>
-                            </tr>
+                           @foreach ($barang as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <img src="{{ asset('storage/' . $item->gambar_barang) }}" alt="Gambar" class="img-fluid" style="max-width: 100px; height: auto;">
+                                </div>
+                            </td>
+                            <td>{{ $item->nama_barang }}</td>
+                            <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
+                            <td>{{ $item->jumlah }}</td>
+                            <td class="px-3">
+
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <button class="btn btn-sm btn-success m-1 btn-tambah"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}"
+                                        data-harga="{{ $item->harga_jual_barang }}"
+                                        data-stok="{{ $item->total_barang }}"
+                                        data-gambar="{{ $item->gambar_barang }}">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm btn-danger m-1 btn-kurangi"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm rincian-btn m-1"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}"
+                                        data-harga="{{ $item->harga_jual_barang }}"
+                                        data-stok="{{ $item->stok_barang }}"
+                                        data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                        data-toggle="modal"
+                                        data-target="#rincianAssetModal">
+                                        <i class="fa fa-eye"></i> Rincian
+                                    </button>
+                                    <button
+                                        class="btn btn-sm btn-warning m-1 btn-update"
+                                        data-id="{{ $item->id }}"
+                                        data-nama="{{ $item->nama_barang }}"
+                                        data-harga="{{ $item->harga_jual_barang }}"
+                                        data-stok="{{ $item->total_barang }}"
+                                        data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                        data-url="{{ route('aset_barang_bekas.update', $item->id) }}"
+                                        data-toggle="modal"
+                                        data-target="#updateAssetModal">
+                                        Update
+                                    </button>
+                                   <button class="btn btn-sm btn-danger m-1 btn-delete"
+                                    data-id="{{ $item->id }}"
+                                    data-nama="{{ $item->nama_barang }}"
+                                    data-url="{{ route('aset_barang_bekas.destroy', $item->id) }}"
+                                    data-toggle="modal"
+                                    data-target="#deleteAssetModal">Hapus</button>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            
+
             <!-- pagination -->
             <div class="row">
                 <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                        Showing 1 to 10 of 57 entries
+                    <div class="dataTables_info" role="status" aria-live="polite">
+                        Showing {{ $barang->firstItem() }} to {{ $barang->lastItem() }} of {{ $barang->total() }} entries
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                    <div class="dataTables_paginate paging_simple_numbers">
                         <ul class="pagination justify-content-end">
-                            <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link ">Previous</a>
+                            {{-- Tombol Previous --}}
+                            <li class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
+                                <a href="{{ $barang->previousPageUrl() ?? '#' }}" class="page-link">Previous</a>
                             </li>
-                            <li class="paginate_button page-item active">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                            </li>
-                            <li class="paginate_button page-item">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                            </li>
-                            <li class="paginate_button page-item">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                            </li>
-                            <li class="paginate_button page-item">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                            </li>
-                            <li class="paginate_button page-item">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                            </li>
-                            <li class="paginate_button page-item">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                            </li>
-                            <li class="paginate_button page-item next" id="dataTable_next">
-                                <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+
+                            {{-- Nomor Halaman --}}
+                            @for ($i = 1; $i <= $barang->lastPage(); $i++)
+                                <li class="paginate_button page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
+                                    <a href="{{ $barang->url($i) }}" class="page-link">{{ $i }}</a>
+                                </li>
+                            @endfor
+
+                            {{-- Tombol Next --}}
+                            <li class="paginate_button page-item {{ $barang->hasMorePages() ? '' : 'disabled' }}">
+                                <a href="{{ $barang->nextPageUrl() ?? '#' }}" class="page-link">Next</a>
                             </li>
                         </ul>
                     </div>
@@ -278,7 +296,7 @@
                 </button>
             </div>
 
-            <form action="{{ route('aset_barang.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('aset_barang_bekas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                             <!-- image upload  -->
@@ -302,10 +320,10 @@
                                 <div id="image-preview" style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
                                     <img id="preview-img" src="" alt="Preview"
                                         style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                    <h6 id="change-image-btn" class="position-absolute"
+                                    <!-- <h6 id="change-image-btn" class="position-absolute"
                                         style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
                                         Click to Change Image
-                                    </h6>
+                                    </h6> -->
                                 </div>
                             </div>
 
@@ -356,7 +374,7 @@
                     <div id="rincian-default-view" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
                         <i class="fa fa-image fa-3x" style="color: white;"></i>
                     </div>
-                    
+
                     <!-- image  -->
                     <div id="rincian-image-view" style="display: none; height: 100%; width: 100%; position: relative;">
                         <img id="rincian-preview-img" src="" alt="Preview" style="height: 100%; width: 100%; object-fit: contain;">
@@ -416,20 +434,20 @@
                                     <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
                                     <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
                                     <input type="file" id="updateFileInput" name="gambar_barang"
-                                        style="display: none;" accept="image/*" required>
+                                        style="display: none;" accept="image/*">
                                 </div>
 
                                 <!-- Image Preview -->
                                 <div id="update-image-preview" style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
                                     <img id="update-preview-img" src="" alt="Preview"
                                         style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                    <h6 id="update-change-btn" class="position-absolute"
+                                    <!-- <h6 id="update-change-btn" class="position-absolute"
                                         style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
                                         Click to Change Image
-                                    </h6>
+                                    </h6> -->
                                 </div>
                             </div>
-                    
+
 
                     <div class="form-group mb-3">
                         <label class="font-weight-bold" for="update-nama">Nama Barang</label>
@@ -492,6 +510,48 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
+     document.querySelector('input[name="search"]').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('searchForm').submit();
+        }
+    });
+
+    // Tombol Rincian - Isi otomatis modal dengan data
+    document.querySelectorAll('.rincian-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const nama = this.dataset.nama;
+            const harga = this.dataset.harga;
+            const stok = this.dataset.stok;
+            const gambar = this.dataset.gambar;
+
+            console.log(stok)
+
+            $('#rincianAssetModal').on('shown.bs.modal', function () {
+            // Isi data ke modal setelah modal benar-benar ditampilkan
+            document.getElementById('rincian-id').innerText = id;
+            document.getElementById('rincian-nama').innerText = nama;
+            document.getElementById('rincian-stok').innerText = stok;
+
+            // Preview gambar
+            const rincianImageView = document.getElementById('rincian-image-view');
+            const rincianDefaultView = document.getElementById('rincian-default-view');
+            const rincianPreviewImg = document.getElementById('rincian-preview-img');
+
+            if (gambar) {
+                rincianPreviewImg.src = gambar;
+                rincianImageView.style.display = 'block';
+                rincianDefaultView.style.display = 'none';
+            } else {
+                rincianImageView.style.display = 'none';
+                rincianDefaultView.style.display = 'flex';
+            }
+        });
+    })
+    });
+
+
     // Untuk modal "Tambah"
     document.getElementById("image-upload-container").addEventListener("click", function () {
         document.getElementById("fileInput").click();
@@ -529,6 +589,26 @@
         }
     });
 
+    // Tombol Delete - Isi otomatis modal dan set form action
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const nama = this.dataset.nama;
+            const url = this.dataset.url;
+
+            // Tampilkan nama di modal
+            document.getElementById('delete-item-name').innerText = `Apakah kamu yakin ingin menghapus "${nama}"?`;
+
+            // Set form action
+            const deleteForm = document.querySelector('#deleteAssetModal form');
+            deleteForm.action = url;
+
+            // Set ID hidden (opsional, kalau diperlukan)
+            document.getElementById('delete-id').value = id;
+        });
+    });
+
+
     // Tombol Update - Isi otomatis modal
     document.querySelectorAll('.btn-update').forEach(button => {
         button.addEventListener('click', function () {
@@ -565,7 +645,50 @@
         });
     });
 
-    
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".btn-tambah")) {
+        let button = event.target.closest(".btn-tambah");
+
+        let data = {
+            nama_barang: button.getAttribute("data-nama"),
+            harga_jual_barang: parseInt(button.getAttribute("data-harga")),
+            total_barang: parseInt(button.getAttribute("data-stok")),
+            gambar_barang: button.getAttribute("data-gambar"),
+            _token: "{{ csrf_token() }}"
+        };
+
+        fetch("{{ route('aset_barang_bekas.storeSame') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": data._token
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(() => location.reload())
+        .catch(error => console.error("Error:", error));
+        }
+    });
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".btn-kurangi")) {
+        let button = event.target.closest(".btn-kurangi");
+        let namaBarang = button.getAttribute("data-nama");
+
+        fetch("{{ route('aset_barang_bekas.deleteOne', ':nama_barang') }}".replace(':nama_barang', encodeURIComponent(namaBarang)), {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            }
+        })
+        .then(response => response.json())
+        .then(() => location.reload())
+        .catch(error => console.error("Error:", error));
+    }
+});
+
 
 </script>
 

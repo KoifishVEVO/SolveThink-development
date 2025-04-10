@@ -7,7 +7,7 @@ use App\Http\Controllers\BarangBekasController;
 use App\Models\AsetBarangBaru;
 use App\Models\AsetBarangBekas;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 
 
 // authentication
@@ -31,20 +31,65 @@ Route::get('/rincianNamaBarang', function() {
     return view('rincianNamaBarang');
 });
 
-Route::get('/rincianBarangBaru', function() {
-    $barang = AsetBarangBaru::all();
-    return view('rincianBarangBaru', compact('barang'));
+Route::get('/rincianBarangBaru', function (Request $request) {
+    $search = $request->input('search');
+
+    $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
+        ->joinSub(
+            AsetBarangBaru::select('nama_barang')
+                ->selectRaw('COUNT(*) as jumlah')
+                ->groupBy('nama_barang'),
+            'jumlah_per_nama',
+            'aset_barang_baru.nama_barang',
+            '=',
+            'jumlah_per_nama.nama_barang'
+        )
+        ->whereIn('aset_barang_baru.id', function ($query) {
+            $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
+        });
+
+    if ($search) {
+        $barang->where('aset_barang_baru.nama_barang', 'LIKE', "%{$search}%");
+    }
+
+    $barang = $barang->paginate(3)->appends(['search' => $search]);
+
+    return view('rincianBarangBaru', compact('barang', 'search'));
 })->name('aset_barang.index');
 
-Route::get('/rincianBarangBekas', function() {
-   $barang = AsetBarangBekas::all();
+Route::get('/rincianBarangBekas', function (Request $request) {
+    $search = $request->input('search');
+
+    $barang = AsetBarangBekas::select('aset_barang_bekas.*', 'jumlah_per_nama.jumlah')
+        ->joinSub(
+            AsetBarangBekas::select('nama_barang')
+                ->selectRaw('COUNT(*) as jumlah')
+                ->groupBy('nama_barang'),
+            'jumlah_per_nama',
+            'aset_barang_bekas.nama_barang',
+            '=',
+            'jumlah_per_nama.nama_barang'
+        )
+        ->whereIn('aset_barang_bekas.id', function ($query) {
+            $query->selectRaw('MAX(id)')->from('aset_barang_bekas')->groupBy('nama_barang');
+        });
+
+    if ($search) {
+        $barang->where('aset_barang_bekas.nama_barang', 'LIKE', "%{$search}%");
+    }
+
+    $barang = $barang->paginate(3)->appends(['search' => $search]);
+
     return view('rincianBarangBekas', compact('barang'));
 })->name('aset_barang_bekas.index');
 
-// rincian barang
+// rincian barang baru
 Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
+Route::post('/aset-barang-baru/same', [BarangBaruController::class, 'storeSame'])->name('aset_barang.storeSame');
 Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
 Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
+Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::class, 'deleteOne'])
+    ->name('aset_barang.deleteOne');
 
 // rincian barang bekas
 Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
@@ -60,4 +105,3 @@ Route::delete('/aset_barang-bekas/deleteOne/{nama_barang}', [BarangBekasControll
 
     // periode
 Route::get('/periode', [PeriodeController::class, 'show'])->name('periode.show');
-
