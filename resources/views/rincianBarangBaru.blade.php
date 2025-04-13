@@ -10,8 +10,6 @@
 @endsection
 
 @section('content')
-<<<<<<< Updated upstream
-=======
     <style>
         /* --- Default (Desktop) Styles for Rincian Modal --- */
 #rincianAssetModal .modal-dialog {
@@ -65,7 +63,7 @@
             color: #272780 !important;
             font-weight: bold !important;
         }
->>>>>>> Stashed changes
+
 
 
 <style>
