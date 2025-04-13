@@ -20,7 +20,7 @@ class BarangBaruController extends Controller
             $request->validate([
                 'nama_barang' => 'required|string',
                 'harga_jual_barang' => 'required|numeric',
-                'total_barang' => 'required|integer',
+                'jenis_barang' => 'required|string',
                 'gambar_barang' => 'required|string',
             ]);
 
@@ -37,11 +37,12 @@ class BarangBaruController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'nama_barang' => 'required|max:255',
             'gambar_barang' => 'required|image|mimes:jpeg,png,jpg',
             'harga_jual_barang' => 'required|integer',
-            'total_barang' => 'required|integer',
+            'jenis_barang' => 'required|string',
         ]);
 
         if ($request->hasFile('gambar_barang')) {
@@ -80,7 +81,7 @@ class BarangBaruController extends Controller
             'nama_barang' => $request->nama_barang,
             'gambar_barang' => $imagePath,
             'harga_jual_barang' => $request->harga_jual_barang,
-            'total_barang' => $request->total_barang,
+            'jenis_barang' => $request->jenis_barang,
         ]);
 
         return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
@@ -98,7 +99,7 @@ class BarangBaruController extends Controller
         $request->validate([
             'nama_barang' => 'required|max:255',
             'harga_jual_barang' => 'required|integer',
-            'total_barang' => 'required|integer',
+            'jenis_barang' => 'required|string',
             'gambar_barang' => 'image|mimes:jpeg,png,jpg',
         ]);
 
@@ -139,7 +140,7 @@ class BarangBaruController extends Controller
         foreach ($barangList as $item) {
             $item->nama_barang = $request->nama_barang;
             $item->harga_jual_barang = $request->harga_jual_barang;
-            $item->total_barang = $request->total_barang;
+            $item->jenis_barang = $request->jenis_barang;
             if ($imagePath) {
                 $item->gambar_barang = $imagePath;
             }
