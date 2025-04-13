@@ -5,53 +5,57 @@
 @endsection
 
 @section('styles')
+
+
 @endsection
 
 @section('content')
-    <style>
-        .heading-text {
-            color: #272780 !important;
-            font-weight: bold !important;
-        }
-
-        .rincian-btn {
-            background-color: transparent !important;
-            color: #A9B5DF !important;
-            border: 2px solid #A9B5DF !important;
-            font-weight: normal !important;
-            border-radius: 5px !important;
-            padding: 0.25rem 0.5rem !important;
-            line-height: 1.5 !important;
-            white-space: nowrap !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
 
 
+<style>
 
-        .rincian-btn i {
-            font-size: 16px !important;
-            margin-right: 0 !important;/
-        }
+.heading-text {
+    color: #272780 !important;
+    font-weight: bold !important;
+}
+.rincian-btn {
+    background-color: transparent !important;
+    color: #A9B5DF !important;
+    border: 2px solid #A9B5DF !important;
+    font-weight: normal !important;
+    border-radius: 5px !important;
+    padding: 0.25rem 0.5rem !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
-        .rincian-btn:hover {
-            background-color: #A9B5DF !important;
-            color: white !important;
-            border-color: #A9B5DF !important;
-        }
 
-        .card-color {
+
+.rincian-btn i {
+    font-size: 16px !important;
+    margin-right: 0 !important; /
+}
+
+.rincian-btn:hover {
+    background-color: #A9B5DF !important;
+    color: white !important;
+    border-color: #A9B5DF !important;
+}
+
+.card-color {
             background-color: #272780 !important;
 
         }
 
         /* for the updown thing, havent figured it out */
-        .entries {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            padding: 6px 30px 6px 12px;
+        .entries{
+           appearance: none;
+           -webkit-appearance: none;
+           -moz-appearance: none;
+           padding: 6px 30px 6px 12px;
             border: 1px solid #ced4da;
             border-radius: 4px;
             background-color: white;
@@ -61,59 +65,61 @@
 
 
         .modal-color {
-            background-color: #272780 !important;
-        }
+        background-color: #272780 !important;
+    }
 
-        /* Additional styles for consistent modal appearance */
-        .drop-zone {
-            background-color: #272780;
-            color: white;
-            border: 2px dashed #ccc;
-            border-radius: 5px;
-            padding: 40px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
+    /* Additional styles for consistent modal appearance */
+    .drop-zone {
+        background-color: #272780;
+        color: white;
+        border: 2px dashed #ccc;
+        border-radius: 5px;
+        padding: 40px 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
 
-        /* Button styling */
-        .btn-modal-color {
-            background-color: #272780;
-            color: white;
-        }
+    /* Button styling */
+    .btn-modal-color {
+        background-color: #272780;
+        color: white;
+    }
 
-        /* Text styling for delete modal */
-        .delete-text {
-            color: #272780;
-            font-weight: bold;
-        }
+    /* Text styling for delete modal */
+    .delete-text {
+        color: #272780;
+        font-weight: bold;
+    }
 
-        /* Bold heading for all modals */
-        .modal-title {
-            font-weight: bold;
-        }
+    /* Bold heading for all modals */
+    .modal-title {
+        font-weight: bold;
+    }
 
-        .btn-success {
-            background-color: #00B634 !important;
-        }
+    .btn-success {
+        background-color: #00B634 !important;
+    }
 
-        .table thead th {
-            border: 1px solid black !important;
-            border-color: #DEDDDD !important;
-        }
+    .table thead th {
+    border: 1px solid black !important;
+    border-color: #DEDDDD !important;
+}
 
-        .table tbody td {
-            border-left: 1px solid black !important;
-            border-right: 1px solid black !important;
-            border-top: none !important;
-            border-bottom: none !important;
-            border-color: #DEDDDD !important;
-        }
-    </style>
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+.table tbody td {
+    border-left: 1px solid black !important;
+    border-right: 1px solid black !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-color: #DEDDDD !important;
+}
 
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+
+</style>
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">ASSET BARANG BEKAS</h1>
         <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait

@@ -10,65 +10,60 @@
 @endsection
 
 @section('content')
-
-
 <style>
-    
-.heading-text {
-    color: #272780 !important;
-    font-weight: bold !important;
-}
-.rincian-btn {
-    background-color: transparent !important;
-    color: #A9B5DF !important;
-    border: 2px solid #A9B5DF !important;
-    font-weight: normal !important;
-    border-radius: 5px !important;
-    padding: 0.25rem 0.5rem !important;
-    line-height: 1.5 !important;
-    white-space: nowrap !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-
-
-.rincian-btn i {
-    font-size: 16px !important;
-    margin-right: 0 !important; /
-}
-
-.rincian-btn:hover {
-    background-color: #A9B5DF !important;
-    color: white !important;
-    border-color: #A9B5DF !important;
-}
-
-.card-color {
-            background-color: #272780 !important;
-
-        }
-
-        /* for the updown thing, havent figured it out */
-        .entries{
-           appearance: none;
-           -webkit-appearance: none;
-           -moz-appearance: none;
-           padding: 6px 30px 6px 12px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            background-color: white;
-            width: 80px;
-            font-size: 14px;
-        }
-
-
-        .modal-color {
+    /* --- Base Styles (from second block) --- */
+    .heading-text {
+        color: #272780 !important;
+        font-weight: bold !important;
+    }
+    .rincian-btn {
+        background-color: transparent !important;
+        color: #A9B5DF !important;
+        border: 2px solid #A9B5DF !important;
+        font-weight: normal !important;
+        border-radius: 5px !important;
+        padding: 0.25rem 0.5rem !important;
+        line-height: 1.5 !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .rincian-btn i {
+        font-size: 16px !important;
+        /* margin-right: 0 !important; // Cleaned up syntax error */
+    }
+    .rincian-btn:hover {
+        background-color: #A9B5DF !important;
+        color: white !important;
+        border-color: #A9B5DF !important;
+    }
+    .card-color {
         background-color: #272780 !important;
     }
-
-    /* Additional styles for consistent modal appearance */
+    .entries{
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 6px 30px 6px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background-color: white;
+        width: 80px;
+        font-size: 14px;
+    }
+    .modal-color {
+        background-color: #272780 !important;
+        color: white !important; /* Ensure text is white */
+    }
+     .modal-color .close { /* Style close button on dark header */
+         color: white !important;
+         opacity: 0.75;
+         text-shadow: none; /* Remove default shadow if any */
+     }
+     .modal-color .close:hover {
+         opacity: 1;
+     }
     .drop-zone {
         background-color: #272780;
         color: white;
@@ -79,95 +74,355 @@
         margin-bottom: 20px;
         cursor: pointer;
     }
-
-    /* Button styling */
-    .btn-modal-color {
+    .btn-modal-color { /* Specific button class */
         background-color: #272780;
         color: white;
+        font-weight: bold; /* Make consistent */
     }
-
-    /* Text styling for delete modal */
+     .btn-modal-color:hover {
+        background-color: #1a1a5c; /* Darker shade on hover */
+        color: white;
+    }
     .delete-text {
         color: #272780;
         font-weight: bold;
     }
-
-    /* Bold heading for all modals */
     .modal-title {
         font-weight: bold;
     }
-
     .btn-success {
         background-color: #00B634 !important;
     }
-
     .table thead th {
-    border: 1px solid black !important;
-    border-color: #DEDDDD !important;
+        border: 1px solid #DEDDDD !important; /* Use consistent border color */
+    }
+    .table tbody td {
+        border-left: 1px solid #DEDDDD !important;
+        border-right: 1px solid #DEDDDD !important;
+        border-top: none !important;
+        border-bottom: 1px solid #DEDDDD !important; /* Add bottom border for separation */
+         vertical-align: middle; /* Align content vertically */
+    }
+    .table tbody tr:last-child td {
+         border-bottom: 1px solid #DEDDDD !important; /* Ensure last row has border */
+     }
+
+    /* Pagination */
+    .dataTables_paginate .pagination { border: 1px solid #272780; border-radius: 0.3rem; display: inline-flex; overflow: hidden; margin-bottom: 0; }
+    .dataTables_paginate .pagination .page-item + .page-item .page-link { margin-left: 0; }
+    .dataTables_paginate .pagination .page-link { border: none !important; color: #272780; background-color: transparent; padding: 0.5rem 0.85rem; transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out; }
+    .dataTables_paginate .pagination .page-item:not(.active):not(.disabled) .page-link:hover { background-color: #e9ecef; color: #272780; }
+    .dataTables_paginate .pagination .page-link:focus { box-shadow: none; }
+    .dataTables_paginate .pagination .page-item.active .page-link { background-color: #272780 !important; color: #fff !important; }
+    .dataTables_paginate .pagination .page-item.disabled .page-link { color: #adb5bd !important; background-color: transparent !important; }
+
+    .batal-btn{ /* Style for Cancel buttons */
+        color: #272780 !important;
+        border: 1px solid #272780 !important;
+        background-color: #fff !important;
+        font-weight: bold; /* Make consistent */
+    }
+     .batal-btn:hover {
+         background-color: #f8f9fa !important; /* Slight hover */
+     }
+    /* --- End Base Styles --- */
+
+
+    /* --- Mobile Styles --- */
+    @media (max-width: 767.98px) {
+
+        /* --- GENERAL FULLSCREEN SETUP for Add/Rincian/Update Modals --- */
+        /* Ensure all relevant IDs are included */
+
+        #addNamaBarangModal .modal-dialog,
+        #rincianNamaBarangModal .modal-dialog,
+        #updateNamaBarangModal .modal-dialog {
+            max-width: 100%; width: 100%; height: 100%; margin: 0;
+            position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            transform: none !important;
+            display: flex; flex-direction: column;
+        }
+  
+        #addNamaBarangModal .modal-content,
+        #rincianNamaBarangModal .modal-content,
+        #updateNamaBarangModal .modal-content {
+            height: 100%; border-radius: 0; border: none;
+            display: flex; flex-direction: column;
+            flex: 1 1 auto;
+            background-color: #fff;
+        }
+         /* Make sure form inside fullscreen modals expands */
+
+         #addNamaBarangModal form,
+         #updateNamaBarangModal form {
+            display: flex; flex-direction: column; height: 100%; flex: 1 1 auto;
+         }
+
+        #addNamaBarangModal .modal-body,
+        #rincianNamaBarangModal .modal-body,
+        #updateNamaBarangModal .modal-body {
+            overflow-y: auto; flex-grow: 1;
+            padding: 1.5rem;
+        }
+
+        #addNamaBarangModal .modal-footer,
+        #rincianNamaBarangModal .modal-footer,
+        #updateNamaBarangModal .modal-footer {
+            margin-top: auto; border-top: none; background-color: #fff;
+            padding: 1rem; flex-shrink: 0;
+        }
+
+         #addNamaBarangModal .modal-body {
+             padding: 1.5rem; /* Consistent padding */
+         }
+
+         /* Style labels like the image */
+         #addNamaBarangModal .modal-body label.form-label, /* Target "Upload Foto Barang" label */
+         #addNamaBarangModal .modal-body label.font-weight-bold /* Target "Nama Barang" label */ {
+             display: block;
+             margin-bottom: 0.5rem;
+             color: #6c757d;  /* Greyish color from image */
+             font-size: 0.9rem;
+             font-weight: bold !important; /* Ensure boldness */
+         }
+
+         /* Style the image upload area like the image */
+         #addNamaBarangModal #add-nama-barang-upload-area {
+             width: 200px;         
+             height: 200px;
+             background-color: #272780 !important; /* Match header/button color */
+             border: none !important; /* Image doesn't show a border */
+             border-radius: 5px !important; /* Match rounding */
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin-bottom: 1.5rem; /* Space below */
+             cursor: pointer;
+             position: relative; /* Needed if you add preview inside later */
+             overflow: hidden;   /* Needed if you add preview inside later */
+         }
+
+         #addNamaBarangModal #add-nama-barang-upload-area i.fa-image {
+             font-size: 2.5rem; /* Adjust icon size as needed */
+             color: white;
+             margin: 0;
+         }
+
+         /* Keep the separate preview area hidden initially */
+         #addNamaBarangModal #add-nama-barang-preview {
+             display: none !important; /* Ensure it stays hidden */
+         }
+
+         #addNamaBarangModal .modal-body .form-control {
+             margin-bottom: 1rem; /* Spacing below input */
+         }
+         /* Add consistent spacing for form groups */
+         #addNamaBarangModal .modal-body .form-group {
+             margin-bottom: 1.5rem; /* Space between groups */
+         }
+
+         /* Style footer buttons like the image */
+         #addNamaBarangModal .modal-footer {
+             display: flex;
+             justify-content: space-between; /* Space buttons apart */
+             align-items: center;
+             padding: 1rem; /* Footer padding */
+             border-top: none; /* No line above footer in fullscreen */
+             background-color: #fff; /* White footer background */
+             flex-shrink: 0;
+         }
+
+         #addNamaBarangModal .modal-footer .btn {
+             width: calc(50% - 0.5rem); /* Buttons share width with a gap */
+             margin: 0;
+             padding-top: 0.75rem;
+             padding-bottom: 0.75rem;
+             font-size: 1rem;
+             font-weight: bold;
+             border-radius: 5px !important; /* Match rounding */
+         }
+         /* Ensure correct styling for the specific buttons */
+         #addNamaBarangModal .modal-footer .batal-btn {
+             /* Base .batal-btn styles already apply */
+         }
+          #addNamaBarangModal .modal-footer .modal-color {
+             /* Base .modal-color styles already apply */
+             color: white !important; /* Ensure text is white */
+         }
+
+        /* --- Specific Styles for Rincian (Show) Modal Mobile --- */
+        #rincianNamaBarangModal .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        #rincianNamaBarangModal .modal-body > div:first-child { /* Image container */
+            width: 80%;
+            max-width: 280px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            background-color: #272780; /* Match modal-color */
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-shrink: 0;
+            overflow: hidden; /* Ensure image inside is contained */
+        }
+         #rincianNamaBarangModal #rincian-default-view, /* Placeholder view */
+         #rincianNamaBarangModal #rincian-image-view { /* Image view */
+             width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+         }
+         #rincianNamaBarangModal #rincian-image-view img {
+             max-width: 100%; max-height: 100%; object-fit: contain;
+         }
+         #rincianNamaBarangModal #rincian-default-view i {
+             color: white; /* Ensure icon is white */
+             font-size: 3rem; /* Adjust icon size */
+         }
+        #rincianNamaBarangModal .modal-body > div:nth-child(2) { /* Details container */
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            width: 80%;
+            max-width: 280px;
+            text-align: left;
+        }
+         #rincianNamaBarangModal .modal-body > div:nth-child(2) p { margin-bottom: 1rem; }
+         #rincianNamaBarangModal .modal-body > div:nth-child(2) strong { font-size: 0.9rem; color: #6c757d; display: block; margin-bottom: 0.25rem; }
+         #rincianNamaBarangModal .modal-body > div:nth-child(2) span { font-size: 1rem; color: #333; }
+        #rincianNamaBarangModal .modal-footer {
+            justify-content: center !important;
+        }
+        #rincianNamaBarangModal .modal-footer .btn { /* Single button takes more width */
+            width: 90%;
+            max-width: 350px;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: bold; /* Make consistent */
+        }
+         /* --- End Specific Rincian Mobile Styles --- */
+
+
+        /* --- Specific Styles for Update Modal Mobile --- */
+        #tam
+        #addNamaBarangModal form,
+        #updateNamaBarangModal form { /* Ensure form takes full height */
+             display: flex; flex-direction: column; height: 100%; flex: 1 1 auto;
+        }
+        #addNamaBarangModal .modal-body,
+        #updateNamaBarangModal .modal-body {
+             /* Default padding applied above */
+             /* Add specific styles for image row if needed */
+              #updateNamaBarangModal .modal-body .row.align-items-center { margin-bottom: 1.5rem; }
+              #updateNamaBarangModal #update-image-placeholder { width: 80px; height: 80px; }
+              #updateNamaBarangModal #update-image-placeholder i { font-size: 2rem; }
+              #updateNamaBarangModal .col p#update-current-filename { font-size: 0.9rem; word-break: break-all; }
+              #updateNamaBarangModal .col button.btn-sm { font-size: 0.8rem; padding: 0.2rem 0.5rem; }
+        }
+        #addNamaBarangModal .modal-footer,
+        #updateNamaBarangModal .modal-footer {
+            display: flex;
+            justify-content: space-between; /* Space out buttons */
+            align-items: center;
+        }
+        #addNamaBarangModal .modal-footer .btn,
+        #updateNamaBarangModal .modal-footer .btn { /* Two buttons share width */
+            width: calc(50% - 0.5rem); /* Adjust gap as needed */
+            margin: 0;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: bold; /* Make consistent */
+        }
+        /* --- End Specific Update Mobile Styles --- */
+
+
+        /* --- Keep Delete Modal Default (matched to deleteAssetModal) --- */
+#deleteNamaBarangModal .modal-dialog {
+    max-width: 500px; /* Match Bootstrap default like deleteAssetModal */
+    height: auto;
+    margin: 1.75rem auto; /* Default centering */
+    position: relative;
+    top: auto; left: auto; bottom: auto; right: auto;
 }
 
-.table tbody td {
-    border-left: 1px solid black !important;
-    border-right: 1px solid black !important;
-    border-top: none !important;
-    border-bottom: none !important;
-    border-color: #DEDDDD !important;
+#deleteNamaBarangModal .modal-content {
+    height: auto;
+    border-radius: 0.3rem; /* Bootstrap default */
+    border: 1px solid rgba(0,0,0,.2);
+    display: block;
+    background-color: #fff;
 }
 
-/* Pagination */
+#deleteNamaBarangModal .modal-body {
+    overflow-y: visible;
+    flex-grow: 0;
+    padding: 1.5rem;
+    text-align: center;
+}
 
-/* Style the main pagination container */
-.dataTables_paginate .pagination {
-    border: 1px solid #272780; 
-    border-radius: 0.3rem;     
-    display: inline-flex;      
-    overflow: hidden;         
-    margin-bottom: 0;          
+#deleteNamaBarangModal .modal-footer {
+    justify-content: center;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    background-color: #fff;
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 1;
+}
+
+#deleteNamaBarangModal .modal-footer .btn {
+    flex: 0 1 auto;
+    padding: 0.5rem 1rem;
+    width: auto;
+    max-width: 45%;
+    font-weight: bold;
 }
 
 
-.dataTables_paginate .pagination .page-item + .page-item .page-link {
-    margin-left: 0;
+        #addNamaBarangModal .modal-dialog {
+    height: 100%; /* Ensure full height */
+    margin: 0;
+    max-width: 100%;
 }
 
-/* Style individual links (default state) */
-.dataTables_paginate .pagination .page-link {
-    border: black !important;             
-    color: #272780;                     
-    background-color: transparent;       
-    padding: 0.5rem 0.85rem;           
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out; 
+#addNamaBarangModal .modal-content {
+    height: 100%; /* Make content fill the modal */
+    display: flex;
+    flex-direction: column; /* Stack header, body, footer vertically */
+    border-radius: 0;
+    border: none;
 }
 
-/* Hover state for non-active, non-disabled links */
-.dataTables_paginate .pagination .page-item:not(.active):not(.disabled) .page-link:hover {
-    background-color: #e9ecef;        
-    color: #272780;                    
+#addNamaBarangModal form {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Remove default focus outline if desired */
-.dataTables_paginate .pagination .page-link:focus {
-     box-shadow: none;
+#addNamaBarangModal .modal-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
 }
 
-/* Active page style */
-.dataTables_paginate .pagination .page-item.active .page-link {
-    background-color: #272780 !important; 
-    color: #fff !important;              
-    border: none !important;
+#addNamaBarangModal .modal-footer {
+    margin-top: auto;
+    padding: 1rem;
+    border-top: none;
+    background-color: #fff;
 }
 
-/* Disabled page style (Previous/Next) */
-.dataTables_paginate .pagination .page-item.disabled .page-link {
-    color: #adb5bd !important;        
-    background-color: transparent !important;
-    border: none !important;
-}
+        /* --- End Delete Modal Styles --- */
+/* --- Mobile Fullscreen for Tambah Asset Modal --- */
 
-.batal-btn{
-    color: #272780 !important; 
-    border-color:  #272780 !important;
-}
+
+    } /* --- End Mobile Styles --- */
 
 </style>
 
@@ -344,9 +599,7 @@
                         <label class="form-label fw-bold">Upload Foto Barang</label>
                         {{-- Clickable Upload Area --}}
                         {{-- Uses modal-color for background, rounded-3 for corners, flex for centering --}}
-                        <div id="add-nama-barang-upload-area" class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2"
-                             style="height: 150px; cursor: pointer;">
-                             {{-- Font Awesome icon --}}
+                        <div id="add-nama-barang-upload-area" class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2">
                             <i class="fa fa-image fa-3x text-white"></i>
                         </div>
                         {{-- Hidden File Input - Triggered by clicking the div above --}}
@@ -361,14 +614,7 @@
                     {{-- Nama Barang Input --}}
                     <div class="form-group mb-3">
                         <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                        <select name="nama_barang" id="add-nama-barang" class="form-control" required>
-                            <option value="" disabled selected>Pilih Nama Barang...</option>
-                            <option value="Sensor">Sensor</option>
-                            <option value="Actuator">Actuator</option>
-                            <option value="Power">Power</option>
-                            <option value="Equipment">Equipment</option>
-                            
-                        </select>
+                        <input type="text" name="nama_barang" id="add-nama-barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
                     </div>
 
                 </div>
@@ -406,7 +652,7 @@
                             
                             <div class="col-auto"> {{-- Use col-auto to fit content --}}
                                 <div id="update-image-placeholder" class="modal-color rounded-3 d-flex align-items-center justify-content-center position-relative"
-                                     style="width: 100px; height: 100px; cursor: pointer;"
+                                     style="width: 100px; height: 100px; cursor: pointer; border-radius: 5px;"
                                      onclick="document.getElementById('update-nama-barang-gambar-input').click();"> {{-- Make placeholder clickable --}}
 
                                     {{-- Default Icon (Initially Visible) --}}
@@ -437,13 +683,7 @@
                     {{-- Nama Barang Input Section --}}
                     <div class="form-group mb-3">
                         <label class="font-weight-bold" for="update-nama-barang">Nama Barang</label>
-                        <select name="nama_barang" id="update-nama-barang" class="form-control" required>
-                            <option value="" disabled selected>Pilih Nama Barang...</option>
-                            <option value="Sensor">Sensor</option>
-                            <option value="Actuator">Actuator</option>
-                            <option value="Power">Power</option>
-                            <option value="Equipment">Equipment</option>
-                        </select>
+                        <input type="text" name="nama_barang" id="update-nama-barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
                     </div>
 
                 </div>

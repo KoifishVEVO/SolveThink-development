@@ -5,10 +5,60 @@
 @endsection
 
 @section('styles')
+
+
 @endsection
 
 @section('content')
-    <style>
+<style>
+        /* --- Default (Desktop) Styles for Rincian Modal --- */
+#rincianAssetModal .modal-dialog {
+    /* Uses modal-lg class for width (800px default) */
+    /* Centering is handled by Bootstrap */
+}
+
+#rincianAssetModal .modal-content {
+    /* Standard modal appearance */
+}
+
+#rincianAssetModal .modal-body {
+    display: flex;          /* Horizontal layout by default */
+    flex-direction: row;
+    align-items: flex-start; /* Align image and text block top */
+    padding: 1.5rem;         /* Adjust padding as needed */
+}
+
+#rincianAssetModal .modal-body > div:first-child { /* Image container */
+    background-color: #272780; /* Ensure background color */
+    border: 2px dashed #ccc; /* Keep border */
+    border-radius: 5px;      /* Keep radius */
+    position: relative;      /* For positioning content inside */
+    display: flex;           /* For centering placeholder */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;        /* Ensure image fits */
+    /* No margin-bottom needed for desktop */
+}
+
+#rincianAssetModal .modal-body > div.ml-4 { /* Details container */
+    flex-grow: 1;               /* Take remaining space */
+    margin-left: 1.5rem !important; /* Bootstrap ml-4 equivalent */
+    text-align: left;           /* Align text left */
+}
+
+#rincianAssetModal .modal-footer {
+ 
+    justify-content: flex-end; /* Align button to the right */
+    border-top: none;
+}
+
+#rincianAssetModal .modal-footer .btn {
+    width: auto;               /* Default button width */
+    max-width: none;           /* Reset max-width */
+    padding: 0.375rem 0.75rem; /* Default Bootstrap padding */
+}
+
+/* --- End Default Rincian Modal Styles --- */
         .heading-text {
             color: #272780 !important;
             font-weight: bold !important;
@@ -169,76 +219,288 @@
 
         /* Dropdown */
 
-        /* Custom Searchable Dropdown Styles */
-        .searchable-dropdown-container .dropdown {
-            position: relative;
-            /* Ensure dropdown menu positions correctly */
-        }
+       /* --- Custom Searchable Dropdown Styles --- */
+.searchable-dropdown {
+    position: relative; /* Needed for positioning the options */
+}
 
-        .searchable-dropdown-container .dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            /* Pushes arrow to the right */
-            align-items: center;
-            border-color: #ced4da;
-            /* Match Bootstrap */
-        }
+/* Style for the element that displays the selected value and toggles the dropdown */
+.dropdown-select-display {
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem; /* Adjust padding for arrow */
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    cursor: pointer;
+    display: block; /* Make it block level like a select */
+    position: relative; /* For the arrow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: calc(1.5em + 0.75rem + 2px); /* Match form-control height */
+    line-height: 1.5; /* Match form-control line-height */
+}
 
-        .searchable-dropdown-container .dropdown-toggle .selected-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+/* Add a dropdown arrow */
+.dropdown-select-display::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: translateY(-50%) rotate(45deg);
+    -webkit-transform: translateY(-50%) rotate(45deg);
+}
 
-        /* Ensure dropdown menu takes full width and scrolls */
-        .searchable-dropdown-menu {
-            width: 100%;
-            max-height: 250px;
-            /* Limit height and enable scroll */
-            overflow-y: auto;
-            padding-top: 0;
-            /* Remove default padding */
-        }
+/* Container for the search box and options list */
+.dropdown-options-container {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-top: none; /* Avoid double border */
+    border-radius: 0 0 0.25rem 0.25rem;
+    width: 100%;
+    z-index: 1051; /* Ensure it's above modal content but potentially below modal itself if needed */
+    max-height: 200px; /* Limit height and allow scrolling */
+    overflow-y: auto;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
 
-        .searchable-dropdown-menu .search-box {
-            position: sticky;
-            /* Make search box stick to top */
-            top: 0;
-            background-color: #fff;
-            /* Ensure background */
-            padding-top: 0.5rem;
-            /* Add padding back */
-            z-index: 10;
-            /* Keep above list items */
-            border-bottom: 1px solid #eee;
-            /* Separator */
-        }
+/* Make options container visible when dropdown is open */
+.searchable-dropdown.open .dropdown-options-container {
+    display: block;
+}
 
-        .searchable-dropdown-menu .search-input {
-            /* Add any specific search input styling */
-        }
+/* Style for the search input area */
+.dropdown-search-wrapper {
+    padding: 5px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa; /* Light background for search */
+}
 
-        .searchable-dropdown-menu .dropdown-items-list {
-            /* Container for items */
-        }
+.dropdown-search-wrapper .search-icon {
+    margin-right: 8px;
+    color: #6c757d; /* Icon color */
+}
 
-        .searchable-dropdown-menu .dropdown-item {
-            cursor: pointer;
-        }
+.dropdown-search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px 0; /* Minimal padding */
+    background-color: transparent; /* Inherit wrapper background */
+    font-size: 0.9em;
+}
 
-        .searchable-dropdown-menu .dropdown-item:hover {
-            background-color: #e9ecef;
-        }
+/* Style for the list holding the options */
+.dropdown-options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-        /* Class to hide items during search */
-        .searchable-item.d-none {
-            display: none;
-        }
+/* Style for individual options */
+.dropdown-options-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-options-list li:hover {
+    background-color: #e9ecef; /* Hover effect */
+}
+
+.dropdown-options-list li.selected {
+    background-color: #007bff; /* Highlight selected */
+    color: white;
+}
+
+.dropdown-options-list li.hidden {
+    display: none; /* Hide filtered-out options */
+}
+
+/* Keep original select hidden but available for JS */
+.original-select-hidden {
+     position: absolute;
+     left: -9999px; /* Move off-screen */
+     opacity: 0;
+     pointer-events: none; /* Prevent interaction */
+     height: 0;
+     width: 0;
+}
+
+@media (max-width: 767.98px) { /* Target mobile screens */
+
+/* --- Make specific modals fullscreen --- */
+#addAssetModal .modal-dialog,
+#rincianAssetModal .modal-dialog,
+#updateAssetModal .modal-dialog {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: fixed; /* Position relative to viewport */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transform: none !important; /* Override potential centering transforms */
+}
+
+#addAssetModal .modal-content,
+#rincianAssetModal .modal-content,
+#updateAssetModal .modal-content {
+    height: 100%; /* Fill the dialog height */
+    border-radius: 0; /* No rounded corners */
+    border: none; /* No border */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack header/body/footer */
+}
+
+ /* Allow modal body to scroll */
+#addAssetModal .modal-body,
+#rincianAssetModal .modal-body,
+#updateAssetModal .modal-body {
+    overflow-y: auto; /* Enable vertical scroll */
+    flex-grow: 1; /* Allow body to take available vertical space */
+}
+
+/* --- Keep delete modal default (override any general .modal styles if needed) --- */
+#deleteAssetModal .modal-dialog {
+    max-width: 500px; /* Bootstrap default */
+    height: auto;
+    margin: 1.75rem auto; /* Default centering margin */
+    position: relative; /* Reset positioning */
+    top: auto; left: auto; bottom: auto; right: auto; /* Reset position */
+}
+#deleteAssetModal .modal-content {
+    height: auto;
+    border-radius: 0.3rem; /* Bootstrap default */
+    border: 1px solid rgba(0,0,0,.2); /* Bootstrap default */
+    display: block; /* Reset flex */
+}
+#deleteAssetModal .modal-body {
+    overflow-y: visible; /* Reset scroll */
+    flex-grow: 0; /* Reset flex grow */
+}
+
+/* --- Specific Styles for Rincian Modal Mobile (based on image) --- */
+#rincianAssetModal .modal-body {
+    display: flex; /* Re-apply flex */
+    flex-direction: column; /* Stack vertically */
+    align-items: center; /* Center items horizontally */
+    padding-top: 2rem; /* Add some top padding */
+    padding-bottom: 2rem; /* Add some bottom padding */
+}
+#rincianAssetModal .modal-body > div:first-child { /* Image container */
+    width: 75%; /* Adjust width */
+    max-width: 300px; /* Limit max size */
+    height: auto;
+    aspect-ratio: 1 / 1; /* Keep it square-ish */
+    margin-bottom: 2rem; /* Space below image */
+}
+#rincianAssetModal .modal-body > div.ml-4 { /* Details container */
+    margin-left: auto !important; /* Remove margin */
+    width: 100%;
+    text-align: left; 
+
+}
+#rincianAssetModal .modal-footer {
+    justify-content: center !important; /* Center the footer button */
+    border-top: none; /* Remove top border */
+}
+ #rincianAssetModal .modal-footer .btn {
+     width: 80%; /* Make button wider */
+     max-width: 300px;
+     padding-top: 0.75rem;
+     padding-bottom: 0.75rem;
+}
+
+#addAssetModal .modal-dialog,
+#updateAssetModal .modal-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Shared Modal Content Styling */
+#addAssetModal .modal-content,
+#updateAssetModal .modal-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+/* Shared Form Styling */
+#addAssetModal form,
+#updateAssetModal form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+}
+
+/* Shared Modal Body Styling */
+#addAssetModal .modal-body,
+#updateAssetModal .modal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Shared Modal Footer Styling */
+#addAssetModal .modal-footer,
+#updateAssetModal .modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: none;
+    padding: 5px;
+    margin-top: auto;
+}
+
+/* Optional: Add a little space at the bottom for update modal only */
+#updateAssetModal .modal-footer {
+    margin-bottom: 20px;
+}
+
+/* Shared Button Styling */
+#addAssetModal .modal-footer .btn,
+#updateAssetModal .modal-footer .btn {
+    flex: 1;
+    max-width: none;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+
+/* Style Dropdown options for mobile */
+ .searchable-dropdown .dropdown-options-container {
+     /* Position it fixed if needed, or just ensure width */
+     width: calc(100% - 2px); /* Account for border */
+     left: 1px;
+     max-height: 150px; /* Maybe shorter on mobile */
+}
+}
     </style>
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+</style>
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">ASSET BARANG BARU</h1>
         <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait
