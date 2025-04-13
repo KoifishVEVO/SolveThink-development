@@ -18,13 +18,17 @@ class BarangBaruController extends Controller
     public function storeSame(Request $request)
     {
             $request->validate([
-                'nama_barang' => 'required|string',
-                'harga_jual_barang' => 'required|numeric',
+                'nama_barang' => 'required',
+                'harga_jual_barang' => 'required|integer',
                 'jenis_barang' => 'required|string',
-                'gambar_barang' => 'required|string',
             ]);
 
-            $barang = AsetBarangBaru::create($request->all());
+            AsetBarangBaru::create([
+                'id_nama_barang' => $request->nama_barang,
+                'id_gambar_barang' => $request->nama_barang,
+                'harga_jual_barang' => $request->harga_jual_barang,
+                'jenis_barang' => $request->jenis_barang,
+            ]);
 
             return response()->json([
                 'success' => true,
@@ -37,55 +41,23 @@ class BarangBaruController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
-            'nama_barang' => 'required|max:255',
-            'gambar_barang' => 'required|image|mimes:jpeg,png,jpg',
+            'nama_barang' => 'required',
             'harga_jual_barang' => 'required|integer',
             'jenis_barang' => 'required|string',
         ]);
 
-        if ($request->hasFile('gambar_barang')) {
-            $file = $request->file('gambar_barang');
-            $extension = $file->getClientOriginalExtension();
-            $newFileName = 'barang_baru_' . time() . '.' . $extension;
-            $destinationPath = storage_path('app/public/uploads');
-
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0777, true);
-            }
-
-            list($width, $height) = getimagesize($file);
-            $newWidth = 800;
-            $newHeight = ($height / $width) * $newWidth;
-
-            $source = imagecreatefromstring(file_get_contents($file));
-            $imageResized = imagecreatetruecolor($newWidth, $newHeight);
-            imagecopyresampled($imageResized, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-            $outputPath = $destinationPath . '/' . $newFileName;
-
-            if ($extension === 'png') {
-                imagepng($imageResized, $outputPath, 6);
-            } else {
-                imagejpeg($imageResized, $outputPath, 75);
-            }
-
-            imagedestroy($source);
-            imagedestroy($imageResized);
-
-            $imagePath = 'uploads/' . $newFileName;
-        }
-
+        // Simpan data ke database tanpa gambar
         AsetBarangBaru::create([
-            'nama_barang' => $request->nama_barang,
-            'gambar_barang' => $imagePath,
+            'id_nama_barang' => $request->nama_barang,
+            'id_gambar_barang' => $request->nama_barang,
             'harga_jual_barang' => $request->harga_jual_barang,
             'jenis_barang' => $request->jenis_barang,
         ]);
 
         return redirect()->route('aset_barang.index')->with('success', 'Barang berhasil ditambahkan');
     }
+
 
 
     public function edit($id)

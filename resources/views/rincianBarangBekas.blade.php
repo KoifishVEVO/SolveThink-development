@@ -5,57 +5,53 @@
 @endsection
 
 @section('styles')
-
-
 @endsection
 
 @section('content')
+    <style>
+        .heading-text {
+            color: #272780 !important;
+            font-weight: bold !important;
+        }
 
-
-<style>
-
-.heading-text {
-    color: #272780 !important;
-    font-weight: bold !important;
-}
-.rincian-btn {
-    background-color: transparent !important;
-    color: #A9B5DF !important;
-    border: 2px solid #A9B5DF !important;
-    font-weight: normal !important;
-    border-radius: 5px !important;
-    padding: 0.25rem 0.5rem !important;
-    line-height: 1.5 !important;
-    white-space: nowrap !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
+        .rincian-btn {
+            background-color: transparent !important;
+            color: #A9B5DF !important;
+            border: 2px solid #A9B5DF !important;
+            font-weight: normal !important;
+            border-radius: 5px !important;
+            padding: 0.25rem 0.5rem !important;
+            line-height: 1.5 !important;
+            white-space: nowrap !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
 
 
 
-.rincian-btn i {
-    font-size: 16px !important;
-    margin-right: 0 !important; /
-}
+        .rincian-btn i {
+            font-size: 16px !important;
+            margin-right: 0 !important;/
+        }
 
-.rincian-btn:hover {
-    background-color: #A9B5DF !important;
-    color: white !important;
-    border-color: #A9B5DF !important;
-}
+        .rincian-btn:hover {
+            background-color: #A9B5DF !important;
+            color: white !important;
+            border-color: #A9B5DF !important;
+        }
 
-.card-color {
+        .card-color {
             background-color: #272780 !important;
 
         }
 
         /* for the updown thing, havent figured it out */
-        .entries{
-           appearance: none;
-           -webkit-appearance: none;
-           -moz-appearance: none;
-           padding: 6px 30px 6px 12px;
+        .entries {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 6px 30px 6px 12px;
             border: 1px solid #ced4da;
             border-radius: 4px;
             background-color: white;
@@ -65,61 +61,59 @@
 
 
         .modal-color {
-        background-color: #272780 !important;
-    }
+            background-color: #272780 !important;
+        }
 
-    /* Additional styles for consistent modal appearance */
-    .drop-zone {
-        background-color: #272780;
-        color: white;
-        border: 2px dashed #ccc;
-        border-radius: 5px;
-        padding: 40px 20px;
-        text-align: center;
-        margin-bottom: 20px;
-        cursor: pointer;
-    }
+        /* Additional styles for consistent modal appearance */
+        .drop-zone {
+            background-color: #272780;
+            color: white;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
 
-    /* Button styling */
-    .btn-modal-color {
-        background-color: #272780;
-        color: white;
-    }
+        /* Button styling */
+        .btn-modal-color {
+            background-color: #272780;
+            color: white;
+        }
 
-    /* Text styling for delete modal */
-    .delete-text {
-        color: #272780;
-        font-weight: bold;
-    }
+        /* Text styling for delete modal */
+        .delete-text {
+            color: #272780;
+            font-weight: bold;
+        }
 
-    /* Bold heading for all modals */
-    .modal-title {
-        font-weight: bold;
-    }
+        /* Bold heading for all modals */
+        .modal-title {
+            font-weight: bold;
+        }
 
-    .btn-success {
-        background-color: #00B634 !important;
-    }
+        .btn-success {
+            background-color: #00B634 !important;
+        }
 
-    .table thead th {
-    border: 1px solid black !important;
-    border-color: #DEDDDD !important;
-}
+        .table thead th {
+            border: 1px solid black !important;
+            border-color: #DEDDDD !important;
+        }
 
-.table tbody td {
-    border-left: 1px solid black !important;
-    border-right: 1px solid black !important;
-    border-top: none !important;
-    border-bottom: none !important;
-    border-color: #DEDDDD !important;
-}
+        .table tbody td {
+            border-left: 1px solid black !important;
+            border-right: 1px solid black !important;
+            border-top: none !important;
+            border-bottom: none !important;
+            border-color: #DEDDDD !important;
+        }
+    </style>
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-
-</style>
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-<!-- Begin Page Content -->
-<div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">ASSET BARANG BEKAS</h1>
         <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait
@@ -189,15 +183,17 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
-                                                        <img src="{{ asset('storage/' . $item->gambar_barang) }}"
+                                                        <img src="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
                                                             alt="Gambar" class="img-fluid"
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
                                                 </td>
-                                                <td>{{ $item->nama_barang }}</td>
-                                                <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
+                                                <td>{{ $item->namaBarang->nama_barang }}</td>
+                                                <td>Rp
+                                                    {{ number_format($item->namaBarang->harga_jual_barang, 0, ',', '.') }}
+                                                </td>
                                                 <td>{{ $item->jumlah }}</td>
-                                                <td>{{ $item->jenis_barang }}</td>
+                                                <td>{{ $item->jenis_barang ?? '-' }}</td>
                                                 <td class="px-3">
 
                                                     <div class="d-flex flex-wrap justify-content-center">
@@ -220,7 +216,7 @@
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}"
+                                                            data-jenis="{{ $item->asetBekasTerbaru->jenis_barang ?? '-' }}"
                                                             data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal">
                                                             <i class="fa fa-eye"></i> Rincian
@@ -313,45 +309,14 @@
                 <form action="{{ route('aset_barang_bekas.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <!-- image upload  -->
-                        <div id="image-upload-container" class="modal-color position-relative mb-4"
-                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
-                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
-                                    cursor: pointer; position: relative; text-align: center;">
-
-
-                            <div id="upload-button-view"
-                                style="display: flex; flex-direction: column; align-items: center;
-                                        justify-content: center; position: absolute; top: 50%; left: 50%;
-                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
-                                <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                                <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                                <input type="file" id="fileInput" name="gambar_barang" style="display: none;"
-                                    accept="image/*" required>
-                            </div>
-
-                            <!-- Image Preview -->
-                            <div id="image-preview"
-                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
-                                <img id="preview-img" src="" alt="Preview"
-                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="change-image-btn" class="position-absolute"
-                                                                                                                                    style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                    Click to Change Image
-                                                                                                                                </h6> -->
-                            </div>
-                        </div>
-
 
                         <!-- Other Inputs -->
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
                             <select name="nama_barang" id="add-nama-barang" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
+                                @foreach ($data_nama_barang as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -419,7 +384,7 @@
                             <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
                         </p>
                         <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">Stok Barang</strong><br>
+                            <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
                             <span style="color: #777; font-size: 14px;" id="rincian-jenis">jumlah stok barang</span>
                         </p>
                     </div>
@@ -472,9 +437,9 @@
                                 <img id="update-preview-img" src="" alt="Preview"
                                     style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
                                 <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                    style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                    Click to Change Image
-                                                                                                                                </h6> -->
+                                                                                                                                                                                                                                    style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
+                                                                                                                                                                                                                                    Click to Change Image
+                                                                                                                                                                                                                                </h6> -->
                             </div>
                         </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\BarangBaruController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\BarangBekasController;
 use App\Models\AsetBarangBaru;
+use App\Models\NamaBarang;
 use App\Models\AsetBarangBekas;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -45,27 +46,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rincianBarangBaru', function (Request $request) {
         $search = $request->input('search');
 
-        $barang = AsetBarangBaru::select('aset_barang_baru.*', 'jumlah_per_nama.jumlah')
-            ->joinSub(
-                AsetBarangBaru::select('nama_barang')
-                    ->selectRaw('COUNT(*) as jumlah')
-                    ->groupBy('nama_barang'),
-                'jumlah_per_nama',
-                'aset_barang_baru.nama_barang',
-                '=',
-                'jumlah_per_nama.nama_barang'
+        $barang = AsetBarangBaru::select(
+                DB::raw('MAX(id) as id'), // ambil satu ID wakil per grup
+                'id_nama_barang',
+                'jenis_barang',
+                'harga_jual_barang',
+                DB::raw('COUNT(*) as jumlah')
             )
-            ->whereIn('aset_barang_baru.id', function ($query) {
-                $query->selectRaw('MAX(id)')->from('aset_barang_baru')->groupBy('nama_barang');
-            });
+            ->with('namaBarang') // pastikan relasi ada
+            ->when($search, function ($query, $search) {
+                $query->whereHas('namaBarang', function ($q) use ($search) {
+                    $q->where('nama_barang', 'LIKE', "%{$search}%");
+                });
+            })
+            ->groupBy('id_nama_barang', 'jenis_barang', 'harga_jual_barang')
+            ->paginate(3)
+            ->appends(['search' => $search]);
 
-        if ($search) {
-            $barang->where('aset_barang_baru.nama_barang', 'LIKE', "%{$search}%");
-        }
+        $data_nama_barang = NamaBarang::all();
 
-        $barang = $barang->paginate(3)->appends(['search' => $search]);
-
-        return view('rincianBarangBaru', compact('barang', 'search'));
+        return view('rincianBarangBaru', compact('barang', 'search', 'data_nama_barang'));
     })->name('aset_barang.index');
     Route::post('/aset-barang-baru', [BarangBaruController::class, 'store'])->name('aset_barang.store');
     Route::post('/aset-barang-baru/same', [BarangBaruController::class, 'storeSame'])->name('aset_barang.storeSame');
@@ -91,27 +91,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rincianBarangBekas', function (Request $request) {
         $search = $request->input('search');
 
-        $barang = AsetBarangBekas::select('aset_barang_bekas.*', 'jumlah_per_nama.jumlah')
-            ->joinSub(
-                AsetBarangBekas::select('nama_barang')
-                    ->selectRaw('COUNT(*) as jumlah')
-                    ->groupBy('nama_barang'),
-                'jumlah_per_nama',
-                'aset_barang_bekas.nama_barang',
-                '=',
-                'jumlah_per_nama.nama_barang'
+        $barang = AsetBarangBekas::select(
+                DB::raw('MAX(id) as id'), // ambil salah satu id sebagai wakil
+                'id_nama_barang',
+                'jenis_barang',
+                'harga_jual_barang',
+                DB::raw('COUNT(*) as jumlah')
             )
-            ->whereIn('aset_barang_bekas.id', function ($query) {
-                $query->selectRaw('MAX(id)')->from('aset_barang_bekas')->groupBy('nama_barang');
-            });
+            ->with('namaBarang')
+            ->when($search, function ($query, $search) {
+                $query->whereHas('namaBarang', function ($q) use ($search) {
+                    $q->where('nama_barang', 'like', "%$search%");
+                });
+            })
+            ->groupBy('id_nama_barang', 'jenis_barang', 'harga_jual_barang')
+            ->paginate(3)
+            ->appends(['search' => $search]);
 
-        if ($search) {
-            $barang->where('aset_barang_bekas.nama_barang', 'LIKE', "%{$search}%");
-        }
+        $data_nama_barang = NamaBarang::all();
 
-        $barang = $barang->paginate(3)->appends(['search' => $search]);
-
-        return view('rincianBarangBekas', compact('barang'));
+        return view('rincianBarangBekas', compact('barang', 'search', 'data_nama_barang'));
     })->name('aset_barang_bekas.index');
     Route::post('/aset-barang-bekas', [BarangBekasController::class, 'store'])->name('aset_barang_bekas.store');
     Route::post('/aset-barang-bekas/same', [BarangBekasController::class, 'storeSame'])->name('aset_barang_bekas.storeSame');
