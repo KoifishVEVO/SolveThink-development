@@ -215,6 +215,98 @@
     border-color: #DEDDDD !important;
 }
 
+#addPeriodeModal .modal-dialog,
+#updatePeriodeModal .modal-dialog {
+    max-width: 700px; /* You can adjust this value to make it wider or narrower */
+    width: 90%;
+}
+
+
+/* Modal mobile view */
+@media (max-width: 767.98px) { /* Target mobile screens */
+
+/* --- Make Add/Update Periode Modals Fullscreen --- */
+
+/* Style the dialog container */
+#addPeriodeModal .modal-dialog,
+#updatePeriodeModal .modal-dialog {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: fixed; /* Position relative to viewport */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transform: none !important; /* Override potential centering transforms */
+    display: flex;          /* Use flex for vertical layout */
+    flex-direction: column; /* Stack header/body/footer */
+}
+#addPeriodeModal form,
+#updatePeriodeModal form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+}
+
+/* Style the content area within the dialog */
+#addPeriodeModal .modal-content,
+#updatePeriodeModal .modal-content {
+    height: 100%; /* Fill the dialog height */
+    border-radius: 0; /* No rounded corners */
+    border: none; /* No border */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack header/body/footer */
+    flex: 1 1 auto; /* Allow content to grow/shrink */
+}
+
+/* Allow modal body to scroll */
+#addPeriodeModal .modal-body,
+#updatePeriodeModal .modal-body {
+    overflow-y: auto; /* Enable vertical scroll */
+    flex: 1 1 auto; /* Allow body to take available vertical space */
+    padding-top: 1.5rem; /* Add some padding */
+    padding-bottom: 1.5rem;
+}
+
+/* Style the footer */
+#addPeriodeModal .modal-footer,
+#updatePeriodeModal .modal-footer {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */ /* Use space-between or rely on button margins */
+    align-items: center;
+    border-top: none; /* Optional: remove top border */
+    padding: 0.75rem; /* Adjust padding as needed */
+    margin-top: auto; /* Push footer to bottom if body content is short */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+/* Style the buttons within the footer */
+#addPeriodeModal .modal-footer .btn,
+#updatePeriodeModal .modal-footer .btn {
+    flex: 1; /* Make both buttons take roughly equal space */
+    /* max-width: none; */ /* Allow buttons to fill space */
+    /* Add margin between buttons if not using space-between */
+    /* The me-2 class on your 'Batal' button already adds margin */
+    padding-top: 0.75rem; /* Increase button padding for easier tapping */
+    padding-bottom: 0.75rem;
+    font-size: 1rem; /* Ensure readable font size */
+}
+
+ /* --- Specific adjustments if needed --- */
+ /* e.g., if Batal button needs slightly different flex behavior */
+/*
+#addPeriodeModal .modal-footer .batal-btn,
+#updatePeriodeModal .modal-footer .batal-btn {
+    flex-grow: 0.8; // Example: Make cancel slightly smaller if desired
+}
+*/
+
+} /* End of @media query */
+
 /* Pagination */
 
 /* Style the main pagination container */
@@ -580,7 +672,7 @@
                 @method('DELETE')
 
                 <div class="modal-body">
-                    <p class="delete-text text-center">Konfirmasi Hapus Data Asset Barang</p>
+                    <p class="delete-text text-center">Konfirmasi Hapus Periode</p>
                     <p class="text-center font-weight-bold" id="delete-periode-nama"></p>
                 </div>
                 <div class="modal-footer justify-content-center"> {{-- Buttons --}}

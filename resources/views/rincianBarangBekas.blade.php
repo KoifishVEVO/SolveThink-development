@@ -296,12 +296,21 @@
                 </button>
             </div>
 
+<<<<<<< Updated upstream
             <form action="{{ route('aset_barang_bekas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                             <!-- image upload  -->
                             <div id="image-upload-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+=======
+                <form action="{{ route('aset_barang_bekas.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <!-- image upload  -->
+                        <!-- <div id="image-upload-container" class="modal-color position-relative mb-4"
+                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+>>>>>>> Stashed changes
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
 
@@ -327,6 +336,7 @@
                                 </div>
                             </div>
 
+<<<<<<< Updated upstream
 
                     <!-- Other Inputs -->
                     <div class="form-group mb-3">
@@ -339,6 +349,45 @@
                             <option value="Equipment">Equipment</option>
                             
                         </select>
+=======
+                       
+                            <div id="image-preview"
+                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
+                                <img id="preview-img" src="" alt="Preview"
+                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
+                               
+                            </div>
+                        </div> -->
+
+
+                        <!-- Other Inputs -->
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                            <select name="nama_barang" id="add-nama-barang" class="form-control" required>
+                                <option value="" disabled selected>Pilih Nama Barang...</option>
+                                <option value="Sensor">Sensor</option>
+                                <option value="Actuator">Actuator</option>
+                                <option value="Power">Power</option>
+                                <option value="Equipment">Equipment</option>
+                            </select>
+                        </div>
+
+                        <label class="font-weight-bold">Harga Jual Barang</label>
+                        <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
+                        <label class="font-weight-bold">Stok Barang</label>
+                        <input type="number" name="stok_barang" class="form-control mb-3" min="0" required>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                            <select name="jenis_barang" id="add-nama-barang" class="form-control" required>
+                                <option value="" disabled selected>Pilih Nama Barang...</option>
+                                <option value="Sensor">Sensor</option>
+                                <option value="Actuator">Actuator</option>
+                                <option value="Power">Power</option>
+                                <option value="Equipment">Equipment</option>
+                            </select>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
@@ -418,11 +467,24 @@
                 @method('PUT')
                 <input type="hidden" name="id" id="update-id">
 
+<<<<<<< Updated upstream
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <!-- image upload  -->
                     <div id="update-image-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+=======
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" id="update-id">
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <!-- image upload  -->
+                        <!-- <div id="update-image-container" class="modal-color position-relative mb-4"
+                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+>>>>>>> Stashed changes
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
 
@@ -448,6 +510,7 @@
                                 </div>
                             </div>
 
+<<<<<<< Updated upstream
 
                     <div class="form-group mb-3">
                         <label class="font-weight-bold" for="update-nama">Nama Barang</label>
@@ -458,6 +521,45 @@
                             <option value="Power">Power</option>
                             <option value="Equipment">Equipment</option>            
                         </select>
+=======
+                        
+                            <div id="update-image-preview"
+                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
+                                <img id="update-preview-img" src="" alt="Preview"
+                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
+                      
+                            </div>
+                        </div> -->
+
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                            <select name="nama_barang" id="update-nama" class="form-control" required>
+                                <option value="" disabled selected>Pilih Nama Barang...</option>
+                                <option value="Sensor">Sensor</option>
+                                <option value="Actuator">Actuator</option>
+                                <option value="Power">Power</option>
+                                <option value="Equipment">Equipment</option>
+                            </select>
+                        </div>
+
+                        <label class="font-weight-bold">Harga Jual Barang</label>
+                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
+                            required>
+                            <label class="font-weight-bold">Stok Barang</label>
+                            <input type="number" name="stok_barang" class="form-control mb-3" min="0" required>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                            <select name="jenis_barang" id="update-jenis" class="form-control" required>
+                                <option value="" disabled selected>Pilih Nama Barang...</option>
+                                <option value="Sensor">Sensor</option>
+                                <option value="Actuator">Actuator</option>
+                                <option value="Power">Power</option>
+                                <option value="Equipment">Equipment</option>
+                            </select>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
 
                     <label class="font-weight-bold">Harga Jual Barang</label>

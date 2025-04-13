@@ -10,6 +10,62 @@
 @endsection
 
 @section('content')
+<<<<<<< Updated upstream
+=======
+    <style>
+        /* --- Default (Desktop) Styles for Rincian Modal --- */
+#rincianAssetModal .modal-dialog {
+    /* Uses modal-lg class for width (800px default) */
+    /* Centering is handled by Bootstrap */
+}
+
+#rincianAssetModal .modal-content {
+    /* Standard modal appearance */
+}
+
+#rincianAssetModal .modal-body {
+    display: flex;          /* Horizontal layout by default */
+    flex-direction: row;
+    align-items: flex-start; /* Align image and text block top */
+    padding: 1.5rem;         /* Adjust padding as needed */
+}
+
+#rincianAssetModal .modal-body > div:first-child { /* Image container */
+    background-color: #272780; /* Ensure background color */
+    border: 2px dashed #ccc; /* Keep border */
+    border-radius: 5px;      /* Keep radius */
+    position: relative;      /* For positioning content inside */
+    display: flex;           /* For centering placeholder */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;        /* Ensure image fits */
+    /* No margin-bottom needed for desktop */
+}
+
+#rincianAssetModal .modal-body > div.ml-4 { /* Details container */
+    flex-grow: 1;               /* Take remaining space */
+    margin-left: 1.5rem !important; /* Bootstrap ml-4 equivalent */
+    text-align: left;           /* Align text left */
+}
+
+#rincianAssetModal .modal-footer {
+ 
+    justify-content: flex-end; /* Align button to the right */
+    border-top: none;
+}
+
+#rincianAssetModal .modal-footer .btn {
+    width: auto;               /* Default button width */
+    max-width: none;           /* Reset max-width */
+    padding: 0.375rem 0.75rem; /* Default Bootstrap padding */
+}
+
+/* --- End Default Rincian Modal Styles --- */
+        .heading-text {
+            color: #272780 !important;
+            font-weight: bold !important;
+        }
+>>>>>>> Stashed changes
 
 
 <style>
@@ -173,6 +229,7 @@
 
 /* Dropdown */
 
+<<<<<<< Updated upstream
 /* Custom Searchable Dropdown Styles */
 .searchable-dropdown-container .dropdown {
     position: relative; /* Ensure dropdown menu positions correctly */
@@ -228,6 +285,284 @@
     display: none;
 }
 
+=======
+       /* --- Custom Searchable Dropdown Styles --- */
+.searchable-dropdown {
+    position: relative; /* Needed for positioning the options */
+}
+
+/* Style for the element that displays the selected value and toggles the dropdown */
+.dropdown-select-display {
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem; /* Adjust padding for arrow */
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    cursor: pointer;
+    display: block; /* Make it block level like a select */
+    position: relative; /* For the arrow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: calc(1.5em + 0.75rem + 2px); /* Match form-control height */
+    line-height: 1.5; /* Match form-control line-height */
+}
+
+/* Add a dropdown arrow */
+.dropdown-select-display::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: translateY(-50%) rotate(45deg);
+    -webkit-transform: translateY(-50%) rotate(45deg);
+}
+
+/* Container for the search box and options list */
+.dropdown-options-container {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-top: none; /* Avoid double border */
+    border-radius: 0 0 0.25rem 0.25rem;
+    width: 100%;
+    z-index: 1051; /* Ensure it's above modal content but potentially below modal itself if needed */
+    max-height: 200px; /* Limit height and allow scrolling */
+    overflow-y: auto;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Make options container visible when dropdown is open */
+.searchable-dropdown.open .dropdown-options-container {
+    display: block;
+}
+
+/* Style for the search input area */
+.dropdown-search-wrapper {
+    padding: 5px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa; /* Light background for search */
+}
+
+.dropdown-search-wrapper .search-icon {
+    margin-right: 8px;
+    color: #6c757d; /* Icon color */
+}
+
+.dropdown-search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px 0; /* Minimal padding */
+    background-color: transparent; /* Inherit wrapper background */
+    font-size: 0.9em;
+}
+
+/* Style for the list holding the options */
+.dropdown-options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style for individual options */
+.dropdown-options-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-options-list li:hover {
+    background-color: #e9ecef; /* Hover effect */
+}
+
+.dropdown-options-list li.selected {
+    background-color: #007bff; /* Highlight selected */
+    color: white;
+}
+
+.dropdown-options-list li.hidden {
+    display: none; /* Hide filtered-out options */
+}
+
+/* Keep original select hidden but available for JS */
+.original-select-hidden {
+     position: absolute;
+     left: -9999px; /* Move off-screen */
+     opacity: 0;
+     pointer-events: none; /* Prevent interaction */
+     height: 0;
+     width: 0;
+}
+
+@media (max-width: 767.98px) { /* Target mobile screens */
+
+/* --- Make specific modals fullscreen --- */
+#addAssetModal .modal-dialog,
+#rincianAssetModal .modal-dialog,
+#updateAssetModal .modal-dialog {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: fixed; /* Position relative to viewport */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transform: none !important; /* Override potential centering transforms */
+}
+
+#addAssetModal .modal-content,
+#rincianAssetModal .modal-content,
+#updateAssetModal .modal-content {
+    height: 100%; /* Fill the dialog height */
+    border-radius: 0; /* No rounded corners */
+    border: none; /* No border */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack header/body/footer */
+}
+
+ /* Allow modal body to scroll */
+#addAssetModal .modal-body,
+#rincianAssetModal .modal-body,
+#updateAssetModal .modal-body {
+    overflow-y: auto; /* Enable vertical scroll */
+    flex-grow: 1; /* Allow body to take available vertical space */
+}
+
+/* --- Keep delete modal default (override any general .modal styles if needed) --- */
+#deleteAssetModal .modal-dialog {
+    max-width: 500px; /* Bootstrap default */
+    height: auto;
+    margin: 1.75rem auto; /* Default centering margin */
+    position: relative; /* Reset positioning */
+    top: auto; left: auto; bottom: auto; right: auto; /* Reset position */
+}
+#deleteAssetModal .modal-content {
+    height: auto;
+    border-radius: 0.3rem; /* Bootstrap default */
+    border: 1px solid rgba(0,0,0,.2); /* Bootstrap default */
+    display: block; /* Reset flex */
+}
+#deleteAssetModal .modal-body {
+    overflow-y: visible; /* Reset scroll */
+    flex-grow: 0; /* Reset flex grow */
+}
+
+/* --- Specific Styles for Rincian Modal Mobile (based on image) --- */
+#rincianAssetModal .modal-body {
+    display: flex; /* Re-apply flex */
+    flex-direction: column; /* Stack vertically */
+    align-items: center; /* Center items horizontally */
+    padding-top: 2rem; /* Add some top padding */
+    padding-bottom: 2rem; /* Add some bottom padding */
+}
+#rincianAssetModal .modal-body > div:first-child { /* Image container */
+    width: 75%; /* Adjust width */
+    max-width: 300px; /* Limit max size */
+    height: auto;
+    aspect-ratio: 1 / 1; /* Keep it square-ish */
+    margin-bottom: 2rem; /* Space below image */
+}
+#rincianAssetModal .modal-body > div.ml-4 { /* Details container */
+    margin-left: auto !important; /* Remove margin */
+    width: 100%;
+    text-align: left; 
+
+}
+#rincianAssetModal .modal-footer {
+    justify-content: center !important; /* Center the footer button */
+    border-top: none; /* Remove top border */
+}
+ #rincianAssetModal .modal-footer .btn {
+     width: 80%; /* Make button wider */
+     max-width: 300px;
+     padding-top: 0.75rem;
+     padding-bottom: 0.75rem;
+}
+
+#addAssetModal .modal-dialog,
+#updateAssetModal .modal-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Shared Modal Content Styling */
+#addAssetModal .modal-content,
+#updateAssetModal .modal-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+/* Shared Form Styling */
+#addAssetModal form,
+#updateAssetModal form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+}
+
+/* Shared Modal Body Styling */
+#addAssetModal .modal-body,
+#updateAssetModal .modal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Shared Modal Footer Styling */
+#addAssetModal .modal-footer,
+#updateAssetModal .modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: none;
+    padding: 5px;
+    margin-top: auto;
+}
+
+/* Optional: Add a little space at the bottom for update modal only */
+#updateAssetModal .modal-footer {
+    margin-bottom: 20px;
+}
+
+/* Shared Button Styling */
+#addAssetModal .modal-footer .btn,
+#updateAssetModal .modal-footer .btn {
+    flex: 1;
+    max-width: none;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+
+/* Style Dropdown options for mobile */
+ .searchable-dropdown .dropdown-options-container {
+     /* Position it fixed if needed, or just ensure width */
+     width: calc(100% - 2px); /* Account for border */
+     left: 1px;
+     max-height: 150px; /* Maybe shorter on mobile */
+}
+}
+    </style>
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+>>>>>>> Stashed changes
 
 </style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -419,12 +754,21 @@
                 </button>
             </div>
 
+<<<<<<< Updated upstream
             <form action="{{ route('aset_barang.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                             <!-- image upload  -->
                             <div id="image-upload-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+=======
+                <form action="{{ route('aset_barang.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <!-- image upload  -->
+                        <!-- <div id="image-upload-container" class="modal-color position-relative mb-4"
+                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+>>>>>>> Stashed changes
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
 
@@ -450,6 +794,7 @@
                                 </div>
                             </div>
 
+<<<<<<< Updated upstream
 
                     <!-- Other Inputs -->
                     <div class="form-group mb-3 searchable-dropdown-container">
@@ -527,6 +872,76 @@
                 <div class="modal-color position-relative" style="width: 250px; height: 250px; border: 2px dashed #ccc; border-radius: 5px; overflow: hidden;">
                     <div id="rincian-default-view" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
                         <i class="fa fa-image fa-3x" style="color: white;"></i>
+=======
+                       
+                            <div id="image-preview"
+                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
+                                <img id="preview-img" src="" alt="Preview"
+                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
+                             
+                            </div>
+                        </div> -->
+
+
+                        <!-- Other Inputs -->
+                        <div class="form-group mb-3">
+                        <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
+                                <div class="searchable-dropdown">
+                                    <select name="nama_barang" id="nama_barang" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Nama Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                        </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Nama Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i> <input type="text" class="dropdown-search-input" placeholder="Cari barang...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <label class="font-weight-bold">Harga Jual Barang</label>
+                        <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
+
+                    
+                        <label class="font-weight-bold">Stok Barang</label>
+                        <input type="number" name="stok_barang" class="form-control mb-3" min="0" required>
+
+                        <div class="form-group mb-3">
+                                <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
+                                 <div class="searchable-dropdown">
+                                    <select name="jenis_barang" id="jenis_barang" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Jenis Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                         </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Jenis Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="dropdown-search-input" placeholder="Cari jenis...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer mt-6">
+                        <button type="button" class="btn text-muted font-weight-bold batal-btn mr-4"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn modal-color text-white font-weight-bold">Tambah</button>
+>>>>>>> Stashed changes
                     </div>
 
                     <!-- image  -->
@@ -557,6 +972,7 @@
     </div>
 </div>
 
+<<<<<<< Updated upstream
 <!-- Update Asset Modal -->
 <div class="modal fade" id="updateAssetModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -565,6 +981,60 @@
             <div class="modal-header modal-color text-white">
                 <h5 class="modal-title">Update Asset Barang</h5>
                 <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+=======
+    <!-- Rincian Asset Modal -->
+    <div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title" id="rincianAssetLabel">Rincian Asset Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex p-4">
+                    <!-- Image container -->
+                    <div class="modal-color position-relative mx-auto"
+                    style="flex: 0 0 300px; aspect-ratio: 1/1; background-color: #26227C; border: 2px dashed #ccc; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
+
+                        <div id="rincian-default-view"
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
+                            <i class="fa fa-image fa-3x" style="color: white;"></i>
+                        </div>
+
+                        <!-- image  -->
+                        <div id="rincian-image-view"
+                            style="display: none; height: 100%; width: 100%; position: relative;">
+                            <img id="rincian-preview-img" src="" alt="Preview"
+                                style="height: 100%; width: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <div class="ml-4">
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">id Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-id">nomor id barang</span>
+                        </p>
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">Nama Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
+                        </p>
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">Stok Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-stok">stok barang</span>
+                        </p>
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-jenis">jenis barang</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn modal-color text-white font-weight-bold"
+                        data-dismiss="modal">Tutup</button>
+                </div>
+>>>>>>> Stashed changes
             </div>
 
             <form action="#" method="POST" enctype="multipart/form-data">
@@ -572,11 +1042,24 @@
                 @method('PUT')
                 <input type="hidden" name="id" id="update-id">
 
+<<<<<<< Updated upstream
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <!-- image upload  -->
                     <div id="update-image-container" class="modal-color position-relative mb-4"
                                 style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+=======
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" id="update-id">
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <!-- image upload  -->
+                        <!-- <div id="update-image-container" class="modal-color position-relative mb-4"
+                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
+>>>>>>> Stashed changes
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
 
@@ -602,6 +1085,7 @@
                                 </div>
                             </div>
 
+<<<<<<< Updated upstream
 
                             <div class="form-group mb-3 searchable-dropdown-container">
                                 <label class="font-weight-bold" for="update-nama-trigger">Nama Barang</label>
@@ -642,12 +1126,98 @@
                                 {{-- Backend Note: Same as add modal. Ensure JS pre-selects the correct value --}}
                                 {{-- by setting the hidden input value AND the trigger button text. --}}
                             </div>
+=======
+                           
+                            <div id="update-image-preview"
+                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
+                                <img id="update-preview-img" src="" alt="Preview"
+                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
+                            
+                            </div>
+                        </div> -->
+>>>>>>> Stashed changes
 
                     <label class="font-weight-bold">Harga Jual Barang</label>
                     <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3" required>
 
+<<<<<<< Updated upstream
                     <label class="font-weight-bold">Stok Barang</label>
                     <input type="number" name="total_barang" id="update-stok" class="form-control mb-3" required>
+=======
+                        <div class="form-group mb-3">
+                                <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                                <div class="searchable-dropdown">
+                                    <select name="nama_barang" id="update-nama" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Nama Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                        </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Nama Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="dropdown-search-input" placeholder="Cari barang...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <label class="font-weight-bold">Harga Jual Barang</label>
+                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
+                            required>
+
+                        <label class="font-weight-bold">Stok Barang</label>
+                        <input type="number" name="stok_barang" class="form-control mb-3" min="0" required>
+
+                        <div class="form-group mb-3">
+                                <label class="font-weight-bold" for="update-jenis">Jenis Barang</label>
+                                <div class="searchable-dropdown">
+                                    <select name="jenis_barang" id="update-jenis" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Jenis Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                         </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Jenis Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="dropdown-search-input" placeholder="Cari jenis...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+                    <div class="modal-footer d-flex justify-content-end">
+                        <button type="button" class="btn font-weight-bold border px-3 batal-btn mr-4"
+                            data-dismiss="modal">Batal</button>
+
+                        <button type="submit" class="btn modal-color text-white font-weight-bold">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Asset Modal -->
+    <div class="modal fade" id="deleteAssetModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- header -->
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title">Hapus Asset Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+>>>>>>> Stashed changes
                 </div>
 
                 <div class="modal-footer d-flex justify-content-end">
@@ -670,6 +1240,7 @@
                 <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
             </div>
 
+<<<<<<< Updated upstream
             <form action="#" method="POST">
                 @csrf
                 @method('DELETE')
@@ -725,6 +1296,156 @@ function setupSearchableDropdown(containerSelector) {
                 item.classList.remove('d-none'); // Use Bootstrap class for consistency
             } else {
                 item.classList.add('d-none');
+=======
+    <script>
+        // (search in modal)
+        document.addEventListener('DOMContentLoaded', function () {
+
+// Function to initialize a single searchable dropdown
+function initializeSearchableDropdown(dropdownElement) {
+    const originalSelect = dropdownElement.querySelector('.original-select-hidden');
+    const displayElement = dropdownElement.querySelector('.dropdown-select-display');
+    const optionsContainer = dropdownElement.querySelector('.dropdown-options-container');
+    const searchInput = dropdownElement.querySelector('.dropdown-search-input');
+    const optionsList = dropdownElement.querySelector('.dropdown-options-list');
+
+    // 1. Populate the custom list from the original select
+    optionsList.innerHTML = ''; // Clear any previous options
+    Array.from(originalSelect.options).forEach(option => {
+        if (option.value) { // Skip the placeholder if it has no value
+            const listItem = document.createElement('li');
+            listItem.textContent = option.textContent;
+            listItem.dataset.value = option.value;
+            optionsList.appendChild(listItem);
+        } else {
+             // Set initial display text from the placeholder
+            displayElement.textContent = option.textContent;
+        }
+    });
+
+    // 2. Toggle dropdown visibility
+    displayElement.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent click from bubbling to document
+        // Close other open dropdowns first
+        closeAllDropdowns(dropdownElement);
+        dropdownElement.classList.toggle('open');
+         if (dropdownElement.classList.contains('open')) {
+             searchInput.focus(); // Focus search input when opened
+             // Reset search
+             searchInput.value = '';
+             filterOptions('');
+        }
+    });
+     // Allow focusing with Tab key
+    displayElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            displayElement.click(); // Simulate click to open/close
+        }
+    });
+
+
+    // 3. Handle option selection
+    optionsList.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+            const selectedValue = e.target.dataset.value;
+            const selectedText = e.target.textContent;
+
+            displayElement.textContent = selectedText; // Update display
+            originalSelect.value = selectedValue;   // Update hidden select's value for form submission
+
+            // Optional: Mark selected in the list (visual only)
+            Array.from(optionsList.querySelectorAll('li')).forEach(li => li.classList.remove('selected'));
+            e.target.classList.add('selected');
+
+            dropdownElement.classList.remove('open'); // Close dropdown
+        }
+    });
+
+    // 4. Handle search input
+    searchInput.addEventListener('input', () => {
+        filterOptions(searchInput.value);
+    });
+
+     // Prevent clicks inside the search input/container from closing the dropdown
+    optionsContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+
+    // Function to filter options based on search term
+    function filterOptions(searchTerm) {
+        const term = searchTerm.toLowerCase();
+        Array.from(optionsList.querySelectorAll('li')).forEach(item => {
+            const itemText = item.textContent.toLowerCase();
+            if (itemText.includes(term)) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    }
+}
+
+// Function to close all dropdowns except the current one
+function closeAllDropdowns(exceptThisOne = null) {
+    document.querySelectorAll('.searchable-dropdown.open').forEach(openDropdown => {
+        if (openDropdown !== exceptThisOne) {
+            openDropdown.classList.remove('open');
+        }
+    });
+}
+
+// 5. Initialize all searchable dropdowns on the page
+document.querySelectorAll('.searchable-dropdown').forEach(dropdown => {
+    initializeSearchableDropdown(dropdown);
+});
+
+// 6. Close dropdown when clicking outside
+document.addEventListener('click', () => {
+    closeAllDropdowns();
+});
+
+// --- Specific logic for Update Modal (if needed) ---
+// You might need to re-initialize or update the dropdowns
+// when the update modal is shown, especially if the options
+// or selected value changes based on the item being edited.
+
+// Example: Re-initialize when Bootstrap modal 'shown.bs.modal' event fires
+ $('#updateAssetModal').on('shown.bs.modal', function (event) {
+     // Assume you populate the form fields before this, including the original selects
+
+     // Find the dropdowns within *this specific* modal instance
+     const modal = event.target;
+     const namaDropdown = modal.querySelector('#update-nama').closest('.searchable-dropdown');
+     const jenisDropdown = modal.querySelector('#update-jenis').closest('.searchable-dropdown');
+
+     // Re-initialize them to reflect current data
+     if (namaDropdown) {
+          initializeSearchableDropdown(namaDropdown);
+          // Set the initial display based on the hidden select's current value
+          const originalNamaSelect = namaDropdown.querySelector('.original-select-hidden');
+          const displayNama = namaDropdown.querySelector('.dropdown-select-display');
+          const selectedNamaOption = originalNamaSelect.options[originalNamaSelect.selectedIndex];
+          displayNama.textContent = selectedNamaOption ? selectedNamaOption.textContent : 'Pilih Nama Barang...';
+     }
+     if (jenisDropdown) {
+          initializeSearchableDropdown(jenisDropdown);
+           // Set the initial display based on the hidden select's current value
+          const originalJenisSelect = jenisDropdown.querySelector('.original-select-hidden');
+          const displayJenis = jenisDropdown.querySelector('.dropdown-select-display');
+          const selectedJenisOption = originalJenisSelect.options[originalJenisSelect.selectedIndex];
+          displayJenis.textContent = selectedJenisOption ? selectedJenisOption.textContent : 'Pilih Jenis Barang...';
+     }
+ });
+
+});
+
+        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('searchForm').submit();
+>>>>>>> Stashed changes
             }
         });
     });

@@ -65,10 +65,12 @@
         /* 3. Sticky Sidebar (Desktop) */
         @media (min-width: 768px) {
              #accordionSidebar {
-                 position: sticky;
-                 top: var(--topbar-height); /* Stick BELOW the topbar */
+                position: sticky;
+                top:0;
+                
+                
                  height: calc(100vh - var(--topbar-height)); /* Full height minus topbar */
-                 z-index: 1000; /* Below topbar */
+                 z-index: 1045; /* Below topbar */
                  overflow-y: auto; /* Allow internal scrolling */
                  overflow-x: hidden; /* Prevent horizontal scroll */
             }
@@ -92,9 +94,29 @@
         #content {
              flex-grow: 1;
         }
+      
 
         /* 5. Mobile Sidebar Adjustments */
         @media (max-width: 767.98px) {
+            #accordionSidebar {
+        /* !FIX Fixed position, off-screen initially */
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: var(--sidebar-width);
+        /* !FIX z-index below mobile toggle button but above content */
+        z-index: 1040;
+        /* !FIX Hide off-screen using transform */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease; /* Animate the slide */
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    body.sidebar-toggled #accordionSidebar {
+                transform: translateX(0); /* Slide in */
+            }
+
             /* When mobile sidebar is shown (usually adds .show class via Bootstrap JS) */
              #accordionSidebar.show {
                  z-index: 1040; /* Make sure sidebar overlay is above content, slightly above topbar */
