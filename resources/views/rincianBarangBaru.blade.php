@@ -673,7 +673,7 @@
                                                     <div class="d-flex flex-wrap justify-content-center">
                                                         <button class="btn btn-sm btn-success m-1 btn-tambah"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-plus"></i>
@@ -681,16 +681,19 @@
 
                                                         <button class="btn btn-sm btn-danger m-1 btn-kurangi"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}">
+                                                            data-nama="{{ $item->id_nama_barang }}"
+                                                            data-gambar="{{ $item->id_gambar_barang }}"
+                                                            data-harga="{{ $item->harga_jual_barang }}"
+                                                            data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
 
                                                         <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                                            data-gambar="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal">
                                                             <i class="fa fa-eye"></i> Rincian
                                                         </button>
@@ -912,9 +915,9 @@
                                 <img id="update-preview-img" src="" alt="Preview"
                                     style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
                                 <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                                                                                                                                        Click to Change Image
-                                                                                                                                                                                                                                                                                                    </h6> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Click to Change Image
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </h6> -->
                             </div>
                         </div>
 
@@ -1131,7 +1134,7 @@
                 const jenis = this.dataset.jenis;
                 const gambar = this.dataset.gambar;
 
-                // console.log(stok)
+                // console.log(jenis)
 
                 $('#rincianAssetModal').on('shown.bs.modal', function() {
                     // Isi data ke modal setelah modal benar-benar ditampilkan
@@ -1154,26 +1157,6 @@
                     }
                 });
             })
-        });
-
-
-        // Untuk modal "Tambah"
-        document.getElementById("image-upload-container").addEventListener("click", function() {
-            document.getElementById("fileInput").click();
-        });
-
-        // Preview gambar
-        document.getElementById("fileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("preview-img").src = event.target.result;
-                    document.getElementById("image-preview").style.display = "block";
-                    document.getElementById("upload-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
         });
 
         // Untuk modal "Update"
@@ -1251,12 +1234,37 @@
             });
         });
 
+        // document.addEventListener("click", function(event) {
+        //     if (event.target.closest(".btn-tambah")) {
+        //         let button = event.target.closest(".btn-tambah");
+
+        //         let data = {
+        //             nama_barang: parseInt(button.getAttribute("data-nama")),
+        //             harga_jual_barang: parseInt(button.getAttribute("data-harga")),
+        //             jenis_barang: button.getAttribute("data-jenis"),
+        //             _token: "{{ csrf_token() }}"
+        //         };
+
+        //         fetch("{{ route('aset_barang.storeSame') }}", {
+        //                 method: "POST",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     "X-CSRF-TOKEN": data._token
+        //                 },
+        //                 body: JSON.stringify(data)
+        //             })
+        //             .then(response => response.json())
+        //             .then(() => location.reload())
+        //             .catch(error => console.error("Error:", error));
+        //     }
+        // });
+
         document.addEventListener("click", function(event) {
             if (event.target.closest(".btn-tambah")) {
                 let button = event.target.closest(".btn-tambah");
 
                 let data = {
-                    nama_barang: parseInt(button.getAttribute("data-nama")),
+                    nama_barang: button.getAttribute("data-nama"),
                     harga_jual_barang: parseInt(button.getAttribute("data-harga")),
                     jenis_barang: button.getAttribute("data-jenis"),
                     _token: "{{ csrf_token() }}"
@@ -1266,32 +1274,88 @@
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": data._token
+                            "X-CSRF-TOKEN": data._token,
+                            "Accept": "application/json" // <--- ini penting biar Laravel balikin JSON saat error
                         },
                         body: JSON.stringify(data)
                     })
-                    .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
+                    .then(async (response) => {
+                        const result = await response.json();
+
+                        if (!response.ok) {
+                            // Tangani error validasi Laravel
+                            if (result.errors) {
+                                let errorMessages = Object.values(result.errors).flat().join("\n");
+                                alert("Gagal menambahkan barang:\n" + errorMessages);
+                            } else {
+                                alert("Terjadi kesalahan tak dikenal.");
+                            }
+                            throw new Error("Validation failed");
+                        }
+
+                        // Kalau sukses, reload
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
             }
         });
+
+
+        // document.addEventListener("click", function(event) {
+        //     if (event.target.closest(".btn-kurangi")) {
+        //         let button = event.target.closest(".btn-kurangi");
+        //         let namaBarang = button.getAttribute("data-nama");
+
+        //         fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
+        //                 encodeURIComponent(namaBarang)), {
+        //                 method: "DELETE",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        //                 }
+        //             })
+        //             .then(response => response.json())
+        //             .then(() => location.reload())
+        //             .catch(error => console.error("Error:", error));
+        //     }
+        // });
 
         document.addEventListener("click", function(event) {
             if (event.target.closest(".btn-kurangi")) {
                 let button = event.target.closest(".btn-kurangi");
                 let namaBarang = button.getAttribute("data-nama");
+                let gambarBarang = button.getAttribute("data-gambar");
+                let hargaJualBarang = button.getAttribute("data-harga");
+                let jenisBarang = button.getAttribute("data-jenis");
 
                 fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
                         encodeURIComponent(namaBarang)), {
-                        method: "DELETE",
+                        method: "POST", // pakai POST tapi spoof DELETE
                         headers: {
                             "Content-Type": "application/json",
                             "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        }
+                        },
+                        body: JSON.stringify({
+                            _method: "DELETE", // spoof DELETE method
+                            gambar_barang: gambarBarang,
+                            harga_jual_barang: hargaJualBarang,
+                            jenis_barang: jenisBarang
+                        })
                     })
                     .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
+                    .then(result => {
+                        if (!result.success) {
+                            alert(result.message || "Terjadi kesalahan.");
+                        } else {
+                            location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Terjadi kesalahan dalam penghapusan barang.");
+                    });
             }
         });
     </script>

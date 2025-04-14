@@ -17,24 +17,24 @@ class BarangBaruController extends Controller
 
     public function storeSame(Request $request)
     {
-            $request->validate([
-                'nama_barang' => 'required',
-                'harga_jual_barang' => 'required|integer',
-                'jenis_barang' => 'required|string',
-            ]);
+        $request->validate([
+            'nama_barang' => 'required|string',
+            'harga_jual_barang' => 'required|integer',
+            'jenis_barang' => 'nullable',
+        ]);
 
-            AsetBarangBaru::create([
-                'id_nama_barang' => $request->nama_barang,
-                'id_gambar_barang' => $request->nama_barang,
-                'harga_jual_barang' => $request->harga_jual_barang,
-                'jenis_barang' => $request->jenis_barang,
-            ]);
+        $barang = AsetBarangBaru::create([
+            'id_nama_barang' => $request->nama_barang,
+            'id_gambar_barang' => $request->nama_barang,
+            'harga_jual_barang' => $request->harga_jual_barang,
+            'jenis_barang' => $request->jenis_barang,
+        ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Barang berhasil ditambahkan!',
-                'data' => $barang
-            ]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Barang berhasil ditambahkan!',
+            'data' => $barang
+        ]);
 
     }
 
@@ -144,25 +144,46 @@ class BarangBaruController extends Controller
         return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarang . '" berhasil dihapus');
     }
 
+    // public function deleteOne($nama_barang)
+    // {
+    //     // Cari semua barang dengan nama yang sama
+    //     $barangList = AsetBarangBaru::where('id_nama_barang', $nama_barang)
+    //     ->where('id_gambar_barang', $gambar_barang)
+    //     ->where('harga_jual_barang', $harga_jual_barang)
+    //     ->where('jenis_barang', $jenis_barang)
+    //     ->get();
+
+    //     if ($barangList->isNotEmpty()) {
+    //         $barang = $barangList->first(); // Ambil satu data untuk dihapus
+
+    //         $barang->delete(); // Hapus satu data barang
+    //     }
+
+    //     return response()->json(['success' => true]);
+    // }
+
     public function deleteOne($nama_barang)
     {
-        // Cari semua barang dengan nama yang sama
-        $barangList = AsetBarangBaru::where('nama_barang', $nama_barang)->get();
+        // Validasi input yang diperlukan
+        $gambar_barang = request('gambar_barang');
+        $harga_jual_barang = request('harga_jual_barang');
+        $jenis_barang = request('jenis_barang');
 
+        // Cari barang berdasarkan beberapa kondisi
+        $barangList = AsetBarangBaru::where('id_nama_barang', $nama_barang)
+            ->where('id_gambar_barang', $gambar_barang)
+            ->where('harga_jual_barang', $harga_jual_barang)
+            ->where('jenis_barang', $jenis_barang)
+            ->get();
+
+        // Cek jika barang ditemukan dan hapus
         if ($barangList->isNotEmpty()) {
             $barang = $barangList->first(); // Ambil satu data untuk dihapus
-
-            // Jika hanya ada satu data tersisa, hapus juga gambar
-            if ($barangList->count() == 1 && $barang->gambar_barang) {
-                $gambarPath = public_path('storage/' . $barang->gambar_barang);
-                if (file_exists($gambarPath)) {
-                    unlink($gambarPath); // Hapus gambar
-                }
-            }
-
-            $barang->delete(); // Hapus satu data barang
+            $barang->delete(); // Hapus barang
+            return response()->json(['success' => true, 'message' => 'Barang berhasil dihapus!']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Barang tidak ditemukan.'], 404);
         }
-
-        return response()->json(['success' => true]);
     }
+
 }

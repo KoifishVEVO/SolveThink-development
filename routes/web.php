@@ -75,6 +75,16 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+// routes/web.php
+
+Route::middleware('auth')->group(function () {
+    Route::get('/nama-barang', [NamaBarangController::class, 'index'])->name('nama_barang.index');
+    Route::post('/nama-barang', [NamaBarangController::class, 'store'])->name('nama_barang.store');
+    Route::put('/nama-barang/{id}', [NamaBarangController::class, 'update'])->name('nama_barang.update');
+    Route::delete('/nama-barang/{id}', [NamaBarangController::class, 'destroy'])->name('nama_barang.destroy');
+});
+
+
 
 
 // rincian barang bekas

@@ -11,6 +11,8 @@ class NamaBarang extends Model
 
     protected $table = 'nama_barang';
 
+    protected $guarded = 'id';
+
     public function asetBarangBarus()
     {
         return $this->hasMany(AsetBarangBaru::class, 'id_nama_barang');
