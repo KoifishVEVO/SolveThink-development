@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/aset-barang-baru/same', [BarangBaruController::class, 'storeSame'])->name('aset_barang.storeSame');
     Route::put('/aset-barang-baru/{id}', [BarangBaruController::class, 'update'])->name('aset_barang.update');
     Route::delete('/aset-barang-baru/{id}', [BarangBaruController::class, 'destroy'])->name('aset_barang.destroy');
-    Route::delete('/aset_barang/deleteOne/{nama_barang}', [BarangBaruController::class, 'deleteOne'])->name('aset_barang.deleteOne');
+    Route::delete('/aset_barang/deleteOne/{id_nama_barang}', [BarangBaruController::class, 'deleteOne'])->name('aset_barang.deleteOne');
 });
 
 

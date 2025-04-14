@@ -162,27 +162,29 @@ class BarangBaruController extends Controller
     //     return response()->json(['success' => true]);
     // }
 
-    public function deleteOne($nama_barang)
+    public function deleteOne($id_nama_barang)
     {
-        // Validasi input yang diperlukan
-        $gambar_barang = request('gambar_barang');
-        $harga_jual_barang = request('harga_jual_barang');
-        $jenis_barang = request('jenis_barang');
+        try {
+            $gambar_barang = request('gambar_barang');
+            $harga_jual_barang = request('harga_jual_barang');
+            $jenis_barang = request('jenis_barang');
 
-        // Cari barang berdasarkan beberapa kondisi
-        $barangList = AsetBarangBaru::where('id_nama_barang', $nama_barang)
-            ->where('id_gambar_barang', $gambar_barang)
-            ->where('harga_jual_barang', $harga_jual_barang)
-            ->where('jenis_barang', $jenis_barang)
-            ->get();
+            // Cari 1 baris berdasarkan kombinasi lengkap
+            $barang = AsetBarangBaru::where('id_nama_barang', $id_nama_barang)
+                ->where('id_gambar_barang', $gambar_barang)
+                ->where('harga_jual_barang', $harga_jual_barang)
+                ->where('jenis_barang', $jenis_barang)
+                ->first();
 
-        // Cek jika barang ditemukan dan hapus
-        if ($barangList->isNotEmpty()) {
-            $barang = $barangList->first(); // Ambil satu data untuk dihapus
-            $barang->delete(); // Hapus barang
-            return response()->json(['success' => true, 'message' => 'Barang berhasil dihapus!']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Barang tidak ditemukan.'], 404);
+            if ($barang) {
+                $barang->delete();
+                return response()->json(['success' => true, 'message' => 'Barang berhasil dihapus!']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Barang tidak ditemukan.'], 404);
+            }
+        } catch (\Exception $e) {
+            \Log::error("Error deleteOne: " . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Terjadi error saat menghapus barang.'], 500);
         }
     }
 
