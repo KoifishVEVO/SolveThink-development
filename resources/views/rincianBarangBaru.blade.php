@@ -5,60 +5,76 @@
 @endsection
 
 @section('styles')
-
-
 @endsection
 
 @section('content')
-<style>
+    <style>
         /* --- Default (Desktop) Styles for Rincian Modal --- */
-#rincianAssetModal .modal-dialog {
-    /* Uses modal-lg class for width (800px default) */
-    /* Centering is handled by Bootstrap */
-}
+        #rincianAssetModal .modal-dialog {
+            /* Uses modal-lg class for width (800px default) */
+            /* Centering is handled by Bootstrap */
+        }
 
-#rincianAssetModal .modal-content {
-    /* Standard modal appearance */
-}
+        #rincianAssetModal .modal-content {
+            /* Standard modal appearance */
+        }
 
-#rincianAssetModal .modal-body {
-    display: flex;          /* Horizontal layout by default */
-    flex-direction: row;
-    align-items: flex-start; /* Align image and text block top */
-    padding: 1.5rem;         /* Adjust padding as needed */
-}
+        #rincianAssetModal .modal-body {
+            display: flex;
+            /* Horizontal layout by default */
+            flex-direction: row;
+            align-items: flex-start;
+            /* Align image and text block top */
+            padding: 1.5rem;
+            /* Adjust padding as needed */
+        }
 
-#rincianAssetModal .modal-body > div:first-child { /* Image container */
-    background-color: #272780; /* Ensure background color */
-    border: 2px dashed #ccc; /* Keep border */
-    border-radius: 5px;      /* Keep radius */
-    position: relative;      /* For positioning content inside */
-    display: flex;           /* For centering placeholder */
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;        /* Ensure image fits */
-    /* No margin-bottom needed for desktop */
-}
+        #rincianAssetModal .modal-body>div:first-child {
+            /* Image container */
+            background-color: #272780;
+            /* Ensure background color */
+            border: 2px dashed #ccc;
+            /* Keep border */
+            border-radius: 5px;
+            /* Keep radius */
+            position: relative;
+            /* For positioning content inside */
+            display: flex;
+            /* For centering placeholder */
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* Ensure image fits */
+            /* No margin-bottom needed for desktop */
+        }
 
-#rincianAssetModal .modal-body > div.ml-4 { /* Details container */
-    flex-grow: 1;               /* Take remaining space */
-    margin-left: 1.5rem !important; /* Bootstrap ml-4 equivalent */
-    text-align: left;           /* Align text left */
-}
+        #rincianAssetModal .modal-body>div.ml-4 {
+            /* Details container */
+            flex-grow: 1;
+            /* Take remaining space */
+            margin-left: 1.5rem !important;
+            /* Bootstrap ml-4 equivalent */
+            text-align: left;
+            /* Align text left */
+        }
 
-#rincianAssetModal .modal-footer {
- 
-    justify-content: flex-end; /* Align button to the right */
-    border-top: none;
-}
+        #rincianAssetModal .modal-footer {
 
-#rincianAssetModal .modal-footer .btn {
-    width: auto;               /* Default button width */
-    max-width: none;           /* Reset max-width */
-    padding: 0.375rem 0.75rem; /* Default Bootstrap padding */
-}
+            justify-content: flex-end;
+            /* Align button to the right */
+            border-top: none;
+        }
 
-/* --- End Default Rincian Modal Styles --- */
+        #rincianAssetModal .modal-footer .btn {
+            width: auto;
+            /* Default button width */
+            max-width: none;
+            /* Reset max-width */
+            padding: 0.375rem 0.75rem;
+            /* Default Bootstrap padding */
+        }
+
+        /* --- End Default Rincian Modal Styles --- */
         .heading-text {
             color: #272780 !important;
             font-weight: bold !important;
@@ -219,288 +235,352 @@
 
         /* Dropdown */
 
-       /* --- Custom Searchable Dropdown Styles --- */
-.searchable-dropdown {
-    position: relative; /* Needed for positioning the options */
-}
+        /* --- Custom Searchable Dropdown Styles --- */
+        .searchable-dropdown {
+            position: relative;
+            /* Needed for positioning the options */
+        }
 
-/* Style for the element that displays the selected value and toggles the dropdown */
-.dropdown-select-display {
-    padding: 0.375rem 2.25rem 0.375rem 0.75rem; /* Adjust padding for arrow */
-    width: 100%;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    background-color: #fff;
-    cursor: pointer;
-    display: block; /* Make it block level like a select */
-    position: relative; /* For the arrow */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height: calc(1.5em + 0.75rem + 2px); /* Match form-control height */
-    line-height: 1.5; /* Match form-control line-height */
-}
+        /* Style for the element that displays the selected value and toggles the dropdown */
+        .dropdown-select-display {
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+            /* Adjust padding for arrow */
+            width: 100%;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            background-color: #fff;
+            cursor: pointer;
+            display: block;
+            /* Make it block level like a select */
+            position: relative;
+            /* For the arrow */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: calc(1.5em + 0.75rem + 2px);
+            /* Match form-control height */
+            line-height: 1.5;
+            /* Match form-control line-height */
+        }
 
-/* Add a dropdown arrow */
-.dropdown-select-display::after {
-    content: '';
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: solid black;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: translateY(-50%) rotate(45deg);
-    -webkit-transform: translateY(-50%) rotate(45deg);
-}
+        /* Add a dropdown arrow */
+        .dropdown-select-display::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: translateY(-50%) rotate(45deg);
+            -webkit-transform: translateY(-50%) rotate(45deg);
+        }
 
-/* Container for the search box and options list */
-.dropdown-options-container {
-    display: none; /* Hidden by default */
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ced4da;
-    border-top: none; /* Avoid double border */
-    border-radius: 0 0 0.25rem 0.25rem;
-    width: 100%;
-    z-index: 1051; /* Ensure it's above modal content but potentially below modal itself if needed */
-    max-height: 200px; /* Limit height and allow scrolling */
-    overflow-y: auto;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
+        /* Container for the search box and options list */
+        .dropdown-options-container {
+            display: none;
+            /* Hidden by default */
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ced4da;
+            border-top: none;
+            /* Avoid double border */
+            border-radius: 0 0 0.25rem 0.25rem;
+            width: 100%;
+            z-index: 1051;
+            /* Ensure it's above modal content but potentially below modal itself if needed */
+            max-height: 200px;
+            /* Limit height and allow scrolling */
+            overflow-y: auto;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
 
-/* Make options container visible when dropdown is open */
-.searchable-dropdown.open .dropdown-options-container {
-    display: block;
-}
+        /* Make options container visible when dropdown is open */
+        .searchable-dropdown.open .dropdown-options-container {
+            display: block;
+        }
 
-/* Style for the search input area */
-.dropdown-search-wrapper {
-    padding: 5px 10px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    background-color: #f8f9fa; /* Light background for search */
-}
+        /* Style for the search input area */
+        .dropdown-search-wrapper {
+            padding: 5px 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            /* Light background for search */
+        }
 
-.dropdown-search-wrapper .search-icon {
-    margin-right: 8px;
-    color: #6c757d; /* Icon color */
-}
+        .dropdown-search-wrapper .search-icon {
+            margin-right: 8px;
+            color: #6c757d;
+            /* Icon color */
+        }
 
-.dropdown-search-input {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 5px 0; /* Minimal padding */
-    background-color: transparent; /* Inherit wrapper background */
-    font-size: 0.9em;
-}
+        .dropdown-search-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 5px 0;
+            /* Minimal padding */
+            background-color: transparent;
+            /* Inherit wrapper background */
+            font-size: 0.9em;
+        }
 
-/* Style for the list holding the options */
-.dropdown-options-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        /* Style for the list holding the options */
+        .dropdown-options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-/* Style for individual options */
-.dropdown-options-list li {
-    padding: 8px 15px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        /* Style for individual options */
+        .dropdown-options-list li {
+            padding: 8px 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-.dropdown-options-list li:hover {
-    background-color: #e9ecef; /* Hover effect */
-}
+        .dropdown-options-list li:hover {
+            background-color: #e9ecef;
+            /* Hover effect */
+        }
 
-.dropdown-options-list li.selected {
-    background-color: #007bff; /* Highlight selected */
-    color: white;
-}
+        .dropdown-options-list li.selected {
+            background-color: #007bff;
+            /* Highlight selected */
+            color: white;
+        }
 
-.dropdown-options-list li.hidden {
-    display: none; /* Hide filtered-out options */
-}
+        .dropdown-options-list li.hidden {
+            display: none;
+            /* Hide filtered-out options */
+        }
 
-/* Keep original select hidden but available for JS */
-.original-select-hidden {
-     position: absolute;
-     left: -9999px; /* Move off-screen */
-     opacity: 0;
-     pointer-events: none; /* Prevent interaction */
-     height: 0;
-     width: 0;
-}
+        /* Keep original select hidden but available for JS */
+        .original-select-hidden {
+            position: absolute;
+            left: -9999px;
+            /* Move off-screen */
+            opacity: 0;
+            pointer-events: none;
+            /* Prevent interaction */
+            height: 0;
+            width: 0;
+        }
 
-@media (max-width: 767.98px) { /* Target mobile screens */
+        @media (max-width: 767.98px) {
+            /* Target mobile screens */
 
-/* --- Make specific modals fullscreen --- */
-#addAssetModal .modal-dialog,
-#rincianAssetModal .modal-dialog,
-#updateAssetModal .modal-dialog {
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    position: fixed; /* Position relative to viewport */
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    transform: none !important; /* Override potential centering transforms */
-}
+            /* --- Make specific modals fullscreen --- */
+            #addAssetModal .modal-dialog,
+            #rincianAssetModal .modal-dialog,
+            #updateAssetModal .modal-dialog {
+                max-width: 100%;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                position: fixed;
+                /* Position relative to viewport */
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                transform: none !important;
+                /* Override potential centering transforms */
+            }
 
-#addAssetModal .modal-content,
-#rincianAssetModal .modal-content,
-#updateAssetModal .modal-content {
-    height: 100%; /* Fill the dialog height */
-    border-radius: 0; /* No rounded corners */
-    border: none; /* No border */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack header/body/footer */
-}
+            #addAssetModal .modal-content,
+            #rincianAssetModal .modal-content,
+            #updateAssetModal .modal-content {
+                height: 100%;
+                /* Fill the dialog height */
+                border-radius: 0;
+                /* No rounded corners */
+                border: none;
+                /* No border */
+                display: flex;
+                /* Use flexbox for layout */
+                flex-direction: column;
+                /* Stack header/body/footer */
+            }
 
- /* Allow modal body to scroll */
-#addAssetModal .modal-body,
-#rincianAssetModal .modal-body,
-#updateAssetModal .modal-body {
-    overflow-y: auto; /* Enable vertical scroll */
-    flex-grow: 1; /* Allow body to take available vertical space */
-}
+            /* Allow modal body to scroll */
+            #addAssetModal .modal-body,
+            #rincianAssetModal .modal-body,
+            #updateAssetModal .modal-body {
+                overflow-y: auto;
+                /* Enable vertical scroll */
+                flex-grow: 1;
+                /* Allow body to take available vertical space */
+            }
 
-/* --- Keep delete modal default (override any general .modal styles if needed) --- */
-#deleteAssetModal .modal-dialog {
-    max-width: 500px; /* Bootstrap default */
-    height: auto;
-    margin: 1.75rem auto; /* Default centering margin */
-    position: relative; /* Reset positioning */
-    top: auto; left: auto; bottom: auto; right: auto; /* Reset position */
-}
-#deleteAssetModal .modal-content {
-    height: auto;
-    border-radius: 0.3rem; /* Bootstrap default */
-    border: 1px solid rgba(0,0,0,.2); /* Bootstrap default */
-    display: block; /* Reset flex */
-}
-#deleteAssetModal .modal-body {
-    overflow-y: visible; /* Reset scroll */
-    flex-grow: 0; /* Reset flex grow */
-}
+            /* --- Keep delete modal default (override any general .modal styles if needed) --- */
+            #deleteAssetModal .modal-dialog {
+                max-width: 500px;
+                /* Bootstrap default */
+                height: auto;
+                margin: 1.75rem auto;
+                /* Default centering margin */
+                position: relative;
+                /* Reset positioning */
+                top: auto;
+                left: auto;
+                bottom: auto;
+                right: auto;
+                /* Reset position */
+            }
 
-/* --- Specific Styles for Rincian Modal Mobile (based on image) --- */
-#rincianAssetModal .modal-body {
-    display: flex; /* Re-apply flex */
-    flex-direction: column; /* Stack vertically */
-    align-items: center; /* Center items horizontally */
-    padding-top: 2rem; /* Add some top padding */
-    padding-bottom: 2rem; /* Add some bottom padding */
-}
-#rincianAssetModal .modal-body > div:first-child { /* Image container */
-    width: 75%; /* Adjust width */
-    max-width: 300px; /* Limit max size */
-    height: auto;
-    aspect-ratio: 1 / 1; /* Keep it square-ish */
-    margin-bottom: 2rem; /* Space below image */
-}
-#rincianAssetModal .modal-body > div.ml-4 { /* Details container */
-    margin-left: auto !important; /* Remove margin */
-    width: 100%;
-    text-align: left; 
+            #deleteAssetModal .modal-content {
+                height: auto;
+                border-radius: 0.3rem;
+                /* Bootstrap default */
+                border: 1px solid rgba(0, 0, 0, .2);
+                /* Bootstrap default */
+                display: block;
+                /* Reset flex */
+            }
 
-}
-#rincianAssetModal .modal-footer {
-    justify-content: center !important; /* Center the footer button */
-    border-top: none; /* Remove top border */
-}
- #rincianAssetModal .modal-footer .btn {
-     width: 80%; /* Make button wider */
-     max-width: 300px;
-     padding-top: 0.75rem;
-     padding-bottom: 0.75rem;
-}
+            #deleteAssetModal .modal-body {
+                overflow-y: visible;
+                /* Reset scroll */
+                flex-grow: 0;
+                /* Reset flex grow */
+            }
 
-#addAssetModal .modal-dialog,
-#updateAssetModal .modal-dialog {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+            /* --- Specific Styles for Rincian Modal Mobile (based on image) --- */
+            #rincianAssetModal .modal-body {
+                display: flex;
+                /* Re-apply flex */
+                flex-direction: column;
+                /* Stack vertically */
+                align-items: center;
+                /* Center items horizontally */
+                padding-top: 2rem;
+                /* Add some top padding */
+                padding-bottom: 2rem;
+                /* Add some bottom padding */
+            }
 
-/* Shared Modal Content Styling */
-#addAssetModal .modal-content,
-#updateAssetModal .modal-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-}
+            #rincianAssetModal .modal-body>div:first-child {
+                /* Image container */
+                width: 75%;
+                /* Adjust width */
+                max-width: 300px;
+                /* Limit max size */
+                height: auto;
+                aspect-ratio: 1 / 1;
+                /* Keep it square-ish */
+                margin-bottom: 2rem;
+                /* Space below image */
+            }
 
-/* Shared Form Styling */
-#addAssetModal form,
-#updateAssetModal form {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    height: 100%;
-}
+            #rincianAssetModal .modal-body>div.ml-4 {
+                /* Details container */
+                margin-left: auto !important;
+                /* Remove margin */
+                width: 100%;
+                text-align: left;
 
-/* Shared Modal Body Styling */
-#addAssetModal .modal-body,
-#updateAssetModal .modal-body {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
+            }
 
-/* Shared Modal Footer Styling */
-#addAssetModal .modal-footer,
-#updateAssetModal .modal-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-top: none;
-    padding: 5px;
-    margin-top: auto;
-}
+            #rincianAssetModal .modal-footer {
+                justify-content: center !important;
+                /* Center the footer button */
+                border-top: none;
+                /* Remove top border */
+            }
 
-/* Optional: Add a little space at the bottom for update modal only */
-#updateAssetModal .modal-footer {
-    margin-bottom: 20px;
-}
+            #rincianAssetModal .modal-footer .btn {
+                width: 80%;
+                /* Make button wider */
+                max-width: 300px;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
 
-/* Shared Button Styling */
-#addAssetModal .modal-footer .btn,
-#updateAssetModal .modal-footer .btn {
-    flex: 1;
-    max-width: none;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-}
+            #addAssetModal .modal-dialog,
+            #updateAssetModal .modal-dialog {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            /* Shared Modal Content Styling */
+            #addAssetModal .modal-content,
+            #updateAssetModal .modal-content {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+            }
+
+            /* Shared Form Styling */
+            #addAssetModal form,
+            #updateAssetModal form {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+                height: 100%;
+            }
+
+            /* Shared Modal Body Styling */
+            #addAssetModal .modal-body,
+            #updateAssetModal .modal-body {
+                flex: 1 1 auto;
+                overflow-y: auto;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+
+            /* Shared Modal Footer Styling */
+            #addAssetModal .modal-footer,
+            #updateAssetModal .modal-footer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                border-top: none;
+                padding: 5px;
+                margin-top: auto;
+            }
+
+            /* Optional: Add a little space at the bottom for update modal only */
+            #updateAssetModal .modal-footer {
+                margin-bottom: 20px;
+            }
+
+            /* Shared Button Styling */
+            #addAssetModal .modal-footer .btn,
+            #updateAssetModal .modal-footer .btn {
+                flex: 1;
+                max-width: none;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
 
 
-/* Style Dropdown options for mobile */
- .searchable-dropdown .dropdown-options-container {
-     /* Position it fixed if needed, or just ensure width */
-     width: calc(100% - 2px); /* Account for border */
-     left: 1px;
-     max-height: 150px; /* Maybe shorter on mobile */
-}
-}
+            /* Style Dropdown options for mobile */
+            .searchable-dropdown .dropdown-options-container {
+                /* Position it fixed if needed, or just ensure width */
+                width: calc(100% - 2px);
+                /* Account for border */
+                left: 1px;
+                max-height: 150px;
+                /* Maybe shorter on mobile */
+            }
+        }
     </style>
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-</style>
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    </style>
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">ASSET BARANG BARU</h1>
         <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait
@@ -577,13 +657,15 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
-                                                        <img src="{{ asset('storage/' . $item->gambar_barang) }}"
+                                                        <img src="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
                                                             alt="Gambar" class="img-fluid"
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
                                                 </td>
-                                                <td>{{ $item->nama_barang }}</td>
-                                                <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
+                                                <td>{{ $item->namaBarang->nama_barang }}</td>
+                                                <td>Rp
+                                                    {{ number_format($item->harga_jual_barang, 0, ',', '.') }}
+                                                </td>
                                                 <td>{{ $item->jumlah }}</td>
                                                 <td>{{ $item->jenis_barang }}</td>
                                                 <td class="px-3">
@@ -591,25 +673,27 @@
                                                     <div class="d-flex flex-wrap justify-content-center">
                                                         <button class="btn btn-sm btn-success m-1 btn-tambah"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ $item->gambar_barang }}">
+                                                            data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
 
                                                         <button class="btn btn-sm btn-danger m-1 btn-kurangi"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}">
+                                                            data-nama="{{ $item->id_nama_barang }}"
+                                                            data-gambar="{{ $item->id_gambar_barang }}"
+                                                            data-harga="{{ $item->harga_jual_barang }}"
+                                                            data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
 
                                                         <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                                            data-gambar="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal">
                                                             <i class="fa fa-eye"></i> Rincian
                                                         </button>
@@ -702,46 +786,13 @@
                 <form action="{{ route('aset_barang.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <!-- image upload  -->
-                        <div id="image-upload-container" class="modal-color position-relative mb-4"
-                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
-                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
-                                    cursor: pointer; position: relative; text-align: center;">
-
-
-                            <div id="upload-button-view"
-                                style="display: flex; flex-direction: column; align-items: center;
-                                        justify-content: center; position: absolute; top: 50%; left: 50%;
-                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
-                                <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                                <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                                <input type="file" id="fileInput" name="gambar_barang" style="display: none;"
-                                    accept="image/*" required>
-                            </div>
-
-                            <!-- Image Preview -->
-                            <div id="image-preview"
-                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
-                                <img id="preview-img" src="" alt="Preview"
-                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="change-image-btn" class="position-absolute"
-                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                        Click to Change Image
-                                                                                                                                                                                    </h6> -->
-                            </div>
-                        </div>
-
-
                         <!-- Other Inputs -->
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
                             <select name="nama_barang" id="nama_barang" class="form-control" required>
-                                <option value="">Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                                <!-- Tambahkan opsi lainnya di sini -->
+                                @foreach ($data_nama_barang as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -864,9 +915,9 @@
                                 <img id="update-preview-img" src="" alt="Preview"
                                     style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
                                 <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                        Click to Change Image
-                                                                                                                                                                                    </h6> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Click to Change Image
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </h6> -->
                             </div>
                         </div>
 
@@ -1083,7 +1134,7 @@
                 const jenis = this.dataset.jenis;
                 const gambar = this.dataset.gambar;
 
-                // console.log(stok)
+                // console.log(jenis)
 
                 $('#rincianAssetModal').on('shown.bs.modal', function() {
                     // Isi data ke modal setelah modal benar-benar ditampilkan
@@ -1106,26 +1157,6 @@
                     }
                 });
             })
-        });
-
-
-        // Untuk modal "Tambah"
-        document.getElementById("image-upload-container").addEventListener("click", function() {
-            document.getElementById("fileInput").click();
-        });
-
-        // Preview gambar
-        document.getElementById("fileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("preview-img").src = event.target.result;
-                    document.getElementById("image-preview").style.display = "block";
-                    document.getElementById("upload-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
         });
 
         // Untuk modal "Update"
@@ -1203,6 +1234,31 @@
             });
         });
 
+        // document.addEventListener("click", function(event) {
+        //     if (event.target.closest(".btn-tambah")) {
+        //         let button = event.target.closest(".btn-tambah");
+
+        //         let data = {
+        //             nama_barang: parseInt(button.getAttribute("data-nama")),
+        //             harga_jual_barang: parseInt(button.getAttribute("data-harga")),
+        //             jenis_barang: button.getAttribute("data-jenis"),
+        //             _token: "{{ csrf_token() }}"
+        //         };
+
+        //         fetch("{{ route('aset_barang.storeSame') }}", {
+        //                 method: "POST",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     "X-CSRF-TOKEN": data._token
+        //                 },
+        //                 body: JSON.stringify(data)
+        //             })
+        //             .then(response => response.json())
+        //             .then(() => location.reload())
+        //             .catch(error => console.error("Error:", error));
+        //     }
+        // });
+
         document.addEventListener("click", function(event) {
             if (event.target.closest(".btn-tambah")) {
                 let button = event.target.closest(".btn-tambah");
@@ -1211,7 +1267,6 @@
                     nama_barang: button.getAttribute("data-nama"),
                     harga_jual_barang: parseInt(button.getAttribute("data-harga")),
                     jenis_barang: button.getAttribute("data-jenis"),
-                    gambar_barang: button.getAttribute("data-gambar"),
                     _token: "{{ csrf_token() }}"
                 };
 
@@ -1219,32 +1274,88 @@
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": data._token
+                            "X-CSRF-TOKEN": data._token,
+                            "Accept": "application/json" // <--- ini penting biar Laravel balikin JSON saat error
                         },
                         body: JSON.stringify(data)
                     })
-                    .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
+                    .then(async (response) => {
+                        const result = await response.json();
+
+                        if (!response.ok) {
+                            // Tangani error validasi Laravel
+                            if (result.errors) {
+                                let errorMessages = Object.values(result.errors).flat().join("\n");
+                                alert("Gagal menambahkan barang:\n" + errorMessages);
+                            } else {
+                                alert("Terjadi kesalahan tak dikenal.");
+                            }
+                            throw new Error("Validation failed");
+                        }
+
+                        // Kalau sukses, reload
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
             }
         });
+
+
+        // document.addEventListener("click", function(event) {
+        //     if (event.target.closest(".btn-kurangi")) {
+        //         let button = event.target.closest(".btn-kurangi");
+        //         let namaBarang = button.getAttribute("data-nama");
+
+        //         fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
+        //                 encodeURIComponent(namaBarang)), {
+        //                 method: "DELETE",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        //                 }
+        //             })
+        //             .then(response => response.json())
+        //             .then(() => location.reload())
+        //             .catch(error => console.error("Error:", error));
+        //     }
+        // });
 
         document.addEventListener("click", function(event) {
             if (event.target.closest(".btn-kurangi")) {
                 let button = event.target.closest(".btn-kurangi");
                 let namaBarang = button.getAttribute("data-nama");
+                let gambarBarang = button.getAttribute("data-gambar");
+                let hargaJualBarang = button.getAttribute("data-harga");
+                let jenisBarang = button.getAttribute("data-jenis");
 
                 fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
                         encodeURIComponent(namaBarang)), {
-                        method: "DELETE",
+                        method: "POST", // pakai POST tapi spoof DELETE
                         headers: {
                             "Content-Type": "application/json",
                             "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        }
+                        },
+                        body: JSON.stringify({
+                            _method: "DELETE", // spoof DELETE method
+                            gambar_barang: gambarBarang,
+                            harga_jual_barang: hargaJualBarang,
+                            jenis_barang: jenisBarang
+                        })
                     })
                     .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
+                    .then(result => {
+                        if (!result.success) {
+                            alert(result.message || "Terjadi kesalahan.");
+                        } else {
+                            location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Terjadi kesalahan dalam penghapusan barang.");
+                    });
             }
         });
     </script>

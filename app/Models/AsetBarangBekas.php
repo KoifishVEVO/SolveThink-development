@@ -12,4 +12,9 @@ class AsetBarangBekas extends Model
     protected $table = 'aset_barang_bekas';
 
     protected $guarded = ['id'];
+
+    public function namaBarang()
+    {
+        return $this->belongsTo(NamaBarang::class, 'id_nama_barang');
+    }
 }
