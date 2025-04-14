@@ -681,7 +681,7 @@
 
                                                         <button class="btn btn-sm btn-danger m-1 btn-kurangi"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->id_nama_barang }}"
+                                                            data-nama="{{ $item->id_nama_barang }}" {{-- ID-nya, bukan nama --}}
                                                             data-gambar="{{ $item->id_gambar_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}">
@@ -699,7 +699,7 @@
                                                         </button>
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ ucfirst(strtolower($item->nama_barang)) }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
@@ -915,25 +915,26 @@
                                 <img id="update-preview-img" src="" alt="Preview"
                                     style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
                                 <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Click to Change Image
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </h6> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Click to Change Image
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </h6> -->
                             </div>
                         </div>
 
 
-                        <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
-                            <select name="nama_barang" id="update-nama" class="form-control" required>
-                                <option value="">Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                                <!-- Tambahkan opsi lainnya di sini -->
-                            </select>
-                        </div>
 
+
+                        <select name="nama_barang" id="update-nama" class="form-control" required>
+                            <option value="">Pilih Nama Barang...</option>
+                            <option value="Sensor" {{ $item->namaBarang->nama_barang == 'Sensor' ? 'selected' : '' }}>
+                                Sensor</option>
+                            <option value="Actuator" {{ $item->namaBarang->nama_barang == 'Actuator' ? 'selected' : '' }}>
+                                Actuator</option>
+                            <option value="Power" {{ $item->namaBarang->nama_barang == 'Power' ? 'selected' : '' }}>Power
+                            </option>
+                            <option value="Equipment"
+                                {{ $item->namaBarang->nama_barang == 'Equipment' ? 'selected' : '' }}>Equipment</option>
+                        </select>
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
                         <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
@@ -1211,7 +1212,15 @@
 
                 // Isi form di modal
                 document.getElementById('update-id').value = id;
-                document.getElementById('update-nama').value = nama;
+                const selectNama = document.getElementById('update-nama');
+
+                // Ambil value yang dipilih
+                const selectedValue = selectNama.value;
+                console.log("Value terpilih:", selectedValue);
+
+                // Ambil teks yang terlihat (label)
+                const selectedText = selectNama.options[selectNama.selectedIndex].text;
+                console.log("Teks ditampilkan:", selectedText);
                 document.getElementById('update-harga').value = harga;
                 document.getElementById('update-jenis').value = jenis;
 
@@ -1330,21 +1339,30 @@
                 let hargaJualBarang = button.getAttribute("data-harga");
                 let jenisBarang = button.getAttribute("data-jenis");
 
+                console.log(namaBarang)
+                console.log(gambarBarang)
+                console.log(hargaJualBarang)
+                console.log(jenisBarang)
+
                 fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
                         encodeURIComponent(namaBarang)), {
-                        method: "POST", // pakai POST tapi spoof DELETE
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                             "X-CSRF-TOKEN": "{{ csrf_token() }}"
                         },
                         body: JSON.stringify({
-                            _method: "DELETE", // spoof DELETE method
-                            gambar_barang: gambarBarang,
+                            _method: "DELETE",
+                            gambar_barang: namaBarang,
                             harga_jual_barang: hargaJualBarang,
                             jenis_barang: jenisBarang
                         })
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) throw new Error("HTTP error " + response.status);
+                        return response
+                            .json(); // error "<!DOCTYPE" bisa dihindari kalau ini error di atas jalan duluan
+                    })
                     .then(result => {
                         if (!result.success) {
                             alert(result.message || "Terjadi kesalahan.");
