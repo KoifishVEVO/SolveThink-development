@@ -21,15 +21,19 @@ class PeriodeController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_periode' => 'required|string|max:255',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_mulai',
-        ]);
+        try {
+            $request->validate([
+                'nama_periode' => 'required|string|max:255',
+                'tanggal_mulai' => 'required|date',
+                'tanggal_akhir' => 'required|date|after_or_equal:tanggal_mulai',
+            ]);
 
-        Periode::create($request->all());
+            Periode::create($request->all());
 
-        return redirect()->route('periode.index')->with('success', 'Periode berhasil ditambahkan!');
+            return redirect()->route('periode.show')->with('success', 'Periode berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['msg' => $e->getMessage()]);
+        }
     }
 
     public function show(Periode $periode)
@@ -55,9 +59,11 @@ class PeriodeController extends Controller
         return redirect()->route('periode')->with('success', 'Periode berhasil diperbarui!');
     }
 
-    public function destroy(Periode $periode)
+    public function destroy($id)
     {
+        $periode = Periode::findOrFail($id);
         $periode->delete();
-        return redirect()->route('periode.index')->with('success', 'Periode berhasil dihapus!');
+
+        return redirect()->route('periode.show')->with('success', 'Periode berhasil dihapus!');
     }
 }

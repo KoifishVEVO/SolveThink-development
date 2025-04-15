@@ -132,5 +132,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    // periode
-Route::get('/periode', [PeriodeController::class, 'show'])->name('periode.show');
+// periode
+Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.show');
+Route::post('/periode', [PeriodeController::class, 'store'])->name('periode.store');
+Route::delete('/periode/{id}', [PeriodeController::class, 'destroy'])->name('periode.destroy');
+
