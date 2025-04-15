@@ -356,11 +356,11 @@
             /* --- Specific adjustments if needed --- */
             /* e.g., if Batal button needs slightly different flex behavior */
             /*
-                                                                                                                                                                                                                                                                                    #addPeriodeModal .modal-footer .batal-btn,
-                                                                                                                                                                                                                                                                                    #updatePeriodeModal .modal-footer .batal-btn {
-                                                                                                                                                                                                                                                                                        flex-grow: 0.8; // Example: Make cancel slightly smaller if desired
-                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                        #addPeriodeModal .modal-footer .batal-btn,
+                                                                                                                                                                                                                                                                                                        #updatePeriodeModal .modal-footer .batal-btn {
+                                                                                                                                                                                                                                                                                                            flex-grow: 0.8; // Example: Make cancel slightly smaller if desired
+                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                        */
 
         }
 
@@ -570,15 +570,19 @@
                                         @foreach ($periodes as $item)
                                             <tr>
                                                 <td>{{ $item->nama_periode }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($item->tanggal_awal)->format('d/m/Y') }}
-                                                </td>
                                                 <td>{{ \Carbon\Carbon::parse($item->tanggal_mulai)->format('d/m/Y') }}
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($item->tanggal_akhir)->format('d/m/Y') }}
                                                 </td>
                                                 <td class="px-3 text-center"> {{-- action buttons --}}
                                                     <div class="d-inline-block">
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
-                                                            data-id="{{ $item->id }}" data-url="#" data-toggle="modal"
-                                                            data-target="#updatePeriodeModal">
+                                                            data-id="{{ $item->id }}"
+                                                            data-nama="{{ $item->nama_periode }}"
+                                                            data-mulai="{{ $item->tanggal_mulai }}"
+                                                            data-akhir="{{ $item->tanggal_akhir }}"
+                                                            data-url="{{ route('periode.update', $item->id) }}"
+                                                            data-toggle="modal" data-target="#updatePeriodeModal">
                                                             Update
                                                         </button>
                                                         <button class="btn btn-sm btn-danger m-1 btn-delete"
@@ -967,5 +971,26 @@
                 if (hiddenId) hiddenId.value = id; // opsional, kalau elemen ada
             });
         });
+
+        document.querySelectorAll('.btn-update').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const nama = this.dataset.nama;
+                const mulai = this.dataset.mulai;
+                const akhir = this.dataset.akhir;
+                const url = this.dataset.url;
+
+                // Isi form dengan data
+                document.getElementById('update-periode-id').value = id;
+                document.getElementById('update-nama-periode').value = nama;
+                document.getElementById('update-tanggal-mulai').value = mulai;
+                document.getElementById('update-tanggal-akhir').value = akhir;
+
+                // Set form action
+                document.getElementById('updatePeriodeForm').action = url;
+            });
+        });
     </script>
+
+
 @endsection

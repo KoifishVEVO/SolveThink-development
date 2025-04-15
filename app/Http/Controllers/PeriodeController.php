@@ -41,23 +41,26 @@ class PeriodeController extends Controller
         return view('periode', compact('periode'));
     }
 
-    public function edit(Periode $periode)
+    public function update(Request $request, $id)
     {
-        return view('periode', compact('periode'));
+        try {
+            $request->validate([
+                'nama_periode' => 'required|string|max:255',
+                'tanggal_mulai' => 'required|date',
+                'tanggal_akhir' => 'required|date|after_or_equal:tanggal_mulai',
+            ]);
+
+            $periode = Periode::findOrFail($id);
+            $periode->update($request->all());
+
+            return redirect()->route('periode.show')->with('success', 'Periode berhasil diperbarui!');
+        } catch (\Illuminate\Validation\ValidationException $ve) {
+            return back()->withErrors($ve->validator->errors());
+        } catch (\Exception $e) {
+            return back()->withErrors(['msg' => 'Gagal memperbarui data: ' . $e->getMessage()]);
+        }
     }
 
-    public function update(Request $request, Periode $periode)
-    {
-        $request->validate([
-            'nama_periode' => 'required|string|max:255',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_mulai',
-        ]);
-
-        $periode->update($request->all());
-
-        return redirect()->route('periode')->with('success', 'Periode berhasil diperbarui!');
-    }
 
     public function destroy($id)
     {
