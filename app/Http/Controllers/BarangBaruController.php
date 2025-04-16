@@ -72,55 +72,27 @@ class BarangBaruController extends Controller
             'nama_barang' => 'required|max:255',
             'harga_jual_barang' => 'required|integer',
             'jenis_barang' => 'required|string',
-            'gambar_barang' => 'image|mimes:jpeg,png,jpg',
         ]);
 
         $barang = AsetBarangBaru::findOrFail($id);
-        $namaBarangLama = $barang->nama_barang;
-        $barangList = AsetBarangBaru::where('nama_barang', $namaBarangLama)->get();
 
-        $imagePath = null;
+        $barangList = AsetBarangBaru::where('id_nama_barang', $barang->id_nama_barang)
+            ->where('id_gambar_barang', $barang->id_gambar_barang)
+            ->where('harga_jual_barang', $barang->harga_jual_barang)
+            ->where('jenis_barang', $barang->jenis_barang)
+            ->get();
 
-        if ($request->hasFile('gambar_barang')) {
-            // Hapus gambar lama jika ada
-            foreach ($barangList as $item) {
-                if ($item->gambar_barang && Storage::disk('public')->exists($item->gambar_barang)) {
-                    Storage::disk('public')->delete($item->gambar_barang);
-                }
-            }
-
-            // Upload gambar baru
-            $file = $request->file('gambar_barang');
-            $extension = $file->getClientOriginalExtension();
-            $newFileName = 'barang_baru_' . time() . '.' . $extension;
-            $imagePath = 'uploads/' . $newFileName;
-
-            // Simpan gambar sesuai formatnya
-            $imageFullPath = storage_path('app/public/' . $imagePath);
-            $image = imagecreatefromstring(file_get_contents($file));
-
-            if ($extension === 'png') {
-                imagepng($image, $imageFullPath, 6);
-            } else {
-                imagejpeg($image, $imageFullPath, 75);
-            }
-
-            imagedestroy($image);
-        }
-
-        // Update semua barang dengan nama yang sama
         foreach ($barangList as $item) {
-            $item->nama_barang = $request->nama_barang;
+            $item->id_nama_barang = $request->nama_barang;
+            $item->id_gambar_barang = $request->nama_barang;
             $item->harga_jual_barang = $request->harga_jual_barang;
             $item->jenis_barang = $request->jenis_barang;
-            if ($imagePath) {
-                $item->gambar_barang = $imagePath;
-            }
             $item->save();
         }
 
-        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarangLama . '" berhasil diperbarui');
+        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan data yang sama berhasil diperbarui.');
     }
+
 
 
 

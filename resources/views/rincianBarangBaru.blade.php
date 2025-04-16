@@ -885,7 +885,7 @@
                     <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
                 </div>
 
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="#" method="POST">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" id="update-id">
@@ -962,6 +962,17 @@
             </div>
         </div>
     </div>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'Oke'
+            });
+        </script>
+    @endif
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
