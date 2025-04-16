@@ -188,6 +188,82 @@
 
         /* --- End Base Styles --- */
 
+        #addNamaBarangModal .modal-dialog {
+            max-width: 550px; /* Adjust width as needed, image looks slightly wider than default */
+        }
+
+        #addNamaBarangModal .modal-body {
+            padding: 1.5rem 2rem; /* Add some horizontal padding */
+        }
+
+        #addNamaBarangModal .form-label,
+        #addNamaBarangModal label.font-weight-bold {
+            color: #495057; /* Standard Bootstrap label color */
+            font-weight: bold !important;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem; /* Slightly smaller label */
+        }
+
+        #addNamaBarangModal #add-nama-barang-upload-area {
+            /* Size for web view - make it smaller */
+            width: 400px;  /* Adjust as needed */
+            height: 100px; /* Adjust as needed - make it square or rectangular */
+            background-color: #272780 !important;
+            border: none !important;
+            border-radius: 5px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto; /* Center the box horizontally and add margin below */
+            cursor: pointer;
+            position: relative; /* Needed for positioning content inside */
+            overflow: hidden; /* Contain the preview image */
+        }
+
+        #addNamaBarangModal #add-nama-barang-upload-area i.fa-image {
+            font-size: 2.5rem; /* Adjust icon size if needed */
+            color: white;
+            margin: 0;
+        }
+
+        #addNamaBarangModal #add-nama-barang-upload-area img#preview-img {
+            /* Styles for the preview image inside the upload area */
+             max-width: 100%;
+             max-height: 100%;
+             object-fit: contain; /* Scale image nicely */
+        }
+
+        /* Filename text (optional styling) */
+        #addNamaBarangModal #add-nama-barang-filename {
+             font-size: 0.8rem;
+             text-align: center;
+             color: #6c757d;
+             word-break: break-all; /* Prevent long filenames from breaking layout */
+        }
+
+        /* Ensure preview div is hidden by default */
+        /* Not needed anymore as preview is inside upload area */
+        /* #addNamaBarangModal #add-nama-barang-preview { */
+        /* display: none; */
+        /* } */
+
+        #addNamaBarangModal .modal-body .form-control {
+            margin-bottom: 1rem; /* Space below input */
+        }
+
+        #addNamaBarangModal .modal-footer {
+            justify-content: flex-end; /* Align buttons to the right for web view */
+            padding: 1rem 2rem; /* Match body horizontal padding */
+            gap: 0.5rem; /* Add a small gap between buttons */
+        }
+
+        #addNamaBarangModal .modal-footer .btn {
+             width: auto; /* Buttons take their natural width */
+             padding: 0.5rem 1rem; /* Standard button padding */
+             font-size: 0.9rem;
+             font-weight: bold; /* Keep consistent */
+        }
+
 
         /* --- Mobile Styles --- */
         @media (max-width: 767.98px) {
@@ -276,7 +352,7 @@
             /* Style the image upload area like the image */
             #addNamaBarangModal #add-nama-barang-upload-area {
                 width: 200px;
-                height: 200px;
+                height: 300px;
                 background-color: #272780 !important;
                 /* Match header/button color */
                 border: none !important;
@@ -297,14 +373,14 @@
 
             #addNamaBarangModal #add-nama-barang-upload-area i.fa-image {
                 font-size: 2.5rem;
-                /* Adjust icon size as needed */
+              
                 color: white;
                 margin: 0;
             }
 
             /* Keep the separate preview area hidden initially */
             #addNamaBarangModal #add-nama-barang-preview {
-                display: none !important;
+                
                 /* Ensure it stays hidden */
             }
 
@@ -767,62 +843,60 @@
 
     <!-- add -->
     <div class="modal fade" id="addNamaBarangModal" tabindex="-1" aria-labelledby="addNamaBarangModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header modal-color text-white">
-                    {{-- Title matches image --}}
-                    <h5 class="modal-title" id="addNamaBarangModalLabel">Tambah Nama Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                {{-- Placeholder: action should point to your store route, e.g., "{{ route('nama_barang.store') }}" --}}
-                {{-- Added enctype="multipart/form-data" for file uploads --}}
-                <form action="{{ route('nama_barang.store') }}" method="POST" id="addNamaBarangForm"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-
-                        {{-- Upload Foto Barang Section --}}
-                        <div class="form-group mb-3">
-                            <label class="form-label fw-bold">Upload Foto Barang</label>
-                            {{-- Clickable Upload Area --}}
-                            {{-- Uses modal-color for background, rounded-3 for corners, flex for centering --}}
-                            <div id="add-nama-barang-upload-area"
-                                class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2">
-                                <i class="fa fa-image fa-3x text-white"></i>
-                            </div>
-                            {{-- Hidden File Input - Triggered by clicking the div above --}}
-                            <input type="file" class="d-none" id="add-nama-barang-gambar-input" name="gambar_barang"
-                                accept="image/*">
-                            {{-- Area to optionally show preview/filename after selection (Initially hidden) --}}
-                            <div id="add-nama-barang-preview" class="mt-2 text-center" style="display: none;">
-                                <img src="#" alt="Preview" class="img-thumbnail"
-                                    style="max-width: 100%; max-height: 150px;" />
-                                <p class="mt-1 mb-0 text-muted small" id="add-nama-barang-filename"></p>
-                            </div>
-                        </div>
-
-                        {{-- Nama Barang Input --}}
-                        <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                            <input type="text" name="nama_barang" id="add-nama-barang" class="form-control"
-                                placeholder="Masukkan Nama Barang..." required>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        {{-- Batal Button - Uses batal-btn class --}}
-                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
-                            data-dismiss="modal">Batal</button>
-                        {{-- Tambah Button - Uses modal-color class --}}
-                        <button type="submit"
-                            class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
-                    </div>
-                </form>
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="addNamaBarangModalLabel">Tambah Nama Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
             </div>
+            <form action="{{ route('nama_barang.store') }}" method="POST" id="addNamaBarangForm"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+
+                    {{-- Upload Foto Barang Section --}}
+                    <div class="form-group mb-3">
+                        <label class="form-label fw-bold">Upload Foto Barang</label>
+                        <div id="add-nama-barang-upload-area"
+                         class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2"
+                         onclick="document.getElementById('add-nama-barang-gambar-input').click();">
+                            
+                         <img src="#" alt="Preview" class="img-thumbnail d-none img-fluid" id="preview-img">
+
+                            <i class="fa fa-image fa-3x text-white" id="add-default-icon"></i> 
+                        </div>
+                        <input type="file" class="d-none" id="add-nama-barang-gambar-input" name="gambar_barang"
+                            accept="image/*">
+                        {{-- Show filename (Optional) --}}
+                        <p class="mt-1 mb-0 text-muted small text-center" id="add-nama-barang-filename"></p>
+
+                        {{-- skrg preview di uploadarea --}}
+                        {{-- <div id="add-nama-barang-preview" class="mt-2 text-center" style="display: none;"> --}}
+                        {{--     <img src="#" alt="Preview" class="img-thumbnail" id="preview-img"/> --}}
+                        {{--     <p class="mt-1 mb-0 text-muted small" id="add-nama-barang-filename"></p> --}}
+                        {{-- </div> --}}
+                    </div>
+
+                    {{-- Nama Barang Input --}}
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                        <input type="text" name="nama_barang" id="add-nama-barang" class="form-control"
+                            placeholder="Masukkan Nama Barang..." required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
+                        data-dismiss="modal">Batal</button>
+                    <button type="submit"
+                        class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
     <!-- update -->
     <div class="modal fade" id="updateNamaBarangModal" tabindex="-1" aria-labelledby="updateNamaBarangModalLabel"
@@ -974,3 +1048,40 @@
         </div>
     </div>
 @endsection
+
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('add-nama-barang-gambar-input');
+    const previewImg = document.getElementById('preview-img');
+    const fileNameLabel = document.getElementById('add-nama-barang-filename');
+    const defaultIcon = document.getElementById('add-default-icon');
+
+    input.addEventListener('change', function (event) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImg.src = e.target.result;
+          previewImg.classList.remove('d-none');
+          defaultIcon.classList.add('d-none');
+          fileNameLabel.textContent = input.files[0].name;
+        };
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        previewImg.src = '#';
+        previewImg.classList.add('d-none');
+        defaultIcon.classList.remove('d-none');
+        fileNameLabel.textContent = '';
+      }
+    });
+
+    // Reset on modal hide
+    $('#addNamaBarangModal').on('hidden.bs.modal', function () {
+      input.value = '';
+      previewImg.src = '#';
+      previewImg.classList.add('d-none');
+      defaultIcon.classList.remove('d-none');
+      fileNameLabel.textContent = '';
+    });
+  });
+
+</script>
