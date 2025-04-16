@@ -657,7 +657,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
-                                                        <img src="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
+                                                        <img src="{{ asset('storage/uploads' . $item->namaBarang->gambar_barang) }}"
                                                             alt="Gambar" class="img-fluid"
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
@@ -693,7 +693,7 @@
                                                             data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
+                                                            data-gambar="{{ asset('storage/uploads' . $item->namaBarang->gambar_barang) }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal">
                                                             <i class="fa fa-eye"></i> Rincian
                                                         </button>
@@ -702,7 +702,7 @@
                                                             data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                                            data-gambar="{{ asset('storage/uploads' . $item->gambar_barang) }}"
                                                             data-url="{{ route('aset_barang.update', $item->id) }}"
                                                             data-toggle="modal" data-target="#updateAssetModal">
                                                             Update
