@@ -11,7 +11,9 @@ class NamaBarang extends Model
 
     protected $table = 'nama_barang';
 
-    protected $guarded = 'id';
+    public $timestamps = false;
+
+    protected $guarded = ['id'];
 
     public function asetBarangBarus()
     {

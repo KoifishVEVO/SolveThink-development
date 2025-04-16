@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangBaruController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\BarangBekasController;
+use App\Http\Controllers\NamaBarangController;
 use App\Models\AsetBarangBaru;
 use App\Models\NamaBarang;
 use App\Models\AsetBarangBekas;
@@ -27,10 +28,6 @@ Route::get('dashboard', function() {
 Route::get('/dashboard', function() {
     return view('rincianNamaBarang');
 })->name('dashboard')->middleware('auth');
-
-Route::get('/rincianNamaBarang', function() {
-    return view('rincianNamaBarang');
-});
 
 
 // rincian barang baru
@@ -78,10 +75,10 @@ Route::middleware(['auth'])->group(function () {
 // routes/web.php
 
 Route::middleware('auth')->group(function () {
-    Route::get('/nama-barang', [NamaBarangController::class, 'index'])->name('nama_barang.index');
-    Route::post('/nama-barang', [NamaBarangController::class, 'store'])->name('nama_barang.store');
-    Route::put('/nama-barang/{id}', [NamaBarangController::class, 'update'])->name('nama_barang.update');
-    Route::delete('/nama-barang/{id}', [NamaBarangController::class, 'destroy'])->name('nama_barang.destroy');
+    Route::get('/rincianNamaBarang', [NamaBarangController::class, 'index'])->name('nama_barang.index');
+    Route::post('/rincianNamaBarang', [NamaBarangController::class, 'store'])->name('nama_barang.store');
+    Route::put('/rincianNamaBarang/{id}', [NamaBarangController::class, 'update'])->name('nama_barang.update');
+    Route::delete('/rincianNamaBarang/{id}', [NamaBarangController::class, 'destroy'])->name('nama_barang.destroy');
 });
 
 
@@ -137,4 +134,3 @@ Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.show'
 Route::post('/periode', [PeriodeController::class, 'store'])->name('periode.store');
 Route::delete('/periode/{id}', [PeriodeController::class, 'destroy'])->name('periode.destroy');
 Route::put('/periode/{id}', [PeriodeController::class, 'update'])->name('periode.update');
-
