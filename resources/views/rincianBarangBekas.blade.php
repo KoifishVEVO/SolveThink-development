@@ -190,7 +190,7 @@
                                                 </td>
                                                 <td>{{ $item->namaBarang->nama_barang }}</td>
                                                 <td>Rp
-                                                    {{ number_format($item->namaBarang->harga_jual_barang, 0, ',', '.') }}
+                                                    {{ number_format($item->harga_jual_barang, 0, ',', '.') }}
                                                 </td>
                                                 <td>{{ $item->jumlah }}</td>
                                                 <td>{{ $item->jenis_barang ?? '-' }}</td>
@@ -199,31 +199,33 @@
                                                     <div class="d-flex flex-wrap justify-content-center">
                                                         <button class="btn btn-sm btn-success m-1 btn-tambah"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ $item->gambar_barang }}">
+                                                            data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
 
                                                         <button class="btn btn-sm btn-danger m-1 btn-kurangi"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}">
+                                                            data-nama="{{ $item->id_nama_barang }}" {{-- ID-nya, bukan nama --}}
+                                                            data-gambar="{{ $item->id_gambar_barang }}"
+                                                            data-harga="{{ $item->harga_jual_barang }}"
+                                                            data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
 
                                                         <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->asetBekasTerbaru->jenis_barang ?? '-' }}"
-                                                            data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
+                                                            data-jenis="{{ $item->jenis_barang }}"
+                                                            data-gambar="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal">
                                                             <i class="fa fa-eye"></i> Rincian
                                                         </button>
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
@@ -407,51 +409,20 @@
                     <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
                 </div>
 
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="#" method="POST">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" id="update-id">
 
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <!-- image upload  -->
-                        <div id="update-image-container" class="modal-color position-relative mb-4"
-                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
-                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
-                                    cursor: pointer; position: relative; text-align: center;">
-
-
-                            <div id="upload-button-view"
-                                style="display: flex; flex-direction: column; align-items: center;
-                                        justify-content: center; position: absolute; top: 50%; left: 50%;
-                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
-                                <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                                <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                                <input type="file" id="updateFileInput" name="gambar_barang" style="display: none;"
-                                    accept="image/*">
-                            </div>
-
-                            <!-- Image Preview -->
-                            <div id="update-image-preview"
-                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
-                                <img id="update-preview-img" src="" alt="Preview"
-                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                                                                                                                    style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                                                                    Click to Change Image
-                                                                                                                                                                                                                                </h6> -->
-                            </div>
-                        </div>
-
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="update-nama">Nama Barang</label>
                             <select name="nama_barang" id="update-nama" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
+                                @foreach ($data_nama_barang as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -460,20 +431,23 @@
                             required>
 
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                            <label class="font-weight-bold" for="jenis_barang">Jenis</label>
                             <select name="jenis_barang" id="update-jenis" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
+                                <option value="">Pilih Nama Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Actuator">Actuator</option>
                                 <option value="Power">Power</option>
                                 <option value="Equipment">Equipment</option>
+                                <!-- Tambahkan opsi lainnya di sini -->
                             </select>
                         </div>
+
                     </div>
 
                     <div class="modal-footer d-flex justify-content-end">
-                        <button type="button" class="btn btn-link text-muted font-weight-bold"
+                        <button type="button" class="btn font-weight-bold border px-3 batal-btn mr-4"
                             data-dismiss="modal">Batal</button>
+
                         <button type="submit" class="btn modal-color text-white font-weight-bold">Simpan</button>
                     </div>
                 </form>
@@ -512,6 +486,29 @@
             </div>
         </div>
     </div>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'Oke'
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: '{{ session('error') }}',
+                showConfirmButton: true
+            });
+        </script>
+    @endif
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -558,42 +555,6 @@
         });
 
 
-        // Untuk modal "Tambah"
-        document.getElementById("image-upload-container").addEventListener("click", function() {
-            document.getElementById("fileInput").click();
-        });
-
-        // Preview gambar
-        document.getElementById("fileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("preview-img").src = event.target.result;
-                    document.getElementById("image-preview").style.display = "block";
-                    document.getElementById("upload-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Untuk modal "Update"
-        document.getElementById("update-image-container").addEventListener("click", function() {
-            document.getElementById("updateFileInput").click();
-        });
-
-        document.getElementById("updateFileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("update-preview-img").src = event.target.result;
-                    document.getElementById("update-image-preview").style.display = "block";
-                    document.getElementById("update-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
 
         // Tombol Delete - Isi otomatis modal dan set form action
         document.querySelectorAll('.btn-delete').forEach(button => {
@@ -619,7 +580,6 @@
         // Tombol Update - Isi otomatis modal
         document.querySelectorAll('.btn-update').forEach(button => {
             button.addEventListener('click', function() {
-                // Ambil data dari tombol
                 const id = this.dataset.id;
                 const nama = this.dataset.nama;
                 const harga = this.dataset.harga;
@@ -627,16 +587,16 @@
                 const gambar = this.dataset.gambar;
                 const url = this.dataset.url;
 
-                // Isi form di modal
+                console.log(jenis)
                 document.getElementById('update-id').value = id;
-                document.getElementById('update-nama').value = nama;
+                const selectNama = document.getElementById('update-nama');
+                selectNama.value = nama;
+
                 document.getElementById('update-harga').value = harga;
                 document.getElementById('update-jenis').value = jenis;
 
-                // Set form action ke URL update
                 document.querySelector('#updateAssetModal form').action = url;
 
-                // Preview gambar
                 const previewImg = document.getElementById('update-preview-img');
                 const previewWrapper = document.getElementById('update-image-preview');
                 const uploadView = document.getElementById('update-button-view');
@@ -660,7 +620,6 @@
                     nama_barang: button.getAttribute("data-nama"),
                     harga_jual_barang: parseInt(button.getAttribute("data-harga")),
                     jenis_barang: button.getAttribute("data-jenis"),
-                    gambar_barang: button.getAttribute("data-gambar"),
                     _token: "{{ csrf_token() }}"
                 };
 
@@ -668,13 +627,31 @@
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": data._token
+                            "X-CSRF-TOKEN": data._token,
+                            "Accept": "application/json" // <--- ini penting biar Laravel balikin JSON saat error
                         },
                         body: JSON.stringify(data)
                     })
-                    .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
+                    .then(async (response) => {
+                        const result = await response.json();
+
+                        if (!response.ok) {
+                            // Tangani error validasi Laravel
+                            if (result.errors) {
+                                let errorMessages = Object.values(result.errors).flat().join("\n");
+                                alert("Gagal menambahkan barang:\n" + errorMessages);
+                            } else {
+                                alert("Terjadi kesalahan tak dikenal.");
+                            }
+                            throw new Error("Validation failed");
+                        }
+
+                        // Kalau sukses, reload
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
             }
         });
 
@@ -682,18 +659,45 @@
             if (event.target.closest(".btn-kurangi")) {
                 let button = event.target.closest(".btn-kurangi");
                 let namaBarang = button.getAttribute("data-nama");
+                let gambarBarang = button.getAttribute("data-gambar");
+                let hargaJualBarang = button.getAttribute("data-harga");
+                let jenisBarang = button.getAttribute("data-jenis");
+
+                console.log(namaBarang)
+                console.log(gambarBarang)
+                console.log(hargaJualBarang)
+                console.log(jenisBarang)
 
                 fetch("{{ route('aset_barang_bekas.deleteOne', ':nama_barang') }}".replace(':nama_barang',
                         encodeURIComponent(namaBarang)), {
-                        method: "DELETE",
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                             "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            _method: "DELETE",
+                            gambar_barang: namaBarang,
+                            harga_jual_barang: hargaJualBarang,
+                            jenis_barang: jenisBarang
+                        })
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error("HTTP error " + response.status);
+                        return response
+                            .json(); // error "<!DOCTYPE" bisa dihindari kalau ini error di atas jalan duluan
+                    })
+                    .then(result => {
+                        if (!result.success) {
+                            alert(result.message || "Terjadi kesalahan.");
+                        } else {
+                            location.reload();
                         }
                     })
-                    .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Terjadi kesalahan dalam penghapusan barang.");
+                    });
             }
         });
     </script>
