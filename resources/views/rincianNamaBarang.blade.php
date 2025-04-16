@@ -189,7 +189,7 @@
          /* Style the image upload area like the image */
          #addNamaBarangModal #add-nama-barang-upload-area {
              width: 200px;         
-             height: 200px;
+             height: 300px;
              background-color: #272780 !important; /* Match header/button color */
              border: none !important; /* Image doesn't show a border */
              border-radius: 5px !important; /* Match rounding */

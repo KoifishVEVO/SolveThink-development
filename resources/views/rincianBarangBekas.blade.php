@@ -1,735 +1,929 @@
-@extends('layouts.dashboard')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title')
-    RincianBarangBekas
-@endsection
+<head>
 
-@section('styles')
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>SB Admin 2 - Tables</title>
 
-@endsection
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-@section('content')
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<style>
+</head>
 
-.heading-text {
-    color: #272780 !important;
-    font-weight: bold !important;
-}
-.rincian-btn {
-    background-color: transparent !important;
-    color: #A9B5DF !important;
-    border: 2px solid #A9B5DF !important;
-    font-weight: normal !important;
-    border-radius: 5px !important;
-    padding: 0.25rem 0.5rem !important;
-    line-height: 1.5 !important;
-    white-space: nowrap !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
+<body id="page-top">
 
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-.rincian-btn i {
-    font-size: 16px !important;
-    margin-right: 0 !important; /
-}
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
 
-.rincian-btn:hover {
-    background-color: #A9B5DF !important;
-    color: white !important;
-    border-color: #A9B5DF !important;
-}
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-.card-color {
-            background-color: #272780 !important;
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
 
-        }
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-        /* for the updown thing, havent figured it out */
-        .entries{
-           appearance: none;
-           -webkit-appearance: none;
-           -moz-appearance: none;
-           padding: 6px 30px 6px 12px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            background-color: white;
-            width: 80px;
-            font-size: 14px;
-        }
-
-
-        .modal-color {
-        background-color: #272780 !important;
-    }
-
-    /* Additional styles for consistent modal appearance */
-    .drop-zone {
-        background-color: #272780;
-        color: white;
-        border: 2px dashed #ccc;
-        border-radius: 5px;
-        padding: 40px 20px;
-        text-align: center;
-        margin-bottom: 20px;
-        cursor: pointer;
-    }
-
-    /* Button styling */
-    .btn-modal-color {
-        background-color: #272780;
-        color: white;
-    }
-
-    /* Text styling for delete modal */
-    .delete-text {
-        color: #272780;
-        font-weight: bold;
-    }
-
-    /* Bold heading for all modals */
-    .modal-title {
-        font-weight: bold;
-    }
-
-    .btn-success {
-        background-color: #00B634 !important;
-    }
-
-    .table thead th {
-    border: 1px solid black !important;
-    border-color: #DEDDDD !important;
-}
-
-.table tbody td {
-    border-left: 1px solid black !important;
-    border-right: 1px solid black !important;
-    border-top: none !important;
-    border-bottom: none !important;
-    border-color: #DEDDDD !important;
-}
-
-
-</style>
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-<!-- Begin Page Content -->
-<div class="container-fluid">
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">ASSET BARANG BEKAS</h1>
-        <p class="mb-4 heading-text font-weight-bold">Tabel asset barang baru adalah tabel yang berisikan informasi terkait
-            barang baru</p>
-
-        <!-- DataTables Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-5 card-color">
-                <h6 class="m-0 font-weight-bold text-white">Data Tabel Asset Barang Baru</h6>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
             </div>
-            <div class="card-body">
 
-                <div class="table-responsive">
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row mb-3">
-                            <!-- Show entries -->
-                            <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_length" id="dataTable_length">
-                                    <label>Show
-                                        <select id="showEntries" name="dataTable_length"
-                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> entries
-                                    </label>
-                                </div>
-                            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
 
-                            <!-- Search box -->
-                            <div class="col-sm-12 col-md-6">
-                                <div id="dataTable_filter" class="dataTables_filter d-flex justify-content-md-end">
-                                    <label class="mr-2">Search:
-                                        <form id="searchForm" method="GET" action="{{ route('aset_barang_bekas.index') }}"
-                                            class="d-inline">
-                                            <input type="search" name="search" value="{{ request('search') }}"
-                                                class="form-control form-control-sm d-inline" placeholder="Cari barang..."
-                                                aria-controls="dataTable">
-                                        </form>
-                                    </label>
-                                    <button class="btn btn-success btn-sm ml-2" data-toggle="modal"
-                                        data-target="#addAssetModal">Tambah</button>
-                                </div>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Utilities</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
                             </div>
                         </div>
+                    </form>
 
-                        <!-- Table row -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Gambar Barang</th>
-                                            <th>Nama Barang</th>
-                                            <th>Harga Jual Barang</th>
-                                            <th>Stok Barang</th>
-                                            <th>Jenis Barang</th>
-                                            <th>Aksi</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="table-body">
-                                        <!-- Sample row -->
-                                        @foreach ($barang as $item)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <img src="{{ asset('storage/' . $item->gambar_barang) }}"
-                                                            alt="Gambar" class="img-fluid"
-                                                            style="max-width: 100px; height: auto;">
-                                                    </div>
-                                                </td>
-                                                <td>{{ $item->nama_barang }}</td>
-                                                <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
-                                                <td>{{ $item->jumlah }}</td>
-                                                <td>{{ $item->jenis_barang }}</td>
-                                                <td class="px-3">
-
-                                                    <div class="d-flex flex-wrap justify-content-center">
-                                                        <button class="btn btn-sm btn-success m-1 btn-tambah"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
-                                                            data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ $item->gambar_barang }}">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
-
-                                                        <button class="btn btn-sm btn-danger m-1 btn-kurangi"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}">
-                                                            <i class="fa fa-minus"></i>
-                                                        </button>
-
-                                                        <button class="btn btn-sm rincian-btn m-1"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
-                                                            data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
-                                                            data-toggle="modal" data-target="#rincianAssetModal">
-                                                            <i class="fa fa-eye"></i> Rincian
-                                                        </button>
-                                                        <button class="btn btn-sm btn-warning m-1 btn-update"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
-                                                            data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}"
-                                                            data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
-                                                            data-url="{{ route('aset_barang_bekas.update', $item->id) }}"
-                                                            data-toggle="modal" data-target="#updateAssetModal">
-                                                            Update
-                                                        </button>
-                                                        <button class="btn btn-sm btn-danger m-1 btn-delete"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
-                                                            data-url="{{ route('aset_barang_bekas.destroy', $item->id) }}"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteAssetModal">Hapus</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Garrett Winters</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>63</td>
+                                            <td>2011/07/25</td>
+                                            <td>$170,750</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ashton Cox</td>
+                                            <td>Junior Technical Author</td>
+                                            <td>San Francisco</td>
+                                            <td>66</td>
+                                            <td>2009/01/12</td>
+                                            <td>$86,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cedric Kelly</td>
+                                            <td>Senior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>22</td>
+                                            <td>2012/03/29</td>
+                                            <td>$433,060</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Airi Satou</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>33</td>
+                                            <td>2008/11/28</td>
+                                            <td>$162,700</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brielle Williamson</td>
+                                            <td>Integration Specialist</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                            <td>2012/12/02</td>
+                                            <td>$372,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Herrod Chandler</td>
+                                            <td>Sales Assistant</td>
+                                            <td>San Francisco</td>
+                                            <td>59</td>
+                                            <td>2012/08/06</td>
+                                            <td>$137,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rhona Davidson</td>
+                                            <td>Integration Specialist</td>
+                                            <td>Tokyo</td>
+                                            <td>55</td>
+                                            <td>2010/10/14</td>
+                                            <td>$327,900</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Colleen Hurst</td>
+                                            <td>Javascript Developer</td>
+                                            <td>San Francisco</td>
+                                            <td>39</td>
+                                            <td>2009/09/15</td>
+                                            <td>$205,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sonya Frost</td>
+                                            <td>Software Engineer</td>
+                                            <td>Edinburgh</td>
+                                            <td>23</td>
+                                            <td>2008/12/13</td>
+                                            <td>$103,600</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jena Gaines</td>
+                                            <td>Office Manager</td>
+                                            <td>London</td>
+                                            <td>30</td>
+                                            <td>2008/12/19</td>
+                                            <td>$90,560</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Quinn Flynn</td>
+                                            <td>Support Lead</td>
+                                            <td>Edinburgh</td>
+                                            <td>22</td>
+                                            <td>2013/03/03</td>
+                                            <td>$342,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Charde Marshall</td>
+                                            <td>Regional Director</td>
+                                            <td>San Francisco</td>
+                                            <td>36</td>
+                                            <td>2008/10/16</td>
+                                            <td>$470,600</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Haley Kennedy</td>
+                                            <td>Senior Marketing Designer</td>
+                                            <td>London</td>
+                                            <td>43</td>
+                                            <td>2012/12/18</td>
+                                            <td>$313,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tatyana Fitzpatrick</td>
+                                            <td>Regional Director</td>
+                                            <td>London</td>
+                                            <td>19</td>
+                                            <td>2010/03/17</td>
+                                            <td>$385,750</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Michael Silva</td>
+                                            <td>Marketing Designer</td>
+                                            <td>London</td>
+                                            <td>66</td>
+                                            <td>2012/11/27</td>
+                                            <td>$198,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Paul Byrd</td>
+                                            <td>Chief Financial Officer (CFO)</td>
+                                            <td>New York</td>
+                                            <td>64</td>
+                                            <td>2010/06/09</td>
+                                            <td>$725,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gloria Little</td>
+                                            <td>Systems Administrator</td>
+                                            <td>New York</td>
+                                            <td>59</td>
+                                            <td>2009/04/10</td>
+                                            <td>$237,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bradley Greer</td>
+                                            <td>Software Engineer</td>
+                                            <td>London</td>
+                                            <td>41</td>
+                                            <td>2012/10/13</td>
+                                            <td>$132,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dai Rios</td>
+                                            <td>Personnel Lead</td>
+                                            <td>Edinburgh</td>
+                                            <td>35</td>
+                                            <td>2012/09/26</td>
+                                            <td>$217,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jenette Caldwell</td>
+                                            <td>Development Lead</td>
+                                            <td>New York</td>
+                                            <td>30</td>
+                                            <td>2011/09/03</td>
+                                            <td>$345,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Yuri Berry</td>
+                                            <td>Chief Marketing Officer (CMO)</td>
+                                            <td>New York</td>
+                                            <td>40</td>
+                                            <td>2009/06/25</td>
+                                            <td>$675,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Caesar Vance</td>
+                                            <td>Pre-Sales Support</td>
+                                            <td>New York</td>
+                                            <td>21</td>
+                                            <td>2011/12/12</td>
+                                            <td>$106,450</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Doris Wilder</td>
+                                            <td>Sales Assistant</td>
+                                            <td>Sidney</td>
+                                            <td>23</td>
+                                            <td>2010/09/20</td>
+                                            <td>$85,600</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Angelica Ramos</td>
+                                            <td>Chief Executive Officer (CEO)</td>
+                                            <td>London</td>
+                                            <td>47</td>
+                                            <td>2009/10/09</td>
+                                            <td>$1,200,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gavin Joyce</td>
+                                            <td>Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>42</td>
+                                            <td>2010/12/22</td>
+                                            <td>$92,575</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jennifer Chang</td>
+                                            <td>Regional Director</td>
+                                            <td>Singapore</td>
+                                            <td>28</td>
+                                            <td>2010/11/14</td>
+                                            <td>$357,650</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brenden Wagner</td>
+                                            <td>Software Engineer</td>
+                                            <td>San Francisco</td>
+                                            <td>28</td>
+                                            <td>2011/06/07</td>
+                                            <td>$206,850</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fiona Green</td>
+                                            <td>Chief Operating Officer (COO)</td>
+                                            <td>San Francisco</td>
+                                            <td>48</td>
+                                            <td>2010/03/11</td>
+                                            <td>$850,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shou Itou</td>
+                                            <td>Regional Marketing</td>
+                                            <td>Tokyo</td>
+                                            <td>20</td>
+                                            <td>2011/08/14</td>
+                                            <td>$163,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Michelle House</td>
+                                            <td>Integration Specialist</td>
+                                            <td>Sidney</td>
+                                            <td>37</td>
+                                            <td>2011/06/02</td>
+                                            <td>$95,400</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Suki Burks</td>
+                                            <td>Developer</td>
+                                            <td>London</td>
+                                            <td>53</td>
+                                            <td>2009/10/22</td>
+                                            <td>$114,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescott Bartlett</td>
+                                            <td>Technical Author</td>
+                                            <td>London</td>
+                                            <td>27</td>
+                                            <td>2011/05/07</td>
+                                            <td>$145,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gavin Cortez</td>
+                                            <td>Team Leader</td>
+                                            <td>San Francisco</td>
+                                            <td>22</td>
+                                            <td>2008/10/26</td>
+                                            <td>$235,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Martena Mccray</td>
+                                            <td>Post-Sales support</td>
+                                            <td>Edinburgh</td>
+                                            <td>46</td>
+                                            <td>2011/03/09</td>
+                                            <td>$324,050</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Unity Butler</td>
+                                            <td>Marketing Designer</td>
+                                            <td>San Francisco</td>
+                                            <td>47</td>
+                                            <td>2009/12/09</td>
+                                            <td>$85,675</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Howard Hatfield</td>
+                                            <td>Office Manager</td>
+                                            <td>San Francisco</td>
+                                            <td>51</td>
+                                            <td>2008/12/16</td>
+                                            <td>$164,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hope Fuentes</td>
+                                            <td>Secretary</td>
+                                            <td>San Francisco</td>
+                                            <td>41</td>
+                                            <td>2010/02/12</td>
+                                            <td>$109,850</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vivian Harrell</td>
+                                            <td>Financial Controller</td>
+                                            <td>San Francisco</td>
+                                            <td>62</td>
+                                            <td>2009/02/14</td>
+                                            <td>$452,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Timothy Mooney</td>
+                                            <td>Office Manager</td>
+                                            <td>London</td>
+                                            <td>37</td>
+                                            <td>2008/12/11</td>
+                                            <td>$136,200</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jackson Bradshaw</td>
+                                            <td>Director</td>
+                                            <td>New York</td>
+                                            <td>65</td>
+                                            <td>2008/09/26</td>
+                                            <td>$645,750</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Olivia Liang</td>
+                                            <td>Support Engineer</td>
+                                            <td>Singapore</td>
+                                            <td>64</td>
+                                            <td>2011/02/03</td>
+                                            <td>$234,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bruno Nash</td>
+                                            <td>Software Engineer</td>
+                                            <td>London</td>
+                                            <td>38</td>
+                                            <td>2011/05/03</td>
+                                            <td>$163,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sakura Yamamoto</td>
+                                            <td>Support Engineer</td>
+                                            <td>Tokyo</td>
+                                            <td>37</td>
+                                            <td>2009/08/19</td>
+                                            <td>$139,575</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thor Walton</td>
+                                            <td>Developer</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                            <td>2013/08/11</td>
+                                            <td>$98,540</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Finn Camacho</td>
+                                            <td>Support Engineer</td>
+                                            <td>San Francisco</td>
+                                            <td>47</td>
+                                            <td>2009/07/07</td>
+                                            <td>$87,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Serge Baldwin</td>
+                                            <td>Data Coordinator</td>
+                                            <td>Singapore</td>
+                                            <td>64</td>
+                                            <td>2012/04/09</td>
+                                            <td>$138,575</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zenaida Frank</td>
+                                            <td>Software Engineer</td>
+                                            <td>New York</td>
+                                            <td>63</td>
+                                            <td>2010/01/04</td>
+                                            <td>$125,250</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zorita Serrano</td>
+                                            <td>Software Engineer</td>
+                                            <td>San Francisco</td>
+                                            <td>56</td>
+                                            <td>2012/06/01</td>
+                                            <td>$115,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jennifer Acosta</td>
+                                            <td>Junior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>43</td>
+                                            <td>2013/02/01</td>
+                                            <td>$75,650</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cara Stevens</td>
+                                            <td>Sales Assistant</td>
+                                            <td>New York</td>
+                                            <td>46</td>
+                                            <td>2011/12/06</td>
+                                            <td>$145,600</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hermione Butler</td>
+                                            <td>Regional Director</td>
+                                            <td>London</td>
+                                            <td>47</td>
+                                            <td>2011/03/21</td>
+                                            <td>$356,250</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lael Greer</td>
+                                            <td>Systems Administrator</td>
+                                            <td>London</td>
+                                            <td>21</td>
+                                            <td>2009/02/27</td>
+                                            <td>$103,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jonas Alexander</td>
+                                            <td>Developer</td>
+                                            <td>San Francisco</td>
+                                            <td>30</td>
+                                            <td>2010/07/14</td>
+                                            <td>$86,500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shad Decker</td>
+                                            <td>Regional Director</td>
+                                            <td>Edinburgh</td>
+                                            <td>51</td>
+                                            <td>2008/11/13</td>
+                                            <td>$183,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Michael Bruce</td>
+                                            <td>Javascript Developer</td>
+                                            <td>Singapore</td>
+                                            <td>29</td>
+                                            <td>2011/06/27</td>
+                                            <td>$183,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Donna Snider</td>
+                                            <td>Customer Support</td>
+                                            <td>New York</td>
+                                            <td>27</td>
+                                            <td>2011/01/25</td>
+                                            <td>$112,000</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- pagination -->
-                        <div class="row">
-                            <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info" role="status" aria-live="polite">
-                                    Showing {{ $barang->firstItem() }} to {{ $barang->lastItem() }} of
-                                    {{ $barang->total() }} entries
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-7">
-                                <div class="dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination justify-content-end">
-                                        {{-- Tombol Previous --}}
-                                        <li
-                                            class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
-                                            <a href="{{ $barang->previousPageUrl() ?? '#' }}"
-                                                class="page-link">Previous</a>
-                                        </li>
+                </div>
+                <!-- /.container-fluid -->
 
-                                        {{-- Nomor Halaman --}}
-                                        @for ($i = 1; $i <= $barang->lastPage(); $i++)
-                                            <li
-                                                class="paginate_button page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
-                                                <a href="{{ $barang->url($i) }}"
-                                                    class="page-link">{{ $i }}</a>
-                                            </li>
-                                        @endfor
+            </div>
+            <!-- End of Main Content -->
 
-                                        {{-- Tombol Next --}}
-                                        <li
-                                            class="paginate_button page-item {{ $barang->hasMorePages() ? '' : 'disabled' }}">
-                                            <a href="{{ $barang->nextPageUrl() ?? '#' }}" class="page-link">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
-            </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
+        <!-- End of Content Wrapper -->
+
     </div>
-    </div>
+    <!-- End of Page Wrapper -->
 
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-
-
-
-    <!-- Modal -->
-    <!-- Add Asset Modal -->
-    <div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetLabel"
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header modal-color text-white">
-                    <h5 class="modal-title" id="addAssetLabel">Tambah Asset Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
-
-                <form action="{{ route('aset_barang_bekas.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <!-- image upload  -->
-                        <div id="image-upload-container" class="modal-color position-relative mb-4"
-                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
-                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
-                                    cursor: pointer; position: relative; text-align: center;">
-
-
-                            <div id="upload-button-view"
-                                style="display: flex; flex-direction: column; align-items: center;
-                                        justify-content: center; position: absolute; top: 50%; left: 50%;
-                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
-                                <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                                <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                                <input type="file" id="fileInput" name="gambar_barang" style="display: none;"
-                                    accept="image/*" required>
-                            </div>
-
-                            <!-- Image Preview -->
-                            <div id="image-preview"
-                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
-                                <img id="preview-img" src="" alt="Preview"
-                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="change-image-btn" class="position-absolute"
-                                                                                                                                    style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                    Click to Change Image
-                                                                                                                                </h6> -->
-                            </div>
-                        </div>
-
-
-                        <!-- Other Inputs -->
-                        <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                            <select name="nama_barang" id="add-nama-barang" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                            </select>
-                        </div>
-
-                        <label class="font-weight-bold">Harga Jual Barang</label>
-                        <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
-
-                        <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                            <select name="jenis_barang" id="add-nama-barang" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link text-muted font-weight-bold"
-                            data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn modal-color text-white font-weight-bold">Tambah</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Rincian Asset Modal -->
-    <div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header modal-color text-white">
-                    <h5 class="modal-title" id="rincianAssetLabel">Rincian Asset Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body d-flex p-4">
-                    <!-- Image container -->
-                    <div class="modal-color position-relative"
-                        style="width: 250px; height: 250px; border: 2px dashed #ccc; border-radius: 5px; overflow: hidden;">
-                        <div id="rincian-default-view"
-                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
-                            <i class="fa fa-image fa-3x" style="color: white;"></i>
-                        </div>
-
-                        <!-- image  -->
-                        <div id="rincian-image-view"
-                            style="display: none; height: 100%; width: 100%; position: relative;">
-                            <img id="rincian-preview-img" src="" alt="Preview"
-                                style="height: 100%; width: 100%; object-fit: contain;">
-                        </div>
-                    </div>
-
-                    <div class="ml-4">
-                        <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">id Barang</strong><br>
-                            <span style="color: #777; font-size: 14px;" id="rincian-id">nomor id barang</span>
-                        </p>
-                        <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">Nama Barang</strong><br>
-                            <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
-                        </p>
-                        <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">Stok Barang</strong><br>
-                            <span style="color: #777; font-size: 14px;" id="rincian-jenis">jumlah stok barang</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-end">
-                    <button type="button" class="btn modal-color text-white font-weight-bold"
-                        data-dismiss="modal">Tutup</button>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Update Asset Modal -->
-    <div class="modal fade" id="updateAssetModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header modal-color text-white">
-                    <h5 class="modal-title">Update Asset Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-                </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="id" id="update-id">
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                        <!-- image upload  -->
-                        <div id="update-image-container" class="modal-color position-relative mb-4"
-                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
-                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
-                                    cursor: pointer; position: relative; text-align: center;">
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-                            <div id="upload-button-view"
-                                style="display: flex; flex-direction: column; align-items: center;
-                                        justify-content: center; position: absolute; top: 50%; left: 50%;
-                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
-                                <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                                <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                                <input type="file" id="updateFileInput" name="gambar_barang" style="display: none;"
-                                    accept="image/*">
-                            </div>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
 
-                            <!-- Image Preview -->
-                            <div id="update-image-preview"
-                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
-                                <img id="update-preview-img" src="" alt="Preview"
-                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                    style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                    Click to Change Image
-                                                                                                                                </h6> -->
-                            </div>
-                        </div>
+</body>
 
-
-                        <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="update-nama">Nama Barang</label>
-                            <select name="nama_barang" id="update-nama" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                            </select>
-                        </div>
-
-                        <label class="font-weight-bold">Harga Jual Barang</label>
-                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
-                            required>
-
-                        <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="update-nama">Nama Barang</label>
-                            <select name="jenis_barang" id="update-jenis" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer d-flex justify-content-end">
-                        <button type="button" class="btn btn-link text-muted font-weight-bold"
-                            data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn modal-color text-white font-weight-bold">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Asset Modal -->
-    <div class="modal fade" id="deleteAssetModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- header -->
-                <div class="modal-header modal-color text-white">
-                    <h5 class="modal-title">Hapus Asset Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-                </div>
-
-                <form action="#" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" id="delete-id">
-
-                    <!-- body -->
-                    <div class="modal-body">
-                        <p class="delete-text text-center">Konfirmasi Hapus Data Asset Barang</p>
-                        <p class="text-center" id="delete-item-name"></p>
-                    </div>
-
-                    <!-- footer -->
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-link text-muted font-weight-bold"
-                            data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn modal-color text-white font-weight-bold">Hapus</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script>
-        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('searchForm').submit();
-            }
-        });
-
-        // Tombol Rincian - Isi otomatis modal dengan data
-        document.querySelectorAll('.rincian-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const nama = this.dataset.nama;
-                const harga = this.dataset.harga;
-                const jenis = this.dataset.jenis;
-                const gambar = this.dataset.gambar;
-
-                // console.log(stok)
-
-                $('#rincianAssetModal').on('shown.bs.modal', function() {
-                    // Isi data ke modal setelah modal benar-benar ditampilkan
-                    document.getElementById('rincian-id').innerText = id;
-                    document.getElementById('rincian-nama').innerText = nama;
-                    document.getElementById('rincian-jenis').innerText = jenis;
-
-                    // Preview gambar
-                    const rincianImageView = document.getElementById('rincian-image-view');
-                    const rincianDefaultView = document.getElementById('rincian-default-view');
-                    const rincianPreviewImg = document.getElementById('rincian-preview-img');
-
-                    if (gambar) {
-                        rincianPreviewImg.src = gambar;
-                        rincianImageView.style.display = 'block';
-                        rincianDefaultView.style.display = 'none';
-                    } else {
-                        rincianImageView.style.display = 'none';
-                        rincianDefaultView.style.display = 'flex';
-                    }
-                });
-            })
-        });
-
-
-        // Untuk modal "Tambah"
-        document.getElementById("image-upload-container").addEventListener("click", function() {
-            document.getElementById("fileInput").click();
-        });
-
-        // Preview gambar
-        document.getElementById("fileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("preview-img").src = event.target.result;
-                    document.getElementById("image-preview").style.display = "block";
-                    document.getElementById("upload-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Untuk modal "Update"
-        document.getElementById("update-image-container").addEventListener("click", function() {
-            document.getElementById("updateFileInput").click();
-        });
-
-        document.getElementById("updateFileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("update-preview-img").src = event.target.result;
-                    document.getElementById("update-image-preview").style.display = "block";
-                    document.getElementById("update-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Tombol Delete - Isi otomatis modal dan set form action
-        document.querySelectorAll('.btn-delete').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const nama = this.dataset.nama;
-                const url = this.dataset.url;
-
-                // Tampilkan nama di modal
-                document.getElementById('delete-item-name').innerText =
-                    `Apakah kamu yakin ingin menghapus "${nama}"?`;
-
-                // Set form action
-                const deleteForm = document.querySelector('#deleteAssetModal form');
-                deleteForm.action = url;
-
-                // Set ID hidden (opsional, kalau diperlukan)
-                document.getElementById('delete-id').value = id;
-            });
-        });
-
-
-        // Tombol Update - Isi otomatis modal
-        document.querySelectorAll('.btn-update').forEach(button => {
-            button.addEventListener('click', function() {
-                // Ambil data dari tombol
-                const id = this.dataset.id;
-                const nama = this.dataset.nama;
-                const harga = this.dataset.harga;
-                const jenis = this.dataset.jenis;
-                const gambar = this.dataset.gambar;
-                const url = this.dataset.url;
-
-                // Isi form di modal
-                document.getElementById('update-id').value = id;
-                document.getElementById('update-nama').value = nama;
-                document.getElementById('update-harga').value = harga;
-                document.getElementById('update-jenis').value = jenis;
-
-                // Set form action ke URL update
-                document.querySelector('#updateAssetModal form').action = url;
-
-                // Preview gambar
-                const previewImg = document.getElementById('update-preview-img');
-                const previewWrapper = document.getElementById('update-image-preview');
-                const uploadView = document.getElementById('update-button-view');
-
-                if (gambar) {
-                    previewImg.src = gambar;
-                    previewWrapper.style.display = 'block';
-                    uploadView.style.display = 'none';
-                } else {
-                    previewWrapper.style.display = 'none';
-                    uploadView.style.display = 'flex';
-                }
-            });
-        });
-
-        document.addEventListener("click", function(event) {
-            if (event.target.closest(".btn-tambah")) {
-                let button = event.target.closest(".btn-tambah");
-
-                let data = {
-                    nama_barang: button.getAttribute("data-nama"),
-                    harga_jual_barang: parseInt(button.getAttribute("data-harga")),
-                    jenis_barang: button.getAttribute("data-jenis"),
-                    gambar_barang: button.getAttribute("data-gambar"),
-                    _token: "{{ csrf_token() }}"
-                };
-
-                fetch("{{ route('aset_barang_bekas.storeSame') }}", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": data._token
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
-            }
-        });
-
-        document.addEventListener("click", function(event) {
-            if (event.target.closest(".btn-kurangi")) {
-                let button = event.target.closest(".btn-kurangi");
-                let namaBarang = button.getAttribute("data-nama");
-
-                fetch("{{ route('aset_barang_bekas.deleteOne', ':nama_barang') }}".replace(':nama_barang',
-                        encodeURIComponent(namaBarang)), {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(() => location.reload())
-                    .catch(error => console.error("Error:", error));
-            }
-        });
-    </script>
-@endsection
+</html>

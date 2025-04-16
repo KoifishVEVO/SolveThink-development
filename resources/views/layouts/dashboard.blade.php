@@ -44,8 +44,11 @@
 
         /* Define Topbar Height Variable (adjust if your topbar height differs) */
         :root {
-             --topbar-height: 68px; /* Default SB Admin 2 topbar height */
-        }
+            --topbar-height: 68px;
+    --sidebar-width-desktop: 224px;       /* Standard desktop width */
+    --sidebar-width-desktop-toggled: 80px !important; /* Standard desktop toggled width */
+    --sidebar-width-mobile: 80px !important;
+}
 
         /* 1. Content Padding for Fixed Topbar */
         #content {
@@ -55,6 +58,9 @@
         /* 2. Sticky Topbar z-index */
         .navbar.fixed-top {
              z-index: 1035; /* Ensure topbar is above most content but potentially below modals/mobile sidebar overlay initially */
+             transition: left 0.3s ease;
+             left: 0;
+    width: 100%;
         }
         /* Ensure mobile toggle button is high enough */
         #sidebarToggleTop {
@@ -90,6 +96,9 @@
              display: flex;
              flex-direction: column;
              min-height: 100vh;
+             overflow-x: hidden;
+             transition: margin-left .3s ease;
+             margin-left: 0;
         }
         #content {
              flex-grow: 1;
@@ -97,50 +106,25 @@
       
 
         /* 5. Mobile Sidebar Adjustments */
-        @media (max-width: 767.98px) {
-            #accordionSidebar {
-        /* !FIX Fixed position, off-screen initially */
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: var(--sidebar-width);
-        /* !FIX z-index below mobile toggle button but above content */
-        z-index: 1040;
-        /* !FIX Hide off-screen using transform */
-        transform: translateX(-100%);
-        transition: transform 0.3s ease; /* Animate the slide */
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    body.sidebar-toggled #accordionSidebar {
-                transform: translateX(0); /* Slide in */
-            }
+        @media (max-width: 767.98px) {#content-wrapper {
+         padding-top: var(--topbar-height);
+         padding-left: 0 !important; /* Override desktop padding */
 
-            /* When mobile sidebar is shown (usually adds .show class via Bootstrap JS) */
-             #accordionSidebar.show {
-                 z-index: 1040; /* Make sure sidebar overlay is above content, slightly above topbar */
-                 /* SB Admin 2 default CSS handles the slide-in */
-            }
+     }
 
-            /* Mobile - Show small icon, hide text when sidebar is active/shown */
-             #accordionSidebar.show .sidebar-brand-icon .welcome-icon {
-                 display: block; /* Show the small icon */
-                 max-width: 40px;
-                 margin: 0 auto 0.5rem auto; /* Add some bottom margin */
-            }
-             #accordionSidebar.show .sidebar-brand-text {
-                 display: none; /* Hide the full logo text */
-             }
+     #accordionSidebar {
+        position: sticky;
+                top:0;
+                
+                
+                 height: calc(100vh - var(--topbar-height)); /* Full height minus topbar */
+                 z-index: 1050; /* Below topbar */
+                 overflow-y: auto; /* Allow internal scrolling */
+                 overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        
 
-            /* Mobile - Hide small icon when sidebar is hidden */
-             #accordionSidebar:not(.show) .welcome-icon {
-                 display: none;
-             }
-            /* Mobile - Ensure full logo text shows when hidden */
-             #accordionSidebar:not(.show) .sidebar-brand-text {
-                 display: block; /* Or inline, depending on original style */
-             }
+    
          }
 
         /* Default state for welcome icon (hidden) */

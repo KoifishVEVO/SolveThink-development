@@ -494,9 +494,6 @@
 }
 }
     </style>
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-</style>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <!-- Begin Page Content -->
@@ -687,8 +684,8 @@
 
 
     <!-- Modal -->
-    <!-- Add Asset Modal -->
-    <div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetLabel"
+        <!-- Add Asset Modal -->
+        <div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -703,7 +700,7 @@
                     @csrf
                     <div class="modal-body">
                         <!-- image upload  -->
-                        <div id="image-upload-container" class="modal-color position-relative mb-4"
+                        <!-- <div id="image-upload-container" class="modal-color position-relative mb-4"
                             style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
@@ -719,51 +716,71 @@
                                     accept="image/*" required>
                             </div>
 
-                            <!-- Image Preview -->
+                       
                             <div id="image-preview"
                                 style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
                                 <img id="preview-img" src="" alt="Preview"
                                     style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="change-image-btn" class="position-absolute"
-                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                        Click to Change Image
-                                                                                                                                                                                    </h6> -->
+                             
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <!-- Other Inputs -->
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
-                            <select name="nama_barang" id="nama_barang" class="form-control" required>
-                                <option value="">Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                                <!-- Tambahkan opsi lainnya di sini -->
-                            </select>
-                        </div>
+                        <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
+                                <div class="searchable-dropdown">
+                                    <select name="nama_barang" id="nama_barang" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Nama Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                        </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Nama Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i> <input type="text" class="dropdown-search-input" placeholder="Cari barang...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
                         <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
 
+                    
+                        <label class="font-weight-bold">Stok Barang</label>
+                        <input type="number" name="stok_barang" class="form-control mb-3" min="0" required>
+
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
-                            <select name="jenis_barang" id="jenis_barang" class="form-control" required>
-                                <option value="">Pilih Jenis Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                                <!-- Tambahkan opsi lainnya di sini -->
-                            </select>
-                        </div>
+                                <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
+                                 <div class="searchable-dropdown">
+                                    <select name="jenis_barang" id="jenis_barang" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Jenis Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                         </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Jenis Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="dropdown-search-input" placeholder="Cari jenis...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
 
                     <!-- Modal Footer -->
-                    <div class="modal-footer">
+                    <div class="modal-footer mt-6">
                         <button type="button" class="btn text-muted font-weight-bold batal-btn mr-4"
                             data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn modal-color text-white font-weight-bold">Tambah</button>
@@ -842,7 +859,7 @@
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <!-- image upload  -->
-                        <div id="update-image-container" class="modal-color position-relative mb-4"
+                        <!-- <div id="update-image-container" class="modal-color position-relative mb-4"
                             style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
                                     background-color: #f8f9fa; height: 200px; overflow: hidden;
                                     cursor: pointer; position: relative; text-align: center;">
@@ -858,47 +875,67 @@
                                     accept="image/*">
                             </div>
 
-                            <!-- Image Preview -->
+                           
                             <div id="update-image-preview"
                                 style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
                                 <img id="update-preview-img" src="" alt="Preview"
                                     style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                                                                        style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                        Click to Change Image
-                                                                                                                                                                                    </h6> -->
+                            
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
-                            <select name="nama_barang" id="update-nama" class="form-control" required>
-                                <option value="">Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                                <!-- Tambahkan opsi lainnya di sini -->
-                            </select>
-                        </div>
+                                <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                                <div class="searchable-dropdown">
+                                    <select name="nama_barang" id="update-nama" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Nama Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                        </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Nama Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="dropdown-search-input" placeholder="Cari barang...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
                         <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
                             required>
 
+                        <label class="font-weight-bold">Stok Barang</label>
+                        <input type="number" name="stok_barang" class="form-control mb-3" min="0" required>
+
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="jenis_barang">Nama Barang</label>
-                            <select name="jenis_barang" id="update-jenis" class="form-control" required>
-                                <option value="">Pilih Nama Barang...</option>
-                                <option value="Sensor">Sensor</option>
-                                <option value="Actuator">Actuator</option>
-                                <option value="Power">Power</option>
-                                <option value="Equipment">Equipment</option>
-                                <!-- Tambahkan opsi lainnya di sini -->
-                            </select>
-                        </div>
+                                <label class="font-weight-bold" for="update-jenis">Jenis Barang</label>
+                                <div class="searchable-dropdown">
+                                    <select name="jenis_barang" id="update-jenis" class="original-select-hidden" required tabindex="-1" aria-hidden="true">
+                                        <option value="">Pilih Jenis Barang...</option>
+                                        <option value="Sensor">Sensor</option>
+                                        <option value="Actuator">Actuator</option>
+                                        <option value="Power">Power</option>
+                                        <option value="Equipment">Equipment</option>
+                                         </select>
+                                    <div class="dropdown-select-display" tabindex="0">Pilih Jenis Barang...</div>
+                                    <div class="dropdown-options-container">
+                                        <div class="dropdown-search-wrapper">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="dropdown-search-input" placeholder="Cari jenis...">
+                                        </div>
+                                        <ul class="dropdown-options-list">
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
 
                     </div>
 
@@ -949,124 +986,147 @@
 
     <script>
         // (search in modal)
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
 
-            function setupSearchableDropdown(containerSelector) {
-                const container = document.querySelector(containerSelector);
-                if (!container) return;
+// Function to initialize a single searchable dropdown
+function initializeSearchableDropdown(dropdownElement) {
+    const originalSelect = dropdownElement.querySelector('.original-select-hidden');
+    const displayElement = dropdownElement.querySelector('.dropdown-select-display');
+    const optionsContainer = dropdownElement.querySelector('.dropdown-options-container');
+    const searchInput = dropdownElement.querySelector('.dropdown-search-input');
+    const optionsList = dropdownElement.querySelector('.dropdown-options-list');
 
-                const triggerButton = container.querySelector('.dropdown-toggle');
-                const hiddenInput = container.querySelector('input[type="hidden"]');
-                const dropdownMenu = container.querySelector('.dropdown-menu');
-                const searchInput = container.querySelector('.search-input');
-                const itemsList = container.querySelector('.dropdown-items-list');
-                const selectedTextSpan = triggerButton.querySelector('.selected-text');
+    // 1. Populate the custom list from the original select
+    optionsList.innerHTML = ''; // Clear any previous options
+    Array.from(originalSelect.options).forEach(option => {
+        if (option.value) { // Skip the placeholder if it has no value
+            const listItem = document.createElement('li');
+            listItem.textContent = option.textContent;
+            listItem.dataset.value = option.value;
+            optionsList.appendChild(listItem);
+        } else {
+             // Set initial display text from the placeholder
+            displayElement.textContent = option.textContent;
+        }
+    });
 
-                // --- Filter items based on search input ---
-                searchInput.addEventListener('input', function() {
-                    const searchTerm = searchInput.value.toLowerCase();
-                    const items = itemsList.querySelectorAll('.searchable-item');
+    // 2. Toggle dropdown visibility
+    displayElement.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent click from bubbling to document
+        // Close other open dropdowns first
+        closeAllDropdowns(dropdownElement);
+        dropdownElement.classList.toggle('open');
+         if (dropdownElement.classList.contains('open')) {
+             searchInput.focus(); // Focus search input when opened
+             // Reset search
+             searchInput.value = '';
+             filterOptions('');
+        }
+    });
+     // Allow focusing with Tab key
+    displayElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            displayElement.click(); // Simulate click to open/close
+        }
+    });
 
-                    items.forEach(item => {
-                        const itemText = item.textContent.toLowerCase();
-                        // Show/hide based on match. Skip the placeholder item.
-                        if (item.dataset.value ===
-                            "") { // Keep placeholder always visible or handle differently
-                            // item.style.display = 'block'; // Or hide it: item.style.display = 'none';
-                            return; // Skip filtering the placeholder
-                        }
 
-                        if (itemText.includes(searchTerm)) {
-                            item.classList.remove('d-none'); // Use Bootstrap class for consistency
-                        } else {
-                            item.classList.add('d-none');
-                        }
-                    });
-                });
+    // 3. Handle option selection
+    optionsList.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+            const selectedValue = e.target.dataset.value;
+            const selectedText = e.target.textContent;
 
-                // --- Handle item selection ---
-                itemsList.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('searchable-item')) {
-                        e.preventDefault();
-                        const selectedValue = e.target.dataset.value;
-                        const selectedText = e.target.textContent;
+            displayElement.textContent = selectedText; // Update display
+            originalSelect.value = selectedValue;   // Update hidden select's value for form submission
 
-                        // Update hidden input and visible text
-                        hiddenInput.value = selectedValue;
-                        selectedTextSpan.textContent = selectedText;
+            // Optional: Mark selected in the list (visual only)
+            Array.from(optionsList.querySelectorAll('li')).forEach(li => li.classList.remove('selected'));
+            e.target.classList.add('selected');
 
-                        // Manually close dropdown (using Bootstrap's jQuery dependency here)
-                        $(triggerButton).dropdown('toggle');
+            dropdownElement.classList.remove('open'); // Close dropdown
+        }
+    });
 
-                        // Trigger change event for any other scripts listening
-                        var event = new Event('change', {
-                            bubbles: true
-                        });
-                        hiddenInput.dispatchEvent(event);
-                    }
-                });
+    // 4. Handle search input
+    searchInput.addEventListener('input', () => {
+        filterOptions(searchInput.value);
+    });
 
-                // --- Reset search when dropdown is shown ---
-                // Need jQuery here because Bootstrap's dropdown events rely on it
-                $(triggerButton).on('shown.bs.dropdown', function() {
-                    searchInput.value = ''; // Clear search box
-                    // Show all items except placeholder if needed
-                    const items = itemsList.querySelectorAll('.searchable-item');
-                    items.forEach(item => item.classList.remove('d-none'));
-                    searchInput.focus(); // Focus search input
-                });
+     // Prevent clicks inside the search input/container from closing the dropdown
+    optionsContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 
-                // Reset to placeholder text if hidden input is empty (useful for Update modal init)
-                if (!hiddenInput.value && hiddenInput.required) { // Check if required and empty
-                    const placeholderItem = itemsList.querySelector('.searchable-item[data-value=""]');
-                    selectedTextSpan.textContent = placeholderItem ? placeholderItem.textContent : 'Pilih...';
-                }
+
+    // Function to filter options based on search term
+    function filterOptions(searchTerm) {
+        const term = searchTerm.toLowerCase();
+        Array.from(optionsList.querySelectorAll('li')).forEach(item => {
+            const itemText = item.textContent.toLowerCase();
+            if (itemText.includes(term)) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
             }
-
-            // Initialize for Add Modal
-            setupSearchableDropdown('#addAssetModal .searchable-dropdown-container');
-
-            // Initialize for Update Modal
-            setupSearchableDropdown('#updateAssetModal .searchable-dropdown-container');
-
-
-            // --- Populate Update Modal (Example - NEEDS to be in your 'show.bs.modal' event) ---
-            $('#updateAssetModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Button that triggered the modal
-                var assetNamaValue = button.data('nama'); // Get the value (e.g., "Sensor")
-
-                // Find the corresponding item text
-                var selectedItemText = 'Pilih Nama Barang...'; // Default
-                var itemLink = $(this).find('#update-nama-list .searchable-item[data-value="' +
-                    assetNamaValue + '"]');
-                if (itemLink.length) {
-                    selectedItemText = itemLink.text();
-                }
-
-                // Set the hidden input value
-                $(this).find('#update-nama-value').val(assetNamaValue);
-                // Set the visible button text
-                $(this).find('#update-nama-trigger .selected-text').text(selectedItemText);
-
-                // Other update modal population logic (ID, price, stock, image)...
-            });
-
-            // --- Reset Add Modal state on close ---
-            $('#addAssetModal').on('hidden.bs.modal', function() {
-                const container = document.querySelector('#addAssetModal .searchable-dropdown-container');
-                const hiddenInput = container.querySelector('input[type="hidden"]');
-                const selectedTextSpan = container.querySelector('.selected-text');
-                const placeholderItem = container.querySelector('.searchable-item[data-value=""]');
-
-                hiddenInput.value = ""; // Clear hidden value
-                selectedTextSpan.textContent = placeholderItem ? placeholderItem.textContent :
-                    'Pilih...'; // Reset text
-
-                // Also reset other form fields if not done by form.reset()
-                $(this).find('form').trigger('reset'); // Reset other standard fields
-            });
-
         });
+    }
+}
+
+// Function to close all dropdowns except the current one
+function closeAllDropdowns(exceptThisOne = null) {
+    document.querySelectorAll('.searchable-dropdown.open').forEach(openDropdown => {
+        if (openDropdown !== exceptThisOne) {
+            openDropdown.classList.remove('open');
+        }
+    });
+}
+
+// 5. Initialize all searchable dropdowns on the page
+document.querySelectorAll('.searchable-dropdown').forEach(dropdown => {
+    initializeSearchableDropdown(dropdown);
+});
+
+// 6. Close dropdown when clicking outside
+document.addEventListener('click', () => {
+    closeAllDropdowns();
+});
+
+// --- Specific logic for Update Modal (if needed) ---
+// You might need to re-initialize or update the dropdowns
+// when the update modal is shown, especially if the options
+// or selected value changes based on the item being edited.
+
+// Example: Re-initialize when Bootstrap modal 'shown.bs.modal' event fires
+ $('#updateAssetModal').on('shown.bs.modal', function (event) {
+     // Assume you populate the form fields before this, including the original selects
+
+     // Find the dropdowns within *this specific* modal instance
+     const modal = event.target;
+     const namaDropdown = modal.querySelector('#update-nama').closest('.searchable-dropdown');
+     const jenisDropdown = modal.querySelector('#update-jenis').closest('.searchable-dropdown');
+
+     // Re-initialize them to reflect current data
+     if (namaDropdown) {
+          initializeSearchableDropdown(namaDropdown);
+          // Set the initial display based on the hidden select's current value
+          const originalNamaSelect = namaDropdown.querySelector('.original-select-hidden');
+          const displayNama = namaDropdown.querySelector('.dropdown-select-display');
+          const selectedNamaOption = originalNamaSelect.options[originalNamaSelect.selectedIndex];
+          displayNama.textContent = selectedNamaOption ? selectedNamaOption.textContent : 'Pilih Nama Barang...';
+     }
+     if (jenisDropdown) {
+          initializeSearchableDropdown(jenisDropdown);
+           // Set the initial display based on the hidden select's current value
+          const originalJenisSelect = jenisDropdown.querySelector('.original-select-hidden');
+          const displayJenis = jenisDropdown.querySelector('.dropdown-select-display');
+          const selectedJenisOption = originalJenisSelect.options[originalJenisSelect.selectedIndex];
+          displayJenis.textContent = selectedJenisOption ? selectedJenisOption.textContent : 'Pilih Jenis Barang...';
+     }
+ });
+
+});
 
         document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -1108,7 +1168,12 @@
             })
         });
 
-
+        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('searchForm').submit();
+            }
+        });
         // Untuk modal "Tambah"
         document.getElementById("image-upload-container").addEventListener("click", function() {
             document.getElementById("fileInput").click();
