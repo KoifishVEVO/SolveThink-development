@@ -82,38 +82,48 @@ class BarangBaruController extends Controller
             ->where('jenis_barang', $barang->jenis_barang)
             ->get();
 
-        foreach ($barangList as $item) {
-            $item->id_nama_barang = $request->nama_barang;
-            $item->id_gambar_barang = $request->nama_barang;
-            $item->harga_jual_barang = $request->harga_jual_barang;
-            $item->jenis_barang = $request->jenis_barang;
-            $item->save();
-        }
+        try {
+            foreach ($barangList as $item) {
+                $item->id_nama_barang = $request->nama_barang;
+                $item->id_gambar_barang = $request->nama_barang;
+                $item->harga_jual_barang = $request->harga_jual_barang;
+                $item->jenis_barang = $request->jenis_barang;
+                $item->save();
+            }
 
-        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan data yang sama berhasil diperbarui.');
+            return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan data yang sama berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->route('aset_barang.index')->with('error', 'Terjadi kesalahan saat memperbarui data: ' . $e->getMessage());
+        }
     }
 
 
 
 
 
-   public function destroy($id)
+    public function destroy($id)
     {
-
         $barang = AsetBarangBaru::findOrFail($id);
 
-        $namaBarang = $barang->nama_barang;
+        $barangList = AsetBarangBaru::where('id_nama_barang', $barang->id_nama_barang)
+            ->where('id_gambar_barang', $barang->id_gambar_barang)
+            ->where('harga_jual_barang', $barang->harga_jual_barang)
+            ->where('jenis_barang', $barang->jenis_barang)
+            ->get();
 
-        $barangList = AsetBarangBaru::where('nama_barang', $namaBarang)->get();
-
-        foreach ($barangList as $item) {
-            if ($item->gambar_barang && file_exists(public_path('storage/' . $item->gambar_barang))) {
-                unlink(public_path('storage/' . $item->gambar_barang));
-            }
+        if ($barangList->isEmpty()) {
+            return redirect()->route('aset_barang.index')->with('error', 'Tidak ada data yang cocok untuk dihapus.');
         }
-        AsetBarangBaru::where('nama_barang', $namaBarang)->delete();
 
-        return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan nama "' . $namaBarang . '" berhasil dihapus');
+        try {
+            foreach ($barangList as $item) {
+                $item->delete();
+            }
+
+            return redirect()->route('aset_barang.index')->with('success', 'Semua barang dengan data yang sama berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('aset_barang.index')->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+        }
     }
 
     // public function deleteOne($nama_barang)
