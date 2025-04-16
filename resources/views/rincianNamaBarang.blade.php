@@ -189,56 +189,68 @@
         /* --- End Base Styles --- */
 
         #addNamaBarangModal .modal-dialog {
-            max-width: 550px; /* Adjust width as needed, image looks slightly wider than default */
+            max-width: 550px;
+            /* Adjust width as needed, image looks slightly wider than default */
         }
 
         #addNamaBarangModal .modal-body {
-            padding: 1.5rem 2rem; /* Add some horizontal padding */
+            padding: 1.5rem 2rem;
+            /* Add some horizontal padding */
         }
 
         #addNamaBarangModal .form-label,
         #addNamaBarangModal label.font-weight-bold {
-            color: #495057; /* Standard Bootstrap label color */
+            color: #495057;
+            /* Standard Bootstrap label color */
             font-weight: bold !important;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem; /* Slightly smaller label */
+            font-size: 0.9rem;
+            /* Slightly smaller label */
         }
 
         #addNamaBarangModal #add-nama-barang-upload-area {
             /* Size for web view - make it smaller */
-            width: 400px;  /* Adjust as needed */
-            height: 100px; /* Adjust as needed - make it square or rectangular */
+            width: 400px;
+            /* Adjust as needed */
+            height: 100px;
+            /* Adjust as needed - make it square or rectangular */
             background-color: #272780 !important;
             border: none !important;
             border-radius: 5px !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem auto; /* Center the box horizontally and add margin below */
+            margin: 0 auto 1rem auto;
+            /* Center the box horizontally and add margin below */
             cursor: pointer;
-            position: relative; /* Needed for positioning content inside */
-            overflow: hidden; /* Contain the preview image */
+            position: relative;
+            /* Needed for positioning content inside */
+            overflow: hidden;
+            /* Contain the preview image */
         }
 
         #addNamaBarangModal #add-nama-barang-upload-area i.fa-image {
-            font-size: 2.5rem; /* Adjust icon size if needed */
+            font-size: 2.5rem;
+            /* Adjust icon size if needed */
             color: white;
             margin: 0;
         }
 
         #addNamaBarangModal #add-nama-barang-upload-area img#preview-img {
             /* Styles for the preview image inside the upload area */
-             max-width: 100%;
-             max-height: 100%;
-             object-fit: contain; /* Scale image nicely */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* Scale image nicely */
         }
 
         /* Filename text (optional styling) */
         #addNamaBarangModal #add-nama-barang-filename {
-             font-size: 0.8rem;
-             text-align: center;
-             color: #6c757d;
-             word-break: break-all; /* Prevent long filenames from breaking layout */
+            font-size: 0.8rem;
+            text-align: center;
+            color: #6c757d;
+            word-break: break-all;
+            /* Prevent long filenames from breaking layout */
         }
 
         /* Ensure preview div is hidden by default */
@@ -248,20 +260,27 @@
         /* } */
 
         #addNamaBarangModal .modal-body .form-control {
-            margin-bottom: 1rem; /* Space below input */
+            margin-bottom: 1rem;
+            /* Space below input */
         }
 
         #addNamaBarangModal .modal-footer {
-            justify-content: flex-end; /* Align buttons to the right for web view */
-            padding: 1rem 2rem; /* Match body horizontal padding */
-            gap: 0.5rem; /* Add a small gap between buttons */
+            justify-content: flex-end;
+            /* Align buttons to the right for web view */
+            padding: 1rem 2rem;
+            /* Match body horizontal padding */
+            gap: 0.5rem;
+            /* Add a small gap between buttons */
         }
 
         #addNamaBarangModal .modal-footer .btn {
-             width: auto; /* Buttons take their natural width */
-             padding: 0.5rem 1rem; /* Standard button padding */
-             font-size: 0.9rem;
-             font-weight: bold; /* Keep consistent */
+            width: auto;
+            /* Buttons take their natural width */
+            padding: 0.5rem 1rem;
+            /* Standard button padding */
+            font-size: 0.9rem;
+            font-weight: bold;
+            /* Keep consistent */
         }
 
 
@@ -373,14 +392,14 @@
 
             #addNamaBarangModal #add-nama-barang-upload-area i.fa-image {
                 font-size: 2.5rem;
-              
+
                 color: white;
                 margin: 0;
             }
 
             /* Keep the separate preview area hidden initially */
             #addNamaBarangModal #add-nama-barang-preview {
-                
+
                 /* Ensure it stays hidden */
             }
 
@@ -748,50 +767,44 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
-                                        @php
-                                            $exampleItems = [
-                                                ['id' => 1, 'nama' => 'Barang 01'],
-                                                ['id' => 2, 'nama' => 'Barang 02'],
-                                                ['id' => 3, 'nama' => 'Barang 03'],
-                                                ['id' => 4, 'nama' => 'Barang 04'],
-                                                ['id' => 5, 'nama' => 'Barang 05'],
-                                                // Add more rows if needed
-                                            ];
-                                        @endphp
 
-                                        @foreach ($exampleItems as $item)
+                                        @foreach ($barang as $b)
                                             <tr>
-                                                <td>{{ $item['id'] }}</td>
+                                                <td>{{ $b->id }}</td>
                                                 <td>
                                                     {{-- Image Placeholder --}}
                                                     <div class="image-placeholder">
                                                         <i class="fa fa-image"></i>
                                                     </div>
                                                 </td>
-                                                <td>{{ $item['nama'] }}</td>
+                                                <td>{{ $b->nama_barang }}</td>
                                                 <td class="px-3 text-center">
                                                     <div class="d-inline-block">
                                                         {{-- Rincian Button --}}
                                                         <button class="btn btn-sm rincian-btn m-1"
-                                                            data-id="{{ $item['id'] }}" {{-- Placeholder id --}}
-                                                            data-nama="{{ $item['nama'] }}" {{-- Placeholder name --}}
+                                                            data-id="{{ $b->id }}" {{-- Placeholder id --}}
+                                                            data-nama="{{ $b->nama_barang }}" {{-- Placeholder name --}}
                                                             {{-- Add data-gambar if you have it --}} data-toggle="modal"
+                                                            data-gambar="{{ asset('storage/uploads/' . $b->gambar_barang) }}"
                                                             data-target="#rincianNamaBarangModal" {{-- Target Rincian Modal --}}>
                                                             <i class="fa fa-eye"></i> Rincian
                                                         </button>
                                                         {{-- Update Button --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
-                                                            data-id="{{ $item['id'] }}" {{-- Placeholder id --}}
-                                                            data-nama="{{ $item['nama'] }}" {{-- Placeholder name --}}
-                                                            data-url="#" {{-- Placeholder URL for update --}} data-toggle="modal"
+                                                            data-id="{{ $b->id }}" {{-- Placeholder id --}}
+                                                            data-nama="{{ $b->nama_barang }}" {{-- Placeholder name --}}
+                                                            data-url="{{ route('nama_barang.update', $b->id) }}"
+                                                            data-gambar="{{ asset('storage/uploads/' . $b->gambar_barang) }}"
+                                                            {{-- Placeholder URL for update --}} data-toggle="modal"
                                                             data-target="#updateNamaBarangModal" {{-- Target Update Modal --}}>
                                                             Update
                                                         </button>
                                                         {{-- Hapus Button --}}
                                                         <button class="btn btn-sm btn-danger m-1 btn-delete"
-                                                            data-id="{{ $item['id'] }}" {{-- Placeholder id --}}
-                                                            data-nama="{{ $item['nama'] }}" {{-- Placeholder name --}}
-                                                            data-url="#" {{-- Placeholder URL for delete --}} data-toggle="modal"
+                                                            data-id="{{ $b->id }}" {{-- Placeholder id --}}
+                                                            data-nama="{{ $b->nama_barang }}" {{-- Placeholder name --}}
+                                                            data-url="{{ route('nama_barang.destroy', $b->id) }}"
+                                                            {{-- Placeholder URL for delete --}} data-toggle="modal"
                                                             data-target="#deleteNamaBarangModal" {{-- Target Delete Modal --}}>
                                                             Hapus
                                                         </button>
@@ -843,60 +856,61 @@
 
     <!-- add -->
     <div class="modal fade" id="addNamaBarangModal" tabindex="-1" aria-labelledby="addNamaBarangModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="addNamaBarangModalLabel">Tambah Nama Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
-            <form action="{{ route('nama_barang.store') }}" method="POST" id="addNamaBarangForm"
-                enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title" id="addNamaBarangModalLabel">Tambah Nama Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="{{ route('nama_barang.store') }}" method="POST" id="addNamaBarangForm"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
 
-                    {{-- Upload Foto Barang Section --}}
-                    <div class="form-group mb-3">
-                        <label class="form-label fw-bold">Upload Foto Barang</label>
-                        <div id="add-nama-barang-upload-area"
-                         class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2"
-                         onclick="document.getElementById('add-nama-barang-gambar-input').click();">
-                            
-                         <img src="#" alt="Preview" class="img-thumbnail d-none img-fluid" id="preview-img">
+                        {{-- Upload Foto Barang Section --}}
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Upload Foto Barang</label>
+                            <div id="add-nama-barang-upload-area"
+                                class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2"
+                                onclick="document.getElementById('add-nama-barang-gambar-input').click();">
 
-                            <i class="fa fa-image fa-3x text-white" id="add-default-icon"></i> 
+                                <img src="#" alt="Preview" class="img-thumbnail d-none img-fluid"
+                                    id="preview-img">
+
+                                <i class="fa fa-image fa-3x text-white" id="add-default-icon"></i>
+                            </div>
+                            <input type="file" class="d-none" id="add-nama-barang-gambar-input" name="gambar_barang"
+                                accept="image/*">
+                            {{-- Show filename (Optional) --}}
+                            <p class="mt-1 mb-0 text-muted small text-center" id="add-nama-barang-filename"></p>
+
+                            {{-- skrg preview di uploadarea --}}
+                            {{-- <div id="add-nama-barang-preview" class="mt-2 text-center" style="display: none;"> --}}
+                            {{--     <img src="#" alt="Preview" class="img-thumbnail" id="preview-img"/> --}}
+                            {{--     <p class="mt-1 mb-0 text-muted small" id="add-nama-barang-filename"></p> --}}
+                            {{-- </div> --}}
                         </div>
-                        <input type="file" class="d-none" id="add-nama-barang-gambar-input" name="gambar_barang"
-                            accept="image/*">
-                        {{-- Show filename (Optional) --}}
-                        <p class="mt-1 mb-0 text-muted small text-center" id="add-nama-barang-filename"></p>
 
-                        {{-- skrg preview di uploadarea --}}
-                        {{-- <div id="add-nama-barang-preview" class="mt-2 text-center" style="display: none;"> --}}
-                        {{--     <img src="#" alt="Preview" class="img-thumbnail" id="preview-img"/> --}}
-                        {{--     <p class="mt-1 mb-0 text-muted small" id="add-nama-barang-filename"></p> --}}
-                        {{-- </div> --}}
+                        {{-- Nama Barang Input --}}
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                            <input type="text" name="nama_barang" id="add-nama-barang" class="form-control"
+                                placeholder="Masukkan Nama Barang..." required>
+                        </div>
+
                     </div>
-
-                    {{-- Nama Barang Input --}}
-                    <div class="form-group mb-3">
-                        <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                        <input type="text" name="nama_barang" id="add-nama-barang" class="form-control"
-                            placeholder="Masukkan Nama Barang..." required>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit"
+                            class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
-                        data-dismiss="modal">Batal</button>
-                    <button type="submit"
-                        class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- update -->
     <div class="modal fade" id="updateNamaBarangModal" tabindex="-1" aria-labelledby="updateNamaBarangModalLabel"
@@ -948,7 +962,7 @@
                                     </button>
                                     {{-- Hidden File Input - Triggered by clicking placeholder or Ganti button --}}
                                     <input type="file" class="d-none" id="update-nama-barang-gambar-input"
-                                        name="gambar_barang_update" accept="image/*">
+                                        name="gambar_barang" accept="image/*">
                                 </div>
                             </div>
                             {{-- Optional: Display selected new file name --}}
@@ -1045,43 +1059,144 @@
                         data-dismiss="modal">Tutup</button>
                 </div>
             </div>
+            @if (session('success'))
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        showConfirmButton: false,
+                        timer: 1500 // Mengatur waktu untuk menutup alert secara otomatis (dalam milidetik)
+                    });
+                </script>
+            @endif
         </div>
     </div>
 @endsection
 
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
-    const input = document.getElementById('add-nama-barang-gambar-input');
-    const previewImg = document.getElementById('preview-img');
-    const fileNameLabel = document.getElementById('add-nama-barang-filename');
-    const defaultIcon = document.getElementById('add-default-icon');
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('add-nama-barang-gambar-input');
+        const previewImg = document.getElementById('preview-img');
+        const fileNameLabel = document.getElementById('add-nama-barang-filename');
+        const defaultIcon = document.getElementById('add-default-icon');
 
-    input.addEventListener('change', function (event) {
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          previewImg.src = e.target.result;
-          previewImg.classList.remove('d-none');
-          defaultIcon.classList.add('d-none');
-          fileNameLabel.textContent = input.files[0].name;
-        };
-        reader.readAsDataURL(input.files[0]);
-      } else {
-        previewImg.src = '#';
-        previewImg.classList.add('d-none');
-        defaultIcon.classList.remove('d-none');
-        fileNameLabel.textContent = '';
-      }
+        input.addEventListener('change', function(event) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.classList.remove('d-none');
+                    defaultIcon.classList.add('d-none');
+                    fileNameLabel.textContent = input.files[0].name;
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewImg.src = '#';
+                previewImg.classList.add('d-none');
+                defaultIcon.classList.remove('d-none');
+                fileNameLabel.textContent = '';
+            }
+        });
+
+        // Reset on modal hide
+        $('#addNamaBarangModal').on('hidden.bs.modal', function() {
+            input.value = '';
+            previewImg.src = '#';
+            previewImg.classList.add('d-none');
+            defaultIcon.classList.remove('d-none');
+            fileNameLabel.textContent = '';
+        });
+
+        const rincianButtons = document.querySelectorAll('.rincian-btn');
+
+        rincianButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const nama = this.getAttribute('data-nama');
+                const gambar = this.getAttribute('data-gambar');
+
+                document.getElementById('rincian-id-barang').textContent = id;
+                document.getElementById('rincian-nama-barang').textContent = nama;
+
+                const defaultView = document.getElementById('rincian-default-view');
+                const imageView = document.getElementById('rincian-image-view');
+                const previewImg = document.getElementById('rincian-preview-img');
+
+                if (gambar) {
+                    previewImg.src = gambar;
+                    imageView.style.display = 'block';
+                    defaultView.style.display = 'none';
+                } else {
+                    imageView.style.display = 'none';
+                    defaultView.style.display = 'block';
+                }
+            });
+        });
+
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+        const deleteForm = document.getElementById('deleteNamaBarangForm');
+        const deleteNameDisplay = document.getElementById('delete-nama-barang-name');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const namaBarang = this.getAttribute('data-nama');
+                const actionUrl = this.getAttribute('data-url');
+
+                deleteForm.setAttribute('action', actionUrl);
+                deleteNameDisplay.textContent = namaBarang;
+            });
+        });
+
+        const updateButtons = document.querySelectorAll('.btn-update');
+        const updateForm = document.getElementById('updateNamaBarangForm');
+        const updateNamaBarangInput = document.getElementById('update-nama-barang');
+        const updateImagePreview = document.getElementById('update-preview-img');
+        const updateCurrentFilename = document.getElementById('update-current-filename');
+        const updateFileInput = document.getElementById('update-nama-barang-gambar-input');
+        const updateDefaultIcon = document.getElementById('update-default-icon');
+
+        updateButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const idBarang = this.getAttribute('data-id');
+                const namaBarang = this.getAttribute('data-nama');
+                const imageUrl = this.getAttribute('data-gambar');
+                const actionUrl = this.getAttribute('data-url');
+
+                // Set form action URL
+                updateForm.setAttribute('action', actionUrl);
+
+                // Fill in the current data
+                updateNamaBarangInput.value = namaBarang;
+                updateCurrentFilename.textContent = imageUrl ? imageUrl.split('/').pop() :
+                    'Tidak ada gambar';
+
+                // Show current image or placeholder
+                if (imageUrl) {
+                    updateImagePreview.style.display = 'block';
+                    updateImagePreview.src = imageUrl;
+                    updateDefaultIcon.style.display = 'none';
+                } else {
+                    updateImagePreview.style.display = 'none';
+                    updateDefaultIcon.style.display = 'block';
+                }
+            });
+        });
+
+        // When user selects a new file
+        updateFileInput.addEventListener('change', function(e) {
+            const fileName = e.target.files[0].name;
+            document.getElementById('update-new-filename-display').textContent = fileName;
+            document.getElementById('update-new-filename-display').style.display = 'block';
+
+            // Display the new image preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                updateImagePreview.style.display = 'block';
+                updateImagePreview.src = e.target.result;
+                updateDefaultIcon.style.display = 'none';
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
     });
-
-    // Reset on modal hide
-    $('#addNamaBarangModal').on('hidden.bs.modal', function () {
-      input.value = '';
-      previewImg.src = '#';
-      previewImg.classList.add('d-none');
-      defaultIcon.classList.remove('d-none');
-      fileNameLabel.textContent = '';
-    });
-  });
-
 </script>
