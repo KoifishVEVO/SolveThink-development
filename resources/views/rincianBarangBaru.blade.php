@@ -699,7 +699,7 @@
                                                         </button>
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ ucfirst(strtolower($item->nama_barang)) }}"
+                                                            data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
@@ -892,49 +892,15 @@
 
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <!-- image upload  -->
-                        <div id="update-image-container" class="modal-color position-relative mb-4"
-                            style="border: 2px dashed #ccc; border-radius: 5px; padding: 20px;
-                                    background-color: #f8f9fa; height: 200px; overflow: hidden;
-                                    cursor: pointer; position: relative; text-align: center;">
 
-
-                            <div id="upload-button-view"
-                                style="display: flex; flex-direction: column; align-items: center;
-                                        justify-content: center; position: absolute; top: 50%; left: 50%;
-                                        transform: translate(-50%, -50%); text-align: center; width: 100%;">
-                                <i class="fa fa-image" style="font-size: 24px; margin-bottom: 10px; color: #FFFFFF"></i>
-                                <div style="font-size: 16px; font-weight: bold; color: #FFFFFF">Click to Select Image</div>
-                                <input type="file" id="updateFileInput" name="gambar_barang" style="display: none;"
-                                    accept="image/*">
-                            </div>
-
-                            <!-- Image Preview -->
-                            <div id="update-image-preview"
-                                style="display: none; height: 200px; width: 100%; position: relative; padding: 0; margin-bottom: 4px;">
-                                <img id="update-preview-img" src="" alt="Preview"
-                                    style="height: 100%; width: 100%; object-fit: contain; position: absolute; top: -20px; left: 0;">
-                                <!-- <h6 id="update-change-btn" class="position-absolute"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            style="top: 10px; right: 10px; cursor: pointer; z-index: 10; background-color: rgba(255,255,255,0.7); padding: 3px 6px; border-radius: 3px;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Click to Change Image
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </h6> -->
-                            </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="update-nama">Nama Barang</label>
+                            <select name="nama_barang" id="update-nama" class="form-control" required>
+                                @foreach ($data_nama_barang as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                @endforeach
+                            </select>
                         </div>
-
-
-
-
-                        <select name="nama_barang" id="update-nama" class="form-control" required>
-                            <option value="">Pilih Nama Barang...</option>
-                            <option value="Sensor" {{ $item->namaBarang->nama_barang == 'Sensor' ? 'selected' : '' }}>
-                                Sensor</option>
-                            <option value="Actuator" {{ $item->namaBarang->nama_barang == 'Actuator' ? 'selected' : '' }}>
-                                Actuator</option>
-                            <option value="Power" {{ $item->namaBarang->nama_barang == 'Power' ? 'selected' : '' }}>Power
-                            </option>
-                            <option value="Equipment"
-                                {{ $item->namaBarang->nama_barang == 'Equipment' ? 'selected' : '' }}>Equipment</option>
-                        </select>
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
                         <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
@@ -1160,24 +1126,6 @@
             })
         });
 
-        // Untuk modal "Update"
-        document.getElementById("update-image-container").addEventListener("click", function() {
-            document.getElementById("updateFileInput").click();
-        });
-
-        document.getElementById("updateFileInput").addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById("update-preview-img").src = event.target.result;
-                    document.getElementById("update-image-preview").style.display = "block";
-                    document.getElementById("update-button-view").style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
         // Tombol Delete - Isi otomatis modal dan set form action
         document.querySelectorAll('.btn-delete').forEach(button => {
             button.addEventListener('click', function() {
@@ -1202,7 +1150,6 @@
         // Tombol Update - Isi otomatis modal
         document.querySelectorAll('.btn-update').forEach(button => {
             button.addEventListener('click', function() {
-                // Ambil data dari tombol
                 const id = this.dataset.id;
                 const nama = this.dataset.nama;
                 const harga = this.dataset.harga;
@@ -1210,24 +1157,16 @@
                 const gambar = this.dataset.gambar;
                 const url = this.dataset.url;
 
-                // Isi form di modal
+                console.log(jenis)
                 document.getElementById('update-id').value = id;
                 const selectNama = document.getElementById('update-nama');
+                selectNama.value = nama;
 
-                // Ambil value yang dipilih
-                const selectedValue = selectNama.value;
-                console.log("Value terpilih:", selectedValue);
-
-                // Ambil teks yang terlihat (label)
-                const selectedText = selectNama.options[selectNama.selectedIndex].text;
-                console.log("Teks ditampilkan:", selectedText);
                 document.getElementById('update-harga').value = harga;
                 document.getElementById('update-jenis').value = jenis;
 
-                // Set form action ke URL update
                 document.querySelector('#updateAssetModal form').action = url;
 
-                // Preview gambar
                 const previewImg = document.getElementById('update-preview-img');
                 const previewWrapper = document.getElementById('update-image-preview');
                 const uploadView = document.getElementById('update-button-view');
@@ -1242,6 +1181,7 @@
                 }
             });
         });
+
 
         // document.addEventListener("click", function(event) {
         //     if (event.target.closest(".btn-tambah")) {
