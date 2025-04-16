@@ -7,9 +7,16 @@ use App\Models\NamaBarang;
 
 class NamaBarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barang = NamaBarang::all();
+        $search = $request->input('search');
+
+        if ($search) {
+            $barang = NamaBarang::where('nama_barang', 'like', "%{$search}%")->paginate(10);
+        } else {
+            $barang = NamaBarang::paginate(10);
+        }
+
         return view('rincianNamaBarang', compact('barang'));
     }
 

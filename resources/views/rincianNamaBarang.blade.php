@@ -740,11 +740,13 @@
                                     class="dataTables_filter d-flex justify-content-md-end align-items-center">
                                     <label class="mr-2 mb-0">Search:
                                         {{-- Placeholder: Link form to backend search --}}
-                                        <form id="searchForm" method="GET" action="#" class="d-inline">
+                                        <form id="searchForm" method="GET" action="{{ route('nama_barang.index') }}"
+                                            class="d-inline">
                                             {{-- Placeholder Action --}}
-                                            <input type="search" name="search" value=""
-                                                class="form-control form-control-sm d-inline" aria-controls="dataTable"
-                                                placeholder="">
+                                            <input type="search" name="search" value="{{ request()->search }}"
+                                                class="form-control
+                                                form-control-sm d-inline"
+                                                aria-controls="dataTable" placeholder="">
                                         </form>
                                     </label>
                                     {{-- Link button to Add Modal --}}
@@ -824,27 +826,40 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" role="status" aria-live="polite">
-                                    {{-- Placeholder pagination info - Update with backend data --}}
-                                    Showing 1 to 5 of 5 entries {{-- Adjusted example count --}}
-                                    {{-- Example: Showing {{ $namaBarangItems->firstItem() }} to {{ $namaBarangItems->lastItem() }} of {{ $namaBarangItems->total() }} entries --}}
+                                    Showing {{ $barang->firstItem() }} to {{ $barang->lastItem() }} of
+                                    {{ $barang->total() }} entries
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination justify-content-end">
-                                        {{-- Placeholder pagination - Remove/replace when using Laravel pagination --}}
-                                        <li class="paginate_button page-item disabled"><a href="#"
-                                                class="page-link">Previous</a></li>
-                                        <li class="paginate_button page-item active"><a href="#"
-                                                class="page-link">1</a></li>
-                                        <li class="paginate_button page-item disabled"><a href="#"
-                                                class="page-link">Next</a></li>
-                                        {{-- Example for Laravel Pagination: --}}
-                                        {{-- {{ $namaBarangItems->links('pagination::bootstrap-4') }} --}}
+
+                                        {{-- Tombol Previous --}}
+                                        <li
+                                            class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
+                                            <a href="{{ $barang->previousPageUrl() ?? '#' }}"
+                                                class="page-link">Previous</a>
+                                        </li>
+
+                                        {{-- Nomor halaman --}}
+                                        @foreach ($barang->getUrlRange(1, $barang->lastPage()) as $page => $url)
+                                            <li
+                                                class="paginate_button page-item {{ $barang->currentPage() == $page ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                            </li>
+                                        @endforeach
+
+                                        {{-- Tombol Next --}}
+                                        <li
+                                            class="paginate_button page-item {{ !$barang->hasMorePages() ? 'disabled' : '' }}">
+                                            <a href="{{ $barang->nextPageUrl() ?? '#' }}" class="page-link">Next</a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
+
 
                     </div>
                 </div>
