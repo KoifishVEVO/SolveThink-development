@@ -776,7 +776,7 @@
                                                 <td>
                                                     {{-- Image Placeholder --}}
                                                     <div class="image-placeholder">
-                                                        <img src="{{ asset('storage/uploads' . $b->gambar_barang) }}"
+                                                        <img src="{{ asset('storage/uploads/' . $b->gambar_barang) }}"
                                                             alt="Gambar" class="img-fluid"
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
