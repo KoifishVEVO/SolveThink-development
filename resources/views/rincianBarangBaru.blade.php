@@ -681,7 +681,7 @@
 
                                                         <button class="btn btn-sm btn-danger m-1 btn-kurangi"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->id_nama_barang }}" {{-- ID-nya, bukan nama --}}
+                                                            data-nama="{{ $item->id_nama_barang }}"
                                                             data-gambar="{{ $item->id_gambar_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}">
