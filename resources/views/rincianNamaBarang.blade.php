@@ -774,7 +774,8 @@
                                                 <td>
                                                     {{-- Image Placeholder --}}
                                                     <div class="image-placeholder">
-                                                        <i class="fa fa-image"></i>
+                                                        <img src="{{ asset('storage/uploads/' . $b->gambar_barang) }}"
+                                                            alt="" width="200px">
                                                     </div>
                                                 </td>
                                                 <td>{{ $b->nama_barang }}</td>
