@@ -183,7 +183,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
-                                                        <img src="{{ asset('storage/uploads' . $item->namaBarang->gambar_barang) }}"
+                                                        <img src="{{ asset('storage/uploads/' . $item->namaBarang->gambar_barang) }}"
                                                             alt="Gambar" class="img-fluid"
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
