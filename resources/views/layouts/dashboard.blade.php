@@ -269,7 +269,7 @@
             </div>
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link " href="{{ '/rincianNamaBarang' }}">
+                <a class="nav-link " href="{{ '/dashboard' }}">
                     <i class="fas fa-list text-gray-400"></i>
                     <span>Rincian Nama Barang</span>
                 </a>
