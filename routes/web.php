@@ -19,15 +19,15 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
 
-Route::get('dashboard', function() {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
+// Route::get('dashboard', function() {
+//     return view('dashboard');
+// })->name('dashboard')->middleware('auth');
 
 
 // dashboard
-Route::get('/dashboard', function() {
-    return view('rincianNamaBarang');
-})->name('dashboard')->middleware('auth');
+// Route::get('/dashboard', function() {
+//     return view('rincianNamaBarang');
+// })->name('dashboard')->middleware('auth');
 
 
 // rincian barang baru
@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
 // routes/web.php
 
 Route::middleware('auth')->group(function () {
-    Route::get('/rincianNamaBarang', [NamaBarangController::class, 'index'])->name('nama_barang.index');
+    Route::get('/dashboard', [NamaBarangController::class, 'index'])->name('nama_barang.index');
     Route::post('/rincianNamaBarang', [NamaBarangController::class, 'store'])->name('nama_barang.store');
     Route::put('/rincianNamaBarang/{id}', [NamaBarangController::class, 'update'])->name('nama_barang.update');
     Route::delete('/rincianNamaBarang/{id}', [NamaBarangController::class, 'destroy'])->name('nama_barang.destroy');
