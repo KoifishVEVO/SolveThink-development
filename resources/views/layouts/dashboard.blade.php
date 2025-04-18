@@ -27,6 +27,49 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* --- Existing Base Styles (Keep As Is) --- */
+
+
+        /* Sidebar Toggle */
+#sidebarToggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    /* Remove the FontAwesome icon content */
+    &::after {
+        content: ''; /* Remove existing FontAwesome content */
+        background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}');
+        background-repeat: no-repeat; /* Prevent the image from repeating */
+        background-position: center; /* Center the image within the button */
+        background-size: contain; /* Ensure the image fits well */
+        width: 100%; /* Ensure it fills the button */
+        height: 100%; /* Ensure it fills the button */
+        display: block; /* Ensure the image behaves like a block element */
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+/* Toggled State */
+.sidebar.toggled #sidebarToggle::after {
+    content: ''; /* Remove the icon completely in toggled state */
+    background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}'); /* Use the same or another icon */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+}
+
+
         .sidebar.toggled .nav-item .nav-link span {
             display: none;
         }

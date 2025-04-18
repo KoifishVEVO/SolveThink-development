@@ -46,6 +46,58 @@
 
         }
 
+        /* Stok barang control */
+        .stock-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            border-radius: 999px; 
+        }
+
+        .stock-control .btn-minus,
+        .stock-control .btn-plus {
+            background-color: #272780;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stock-control .btn-minus {
+            border-top-left-radius: 999px;
+            border-bottom-left-radius: 999px;
+        }
+
+        .stock-control .btn-plus {
+            border-top-right-radius: 999px;
+            border-bottom-right-radius: 999px;
+        }
+
+        .stock-control .btn {
+            padding: 0.25rem 0.5rem;
+            /* Smaller padding for + / - buttons */
+            line-height: 1;
+            /* Adjust line height */
+            flex-shrink: 0;
+            /* Prevent buttons from shrinking */
+        }
+
+        .stock-quantity {
+            margin: 0 0.5rem;
+            /* Space around the number */
+            font-weight: bold;
+            min-width: 30px;
+            /* Ensure space for number */
+            text-align: center;
+        }
+
         /* for the updown thing, havent figured it out */
         .entries {
             appearance: none;
@@ -170,17 +222,19 @@
                                             <th>ID</th>
                                             <th>Gambar Barang</th>
                                             <th>Nama Barang</th>
+                                            <th>Jenis Barang</th>
                                             <th>Harga Jual Barang</th>
                                             <th>Stok Barang</th>
-                                            <th>Jenis Barang</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
-                                        <!-- Sample row -->
                                         @foreach ($barang as $item)
                                             <tr>
+                                                <!-- ID -->
                                                 <td>{{ $loop->iteration }}</td>
+                        
+                                                <!-- Gambar -->
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
                                                         <img src="{{ asset('storage/uploads/' . $item->namaBarang->gambar_barang) }}"
@@ -188,15 +242,35 @@
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
                                                 </td>
+                        
+                                                <!-- Nama -->
                                                 <td>{{ $item->namaBarang->nama_barang }}</td>
-                                                <td>Rp
-                                                    {{ number_format($item->harga_jual_barang, 0, ',', '.') }}
-                                                </td>
-                                                <td>{{ $item->jumlah }}</td>
+                        
+                                                <!-- Jenis -->
                                                 <td>{{ $item->jenis_barang ?? '-' }}</td>
-                                                <td class="px-3">
-
-                                                    <div class="d-flex flex-wrap justify-content-center">
+                        
+                                                <!-- Harga -->
+                                                <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
+                        
+                                                <!-- Stok -->
+                                                <td class="text-center stock-column">
+                                                    <div class="stock-control">
+                                                        <!-- Minus Button -->
+                                                        <button class="btn btn-sm btn-danger m-1 btn-kurangi"
+                                                            data-id="{{ $item->id }}"
+                                                            data-nama="{{ $item->id_nama_barang }}"
+                                                            data-gambar="{{ $item->id_gambar_barang }}"
+                                                            data-harga="{{ $item->harga_jual_barang }}"
+                                                            data-jenis="{{ $item->jenis_barang }}">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+                        
+                                                        <!-- Stock Number -->
+                                                        <span class="stock-quantity" data-stock-id="{{ $item->id }}">
+                                                            {{ $item->jumlah }}
+                                                        </span>
+                        
+                                                        <!-- Plus Button -->
                                                         <button class="btn btn-sm btn-success m-1 btn-tambah"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->id }}"
@@ -204,25 +278,25 @@
                                                             data-jenis="{{ $item->jenis_barang }}">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
-
-                                                        <button class="btn btn-sm btn-danger m-1 btn-kurangi"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->id_nama_barang }}" {{-- ID-nya, bukan nama --}}
-                                                            data-gambar="{{ $item->id_gambar_barang }}"
-                                                            data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}">
-                                                            <i class="fa fa-minus"></i>
-                                                        </button>
-
+                                                    </div>
+                                                </td>
+                        
+                                                <!-- Aksi -->
+                                                <td class="action-column">
+                                                    <div class="d-flex flex-nowrap justify-content-center">
+                                                        <!-- Rincian -->
                                                         <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
-                                                            data-toggle="modal" data-target="#rincianAssetModal">
-                                                            <i class="fa fa-eye"></i> Rincian
+                                                            data-toggle="modal" data-target="#rincianAssetModal"
+                                                            title="Rincian">
+                                                            <i class="fa fa-eye"></i>
                                                         </button>
+                        
+                                                        <!-- Update -->
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->id }}"
@@ -230,15 +304,21 @@
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ asset('storage/' . $item->gambar_barang) }}"
                                                             data-url="{{ route('aset_barang_bekas.update', $item->id) }}"
-                                                            data-toggle="modal" data-target="#updateAssetModal">
-                                                            Update
+                                                            data-toggle="modal" data-target="#updateAssetModal"
+                                                            title="Update">
+                                                            <i class="fa fa-pencil-alt"></i>
                                                         </button>
+                        
+                                                        <!-- Hapus -->
                                                         <button class="btn btn-sm btn-danger m-1 btn-delete"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->nama_barang }}"
+                                                            data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-url="{{ route('aset_barang_bekas.destroy', $item->id) }}"
                                                             data-toggle="modal"
-                                                            data-target="#deleteAssetModal">Hapus</button>
+                                                            data-target="#deleteAssetModal"
+                                                            title="Hapus">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -247,6 +327,7 @@
                                 </table>
                             </div>
                         </div>
+                        
 
                         <!-- pagination -->
                         <div class="row">
