@@ -94,6 +94,35 @@
             justify-content: center !important;
         }
 
+        .btn-kurangi,
+.btn-tambah {
+    background-color: #272780;
+    color: white;
+    font-size: 1rem;   /* <-- REDUCED from 1.2rem */
+    font-weight: bold;
+    width: 35px;       /* <-- OPTIONAL: Reduced width */
+    height: 30px;      /* <-- REDUCED from 40px */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    line-height: 1; /* Helps center icons vertically */
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.btn-kurangi {
+    /* Match container radius on the left */
+    border-radius: 8px 0 0 8px;
+}
+
+.btn-tambah {
+    /* Match container radius on the right */
+     border-radius: 0 8px 8px 0;
+}
+
 
 
         .rincian-btn i {
@@ -379,11 +408,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 120px;
-            border-radius: 999px; 
+            min-height: 30px; /* <-- REDUCED from 40px */
+            /* min-width: 120px; /* You might adjust or remove this if needed */
+            border: 1px solid #ccc;
+            border-radius: 8px; /* <-- Slightly reduced radius */
+            overflow: hidden;
+            width: fit-content;
         }
 
-        .stock-control .btn-minus,
+        ..stock-control .btn-minus{
+            background-color: #272780;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .stock-control .btn-plus {
             background-color: #272780;
             color: white;
@@ -418,13 +463,13 @@
         }
 
         .stock-quantity {
-            margin: 0 0.5rem;
-            /* Space around the number */
-            font-weight: bold;
-            min-width: 30px;
-            /* Ensure space for number */
-            text-align: center;
-        }
+    margin: 0 0.5rem; /* Space around the number */
+    font-weight: bold;
+    min-width: 25px;  /* Adjusted min-width */
+    text-align: center;
+    line-height: 30px; /* Match new button height */
+    font-size: 0.9rem; /* Optional: adjust font size */
+}
 
         .table tbody td.stock-column,
         .table tbody td.action-column {
@@ -438,11 +483,9 @@
             justify-content: center;
         }
 
-        /* Ensure consistent button sizing in action column if needed */
-        .action-column .btn {
-            white-space: nowrap;
-            /* Prevent text wrapping on buttons */
-        }
+        .action-column {
+    min-width: 180px; /* or more if needed */
+}
 
         @media (max-width: 767.98px) {
             /* Target mobile screens */
@@ -744,9 +787,10 @@
                                                 </td>
                                                 <!-- Stok -->
                                                 <td class="text-center stock-column"> 
+                                                    <div class="stock-control-container">
                                                     <div class="stock-control">
                                                         {{-- Minus Button --}}
-                                                        <button class="btn btn-sm btn-danger m-1 btn-kurangi"
+                                                        <button class="btn-kurangi"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->id_nama_barang }}"
                                                             data-gambar="{{ $item->id_gambar_barang }}"
@@ -762,7 +806,7 @@
                                                         {{-- Added data-stock-id for potential JS updates --}}
 
                                                         {{-- Plus Button --}}
-                                                        <button class="btn btn-sm btn-success m-1 btn-tambah"
+                                                        <button class="btn-tambah"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
@@ -770,23 +814,24 @@
                                                             <i class="fa fa-plus"></i>
                                                         </button>
                                                     </div>
+                                                </div>
                                                 </td>
                                                 <!-- Aksi -->
                                                 <td class="action-column"> 
                                                     <div class="d-flex flex-nowrap justify-content-center">
                                                         {{-- Added flex-nowrap --}}
                                                         {{-- Rincian Button (Optional - Not in image, but in original code) --}}
-                                                        <button class="btn btn-sm rincian-btn m-1"
+                                                        {{-- <button class="btn  rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang ?? 'N/A' }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ $item->namaBarang && $item->namaBarang->gambar_barang ? asset('storage/uploads/' . $item->namaBarang->gambar_barang) : '' }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal"
-                                                            title="Rincian"> {{-- Added title --}}
-                                                            <i class="fa fa-eye"></i> {{-- Show only icon or Icon + Text --}}
-                                                            {{-- Rincian --}} {{-- Text removed to match image button style closer --}}
-                                                        </button>
+                                                            title="Rincian"> 
+                                                            <i class="fa fa-eye"></i> 
+                                                
+                                                        </button> --}}
 
                                                         {{-- Update Button --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
@@ -799,8 +844,8 @@
                                                             data-url="{{ route('aset_barang.update', $item->id) }}"
                                                             data-toggle="modal" data-target="#updateAssetModal"
                                                             title="Update"> {{-- Added title --}}
-                                                            {{-- Update --}} {{-- Text removed to match image button style closer --}}
-                                                            <i class="fa fa-pencil-alt"></i> {{-- Example using FontAwesome --}}
+                                                            Update
+                                                          
                                                         </button>
 
                                                         {{-- Delete Button --}}
@@ -810,8 +855,8 @@
                                                             data-url="{{ route('aset_barang.destroy', $item->id) }}"
                                                             data-toggle="modal" data-target="#deleteAssetModal"
                                                             title="Hapus"> {{-- Added title --}}
-                                                            {{-- Hapus --}} {{-- Text removed to match image button style closer --}}
-                                                            <i class="fa fa-trash"></i> {{-- Example using FontAwesome --}}
+                                                            Hapus
+                                                            
                                                         </button>
                                                     </div>
                                                 </td>

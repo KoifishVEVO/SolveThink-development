@@ -28,6 +28,35 @@
             justify-content: center !important;
         }
 
+        .btn-kurangi,
+.btn-tambah {
+    background-color: #272780;
+    color: white;
+    font-size: 1rem;   /* <-- REDUCED from 1.2rem */
+    font-weight: bold;
+    width: 35px;       /* <-- OPTIONAL: Reduced width */
+    height: 30px;      /* <-- REDUCED from 40px */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    line-height: 1; /* Helps center icons vertically */
+    cursor: pointer; /* Add pointer cursor */
+}
+
+        .btn-kurangi {
+    /* Match container radius on the left */
+    border-radius: 8px 0 0 8px;
+}
+
+.btn-tambah {
+    /* Match container radius on the right */
+     border-radius: 0 8px 8px 0;
+}
+
 
 
         .rincian-btn i {
@@ -47,15 +76,32 @@
         }
 
         /* Stok barang control */
+        /* Stok barang control */
         .stock-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px; /* <-- REDUCED from 40px */
+    /* min-width: 120px; /* You might adjust or remove this if needed */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* <-- Slightly reduced radius */
+    overflow: hidden;
+    width: fit-content;
+}
+
+        ..stock-control .btn-minus{
+            background-color: #272780;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 120px;
-            border-radius: 999px; 
         }
-
-        .stock-control .btn-minus,
         .stock-control .btn-plus {
             background-color: #272780;
             color: white;
@@ -90,12 +136,24 @@
         }
 
         .stock-quantity {
-            margin: 0 0.5rem;
-            /* Space around the number */
-            font-weight: bold;
-            min-width: 30px;
-            /* Ensure space for number */
-            text-align: center;
+    margin: 0 0.5rem; /* Space around the number */
+    font-weight: bold;
+    min-width: 25px;  /* Adjusted min-width */
+    text-align: center;
+    line-height: 30px; /* Match new button height */
+    font-size: 0.9rem; /* Optional: adjust font size */
+}
+
+        .table tbody td.stock-column,
+        .table tbody td.action-column {
+            vertical-align: middle;
+            /* Vertically center content */
+        }
+
+        .table tbody td.action-column .d-flex {
+            flex-wrap: nowrap !important;
+            /* Prevent action buttons from wrapping if possible */
+            justify-content: center;
         }
 
         /* for the updown thing, havent figured it out */
@@ -114,6 +172,203 @@
 
         .modal-color {
             background-color: #272780 !important;
+        }
+
+        /* Pagination */
+
+        /* Style the main pagination container */
+        .dataTables_paginate .pagination {
+            border: 1px solid #272780;
+            border-radius: 0.3rem;
+            display: inline-flex;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+
+        .dataTables_paginate .pagination .page-item+.page-item .page-link {
+            margin-left: 0;
+        }
+
+        /* Style individual links (default state) */
+        .dataTables_paginate .pagination .page-link {
+            border: black !important;
+            color: #272780;
+            background-color: transparent;
+            padding: 0.5rem 0.85rem;
+            transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+        }
+
+        /* Hover state for non-active, non-disabled links */
+        .dataTables_paginate .pagination .page-item:not(.active):not(.disabled) .page-link:hover {
+            background-color: #e9ecef;
+            color: #272780;
+        }
+
+        /* Remove default focus outline if desired */
+        .dataTables_paginate .pagination .page-link:focus {
+            box-shadow: none;
+        }
+
+        /* Active page style */
+        .dataTables_paginate .pagination .page-item.active .page-link {
+            background-color: #272780 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+
+        /* Disabled page style (Previous/Next) */
+        .dataTables_paginate .pagination .page-item.disabled .page-link {
+            color: #adb5bd !important;
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        .batal-btn {
+            color: #272780 !important;
+            border-color: #272780 !important;
+        }
+
+
+
+        /* Dropdown */
+
+        /* --- Custom Searchable Dropdown Styles --- */
+        .searchable-dropdown {
+            position: relative;
+            /* Needed for positioning the options */
+        }
+
+        /* Style for the element that displays the selected value and toggles the dropdown */
+        .dropdown-select-display {
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+            /* Adjust padding for arrow */
+            width: 100%;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            background-color: #fff;
+            cursor: pointer;
+            display: block;
+            /* Make it block level like a select */
+            position: relative;
+            /* For the arrow */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: calc(1.5em + 0.75rem + 2px);
+            /* Match form-control height */
+            line-height: 1.5;
+            /* Match form-control line-height */
+        }
+
+        /* Add a dropdown arrow */
+        .dropdown-select-display::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: translateY(-50%) rotate(45deg);
+            -webkit-transform: translateY(-50%) rotate(45deg);
+        }
+
+        /* Container for the search box and options list */
+        .dropdown-options-container {
+            display: none;
+            /* Hidden by default */
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ced4da;
+            border-top: none;
+            /* Avoid double border */
+            border-radius: 0 0 0.25rem 0.25rem;
+            width: 100%;
+            z-index: 1051;
+            /* Ensure it's above modal content but potentially below modal itself if needed */
+            max-height: 200px;
+            /* Limit height and allow scrolling */
+            overflow-y: auto;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        /* Make options container visible when dropdown is open */
+        .searchable-dropdown.open .dropdown-options-container {
+            display: block;
+        }
+
+        /* Style for the search input area */
+        .dropdown-search-wrapper {
+            padding: 5px 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            /* Light background for search */
+        }
+
+        .dropdown-search-wrapper .search-icon {
+            margin-right: 8px;
+            color: #6c757d;
+            /* Icon color */
+        }
+
+        .dropdown-search-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 5px 0;
+            /* Minimal padding */
+            background-color: transparent;
+            /* Inherit wrapper background */
+            font-size: 0.9em;
+        }
+
+        /* Style for the list holding the options */
+        .dropdown-options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Style for individual options */
+        .dropdown-options-list li {
+            padding: 8px 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dropdown-options-list li:hover {
+            background-color: #e9ecef;
+            /* Hover effect */
+        }
+
+        .dropdown-options-list li.selected {
+            background-color: #007bff;
+            /* Highlight selected */
+            color: white;
+        }
+
+        .dropdown-options-list li.hidden {
+            display: none;
+            /* Hide filtered-out options */
+        }
+
+        /* Keep original select hidden but available for JS */
+        .original-select-hidden {
+            position: absolute;
+            left: -9999px;
+            /* Move off-screen */
+            opacity: 0;
+            pointer-events: none;
+            /* Prevent interaction */
+            height: 0;
+            width: 0;
         }
 
         /* Additional styles for consistent modal appearance */
@@ -254,9 +509,10 @@
                         
                                                 <!-- Stok -->
                                                 <td class="text-center stock-column">
+                                                    <div class="stock-control-container">
                                                     <div class="stock-control">
                                                         <!-- Minus Button -->
-                                                        <button class="btn btn-sm btn-danger m-1 btn-kurangi"
+                                                        <button class="btn-kurangi"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->id_nama_barang }}"
                                                             data-gambar="{{ $item->id_gambar_barang }}"
@@ -271,7 +527,7 @@
                                                         </span>
                         
                                                         <!-- Plus Button -->
-                                                        <button class="btn btn-sm btn-success m-1 btn-tambah"
+                                                        <button class="btn-tambah"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->id }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
@@ -279,13 +535,14 @@
                                                             <i class="fa fa-plus"></i>
                                                         </button>
                                                     </div>
+                                                </div>
                                                 </td>
                         
                                                 <!-- Aksi -->
                                                 <td class="action-column">
                                                     <div class="d-flex flex-nowrap justify-content-center">
                                                         <!-- Rincian -->
-                                                        <button class="btn btn-sm rincian-btn m-1"
+                                                        {{-- <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
@@ -294,7 +551,7 @@
                                                             data-toggle="modal" data-target="#rincianAssetModal"
                                                             title="Rincian">
                                                             <i class="fa fa-eye"></i>
-                                                        </button>
+                                                        </button> --}}
                         
                                                         <!-- Update -->
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
@@ -306,7 +563,8 @@
                                                             data-url="{{ route('aset_barang_bekas.update', $item->id) }}"
                                                             data-toggle="modal" data-target="#updateAssetModal"
                                                             title="Update">
-                                                            <i class="fa fa-pencil-alt"></i>
+                                                            Update
+                                                         
                                                         </button>
                         
                                                         <!-- Hapus -->
@@ -317,7 +575,8 @@
                                                             data-toggle="modal"
                                                             data-target="#deleteAssetModal"
                                                             title="Hapus">
-                                                            <i class="fa fa-trash"></i>
+                                                            Hapus
+                                                         
                                                         </button>
                                                     </div>
                                                 </td>

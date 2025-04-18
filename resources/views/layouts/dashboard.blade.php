@@ -30,53 +30,70 @@
 
 
         /* Sidebar Toggle */
-#sidebarToggle {
-    width: 2.5rem;
-    height: 2.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    cursor: pointer;
-
-    /* Remove the FontAwesome icon content */
-    &::after {
-        content: ''; /* Remove existing FontAwesome content */
+        #sidebarToggle {
+        /* Apply the custom image as the background */
         background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}');
-        background-repeat: no-repeat; /* Prevent the image from repeating */
-        background-position: center; /* Center the image within the button */
-        background-size: contain; /* Ensure the image fits well */
-        width: 100%; /* Ensure it fills the button */
-        height: 100%; /* Ensure it fills the button */
-        display: block; /* Ensure the image behaves like a block element */
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain; /* Use 'contain' to fit the image, or 'cover' to fill */
+
+        /* Override default SB Admin button styles */
+        background-color: transparent !important; /* Remove default bg color (important needed to override template) */
+        border: none !important; /* Remove default border (important needed) */
+        outline: none !important; /* Remove focus outline */
+
+        /* Keep desired size/layout properties */
+        width: 2.5rem;
+        height: 2.5rem;
+        text-align: center; /* Center the background image */
+        margin-bottom: 1rem;
+        cursor: pointer;
+
+        /* Prevent any potential text/icon rendering inside */
+        font-size: 0; /* Hide any potential font-based content */
+        color: transparent; /* Hide text color */
     }
 
-    &:hover {
-        text-decoration: none;
+    /* Remove the default Font Awesome icon from the ::after pseudo-element */
+    /* This applies to both normal and toggled states */
+    #sidebarToggle::after,
+    .sidebar.toggled #sidebarToggle::after {
+        content: '' !important; /* Remove Font Awesome content */
+        display: none !important; /* Hide the pseudo-element entirely */
     }
 
-    &:focus {
-        outline: none;
+    /* Optional: Style hover/focus states if needed */
+    #sidebarToggle:hover {
+        opacity: 0.85; /* Example: slightly fade on hover */
+        /* text-decoration: none; is default behavior */
     }
-}
 
-/* Toggled State */
-.sidebar.toggled #sidebarToggle::after {
-    content: ''; /* Remove the icon completely in toggled state */
-    background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}'); /* Use the same or another icon */
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    width: 100%;
-    height: 100%;
-}
+    #sidebarToggle:focus {
+       /* outline: none !important; already applied above */
+       box-shadow: none; /* Remove any default focus shadow if needed */
+    }
 
 
-        .sidebar.toggled .nav-item .nav-link span {
-            display: none;
-        }
+    /* --- Toggled State (Sidebar itself) --- */
+    /* Your existing styles for how the sidebar behaves when toggled */
+    .sidebar.toggled {
+        /* Default SB Admin toggled state might set width: 0 !important; */
+        /* Keep your existing styles for toggled sidebar items here */
+        /* e.g., hiding text spans */
+         .nav-item .nav-link span,
+         .sidebar-heading span,
+         .welcome-text {
+             display: none;
+         }
+         .sidebar-heading-icon,
+         .welcome-icon {
+             display: block; /* Or inline-block as needed */
+             /* Add necessary centering/margin for icons in toggled state */
+             text-align: center;
+             margin: 0 auto 0.5rem auto; /* Example */
+         }
+    }
 
-        .sidebar.toggled .sidebar-heading span {
-            display: none;
-        }
 
         .sidebar-color {
             background-color: #272780;
