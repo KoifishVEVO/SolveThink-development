@@ -29,33 +29,38 @@
         }
 
         .btn-kurangi,
-.btn-tambah {
-    background-color: #272780;
-    color: white;
-    font-size: 1rem;   /* <-- REDUCED from 1.2rem */
-    font-weight: bold;
-    width: 35px;       /* <-- OPTIONAL: Reduced width */
-    height: 30px;      /* <-- REDUCED from 40px */
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease;
-    line-height: 1; /* Helps center icons vertically */
-    cursor: pointer; /* Add pointer cursor */
-}
+        .btn-tambah {
+            background-color: #272780;
+            color: white;
+            font-size: 1rem;
+            /* <-- REDUCED from 1.2rem */
+            font-weight: bold;
+            width: 35px;
+            /* <-- OPTIONAL: Reduced width */
+            height: 30px;
+            /* <-- REDUCED from 40px */
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+            line-height: 1;
+            /* Helps center icons vertically */
+            cursor: pointer;
+            /* Add pointer cursor */
+        }
 
         .btn-kurangi {
-    /* Match container radius on the left */
-    border-radius: 8px 0 0 8px;
-}
+            /* Match container radius on the left */
+            border-radius: 8px 0 0 8px;
+        }
 
-.btn-tambah {
-    /* Match container radius on the right */
-     border-radius: 0 8px 8px 0;
-}
+        .btn-tambah {
+            /* Match container radius on the right */
+            border-radius: 0 8px 8px 0;
+        }
 
 
 
@@ -79,22 +84,25 @@
         .stock-control-container {
             display: flex;
             justify-content: center;
-            align-items: center; 
+            align-items: center;
             height: 100%;
         }
-        .stock-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 30px; /* <-- REDUCED from 40px */
-    /* min-width: 120px; /* You might adjust or remove this if needed */
-    border: 1px solid #ccc;
-    border-radius: 8px; /* <-- Slightly reduced radius */
-    overflow: hidden;
-    width: fit-content;
-}
 
-        ..edstock-control .btn-minus{
+        .stock-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 30px;
+            /* <-- REDUCED from 40px */
+            /* min-width: 120px; /* You might adjust or remove this if needed */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            /* <-- Slightly reduced radius */
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        ..edstock-control .btn-minus {
             background-color: #272780;
             color: white;
             font-size: 1.5rem;
@@ -107,6 +115,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .stock-control .btn-plus {
             background-color: #272780;
             color: white;
@@ -141,20 +150,26 @@
         }
 
         .stock-quantity {
-    margin: 0 0.5rem; /* Space around the number */
-    font-weight: bold;
-    min-width: 25px;  /* Adjusted min-width */
-    text-align: center;
-    line-height: 30px; /* Match new button height */
-    font-size: 0.9rem; /* Optional: adjust font size */
-}
+            margin: 0 0.5rem;
+            /* Space around the number */
+            font-weight: bold;
+            min-width: 25px;
+            /* Adjusted min-width */
+            text-align: center;
+            line-height: 30px;
+            /* Match new button height */
+            font-size: 0.9rem;
+            /* Optional: adjust font size */
+        }
 
         .table tbody td.stock-column,
         .table tbody td.action-column {
             vertical-align: middle;
             /* Vertically center content */
         }
-        .stock-column, .stock-column-container{
+
+        .stock-column,
+        .stock-column-container {
             text-align: center;
         }
 
@@ -496,7 +511,7 @@
                                             <tr>
                                                 <!-- ID -->
                                                 <td>{{ $loop->iteration }}</td>
-                        
+
                                                 <!-- Gambar -->
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
@@ -505,47 +520,46 @@
                                                             style="max-width: 100px; height: auto;">
                                                     </div>
                                                 </td>
-                        
+
                                                 <!-- Nama -->
                                                 <td>{{ $item->namaBarang->nama_barang }}</td>
-                        
+
                                                 <!-- Jenis -->
                                                 <td>{{ $item->jenis_barang ?? '-' }}</td>
-                        
+
                                                 <!-- Harga -->
                                                 <td>Rp {{ number_format($item->harga_jual_barang, 0, ',', '.') }}</td>
-                        
+
                                                 <!-- Stok -->
                                                 <td class="text-center stock-column">
                                                     <div class="stock-control-container">
-                                                    <div class="stock-control">
-                                                        <!-- Minus Button -->
-                                                        <button class="btn-kurangi"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->id_nama_barang }}"
-                                                            data-gambar="{{ $item->id_gambar_barang }}"
-                                                            data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}">
-                                                            <i class="fa fa-minus"></i>
-                                                        </button>
-                        
-                                                        <!-- Stock Number -->
-                                                        <span class="stock-quantity" data-stock-id="{{ $item->id }}">
-                                                            {{ $item->jumlah }}
-                                                        </span>
-                        
-                                                        <!-- Plus Button -->
-                                                        <button class="btn-tambah"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->namaBarang->id }}"
-                                                            data-harga="{{ $item->harga_jual_barang }}"
-                                                            data-jenis="{{ $item->jenis_barang }}">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
+                                                        <div class="stock-control">
+                                                            <!-- Minus Button -->
+                                                            <button class="btn-kurangi" data-id="{{ $item->id }}"
+                                                                data-nama="{{ $item->id_nama_barang }}"
+                                                                data-gambar="{{ $item->id_gambar_barang }}"
+                                                                data-harga="{{ $item->harga_jual_barang }}"
+                                                                data-jenis="{{ $item->jenis_barang }}">
+                                                                <i class="fa fa-minus"></i>
+                                                            </button>
+
+                                                            <!-- Stock Number -->
+                                                            <span class="stock-quantity"
+                                                                data-stock-id="{{ $item->id }}">
+                                                                {{ $item->jumlah }}
+                                                            </span>
+
+                                                            <!-- Plus Button -->
+                                                            <button class="btn-tambah" data-id="{{ $item->id }}"
+                                                                data-nama="{{ $item->namaBarang->id }}"
+                                                                data-harga="{{ $item->harga_jual_barang }}"
+                                                                data-jenis="{{ $item->jenis_barang }}">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 </td>
-                        
+
                                                 <!-- Aksi -->
                                                 <td class="action-column">
                                                     <div class="d-flex flex-nowrap justify-content-center">
@@ -556,12 +570,13 @@
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ asset('storage/' . $item->namaBarang->gambar_barang) }}"
+                                                            data-desc="{{ $item->namaBarang->deskripsi }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal"
                                                             title="Rincian">
-                                                            <i class="fa fa-eye"></i> 
+                                                            <i class="fa fa-eye"></i>
                                                             Rincian
                                                         </button>
-                        
+
                                                         <!-- Update -->
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
@@ -573,19 +588,18 @@
                                                             data-toggle="modal" data-target="#updateAssetModal"
                                                             title="Update">
                                                             Update
-                                                         
+
                                                         </button>
-                        
+
                                                         <!-- Hapus -->
                                                         <button class="btn btn-sm btn-danger m-1 btn-delete"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang }}"
                                                             data-url="{{ route('aset_barang_bekas.destroy', $item->id) }}"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteAssetModal"
+                                                            data-toggle="modal" data-target="#deleteAssetModal"
                                                             title="Hapus">
                                                             Hapus
-                                                         
+
                                                         </button>
                                                     </div>
                                                 </td>
@@ -595,7 +609,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+
 
                         <!-- pagination -->
                         <div class="row">
@@ -740,18 +754,15 @@
                         </p>
                         <p class="mb-3">
                             <strong style="color: #555; font-size: 16px;">Link Deskripsi</strong><br>
-                            
-                            <a href="#" {{-- Href will be set by JavaScript --}}
-                               id="rincian-link-deskripsi"
-                               target="_blank"  {{-- Opens the link in a new tab --}}
-                               class="text-primary" 
-                               style="display: none;" {{-- Hide initially if no link --}}
-                               rel="noopener noreferrer"> 
-                                Link 
-                                <i class="fas fa-external-link-alt fa-xs"></i> 
+
+                            <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
+                                {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide initially if no link --}}
+                                rel="noopener noreferrer">
+                                Link
+                                <i class="fas fa-external-link-alt fa-xs"></i>
                             </a>
                             {{-- Text to show if no link is available --}}
-                             <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
+                            <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
                         </p>
                     </div>
                 </div>
@@ -892,8 +903,11 @@
                 const harga = this.dataset.harga;
                 const jenis = this.dataset.jenis;
                 const gambar = this.dataset.gambar;
+                const desc = this.dataset.desc;
 
                 // console.log(stok)
+                const linkElement = document.getElementById('rincian-link-deskripsi');
+                const noLinkText = document.getElementById('rincian-no-link');
 
                 $('#rincianAssetModal').on('shown.bs.modal', function() {
                     // Isi data ke modal setelah modal benar-benar ditampilkan
@@ -905,6 +919,15 @@
                     const rincianImageView = document.getElementById('rincian-image-view');
                     const rincianDefaultView = document.getElementById('rincian-default-view');
                     const rincianPreviewImg = document.getElementById('rincian-preview-img');
+
+                    if (desc) {
+                        linkElement.href = desc;
+                        linkElement.style.display = 'inline';
+                        noLinkText.style.display = 'none';
+                    } else {
+                        linkElement.style.display = 'none';
+                        noLinkText.style.display = 'inline';
+                    }
 
                     if (gambar) {
                         rincianPreviewImg.src = gambar;

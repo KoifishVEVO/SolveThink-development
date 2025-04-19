@@ -790,7 +790,9 @@
                                                             data-nama="{{ $b->nama_barang }}" {{-- Placeholder name --}}
                                                             {{-- Add data-gambar if you have it --}} data-toggle="modal"
                                                             data-gambar="{{ asset('storage/uploads/' . $b->gambar_barang) }}"
-                                                            data-target="#rincianNamaBarangModal" {{-- Target Rincian Modal --}}>
+                                                            data-target="#rincianNamaBarangModal" {{-- Target Rincian Modal --}}
+                                                            data-desc="{{ $b->deskripsi }}">
+
                                                             <i class="fa fa-eye"></i> Rincian
                                                         </button>
                                                         {{-- Update Button --}}
@@ -800,6 +802,7 @@
                                                             data-url="{{ route('nama_barang.update', $b->id) }}"
                                                             data-gambar="{{ asset('storage/uploads/' . $b->gambar_barang) }}"
                                                             {{-- Placeholder URL for update --}} data-toggle="modal"
+                                                            data-desc="{{ $b->deskripsi }}"
                                                             data-target="#updateNamaBarangModal" {{-- Target Update Modal --}}>
                                                             Update
                                                         </button>
@@ -920,7 +923,7 @@
                         {{-- Link Deskripsi --}}
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-deskripsi-nama-barang">Link Deskripsi</label>
-                            <input type="text" name="deskripsi_barang" id="add-deskripsi-nama-barang" class="form-control"
+                            <input type="text" name="deskripsi" id="add-deskripsi-nama-barang" class="form-control"
                                 required>
                         </div>
 
@@ -1004,8 +1007,8 @@
                         {{-- deskripsi --}}
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="update-deskripsi-nama-barang">Link Deskripsi</label>
-                            <input type="text" name="deskripsi_barang" id="update-deskripsi-nama-barang" class="form-control"
-                                required>
+                            <input type="text" name="deskripsi" id="update-deskripsi-nama-barang"
+                                class="form-control" required>
                         </div>
 
                     </div>
@@ -1086,18 +1089,15 @@
                         {{-- Link --}}
                         <p class="mb-3">
                             <strong style="color: #6c757d;">Link Deskripsi</strong><br>
-                            
-                            <a href="#" {{-- Href will be set by JavaScript --}}
-                               id="rincian-link-deskripsi"
-                               target="_blank"  {{-- Opens the link in a new tab --}}
-                               class="text-primary" 
-                               style="display: none;" {{-- Hide initially if no link --}}
-                               rel="noopener noreferrer"> 
-                                Link 
-                                <i class="fas fa-external-link-alt fa-xs"></i> 
+
+                            <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
+                                {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide initially if no link --}}
+                                rel="noopener noreferrer">
+                                Link
+                                <i class="fas fa-external-link-alt fa-xs"></i>
                             </a>
                             {{-- Text to show if no link is available --}}
-                             <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
+                            <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
                         </p>
                     </div>
                 </div>
@@ -1162,6 +1162,10 @@
                 const id = this.getAttribute('data-id');
                 const nama = this.getAttribute('data-nama');
                 const gambar = this.getAttribute('data-gambar');
+                const desc = this.getAttribute('data-desc');
+
+                const linkElement = document.getElementById('rincian-link-deskripsi');
+                const noLinkText = document.getElementById('rincian-no-link');
 
                 document.getElementById('rincian-id-barang').textContent = id;
                 document.getElementById('rincian-nama-barang').textContent = nama;
@@ -1177,6 +1181,14 @@
                 } else {
                     imageView.style.display = 'none';
                     defaultView.style.display = 'block';
+                }
+                if (desc) {
+                    linkElement.href = desc;
+                    linkElement.style.display = 'inline';
+                    noLinkText.style.display = 'none';
+                } else {
+                    linkElement.style.display = 'none';
+                    noLinkText.style.display = 'inline';
                 }
             });
         });
@@ -1202,6 +1214,7 @@
         const updateCurrentFilename = document.getElementById('update-current-filename');
         const updateFileInput = document.getElementById('update-nama-barang-gambar-input');
         const updateDefaultIcon = document.getElementById('update-default-icon');
+        const updateDesc = document.getElementById('update-deskripsi-nama-barang');
 
         updateButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -1209,12 +1222,14 @@
                 const namaBarang = this.getAttribute('data-nama');
                 const imageUrl = this.getAttribute('data-gambar');
                 const actionUrl = this.getAttribute('data-url');
+                const descBarang = this.getAttribute('data-desc');
 
                 // Set form action URL
                 updateForm.setAttribute('action', actionUrl);
 
                 // Fill in the current data
                 updateNamaBarangInput.value = namaBarang;
+                updateDesc.value = descBarang;
                 updateCurrentFilename.textContent = imageUrl ? imageUrl.split('/').pop() :
                     'Tidak ada gambar';
 
@@ -1248,6 +1263,4 @@
     });
 
     //Link
-    
-
 </script>

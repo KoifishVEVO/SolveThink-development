@@ -25,6 +25,7 @@ class NamaBarangController extends Controller
         $request->validate([
             'nama_barang' => 'required|string',
             'gambar_barang' => 'nullable|image',
+            'deskripsi' => 'nullable|string'
         ]);
 
         $fileName = null;
@@ -62,6 +63,7 @@ class NamaBarangController extends Controller
         NamaBarang::create([
             'nama_barang' => $request->nama_barang,
             'gambar_barang' => $fileName,
+            'deskripsi' => $request->deskripsi
         ]);
 
         return redirect()->back()->with('success', 'Barang ditambahkan.');
@@ -74,7 +76,8 @@ class NamaBarangController extends Controller
 
         $request->validate([
             'nama_barang' => 'required|string',
-            'gambar_barang' => 'nullable|image', // max 2MB
+            'gambar_barang' => 'nullable|image',
+            'deskripsi' => 'nullable|string'
         ]);
 
         $fileName = $barang->gambar_barang; // Menggunakan gambar lama jika tidak ada gambar baru
@@ -118,6 +121,7 @@ class NamaBarangController extends Controller
         $barang->update([
             'nama_barang' => $request->nama_barang,
             'gambar_barang' => $fileName,
+            'deskripsi' => $request->deskripsi
         ]);
 
         return redirect()->back()->with('success', 'Barang berhasil diperbarui.');
