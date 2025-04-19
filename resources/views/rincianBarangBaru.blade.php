@@ -968,6 +968,7 @@
                             <select name="jenis_barang" id="jenis_barang" class="form-control" required>
                                 <option value="">Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
+                                <option value="Microcontroller">Microcontroller</option>
                                 <option value="Actuator">Actuator</option>
                                 <option value="Power">Power</option>
                                 <option value="Equipment">Equipment</option>
@@ -1087,6 +1088,7 @@
                             <select name="jenis_barang" id="update-jenis" class="form-control" required>
                                 <option value="">Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
+                                <option value="Microcontroller">Microcontroller</option>
                                 <option value="Actuator">Actuator</option>
                                 <option value="Power">Power</option>
                                 <option value="Equipment">Equipment</option>
