@@ -208,7 +208,7 @@
             .sidebar-toggler-container {
              display: block !important; /* Override Bootstrap's d-none */
              position: absolute;       /* Position relative to #accordionSidebar */
-             bottom: 10rem;           /* << ADJUST THIS VALUE (e.g., 1rem, 2rem) TO MOVE VERTICALLY >> */
+             bottom: 13rem;           /* << ADJUST THIS VALUE (e.g., 1rem, 2rem) TO MOVE VERTICALLY >> */
              left: 0;                  /* Stretch across sidebar width */
              right: 0;
              text-align: center;       /* Center the button horizontally */

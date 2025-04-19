@@ -675,9 +675,9 @@
                         <input type="number" name="harga_jual_barang" class="form-control mb-3" required>
 
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
+                            <label class="font-weight-bold" for="add-nama-barang">Jenis Barang</label>
                             <select name="jenis_barang" id="add-nama-barang" class="form-control" required>
-                                <option value="" disabled selected>Pilih Nama Barang...</option>
+                                <option value="" disabled selected>Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Actuator">Actuator</option>
                                 <option value="Power">Power</option>
@@ -795,7 +795,7 @@
                             required>
 
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="jenis_barang">Jenis</label>
+                            <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
                             <select name="jenis_barang" id="update-jenis" class="form-control" required>
                                 <option value="">Pilih Nama Barang...</option>
                                 <option value="Sensor">Sensor</option>

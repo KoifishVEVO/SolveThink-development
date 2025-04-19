@@ -1074,9 +1074,9 @@
                             required>
 
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold" for="jenis_barang">Nama Barang</label>
+                            <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
                             <select name="jenis_barang" id="update-jenis" class="form-control" required>
-                                <option value="">Pilih Nama Barang...</option>
+                                <option value="">Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Actuator">Actuator</option>
                                 <option value="Power">Power</option>
