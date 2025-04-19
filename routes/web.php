@@ -18,6 +18,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show')->
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show')->middleware('guest');
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Route::get('dashboard', function() {
 //     return view('dashboard');

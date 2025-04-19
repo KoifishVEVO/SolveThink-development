@@ -31,67 +31,84 @@
 
         /* Sidebar Toggle */
         #sidebarToggle {
-        /* Apply the custom image as the background */
-        background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}'); /* Make sure this path is correct */
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%; /* Adjust size of icon within the button */
+            /* Apply the custom image as the background */
+            background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}');
+            /* Make sure this path is correct */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            /* Adjust size of icon within the button */
 
-        /* Shape, Size, and Base Appearance */
-        display: inline-block; /* Allows text-align: center on parent to work */
-        width: 40px;   /* Consistent size (approx 2.5rem) */
-        height: 40px;  /* Consistent size */
-        border-radius: 50% !important; /* Force circular shape */
-        border: none !important;       /* Remove border */
-        background-color: transparent !important; /* Start transparent */
-        outline: none !important;      /* Remove focus outline */
-        box-shadow: none !important;   /* Remove any focus shadow */
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out; /* Smooth transition for hover */
+            /* Shape, Size, and Base Appearance */
+            display: inline-block;
+            /* Allows text-align: center on parent to work */
+            width: 40px;
+            /* Consistent size (approx 2.5rem) */
+            height: 40px;
+            /* Consistent size */
+            border-radius: 50% !important;
+            /* Force circular shape */
+            border: none !important;
+            /* Remove border */
+            background-color: transparent !important;
+            /* Start transparent */
+            outline: none !important;
+            /* Remove focus outline */
+            box-shadow: none !important;
+            /* Remove any focus shadow */
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            /* Smooth transition for hover */
 
-        /* Hide any potential text inside */
-        font-size: 0;
-        color: transparent;
-    }
+            /* Hide any potential text inside */
+            font-size: 0;
+            color: transparent;
+        }
 
-    /* Remove the default Font Awesome icon from the ::after pseudo-element */
-    /* This applies to both normal and toggled states */
-    .sidebar.toggled #sidebarToggle {
-    background-image: url('{{ asset('assets/images/sbarToggleIconActive.png') }}') !important;
-}
+        /* Remove the default Font Awesome icon from the ::after pseudo-element */
+        /* This applies to both normal and toggled states */
+        .sidebar.toggled #sidebarToggle {
+            background-image: url('{{ asset('assets/images/sbarToggleIconActive.png') }}') !important;
+        }
 
-    /* Optional: Style hover/focus states if needed */
-    #sidebarToggle:hover {
-        opacity: 0.85; /* Example: slightly fade on hover */
-        background-color: rgba(200, 200, 200, 0.2) !important;
-        /* text-decoration: none; is default behavior */
-    }
+        /* Optional: Style hover/focus states if needed */
+        #sidebarToggle:hover {
+            opacity: 0.85;
+            /* Example: slightly fade on hover */
+            background-color: rgba(200, 200, 200, 0.2) !important;
+            /* text-decoration: none; is default behavior */
+        }
 
-    #sidebarToggle:focus {
-       /* outline: none !important; already applied above */
-       box-shadow: none; /* Remove any default focus shadow if needed */
-    }
+        #sidebarToggle:focus {
+            /* outline: none !important; already applied above */
+            box-shadow: none;
+            /* Remove any default focus shadow if needed */
+        }
 
 
-    /* --- Toggled State (Sidebar itself) --- */
-    /* Your existing styles for how the sidebar behaves when toggled */
-    .sidebar.toggled {
-        /* Default SB Admin toggled state might set width: 0 !important; */
-        /* Keep your existing styles for toggled sidebar items here */
-        /* e.g., hiding text spans */
-         .nav-item .nav-link span,
-         .sidebar-heading span,
-         .welcome-text {
-             display: none;
-         }
-         .sidebar-heading-icon,
-         .welcome-icon {
-             display: block; /* Or inline-block as needed */
-             /* Add necessary centering/margin for icons in toggled state */
-             text-align: center;
-             margin: 0 auto 0.5rem auto; /* Example */
-         }
-    }
+        /* --- Toggled State (Sidebar itself) --- */
+        /* Your existing styles for how the sidebar behaves when toggled */
+        .sidebar.toggled {
+
+            /* Default SB Admin toggled state might set width: 0 !important; */
+            /* Keep your existing styles for toggled sidebar items here */
+            /* e.g., hiding text spans */
+            .nav-item .nav-link span,
+            .sidebar-heading span,
+            .welcome-text {
+                display: none;
+            }
+
+            .sidebar-heading-icon,
+            .welcome-icon {
+                display: block;
+                /* Or inline-block as needed */
+                /* Add necessary centering/margin for icons in toggled state */
+                text-align: center;
+                margin: 0 auto 0.5rem auto;
+                /* Example */
+            }
+        }
 
 
         .sidebar-color {
@@ -185,8 +202,9 @@
         }
 
         .sidebar-toggler-container {
-         display: none; /* Hidden by default (mobile-first) */
-     }
+            display: none;
+            /* Hidden by default (mobile-first) */
+        }
 
         /* 3. Sticky Sidebar (Desktop) */
         @media (min-width: 768px) {
@@ -206,14 +224,20 @@
             }
 
             .sidebar-toggler-container {
-             display: block !important; /* Override Bootstrap's d-none */
-             position: absolute;       /* Position relative to #accordionSidebar */
-             bottom: 13rem;           /* << ADJUST THIS VALUE (e.g., 1rem, 2rem) TO MOVE VERTICALLY >> */
-             left: 0;                  /* Stretch across sidebar width */
-             right: 0;
-             text-align: center;       /* Center the button horizontally */
-             z-index: 10;              /* Keep it above other static sidebar content */
-         }
+                display: block !important;
+                /* Override Bootstrap's d-none */
+                position: absolute;
+                /* Position relative to #accordionSidebar */
+                bottom: 13rem;
+                /* << ADJUST THIS VALUE (e.g., 1rem, 2rem) TO MOVE VERTICALLY >> */
+                left: 0;
+                /* Stretch across sidebar width */
+                right: 0;
+                text-align: center;
+                /* Center the button horizontally */
+                z-index: 10;
+                /* Keep it above other static sidebar content */
+            }
 
             /* Desktop Toggled Icon */
             .sidebar.toggled .welcome-icon {
@@ -510,7 +534,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="{{ '/login' }}">Logout</a>
+                        <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                     </div>
                 </div>
             </div>
