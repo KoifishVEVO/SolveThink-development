@@ -820,8 +820,7 @@
                                                 <td class="action-column"> 
                                                     <div class="d-flex flex-nowrap justify-content-center">
                                                         {{-- Added flex-nowrap --}}
-                                                        {{-- Rincian Button (Optional - Not in image, but in original code) --}}
-                                                        {{-- <button class="btn  rincian-btn m-1"
+                                                        <button class="btn  rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang ?? 'N/A' }}"
                                                             data-harga="{{ $item->harga_jual_barang }}"
@@ -830,8 +829,9 @@
                                                             data-toggle="modal" data-target="#rincianAssetModal"
                                                             title="Rincian"> 
                                                             <i class="fa fa-eye"></i> 
+                                                            Rincian
                                                 
-                                                        </button> --}}
+                                                        </button>
 
                                                         {{-- Update Button --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
@@ -1009,6 +1009,22 @@
                         <p class="mb-4">
                             <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
                             <span style="color: #777; font-size: 14px;" id="rincian-jenis">jenis barang</span>
+                        </p>
+                        {{-- Link --}}
+                        <p class="mb-3">
+                            <strong style="color: #555; font-size: 16px;">Link Deskripsi</strong><br>
+                            
+                            <a href="#" {{-- Href will be set by JavaScript --}}
+                               id="rincian-link-deskripsi"
+                               target="_blank"  {{-- Opens the link in a new tab --}}
+                               class="text-primary" 
+                               style="display: none;" {{-- Hide initially if no link --}}
+                               rel="noopener noreferrer"> 
+                                Link 
+                                <i class="fas fa-external-link-alt fa-xs"></i> 
+                            </a>
+                            {{-- Text to show if no link is available --}}
+                             <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
                         </p>
                     </div>
                 </div>

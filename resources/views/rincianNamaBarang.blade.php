@@ -210,7 +210,7 @@
 
         #addNamaBarangModal #add-nama-barang-upload-area {
             /* Size for web view - make it smaller */
-            width: 400px;
+            width: 100%;
             /* Adjust as needed */
             height: 100px;
             /* Adjust as needed - make it square or rectangular */
@@ -917,6 +917,13 @@
                                 placeholder="Masukkan Nama Barang..." required>
                         </div>
 
+                        {{-- Link Deskripsi --}}
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="add-deskripsi-nama-barang">Link Deskripsi</label>
+                            <input type="text" name="deskripsi_barang" id="add-deskripsi-nama-barang" class="form-control"
+                                required>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
@@ -994,6 +1001,13 @@
                                 placeholder="Masukkan Nama Barang..." required>
                         </div>
 
+                        {{-- deskripsi --}}
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="update-deskripsi-nama-barang">Link Deskripsi</label>
+                            <input type="text" name="deskripsi_barang" id="update-deskripsi-nama-barang" class="form-control"
+                                required>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
@@ -1068,6 +1082,22 @@
                         <p>
                             <strong style="color: #6c757d;">Nama Barang</strong><br>
                             <span class="text-muted" id="rincian-nama-barang">nama barang</span>
+                        </p>
+                        {{-- Link --}}
+                        <p class="mb-3">
+                            <strong style="color: #6c757d;">Link Deskripsi</strong><br>
+                            
+                            <a href="#" {{-- Href will be set by JavaScript --}}
+                               id="rincian-link-deskripsi"
+                               target="_blank"  {{-- Opens the link in a new tab --}}
+                               class="text-primary" 
+                               style="display: none;" {{-- Hide initially if no link --}}
+                               rel="noopener noreferrer"> 
+                                Link 
+                                <i class="fas fa-external-link-alt fa-xs"></i> 
+                            </a>
+                            {{-- Text to show if no link is available --}}
+                             <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
                         </p>
                     </div>
                 </div>
@@ -1216,4 +1246,8 @@
             reader.readAsDataURL(e.target.files[0]);
         });
     });
+
+    //Link
+    
+
 </script>

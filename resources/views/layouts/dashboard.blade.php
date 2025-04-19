@@ -32,39 +32,38 @@
         /* Sidebar Toggle */
         #sidebarToggle {
         /* Apply the custom image as the background */
-        background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}');
+        background-image: url('{{ asset('assets/images/sbarToggleIcon.png') }}'); /* Make sure this path is correct */
         background-repeat: no-repeat;
         background-position: center;
-        background-size: contain; /* Use 'contain' to fit the image, or 'cover' to fill */
+        background-size: 100%; /* Adjust size of icon within the button */
 
-        /* Override default SB Admin button styles */
-        background-color: transparent !important; /* Remove default bg color (important needed to override template) */
-        border: none !important; /* Remove default border (important needed) */
-        outline: none !important; /* Remove focus outline */
-
-        /* Keep desired size/layout properties */
-        width: 2.5rem;
-        height: 2.5rem;
-        text-align: center; /* Center the background image */
-        margin-bottom: 1rem;
+        /* Shape, Size, and Base Appearance */
+        display: inline-block; /* Allows text-align: center on parent to work */
+        width: 40px;   /* Consistent size (approx 2.5rem) */
+        height: 40px;  /* Consistent size */
+        border-radius: 50% !important; /* Force circular shape */
+        border: none !important;       /* Remove border */
+        background-color: transparent !important; /* Start transparent */
+        outline: none !important;      /* Remove focus outline */
+        box-shadow: none !important;   /* Remove any focus shadow */
         cursor: pointer;
+        transition: background-color 0.2s ease-in-out; /* Smooth transition for hover */
 
-        /* Prevent any potential text/icon rendering inside */
-        font-size: 0; /* Hide any potential font-based content */
-        color: transparent; /* Hide text color */
+        /* Hide any potential text inside */
+        font-size: 0;
+        color: transparent;
     }
 
     /* Remove the default Font Awesome icon from the ::after pseudo-element */
     /* This applies to both normal and toggled states */
-    #sidebarToggle::after,
-    .sidebar.toggled #sidebarToggle::after {
-        content: '' !important; /* Remove Font Awesome content */
-        display: none !important; /* Hide the pseudo-element entirely */
-    }
+    .sidebar.toggled #sidebarToggle {
+    background-image: url('{{ asset('assets/images/sbarToggleIconActive.png') }}') !important;
+}
 
     /* Optional: Style hover/focus states if needed */
     #sidebarToggle:hover {
         opacity: 0.85; /* Example: slightly fade on hover */
+        background-color: rgba(200, 200, 200, 0.2) !important;
         /* text-decoration: none; is default behavior */
     }
 
@@ -185,6 +184,10 @@
             /* Needed for z-index to work reliably on buttons */
         }
 
+        .sidebar-toggler-container {
+         display: none; /* Hidden by default (mobile-first) */
+     }
+
         /* 3. Sticky Sidebar (Desktop) */
         @media (min-width: 768px) {
             #accordionSidebar {
@@ -201,6 +204,16 @@
                 overflow-x: hidden;
                 /* Prevent horizontal scroll */
             }
+
+            .sidebar-toggler-container {
+             display: block !important; /* Override Bootstrap's d-none */
+             position: absolute;       /* Position relative to #accordionSidebar */
+             bottom: 10rem;           /* << ADJUST THIS VALUE (e.g., 1rem, 2rem) TO MOVE VERTICALLY >> */
+             left: 0;                  /* Stretch across sidebar width */
+             right: 0;
+             text-align: center;       /* Center the button horizontally */
+             z-index: 10;              /* Keep it above other static sidebar content */
+         }
 
             /* Desktop Toggled Icon */
             .sidebar.toggled .welcome-icon {
@@ -385,7 +398,7 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- sidebar toggler -->
-            <div class="text-center d-none d-md-inline">
+            <div class="text-center d-none d-md-inline sidebar-toggler-container">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
