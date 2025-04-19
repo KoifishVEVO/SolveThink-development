@@ -224,20 +224,16 @@
             }
 
             .sidebar-toggler-container {
-                display: block !important;
-                /* Override Bootstrap's d-none */
-                position: absolute;
-                /* Position relative to #accordionSidebar */
-                bottom: 13rem;
-                /* << ADJUST THIS VALUE (e.g., 1rem, 2rem) TO MOVE VERTICALLY >> */
-                left: 0;
-                /* Stretch across sidebar width */
-                right: 0;
-                text-align: center;
-                /* Center the button horizontally */
-                z-index: 10;
-                /* Keep it above other static sidebar content */
-            }
+         display: block !important;  
+         position: sticky;          
+         left: 0;                   
+         right: 0;                  
+         text-align: center;        
+         z-index: 10;               
+         background-color: #272780; 
+         padding: 1rem 0;          
+         margin-top: 10rem;
+     }
 
             /* Desktop Toggled Icon */
             .sidebar.toggled .welcome-icon {
