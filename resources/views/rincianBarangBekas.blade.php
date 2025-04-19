@@ -76,7 +76,12 @@
         }
 
         /* Stok barang control */
-        /* Stok barang control */
+        .stock-control-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            height: 100%;
+        }
         .stock-control {
     display: flex;
     align-items: center;
