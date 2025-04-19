@@ -51,4 +51,15 @@ class AuthController extends Controller
 
         return back()->with('error', 'No HP atau Password salah.');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('success', 'Berhasil logout.');
+    }
+
 }
