@@ -217,10 +217,9 @@
                 /* Full height minus topbar */
                 z-index: 1045;
                 /* Below topbar */
-                overflow-y: auto;
-                /* Allow internal scrolling */
+                overflow-y: hidden;
                 overflow-x: hidden;
-                /* Prevent horizontal scroll */
+          
             }
 
             .sidebar-toggler-container {
@@ -269,14 +268,14 @@
                 left: 0;
                 height: 100vh;
                 width: var(--sidebar-width);
-                /* !FIX z-index below mobile toggle button but above content */
+     
                 z-index: 1040;
                 /* !FIX Hide off-screen using transform */
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
-                /* Animate the slide */
-                overflow-y: auto;
-                overflow-x: hidden;
+              
+                overflow-y: hidden !important;
+                overflow-x: hidden !important;
             }
 
             body.sidebar-toggled #accordionSidebar {
