@@ -130,14 +130,34 @@ class NamaBarangController extends Controller
 
     public function destroy($id)
     {
-        $barang = NamaBarang::findOrFail($id);
+        // Ambil NamaBarang beserta relasi aset-asetnya
+        $barang = NamaBarang::with(['asetBarangBarus', 'asetBarangBekas'])->findOrFail($id);
 
+        // Hapus semua aset barang baru
+        foreach ($barang->asetBarangBarus as $asetBaru) {
+            if ($asetBaru->gambar && file_exists(public_path('storage/uploads/' . $asetBaru->gambar))) {
+                unlink(public_path('storage/uploads/' . $asetBaru->gambar));
+            }
+            $asetBaru->delete();
+        }
+
+        // Hapus semua aset barang bekas
+        foreach ($barang->asetBarangBekas as $asetBekas) {
+            if ($asetBekas->gambar && file_exists(public_path('storage/uploads/' . $asetBekas->gambar))) {
+                unlink(public_path('storage/uploads/' . $asetBekas->gambar));
+            }
+            $asetBekas->delete();
+        }
+
+        // Hapus gambar NamaBarang (jika ada)
         if ($barang->gambar_barang && file_exists(public_path('storage/uploads/' . $barang->gambar_barang))) {
             unlink(public_path('storage/uploads/' . $barang->gambar_barang));
         }
 
+        // Hapus NamaBarang itu sendiri
         $barang->delete();
 
-        return redirect()->back()->with('success', 'Barang dihapus.');
+        return redirect()->back()->with('success', 'Nama barang beserta seluruh aset berhasil dihapus.');
     }
+
 }
