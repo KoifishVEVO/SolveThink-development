@@ -26,9 +26,13 @@
     {{-- Sweet Alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* --- Existing Base Styles (Keep As Is) --- */
+        
 
-
+        :root {
+            --topbar-height: 68px;
+            --sidebar-width: 100px;
+            
+        }
         /* Sidebar Toggle */
         #sidebarToggle {
             /* Apply the custom image as the background */
@@ -90,9 +94,7 @@
         /* Your existing styles for how the sidebar behaves when toggled */
         .sidebar.toggled {
 
-            /* Default SB Admin toggled state might set width: 0 !important; */
-            /* Keep your existing styles for toggled sidebar items here */
-            /* e.g., hiding text spans */
+            
             .nav-item .nav-link span,
             .sidebar-heading span,
             .welcome-text {
@@ -177,10 +179,7 @@
         /* --- Layout Adjustments --- */
 
         /* Define Topbar Height Variable (adjust if your topbar height differs) */
-        :root {
-            --topbar-height: 68px;
-            /* Default SB Admin 2 topbar height */
-        }
+        
 
         /* 1. Content Padding for Fixed Topbar */
         #content {
@@ -208,6 +207,8 @@
 
         /* 3. Sticky Sidebar (Desktop) */
         @media (min-width: 768px) {
+            
+            
             #accordionSidebar {
                 position: sticky;
                 top: 0;
@@ -263,10 +264,10 @@
         @media (max-width: 767.98px) {
             #accordionSidebar {
                 /* !FIX Fixed position, off-screen initially */
-                position: fixed;
+                position: fixed !important;
                 top: 0;
                 left: 0;
-                height: 100vh;
+                height: 200vh;
                 width: var(--sidebar-width);
      
                 z-index: 1040;
@@ -280,7 +281,8 @@
 
             body.sidebar-toggled #accordionSidebar {
                 transform: translateX(0);
-                /* Slide in */
+                width: var(--sidebar-width) !important; 
+                overflow: visible; 
             }
 
             /* When mobile sidebar is shown (usually adds .show class via Bootstrap JS) */
@@ -314,6 +316,13 @@
                 display: block;
                 /* Or inline, depending on original style */
             }
+            #wrapper #content-wrapper {
+                transform: translateX(0);
+                transition: transform 0.3s ease-in-out;
+            }
+            body.sidebar-toggled #wrapper #content-wrapper {
+        transform: translateX(var(--sidebar-width));
+    }
         }
 
         /* Default state for welcome icon (hidden) */
@@ -537,15 +546,18 @@
     </div>
 
     <!-- Scripts -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    
 
     @yield('scripts')
+    
 
 </body>
 
