@@ -923,8 +923,7 @@
                         {{-- Link Deskripsi --}}
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-deskripsi-nama-barang">Link Deskripsi</label>
-                            <input type="text" name="deskripsi" id="add-deskripsi-nama-barang" class="form-control"
-                                required>
+                            <input type="text" name="deskripsi" id="add-deskripsi-nama-barang" class="form-control">
                         </div>
 
                     </div>
