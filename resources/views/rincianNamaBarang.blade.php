@@ -1007,7 +1007,7 @@
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="update-deskripsi-nama-barang">Link Deskripsi</label>
                             <input type="text" name="deskripsi" id="update-deskripsi-nama-barang"
-                                class="form-control" required>
+                                class="form-control">
                         </div>
 
                     </div>
