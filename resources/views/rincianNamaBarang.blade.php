@@ -772,7 +772,7 @@
 
                                         @foreach ($barang as $b)
                                             <tr>
-                                                <td>{{ $b->id }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     {{-- Image Placeholder --}}
                                                     <div class="image-placeholder">
