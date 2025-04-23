@@ -439,6 +439,122 @@
             border-bottom: none !important;
             border-color: #DEDDDD !important;
         }
+
+
+        /* Searchable Dropdown */
+        /* Container for the custom dropdown */
+        .custom-search-select-container {
+            position: relative;
+            font-family: sans-serif; /* Or your preferred font */
+        }
+
+        /* The visible part showing the selected value */
+        .selected-value {
+            padding: 0.375rem 2rem 0.375rem 0.75rem; 
+            border: 1px solid #ced4da; 
+            border-radius: 0.25rem;
+            background-color: #fff;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: calc(1.5em + 0.75rem + 2px);
+            line-height: 1.5;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            user-select: none;
+            position: relative; 
+        }
+
+       
+        .selected-value::after {
+            content: '';
+            position: absolute;
+            right: 0.75rem; /* Position arrow on the right */
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid #555; /* Arrow color */
+            pointer-events: none; /* Ensure arrow doesn't block clicks */
+        }
+
+        
+        .selected-value:focus,
+        .custom-search-select-container.open .selected-value { /* Style when dropdown is open */
+            border-color: #007bff; /* Blue border color */
+            outline: 0;
+            /* Keep shadow or remove if you prefer the simpler blue border */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+
+        /* The dropdown box containing search and list */
+        .dropdown-list-container {
+            display: none;
+            position: absolute;
+            top: calc(100% + 2px); /* !FIX! Position slightly below with a small gap */
+            left: 0;
+            right: 0;
+            border: 1px solid #ced4da; /* !FIX! Full border around the dropdown */
+            background-color: #fff;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1051;
+            border-radius: 0.25rem; /* !FIX! Apply border radius to the whole dropdown */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            /* Removed margin-top: -1px and border-top: none */
+        }
+
+        /* Make dropdown visible when .show class is added */
+        .dropdown-list-container.show {
+            display: block;
+        }
+
+        /* Search input inside the dropdown */
+        .search-box {
+            padding: 0.375rem 0.75rem;
+            width: calc(100% - 16px); /* !FIX! Account for margin */
+            box-sizing: border-box;
+            border: 1px solid #ced4da; /* !FIX! Full border like a standard input */
+            outline: none;
+            margin: 8px; /* !FIX! Add margin for spacing */
+            border-radius: 0.25rem; /* !FIX! Add border-radius */
+            /* Removed border: none and border-bottom */
+        }
+
+        /* List of options */
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            /* !FIX! Add padding top if search box has margin, or adjust search box margin */
+            padding-top: 0; /* Adjust if needed */
+            padding-bottom: 5px; /* Add some space at the bottom */
+        }
+
+        /* Individual option item */
+        .options-list li {
+            padding: 0.5rem 0.75rem; /* Keep padding as is, looks okay */
+            cursor: pointer;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 1.5; /* !FIX! Ensure consistent line height */
+        }
+
+        /* Hover/Highlight effect for options */
+        .options-list li:hover,
+        .options-list li.highlighted {
+            background-color: #f8f9fa; /* !FIX! Slightly lighter grey for hover */
+            color: #16181b; /* !FIX! Ensure text is readable on hover */
+        }
+
+        /* Style for hidden original select */
+        .original-select-hidden {
+            display: none !important;
+        }
     </style>
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -501,7 +617,7 @@
                                             <th>Gambar Barang</th>
                                             <th>Nama Barang</th>
                                             <th>Jenis Barang</th>
-                                            <th>Harga Jual Barang</th>
+                                            <th>Harga Barang</th>
                                             <th>Stok Barang</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -678,11 +794,21 @@
                         <!-- Other Inputs -->
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                            <select name="nama_barang" id="add-nama-barang" class="form-control" required>
+                            <select name="nama_barang" id="add-nama-barang" class="original-select-hidden" required>
+                                <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                                 @endforeach
                             </select>
+
+                            <div class="custom-search-select-container" id="custom-nama-barang-container">
+                                <div class="selected-value" data-target-select="add-nama-barang" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="dropdown-list-container">
+                                    <input type="text" class="search-box" placeholder="Cari...">
+                                    <ul class="options-list">
+                                        </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
@@ -690,7 +816,9 @@
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-nama-barang">Jenis Barang</label>
-                            <select name="jenis_barang" id="add-nama-barang" class="form-control" required>
+                        
+                            <!-- Hidden Original Select -->
+                            <select name="jenis_barang" id="add-nama-barang" class="original-select-hidden" required>
                                 <option value="" disabled selected>Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Microcontroller">Microcontroller</option>
@@ -698,6 +826,15 @@
                                 <option value="Power">Power</option>
                                 <option value="Equipment">Equipment</option>
                             </select>
+                        
+                            <!-- Custom Searchable Dropdown -->
+                            <div class="custom-search-select-container" id="custom-jenis-barang-container">
+                                <div class="selected-value" data-target-select="add-nama-barang" tabindex="0">Pilih Jenis Barang...</div>
+                                <div class="dropdown-list-container">
+                                    <input type="text" class="search-box" placeholder="Cari...">
+                                    <ul class="options-list"></ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -795,11 +932,20 @@
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="update-nama">Nama Barang</label>
-                            <select name="nama_barang" id="update-nama" class="form-control" required>
+                            <select name="nama_barang" id="update-nama" class="original-select-hidden" required>
+                                <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                                 @endforeach
                             </select>
+
+                            <div class="custom-search-select-container" id="custom-update-nama-container">
+                                <div class="selected-value" data-target-select="update-nama" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="dropdown-list-container">
+                                    <input type="text" class="search-box" placeholder="Cari...">
+                                    <ul class="options-list"></ul>
+                                </div>
+                            </div>
                         </div>
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
@@ -808,7 +954,7 @@
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
-                            <select name="jenis_barang" id="update-jenis" class="form-control" required>
+                            <select name="jenis_barang" id="update-jenis" class="original-select-hidden" required>
                                 <option value="">Pilih Nama Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Microcontroller">Microcontroller</option>
@@ -817,6 +963,14 @@
                                 <option value="Equipment">Equipment</option>
                                 <!-- Tambahkan opsi lainnya di sini -->
                             </select>
+
+                            <div class="custom-search-select-container" id="custom-update-jenis-container">
+                                <div class="selected-value" data-target-select="update-jenis" tabindex="0">Pilih Jenis Barang...</div>
+                                <div class="dropdown-list-container">
+                                    <input type="text" class="search-box" placeholder="Cari...">
+                                    <ul class="options-list"></ul>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -890,6 +1044,190 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script>
+
+
+        // fitur search
+        // Fitur search
+        document.addEventListener('DOMContentLoaded', function() {
+
+/**
+ * Initializes a custom searchable dropdown.
+ * @param {string} containerId - The ID of the main container div for the custom dropdown.
+ * @param {string} originalSelectId - The ID of the original (now hidden) select element.
+ */
+function setupSearchableDropdown(containerId, originalSelectId) {
+    const container = document.getElementById(containerId);
+    if (!container) return; // Exit if container not found
+
+    const originalSelect = document.getElementById(originalSelectId);
+    if (!originalSelect) return; // Exit if original select not found
+
+    const selectedValueDiv = container.querySelector('.selected-value');
+    const dropdownContainer = container.querySelector('.dropdown-list-container');
+    const searchBox = container.querySelector('.search-box');
+    const optionsList = container.querySelector('.options-list');
+
+    // --- Populate the custom list from the original select ---
+    // Reason: Creates the visual list based on the hidden select's options.
+    optionsList.innerHTML = ''; // Clear existing options
+    let listItems = []; // To store references to the li elements for filtering
+    Array.from(originalSelect.options).forEach(option => {
+        if (option.value) { // Skip empty value option if it's just a placeholder
+            const li = document.createElement('li');
+            li.textContent = option.textContent;
+            li.dataset.value = option.value; // Store the value in a data attribute
+            optionsList.appendChild(li);
+            listItems.push(li); // Add to array for filtering
+        }
+    });
+
+    // --- Toggle Dropdown Visibility ---
+    // Reason: Show/hide the dropdown when the display area is clicked.
+    selectedValueDiv.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent click from bubbling to document listener
+        closeAllDropdowns(containerId); // Close others before opening this one
+        dropdownContainer.classList.toggle('show');
+        if (dropdownContainer.classList.contains('show')) {
+            searchBox.focus(); // Focus search box when opened
+        }
+    });
+
+    // --- Close dropdown when clicking outside ---
+    // Reason: Standard dropdown behavior to close when focus is lost.
+    document.addEventListener('click', (event) => {
+        if (!container.contains(event.target)) {
+            dropdownContainer.classList.remove('show');
+        }
+    });
+
+    // --- Handle Option Selection ---
+    // Reason: Update display and hidden select when an option is clicked.
+    optionsList.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            selectedValueDiv.textContent = event.target.textContent; // Update display text
+            originalSelect.value = event.target.dataset.value; // Update hidden select value
+            dropdownContainer.classList.remove('show'); // Close dropdown
+
+            // Optional: Trigger change event on original select if needed by other scripts
+            originalSelect.dispatchEvent(new Event('change'));
+        }
+    });
+
+    // --- Handle Searching/Filtering ---
+    // Reason: Filter the list based on search box input.
+    searchBox.addEventListener('input', () => {
+        const searchTerm = searchBox.value.toLowerCase();
+        listItems.forEach(li => {
+            const itemText = li.textContent.toLowerCase();
+            // Show item if search term is empty or item text includes the term
+            li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
+        });
+    });
+
+     // --- Update custom dropdown if original select value changes externally (e.g., setting initial value) ---
+     // Reason: Keep the custom display synchronized with the actual select value.
+     function syncDisplayWithSelect() {
+        const selectedOption = originalSelect.options[originalSelect.selectedIndex];
+        if (selectedOption && selectedOption.value) {
+            selectedValueDiv.textContent = selectedOption.textContent;
+        } else {
+            // Find the placeholder text from the first option if it has no value
+             const placeholderOption = Array.from(originalSelect.options).find(opt => !opt.value);
+             selectedValueDiv.textContent = placeholderOption ? placeholderOption.textContent : 'Select...';
+        }
+     }
+     // Initial sync
+     syncDisplayWithSelect();
+     // Sync if the original select changes programmatically
+     originalSelect.addEventListener('change', syncDisplayWithSelect);
+
+
+      // --- Reset dropdown when modal is hidden (Bootstrap specific) ---
+      // Reason: Reset selection and search when modal closes for next use.
+      const modal = container.closest('.modal');
+      if (modal) {
+            // Using jQuery here because Bootstrap events are easier with it.
+            // If you are completely avoiding jQuery, you'd need to use Bootstrap's vanilla JS event listeners.
+            // Example using Bootstrap 5 Vanilla JS:
+            // const bootstrapModal = bootstrap.Modal.getInstance(modal); // Get instance if initialized
+            // if(bootstrapModal) {
+            //     modal.addEventListener('hidden.bs.modal', () => {
+            //         originalSelect.selectedIndex = 0; // Reset to placeholder
+            //         syncDisplayWithSelect();
+            //         searchBox.value = ''; // Clear search
+            //         listItems.forEach(li => li.style.display = ''); // Show all items
+            //         dropdownContainer.classList.remove('show'); // Ensure closed
+            //     });
+            // }
+            // --- Fallback using jQuery if available (more common with older Bootstrap) ---
+             if (typeof $ !== 'undefined') {
+                $(modal).on('hidden.bs.modal', function () {
+                    originalSelect.selectedIndex = 0; // Reset to placeholder
+                    syncDisplayWithSelect();
+                    searchBox.value = ''; // Clear search
+                    listItems.forEach(li => li.style.display = ''); // Show all items
+                    dropdownContainer.classList.remove('show'); // Ensure closed
+                });
+             }
+      }
+
+} // End of setupSearchableDropdown function
+
+// --- Helper to close other dropdowns ---
+function closeAllDropdowns(excludeContainerId = null) {
+    document.querySelectorAll('.custom-search-select-container .dropdown-list-container').forEach(dropdown => {
+        if (!excludeContainerId || dropdown.closest('.custom-search-select-container').id !== excludeContainerId) {
+            dropdown.classList.remove('show');
+        }
+    });
+}
+
+
+// --- Initialize for both modals ---
+// Reason: Apply the setup to the dropdowns in both Add and Update modals.
+setupSearchableDropdown('custom-nama-barang-container', 'add-nama-barang');
+setupSearchableDropdown('custom-update-nama-container', 'update-nama');
+setupSearchableDropdown('custom-jenis-barang-container', 'add-nama-barang');
+setupSearchableDropdown('custom-update-jenis-container', 'update-nama');
+
+
+
+
+ // --- Handle Update Modal Specifics (Example: loading data) ---
+ // You might need to re-populate or re-sync the update modal dropdown
+ // when it's shown, especially if you load data dynamically.
+ const updateModal = document.getElementById('updateAssetModal');
+ if (updateModal) {
+    // Example using jQuery for Bootstrap event
+     if (typeof $ !== 'undefined') {
+        $(updateModal).on('show.bs.modal', function() {
+            // Example: Simulate setting the value when the modal opens
+            // Replace this logic with how you actually get the asset's current 'nama_barang' ID
+            const currentAssetBarangId = document.getElementById('update-id').value; // Assuming update-id holds the barang_id
+            const updateSelect = document.getElementById('update-nama');
+            if (currentAssetBarangId) {
+                updateSelect.value = currentAssetBarangId;
+            } else {
+                 updateSelect.selectedIndex = 0; // Default to placeholder if no ID
+            }
+             // Trigger sync after setting value
+             updateSelect.dispatchEvent(new Event('change'));
+        });
+     }
+      // Example using Bootstrap 5 Vanilla JS:
+      // const bootstrapUpdateModal = bootstrap.Modal.getInstance(updateModal);
+      // if (bootstrapUpdateModal) {
+      //     updateModal.addEventListener('show.bs.modal', () => {
+      //          // ... (logic to set updateSelect.value) ...
+      //          updateSelect.dispatchEvent(new Event('change')); // Sync display
+      //      });
+      // }
+
+ }
+
+
+});
+
         document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();

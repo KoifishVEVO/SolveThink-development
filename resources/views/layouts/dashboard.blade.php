@@ -223,17 +223,7 @@
           
             }
 
-            .sidebar-toggler-container {
-         display: block !important;  
-         position: sticky;          
-         left: 0;                   
-         right: 0;                  
-         text-align: center;        
-         z-index: 10;               
-         background-color: #272780; 
-         padding: 1rem 0;          
-         margin-top: 10rem;
-     }
+           
 
             /* Desktop Toggled Icon */
             .sidebar.toggled .welcome-icon {
@@ -411,14 +401,16 @@
             </li>
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="{{ url('/rincianBarangBekas') }}">
-                    <small>Penjualan Barang</small>
+                <a class="nav-link" href="{{ url('/penjualanBarang') }}">
+                    <i class="fas fa-tags text-gray-400"></i>
+                    <span>Penjualan Barang</span>
                 </a>
             </li>
-
+            
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="{{ url('/rincianBarangBekas') }}">
-                    <small>Penyewaan Barang</small>
+                <a class="nav-link" href="{{ url('/penyewaanBarang') }}">
+                    <i class="fas fa-box-open text-gray-400"></i>
+                    <span>Penyewaan Barang</span>
                 </a>
             </li>
 
@@ -447,19 +439,19 @@
 
 
                         <!-- Notification Icon -->
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#" role="button">
                                 <i class="fas fa-bell text-dark fa-lg"></i>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- Message Icon -->
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#" role="button">
                                 <i class="fas fa-envelope text-dark fa-lg"></i>
                             </a>
                         </li>
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block"></div> --}}
 
                         <!-- Nav Item - Urse Information -->
                         <li class="nav-item dropdown no-arrow">
