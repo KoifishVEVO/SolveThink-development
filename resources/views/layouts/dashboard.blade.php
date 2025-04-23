@@ -401,14 +401,14 @@
             </li>
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="{{ url('/penjualanBarang') }}">
+                <a class="nav-link" href="{{ route('penjualan.show') }}">
                     <i class="fas fa-tags text-gray-400"></i>
                     <span>Penjualan Barang</span>
                 </a>
             </li>
             
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="{{ url('/penyewaanBarang') }}">
+                <a class="nav-link" href="{{ route('penyewaan.show') }}">
                     <i class="fas fa-box-open text-gray-400"></i>
                     <span>Penyewaan Barang</span>
                 </a>

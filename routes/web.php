@@ -8,6 +8,8 @@ use App\Http\Controllers\NamaBarangController;
 use App\Models\AsetBarangBaru;
 use App\Models\NamaBarang;
 use App\Models\AsetBarangBekas;
+use App\Http\Controllers\penjualanBarangController;
+use App\Http\Controllers\penyewaanBarangController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -135,3 +137,9 @@ Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.show'
 Route::post('/periode', [PeriodeController::class, 'store'])->name('periode.store');
 Route::delete('/periode/{id}', [PeriodeController::class, 'destroy'])->name('periode.destroy');
 Route::put('/periode/{id}', [PeriodeController::class, 'update'])->name('periode.update');
+
+
+// penyewaan barang
+Route::get('/penyewaanBarang', [penyewaanBarangController::class, 'index'])->name('penyewaan.show');
+// penjualan barang
+Route::get('/penjualanBarang', [penjualanBarangController::class, 'index'])->name('penjualan.show');
