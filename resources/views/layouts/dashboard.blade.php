@@ -12,6 +12,9 @@
     <title>@yield('title')</title> <!-- Dynamic Title -->
 
     <!-- Custom fonts for this template-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=sync" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -252,6 +255,7 @@
 
         /* 5. Mobile Sidebar Adjustments */
         @media (max-width: 767.98px) {
+            
             #accordionSidebar {
                 /* !FIX Fixed position, off-screen initially */
                 position: fixed !important;
@@ -306,13 +310,10 @@
                 display: block;
                 /* Or inline, depending on original style */
             }
-            #wrapper #content-wrapper {
-                transform: translateX(0);
-                transition: transform 0.3s ease-in-out;
-            }
-            body.sidebar-toggled #wrapper #content-wrapper {
+           /* this breaks the modals, but i need something to make the sidebar move the contents */
+            /* body.sidebar-toggled #wrapper #content-wrapper {
         transform: translateX(var(--sidebar-width));
-    }
+    } */
         }
 
         /* Default state for welcome icon (hidden) */

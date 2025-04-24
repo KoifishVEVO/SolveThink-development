@@ -469,7 +469,7 @@
                 aspect-ratio: 1 / 1;
                 background-color: #272780;
                 /* Match modal-color */
-                border: 2px dashed #ccc;
+               
                 border-radius: 5px;
                 display: flex;
                 align-items: center;
@@ -793,7 +793,7 @@
                                                             data-target="#rincianNamaBarangModal" {{-- Target Rincian Modal --}}
                                                             data-desc="{{ $b->deskripsi }}">
 
-                                                            <i class="fa fa-eye"></i> Rincian
+                                                            Rincian
                                                         </button>
                                                         {{-- Update Button --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
@@ -1065,7 +1065,7 @@
                 <div class="modal-body d-flex px-4 py-4">
                     <!-- Image Area -->
                     <div
-                        style="width: 260px; height: 260px; background-color: #2B2684; border: 2px dashed #ccc; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+                        style="width: 260px; height: 260px; background-color: #2B2684; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
                         <div id="rincian-default-view" style="text-align: center;">
                             <i class="fa fa-cube fa-3x" style="color: white;"></i>
                         </div>
@@ -1260,6 +1260,10 @@
             reader.readAsDataURL(e.target.files[0]);
         });
     });
+
+
+    // addnamabarang thing
+    
 
     //Link
 </script>

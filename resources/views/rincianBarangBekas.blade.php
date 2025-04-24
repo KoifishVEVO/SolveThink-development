@@ -398,7 +398,6 @@
         .drop-zone {
             background-color: #272780;
             color: white;
-            border: 2px dashed #ccc;
             border-radius: 5px;
             padding: 40px 20px;
             text-align: center;
@@ -438,6 +437,213 @@
             border-top: none !important;
             border-bottom: none !important;
             border-color: #DEDDDD !important;
+        }
+
+        .batal-btn {
+            color: #272780 !important;
+            border-color: #272780 !important;
+        }
+        @media (max-width: 767.98px) {
+            /* Target mobile screens */
+            
+
+            /* --- Make specific modals fullscreen --- */
+            #addAssetModal .modal-dialog,
+            #rincianAssetModal .modal-dialog,
+            #updateAssetModal .modal-dialog {
+                
+                max-width: 100%;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                position: fixed;
+                /* Position relative to viewport */
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                transform: none !important;
+                /* Override potential centering transforms */
+            }
+
+            #addAssetModal .modal-content,
+            #rincianAssetModal .modal-content,
+            #updateAssetModal .modal-content {
+                height: 100%;
+                /* Fill the dialog height */
+                border-radius: 0;
+                /* No rounded corners */
+                border: none;
+                /* No border */
+                display: flex;
+                /* Use flexbox for layout */
+                flex-direction: column;
+                /* Stack header/body/footer */
+            }
+
+            /* Allow modal body to scroll */
+            #addAssetModal .modal-body,
+            #rincianAssetModal .modal-body,
+            #updateAssetModal .modal-body {
+                overflow-y: auto;
+                /* Enable vertical scroll */
+                flex-grow: 1;
+                /* Allow body to take available vertical space */
+            }
+
+            /* --- Keep delete modal default (override any general .modal styles if needed) --- */
+            #deleteAssetModal .modal-dialog {
+                max-width: 500px;
+                /* Bootstrap default */
+                height: auto;
+                margin: 1.75rem auto;
+                /* Default centering margin */
+                position: relative;
+                /* Reset positioning */
+                top: auto;
+                left: auto;
+                bottom: auto;
+                right: auto;
+                /* Reset position */
+            }
+
+            #deleteAssetModal .modal-content {
+                height: auto;
+                border-radius: 0.3rem;
+                /* Bootstrap default */
+                border: 1px solid rgba(0, 0, 0, .2);
+                /* Bootstrap default */
+                display: block;
+                /* Reset flex */
+            }
+
+            #deleteAssetModal .modal-body {
+                overflow-y: visible;
+                /* Reset scroll */
+                flex-grow: 0;
+                /* Reset flex grow */
+            }
+
+            /* --- Specific Styles for Rincian Modal Mobile (based on image) --- */
+            #rincianAssetModal .modal-body {
+                display: flex;
+                /* Re-apply flex */
+                flex-direction: column;
+                /* Stack vertically */
+                align-items: center;
+                /* Center items horizontally */
+                padding-top: 2rem;
+                /* Add some top padding */
+                padding-bottom: 2rem;
+                /* Add some bottom padding */
+            }
+
+            #rincianAssetModal .modal-body>div:first-child {
+                /* Image container */
+                width: 75%;
+                /* Adjust width */
+                max-width: 300px;
+                /* Limit max size */
+                height: auto;
+                aspect-ratio: 1 / 1;
+                /* Keep it square-ish */
+                margin-bottom: 2rem;
+                /* Space below image */
+            }
+
+            #rincianAssetModal .modal-body>div.ml-4 {
+                /* Details container */
+                margin-left: auto !important;
+                /* Remove margin */
+                width: 100%;
+                text-align: left;
+
+            }
+
+            #rincianAssetModal .modal-footer {
+                justify-content: center !important;
+                /* Center the footer button */
+                border-top: none;
+                /* Remove top border */
+            }
+
+            #rincianAssetModal .modal-footer .btn {
+                width: 80%;
+                /* Make button wider */
+                max-width: 300px;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            #addAssetModal .modal-dialog,
+            #updateAssetModal .modal-dialog {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            /* Shared Modal Content Styling */
+            #addAssetModal .modal-content,
+            #updateAssetModal .modal-content {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+            }
+
+            /* Shared Form Styling */
+            #addAssetModal form,
+            #updateAssetModal form {
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+                height: 100%;
+            }
+
+            /* Shared Modal Body Styling */
+            #addAssetModal .modal-body,
+            #updateAssetModal .modal-body {
+                flex: 1 1 auto;
+                overflow-y: auto;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+
+            /* Shared Modal Footer Styling */
+            #addAssetModal .modal-footer,
+            #updateAssetModal .modal-footer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                border-top: none;
+                padding: 5px;
+                margin-top: auto;
+            }
+
+            /* Optional: Add a little space at the bottom for update modal only */
+            #updateAssetModal .modal-footer {
+                margin-bottom: 20px;
+            }
+
+            /* Shared Button Styling */
+            #addAssetModal .modal-footer .btn,
+            #updateAssetModal .modal-footer .btn {
+                flex: 1;
+                max-width: none;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+
+            /* Style Dropdown options for mobile */
+            .searchable-dropdown .dropdown-options-container {
+                /* Position it fixed if needed, or just ensure width */
+                width: calc(100% - 2px);
+                /* Account for border */
+                left: 1px;
+                max-height: 150px;
+                /* Maybe shorter on mobile */
+            }
         }
 
 
@@ -689,7 +895,7 @@
                                                             data-desc="{{ $item->namaBarang->deskripsi }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal"
                                                             title="Rincian">
-                                                            <i class="fa fa-eye"></i>
+                                                            
                                                             Rincian
                                                         </button>
 
@@ -840,7 +1046,7 @@
 
                     <!-- Modal Footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link text-muted font-weight-bold"
+                        <button type="button" class="btn btn-link text-muted font-weight-bold batal-btn"
                             data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn modal-color text-white font-weight-bold">Tambah</button>
                     </div>
@@ -863,7 +1069,7 @@
                 <div class="modal-body d-flex p-4">
                     <!-- Image container -->
                     <div class="modal-color position-relative"
-                        style="width: 250px; height: 250px; border: 2px dashed #ccc; border-radius: 5px; overflow: hidden;">
+                        style="width: 250px; height: 250px;  border-radius: 5px; overflow: hidden;">
                         <div id="rincian-default-view"
                             style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
                             <i class="fa fa-image fa-3x" style="color: white;"></i>
@@ -1009,7 +1215,7 @@
 
                     <!-- footer -->
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-link text-muted font-weight-bold"
+                        <button type="button" class="btn btn-link text-muted font-weight-bold batal-btn"
                             data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn modal-color text-white font-weight-bold">Hapus</button>
                     </div>

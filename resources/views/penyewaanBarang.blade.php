@@ -346,7 +346,7 @@
                                                             {{-- Add other necessary data attributes (barang, tanggal, status, urls etc.) --}}
                                                             data-toggle="modal"
                                                             data-target="#rincianPenyewaanModal">
-                                                            <i class="fa fa-eye"></i>
+                                                          
                                                         Rincian
                                                     </button>
 
@@ -409,6 +409,213 @@
 
 </div>
 
+{{-- modals --}}
+
+<div class="modal fade" id="addPenyewaanModal" tabindex="-1" aria-labelledby="addPenyewaanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="addPenyewaanModalLabel">Tambah Penyewaan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {{-- @TODO: Set correct route for storing data --}}
+            <form action="{{-- route('penyewaan_barang.store') --}}" method="POST" id="addPenyewaanForm" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    {{-- Add form fields for: --}}
+                    {{-- Informasi Penyewa (Nama, Alamat, Kontak?) --}}
+                    {{-- Detail Transaksi (Barang selection, Harga Sewa) --}}
+                    {{-- Detail Pembayaran (Metode, Upload Bukti Bayar, Upload Bukti KTM/KTP) --}}
+                    {{-- Detail Sewa (Tanggal Mulai, Tanggal Akhir/Durasi) --}}
+                    {{-- Pengiriman (Metode, Alamat, Status?) --}}
+                    <p>Placeholder for Add Penyewaan Form Fields...</p>
+                    {{-- Example Fields --}}
+                    <div class="form-group">
+                        <label for="add-nama-penyewa">Nama Penyewa</label>
+                        <input type="text" class="form-control" id="add-nama-penyewa" name="nama_penyewa" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="add-tanggal-mulai">Tanggal Mulai Sewa</label>
+                        <input type="date" class="form-control" id="add-tanggal-mulai" name="tanggal_mulai" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="add-bukti-ktm">Upload Bukti KTM/KTP</label>
+                        <input type="file" class="form-control-file" id="add-bukti-ktm" name="bukti_ktm" accept="image/*,application/pdf">
+                    </div>
+                    {{-- Add other fields here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updatePenyewaanModal" tabindex="-1" aria-labelledby="updatePenyewaanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="updatePenyewaanModalLabel">Update Penyewaan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {{-- @TODO: Action URL is set dynamically via JS --}}
+            <form action="#" method="POST" id="updatePenyewaanForm" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="id" id="update-penyewaan-id"> {{-- To store the ID of the item being updated --}}
+                <div class="modal-body">
+                    {{-- Add form fields similar to Add Modal, pre-filled via JS --}}
+                    <p>Placeholder for Update Penyewaan Form Fields...</p>
+                     {{-- Example Fields --}}
+                    <div class="form-group">
+                        <label for="update-nama-penyewa">Nama Penyewa</label>
+                        <input type="text" class="form-control" id="update-nama-penyewa" name="nama_penyewa" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="update-status-sewa">Status Sewa</label>
+                        <select class="form-control" id="update-status-sewa" name="status_sewa">
+                            <option value="Berlangsung">Berlangsung</option>
+                            <option value="Selesai">Selesai</option>
+                            {{-- Add other statuses --}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                         <label>Bukti KTM/KTP Saat Ini</label>
+                         <div id="update-current-ktm"></div> {{-- Display current file/link here --}}
+                         <label for="update-bukti-ktm">Ganti Bukti KTM/KTP (Opsional)</label>
+                         <input type="file" class="form-control-file" id="update-bukti-ktm" name="bukti_ktm" accept="image/*,application/pdf">
+                     </div>
+                     {{-- Add other fields here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePenyewaanModal" tabindex="-1" aria-labelledby="deletePenyewaanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="deletePenyewaanModalLabel">Hapus Penyewaan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {{-- @TODO: Action URL is set dynamically via JS --}}
+            <form action="#" method="POST" id="deletePenyewaanForm">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <p class="text-center delete-text mb-1">Anda yakin ingin menghapus data penyewaan ini?</p>
+                    <p class="text-center font-weight-bold" id="delete-penyewaan-info"></p> {{-- Populated by JS --}}
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rincianPenyewaanModal" tabindex="-1" aria-labelledby="rincianPenyewaanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Adjust size as needed --}}
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="rincianPenyewaanModalLabel">Rincian Penyewaan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                {{-- @TODO: Structure the details display. Use JS to populate this from data-* attributes --}}
+                {{-- Example structure --}}
+                 <div class="row">
+                    <div class="col-md-6">
+                        <h6>Informasi Penyewa</h6>
+                        <p><strong>Nama:</strong> <span id="rincian-nama-penyewa"></span></p>
+                        <p><strong>Alamat:</strong> <span id="rincian-alamat-penyewa"></span></p>
+                        {{-- Add more fields --}}
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Detail Transaksi</h6>
+                        <p><strong>Barang Disewa:</strong> <span id="rincian-barang-disewa"></span></p>
+                        <p><strong>Total Harga:</strong> <span id="rincian-harga-sewa"></span></p>
+                         {{-- Add more fields --}}
+                    </div>
+                </div>
+                <hr>
+                 <div class="row">
+                    <div class="col-md-6">
+                         <h6>Detail Pembayaran</h6>
+                         <p><strong>Bukti Bayar:</strong> <span id="rincian-bukti-bayar"></span></p> {{-- Link or Status --}}
+                         <p><strong>Bukti KTM/KTP:</strong> <span id="rincian-bukti-ktm"></span></p> {{-- Link or Status --}}
+                    </div>
+                    <div class="col-md-6">
+                         <h6>Detail Sewa</h6>
+                         <p><strong>Tanggal Mulai:</strong> <span id="rincian-tgl-mulai"></span></p>
+                         <p><strong>Durasi:</strong> <span id="rincian-durasi"></span></p>
+                         <p><strong>Status:</strong> <span id="rincian-status-sewa"></span></p>
+                    </div>
+                 </div>
+                  <hr>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <h6>Pengiriman</h6>
+                        <p><strong>Metode:</strong> <span id="rincian-metode-kirim"></span></p>
+                    </div>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-color text-white font-weight-bold rounded-3" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="filterPenyewaanModal" tabindex="-1" aria-labelledby="filterPenyewaanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="filterPenyewaanModalLabel">Filter Penyewaan</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+             {{-- @TODO: Point form to index route with GET method --}}
+            <form action="{{-- route('penyewaan_barang.index') --}}" method="GET">
+                <div class="modal-body">
+                    {{-- @TODO: Add filter fields (e.g., date range, status, penyewa) --}}
+                    <p>Placeholder for Filter Fields (e.g., Date Range, Status)</p>
+                    <div class="form-group">
+                        <label for="filter-start-date">Tanggal Mulai Sewa Dari</label>
+                        <input type="date" class="form-control" id="filter-start-date" name="start_date" value="{{-- request('start_date') --}}">
+                    </div>
+                     <div class="form-group">
+                        <label for="filter-end-date">Tanggal Mulai Sewa Sampai</label>
+                        <input type="date" class="form-control" id="filter-end-date" name="end_date" value="{{-- request('end_date') --}}">
+                    </div>
+                    <div class="form-group">
+                         <label for="filter-status-sewa">Status Sewa</label>
+                         <select class="form-control" id="filter-status-sewa" name="status_sewa">
+                             <option value="">Semua Status</option>
+                             <option value="Berlangsung" {{-- request('status_sewa') == 'Berlangsung' ? 'selected' : '' --}}>Berlangsung</option>
+                             <option value="Selesai" {{-- request('status_sewa') == 'Selesai' ? 'selected' : '' --}}>Selesai</option>
+                             {{-- Add other statuses --}}
+                         </select>
+                     </div>
+                    {{-- Add other filter inputs --}}
+                </div>
+                <div class="modal-footer">
+                    {{-- Link to clear filters (redirect to index without filter params) --}}
+                     <a href="{{-- route('penyewaan_barang.index') --}}" class="btn btn-outline-secondary rounded-3 me-2">Clear</a>
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Apply Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>

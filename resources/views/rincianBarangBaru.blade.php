@@ -32,8 +32,8 @@
         #rincianAssetModal .modal-body>div:first-child {
             /* Image container */
             background-color: #272780;
-            /* Ensure background color */
-            border: 2px dashed #ccc;
+           
+           
             /* Keep border */
             border-radius: 5px;
             /* Keep radius */
@@ -168,7 +168,7 @@
         .drop-zone {
             background-color: #272780;
             color: white;
-            border: 2px dashed #ccc;
+           
             border-radius: 5px;
             padding: 40px 20px;
             text-align: center;
@@ -509,11 +509,13 @@
 
         @media (max-width: 767.98px) {
             /* Target mobile screens */
+            
 
             /* --- Make specific modals fullscreen --- */
             #addAssetModal .modal-dialog,
             #rincianAssetModal .modal-dialog,
             #updateAssetModal .modal-dialog {
+                
                 max-width: 100%;
                 width: 100%;
                 height: 100%;
@@ -961,7 +963,7 @@
                                                             data-desc="{{ $item->namaBarang->deskripsi }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal"
                                                             title="Rincian">
-                                                            <i class="fa fa-eye"></i>
+                                                            
                                                             Rincian
 
                                                         </button>
@@ -1067,7 +1069,8 @@
                         <!-- Other Inputs -->
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
-                            <select name="nama_barang" id="nama_barang" class="original-select-hidden form-control" required>
+                            {{-- CURRENTLY FIXING DROPDOWN, MUST ADJUST OTHER USES OF THE ORIGINAL NAME --}}
+                            <select name="nama_barang" id="nama_barang_select_add" class="original-select-hidden form-control" required>
                                 <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
@@ -1138,7 +1141,7 @@
                 <div class="modal-body d-flex p-4">
                     <!-- Image container -->
                     <div class="modal-color position-relative"
-                        style="width: 250px; height: 250px; border: 2px dashed #ccc; border-radius: 5px; overflow: hidden;">
+                        style="width: 250px; height: 250px;  overflow: hidden;">
                         <div id="rincian-default-view"
                             style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
                             <i class="fa fa-image fa-3x" style="color: white;"></i>
@@ -1292,6 +1295,9 @@
             </div>
         </div>
     </div>
+
+
+    
 
     @if (session('success'))
         <script>

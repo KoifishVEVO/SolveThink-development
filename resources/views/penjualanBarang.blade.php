@@ -267,7 +267,7 @@
                                                             {{-- Add other necessary data attributes --}}
                                                             data-toggle="modal"
                                                             data-target="#rincianPenjualanModal">
-                                                            <i class="fa fa-eye"></i>
+                                                            
                                                         Rincian
                                                     </button>
 
@@ -330,6 +330,173 @@
         </div>
     </div>
 
+</div>
+
+
+{{-- modals --}}
+
+<div class="modal fade" id="addPenjualanModal" tabindex="-1" aria-labelledby="addPenjualanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="addPenjualanModalLabel">Tambah Penjualan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {{-- @TODO: Set correct route for storing data --}}
+            <form action="{{-- route('penjualan_barang.store') --}}" method="POST" id="addPenjualanForm" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    {{-- Add form fields for: --}}
+                    {{-- Informasi Pembeli (Nama, Alamat, Kontak?) --}}
+                    {{-- Detail Transaksi (Barang selection, Jumlah, Harga, Tanggal) --}}
+                    {{-- Detail Pembayaran (Metode Pembayaran, Status Pembayaran, Upload Bukti?) --}}
+                    {{-- Pengiriman (Metode Pengiriman, Alamat Pengiriman, Status Pengiriman?) --}}
+                    <p>Placeholder for Add Penjualan Form Fields...</p>
+                     {{-- Example Field --}}
+                     <div class="form-group">
+                         <label for="add-nama-pembeli">Nama Pembeli</label>
+                         <input type="text" class="form-control" id="add-nama-pembeli" name="nama_pembeli" required>
+                     </div>
+                     {{-- Add other fields here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updatePenjualanModal" tabindex="-1" aria-labelledby="updatePenjualanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="updatePenjualanModalLabel">Update Penjualan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {{-- @TODO: Action URL is set dynamically via JS --}}
+            <form action="#" method="POST" id="updatePenjualanForm" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="id" id="update-penjualan-id"> {{-- To store the ID of the item being updated --}}
+                <div class="modal-body">
+                    {{-- Add form fields similar to Add Modal, pre-filled via JS --}}
+                    <p>Placeholder for Update Penjualan Form Fields...</p>
+                     {{-- Example Field --}}
+                     <div class="form-group">
+                         <label for="update-nama-pembeli">Nama Pembeli</label>
+                         <input type="text" class="form-control" id="update-nama-pembeli" name="nama_pembeli" required>
+                     </div>
+                     {{-- Add other fields here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePenjualanModal" tabindex="-1" aria-labelledby="deletePenjualanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="deletePenjualanModalLabel">Hapus Penjualan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {{-- @TODO: Action URL is set dynamically via JS --}}
+            <form action="#" method="POST" id="deletePenjualanForm">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <p class="text-center delete-text mb-1">Anda yakin ingin menghapus data penjualan ini?</p>
+                    <p class="text-center font-weight-bold" id="delete-penjualan-info"></p> {{-- Populated by JS --}}
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rincianPenjualanModal" tabindex="-1" aria-labelledby="rincianPenjualanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Adjust size as needed --}}
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="rincianPenjualanModalLabel">Rincian Penjualan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                {{-- @TODO: Structure the details display. Use JS to populate this from data-* attributes --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Informasi Pembeli</h6>
+                        <p><strong>Nama:</strong> <span id="rincian-nama-pembeli"></span></p>
+                        <p><strong>Alamat:</strong> <span id="rincian-alamat-pembeli"></span></p>
+                        {{-- Add more fields as needed --}}
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Detail Transaksi</h6>
+                        <p><strong>Barang:</strong> <span id="rincian-barang"></span></p>
+                        <p><strong>Total Harga:</strong> <span id="rincian-harga"></span></p>
+                        <p><strong>Tanggal:</strong> <span id="rincian-tanggal"></span></p>
+                         {{-- Add more fields as needed --}}
+                    </div>
+                </div>
+                 <hr>
+                 <div class="row">
+                     <div class="col-md-6">
+                         <h6>Detail Pembayaran</h6>
+                         <p><strong>Bukti Bayar:</strong> <span id="rincian-bukti-bayar"></span></p> {{-- Link or Status --}}
+                     </div>
+                     <div class="col-md-6">
+                         <h6>Pengiriman</h6>
+                         <p><strong>Metode:</strong> <span id="rincian-metode-kirim"></span></p>
+                     </div>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn modal-color text-white font-weight-bold rounded-3" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <div class="modal fade" id="filterPenjualanModal" tabindex="-1" aria-labelledby="filterPenjualanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="filterPenjualanModalLabel">Filter Penjualan</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+             {{-- @TODO: Point form to index route with GET method --}}
+            <form action="{{-- route('penjualan_barang.index') --}}" method="GET">
+                <div class="modal-body">
+                    {{-- @TODO: Add filter fields (e.g., date range, status, buyer) --}}
+                    <p>Placeholder for Filter Fields (e.g., Date Range, Status)</p>
+                    <div class="form-group">
+                        <label for="filter-start-date">Tanggal Mulai</label>
+                        <input type="date" class="form-control" id="filter-start-date" name="start_date" value="{{-- request('start_date') --}}">
+                    </div>
+                     <div class="form-group">
+                        <label for="filter-end-date">Tanggal Akhir</label>
+                        <input type="date" class="form-control" id="filter-end-date" name="end_date" value="{{-- request('end_date') --}}">
+                    </div>
+                    {{-- Add other filter inputs --}}
+                </div>
+                <div class="modal-footer">
+                    {{-- Link to clear filters (redirect to index without filter params) --}}
+                     <a href="{{-- route('penjualan_barang.index') --}}" class="btn btn-outline-secondary rounded-3 me-2">Clear</a>
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Apply Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 
