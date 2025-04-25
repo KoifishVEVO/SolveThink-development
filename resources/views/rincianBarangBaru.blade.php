@@ -1051,6 +1051,71 @@
 
 
     <!-- Modal -->
+
+<!-- Rincian Asset Modal -->
+<div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header modal-color text-white">
+            <h5 class="modal-title" id="rincianAssetLabel">Rincian Asset Barang</h5>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body d-flex p-4">
+            <!-- Image container -->
+            <div class="modal-color position-relative"
+                style="width: 250px; height: 250px;  overflow: hidden;">
+                <div id="rincian-default-view"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
+                    <i class="fa fa-image fa-3x" style="color: white;"></i>
+                </div>
+
+                <!-- image  -->
+                <div id="rincian-image-view"
+                    style="display: none; height: 100%; width: 100%; position: relative;">
+                    <img id="rincian-preview-img" src="" alt="Preview"
+                        style="height: 100%; width: 100%; object-fit: contain;">
+                </div>
+            </div>
+
+            <div class="ml-4">
+                <p class="mb-4">
+                    <strong style="color: #555; font-size: 16px;">id Barang</strong><br>
+                    <span style="color: #777; font-size: 14px;" id="rincian-id">nomor id barang</span>
+                </p>
+                <p class="mb-4">
+                    <strong style="color: #555; font-size: 16px;">Nama Barang</strong><br>
+                    <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
+                </p>
+                <p class="mb-4">
+                    <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
+                    <span style="color: #777; font-size: 14px;" id="rincian-jenis">jenis barang</span>
+                </p>
+                {{-- Link --}}
+                <p class="mb-3">
+                    <strong style="color: #555; font-size: 16px;">Link Deskripsi</strong><br>
+
+                    <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
+                        {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide initially if no link --}}
+                        rel="noopener noreferrer">
+                        Link
+                        <i class="fas fa-external-link-alt fa-xs"></i>
+                    </a>
+                    {{-- Text to show if no link is available --}}
+                    <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
+                </p>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-end">
+            <button type="button" class="btn modal-color text-white font-weight-bold"
+                data-dismiss="modal">Tutup</button>
+        </div>
+    </div>
+</div>
+</div>
+
     <!-- Add Asset Modal -->
     <div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetLabel"
         aria-hidden="true">
@@ -1078,7 +1143,7 @@
                             </select>
 
                             <div class="custom-search-select-container" id="custom-nama-barang-container">
-                                <div class="selected-value" data-target-select="nama_barang" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="selected-value" data-target-select="nama_barang_select_add" tabindex="0">Pilih Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list">
@@ -1095,7 +1160,7 @@
                             <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
                             
                             <!-- Hidden Original Select -->
-                            <select name="jenis_barang" id="jenis_barang" class="original-select-hidden" required>
+                            <select name="jenis_barang" id="jenis_barang_select_add" class="original-select-hidden" required>
                                 <option value="">Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Microcontroller">Microcontroller</option>
@@ -1107,7 +1172,7 @@
                         
                             <!-- Custom Searchable Dropdown -->
                             <div class="custom-search-select-container" id="custom-jenis-barang-container">
-                                <div class="selected-value" data-target-select="jenis_barang" tabindex="0">Pilih Jenis Barang...</div>
+                                <div class="selected-value" data-target-select="jenis_barang_select_add" tabindex="0">Pilih Jenis Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list"></ul>
@@ -1127,69 +1192,7 @@
         </div>
     </div>
 
-    <!-- Rincian Asset Modal -->
-    <div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header modal-color text-white">
-                    <h5 class="modal-title" id="rincianAssetLabel">Rincian Asset Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body d-flex p-4">
-                    <!-- Image container -->
-                    <div class="modal-color position-relative"
-                        style="width: 250px; height: 250px;  overflow: hidden;">
-                        <div id="rincian-default-view"
-                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
-                            <i class="fa fa-image fa-3x" style="color: white;"></i>
-                        </div>
-
-                        <!-- image  -->
-                        <div id="rincian-image-view"
-                            style="display: none; height: 100%; width: 100%; position: relative;">
-                            <img id="rincian-preview-img" src="" alt="Preview"
-                                style="height: 100%; width: 100%; object-fit: contain;">
-                        </div>
-                    </div>
-
-                    <div class="ml-4">
-                        <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">id Barang</strong><br>
-                            <span style="color: #777; font-size: 14px;" id="rincian-id">nomor id barang</span>
-                        </p>
-                        <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">Nama Barang</strong><br>
-                            <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
-                        </p>
-                        <p class="mb-4">
-                            <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
-                            <span style="color: #777; font-size: 14px;" id="rincian-jenis">jenis barang</span>
-                        </p>
-                        {{-- Link --}}
-                        <p class="mb-3">
-                            <strong style="color: #555; font-size: 16px;">Link Deskripsi</strong><br>
-
-                            <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
-                                {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide initially if no link --}}
-                                rel="noopener noreferrer">
-                                Link
-                                <i class="fas fa-external-link-alt fa-xs"></i>
-                            </a>
-                            {{-- Text to show if no link is available --}}
-                            <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-end">
-                    <button type="button" class="btn modal-color text-white font-weight-bold"
-                        data-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Update Asset Modal -->
     <div class="modal fade" id="updateAssetModal" tabindex="-1" aria-hidden="true">
@@ -1211,14 +1214,14 @@
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="update-nama">Nama Barang</label>
-                            <select name="nama_barang" id="update-nama" class="original-select-hidden" required>
+                            <select name="nama_barang" id="nama_barang_select_update" class="original-select-hidden" required>
                                 <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                                 @endforeach
                             </select>
                             <div class="custom-search-select-container" id="custom-update-nama-container">
-                                <div class="selected-value" data-target-select="nama_barang" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="selected-value" data-target-select="nama_barang_select_update" tabindex="0">Pilih Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list">
@@ -1233,7 +1236,7 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
-                                <select name="jenis_barang" id="jenis_barang" class="original-select-hidden" required>
+                                <select name="jenis_barang" id="jenis_barang_select_update" class="original-select-hidden" required>
                                     <option value="">Pilih Jenis Barang...</option>
                                     <option value="Sensor">Sensor</option>
                                     <option value="Microcontroller">Microcontroller</option>
@@ -1243,7 +1246,7 @@
                                 </select>
                             
                                 <div class="custom-search-select-container" id="custom-update-jenis-container">
-                                    <div class="selected-value" data-target-select="jenis_barang" tabindex="0">Pilih Jenis Barang...</div>
+                                    <div class="selected-value" data-target-select="jenis_barang_select_update" tabindex="0">Pilih Jenis Barang...</div>
                                     <div class="dropdown-list-container">
                                         <input type="text" class="search-box" placeholder="Cari...">
                                         <ul class="options-list"></ul>
@@ -1551,7 +1554,7 @@
             });
         });
 
-        // Fitur search
+        // Fitur dropdown
         document.addEventListener('DOMContentLoaded', function() {
 
 /**
@@ -1689,10 +1692,12 @@ function closeAllDropdowns(excludeContainerId = null) {
 
 // --- Initialize for both modals ---
 // Reason: Apply the setup to the dropdowns in both Add and Update modals.
-setupSearchableDropdown('custom-nama-barang-container', 'nama_barang');
-setupSearchableDropdown('custom-update-nama-container', 'update-nama');
-setupSearchableDropdown('custom-jenis-barang-container', 'nama_barang');
-setupSearchableDropdown('custom-update-jenis-container', 'update-nama');
+// Add Modal Dropdowns
+        setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
+        setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
+        // Update Modal Dropdowns
+        setupSearchableDropdown('custom_nama_barang_update_container', 'nama_barang_select_update');
+        setupSearchableDropdown('custom_jenis_barang_update_container', 'jenis_barang_select_update');
 
 
 

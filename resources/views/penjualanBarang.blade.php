@@ -133,6 +133,62 @@
         color: #1b2e91;
         text-decoration: none;
     }
+
+
+    /* Pagination */
+
+        /* Style the main pagination container */
+        .dataTables_paginate .pagination {
+            border: 1px solid #272780;
+            border-radius: 0.3rem;
+            display: inline-flex;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+
+        .dataTables_paginate .pagination .page-item+.page-item .page-link {
+            margin-left: 0;
+        }
+
+        /* Style individual links (default state) */
+        .dataTables_paginate .pagination .page-link {
+            border: black !important;
+            color: #272780;
+            background-color: transparent;
+            padding: 0.5rem 0.85rem;
+            transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+        }
+
+        /* Hover state for non-active, non-disabled links */
+        .dataTables_paginate .pagination .page-item:not(.active):not(.disabled) .page-link:hover {
+            background-color: #e9ecef;
+            color: #272780;
+        }
+
+        /* Remove default focus outline if desired */
+        .dataTables_paginate .pagination .page-link:focus {
+            box-shadow: none;
+        }
+
+        /* Active page style */
+        .dataTables_paginate .pagination .page-item.active .page-link {
+            background-color: #272780 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+
+        /* Disabled page style (Previous/Next) */
+        .dataTables_paginate .pagination .page-item.disabled .page-link {
+            color: #adb5bd !important;
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        .batal-btn {
+            color: #272780 !important;
+            border-color: #272780 !important;
+        }
 </style>
 
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -192,12 +248,12 @@
                                 </label>
 
                                 {{-- Filter Button (Placeholder) --}}
-                                {{-- @TODO: Link button to Filter Modal or implement filter logic --}}
+                                
                                 <button class="btn btn-filter btn-sm ml-2" data-toggle="modal" data-target="#filterPenjualanModal">Filter</button>
 
                                 {{-- Tambah Button --}}
-                                {{-- @TODO: Link button to Add Modal --}}
-                                <button class="btn btn-success btn-sm ml-2" data-toggle="modal" data-target="#addPenjualanModal">Tambah</button>
+                                
+                                {{-- <button class="btn btn-success btn-sm ml-2" data-toggle="modal" data-target="#addPenjualanModal">Tambah</button> --}}
                             </div>
                         </div>
                     </div>
@@ -285,14 +341,14 @@
 
                                                     {{-- Hapus Button --}}
                                                      {{-- @TODO: Populate data-* attributes and set correct delete URL --}}
-                                                    <button class="btn btn-sm btn-danger m-1 btn-delete"
+                                                    {{-- <button class="btn btn-sm btn-danger m-1 btn-delete"
                                                             data-id="{{ $item->id }}"
-                                                            data-info="Penjualan ID {{ $item->id }} oleh {{ $item->nama_pembeli }}" {{-- Info for confirmation modal --}}
-                                                            data-url="{{-- route('penjualan_barang.destroy', $item->id) --}}" {{-- Placeholder URL --}}
+                                                            data-info="Penjualan ID {{ $item->id }} oleh {{ $item->nama_pembeli }}" 
+                                                            data-url="" 
                                                             data-toggle="modal"
                                                             data-target="#deletePenjualanModal">
                                                         Hapus
-                                                    </button>
+                                                    </button> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -307,23 +363,45 @@
                     </div>
 
                     {{-- Pagination Row --}}
-                    {{-- Make sure the $penjualan variable is a Paginator instance from your Controller --}}
                     <div class="row">
-                         <div class="col-sm-12 col-md-5">
-                             <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                                 {{-- Showing {{ $penjualan->firstItem() }} to {{ $penjualan->lastItem() }} of {{ $penjualan->total() }} entries --}}
-                                  Showing {{ $penjualan->firstItem() ?? 0 }} to {{ $penjualan->lastItem() ?? 0 }} of {{ $penjualan->total() }} entries {{-- Handle empty data --}}
-                             </div>
-                         </div>
-                         <div class="col-sm-12 col-md-7">
-                             <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                 {{-- Render pagination links, append search query if exists --}}
-                                 {{-- {{ $penjualan->appends(request()->query())->links('pagination::bootstrap-4') }} --}}
-                                  {{-- Use the dummy paginator for display --}}
-                                  {{ $penjualan->links('pagination::bootstrap-4') }}
-                             </div>
-                         </div>
-                     </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" role="status" aria-live="polite">
+                                Showing 1 to 10 of 50 entries
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                <ul class="pagination justify-content-end">
+                                    <!-- Previous Button -->
+                                    <li class="paginate_button page-item disabled">
+                                        <a href="#" class="page-link">Previous</a>
+                                    </li>
+                    
+                                    <!-- Page Numbers -->
+                                    <li class="paginate_button page-item active">
+                                        <a href="#" class="page-link">1</a>
+                                    </li>
+                                    <li class="paginate_button page-item">
+                                        <a href="#" class="page-link">2</a>
+                                    </li>
+                                    <li class="paginate_button page-item">
+                                        <a href="#" class="page-link">3</a>
+                                    </li>
+                                    <li class="paginate_button page-item">
+                                        <a href="#" class="page-link">4</a>
+                                    </li>
+                                    <li class="paginate_button page-item">
+                                        <a href="#" class="page-link">5</a>
+                                    </li>
+                    
+                                    <!-- Next Button -->
+                                    <li class="paginate_button page-item">
+                                        <a href="#" class="page-link">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

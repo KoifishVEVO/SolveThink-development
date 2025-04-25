@@ -64,7 +64,7 @@
             box-shadow: none !important;
             /* Remove any focus shadow */
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
+            transition: none;
             /* Smooth transition for hover */
 
             /* Hide any potential text inside */
@@ -267,7 +267,7 @@
                 z-index: 1040;
                 /* !FIX Hide off-screen using transform */
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                transition: none;
               
                 overflow-y: hidden !important;
                 overflow-x: hidden !important;
@@ -278,6 +278,24 @@
                 width: var(--sidebar-width) !important; 
                 overflow: visible; 
             }
+            body.sidebar-toggled #content-wrapper {
+        margin-left: var(--sidebar-width);
+    }
+    
+    #content-wrapper {
+         margin-left: 0;
+     }
+     /* --- TOPBAR PUSH (THE FIX) --- */
+    /* Push the fixed topbar when sidebar is toggled on mobile */
+    body.sidebar-toggled .navbar.fixed-top {
+         margin-left: var(--sidebar-width);
+    }
+    /* Base mobile margin for topbar */
+    .navbar.fixed-top {
+         margin-left: 0;
+         /* Ensure transition is applied if not global */
+         /* transition: margin-left 0.3s ease; */
+    }
 
             /* When mobile sidebar is shown (usually adds .show class via Bootstrap JS) */
             #accordionSidebar.show {
@@ -285,6 +303,30 @@
                 /* Make sure sidebar overlay is above content, slightly above topbar */
                 /* SB Admin 2 default CSS handles the slide-in */
             }
+            
+
+            /* ICON */
+            body.sidebar-toggled .sidebar-brand-text {
+                display: none !important; /* (fixed line) */
+            }
+
+            /* Show icon when sidebar is toggled */
+            body.sidebar-toggled .sidebar-brand-icon .welcome-icon {
+                display: block !important; /* (fixed line) */
+                max-width: 40px; /* (fixed line) */
+                margin: 0 auto 0.5rem auto; /* (fixed line) */
+            }
+
+            /* Default: icon hidden */
+            .sidebar-brand-icon .welcome-icon {
+                display: none; /* (fixed line) */
+            }
+
+            /* Default: full text shown */
+            .sidebar-brand-text {
+                display: block; /* (fixed line) */
+            }
+            
 
             /* Mobile - Show small icon, hide text when sidebar is active/shown */
             #accordionSidebar.show .sidebar-brand-icon .welcome-icon {
