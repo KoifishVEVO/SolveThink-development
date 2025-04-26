@@ -32,8 +32,8 @@
         #rincianAssetModal .modal-body>div:first-child {
             /* Image container */
             background-color: #272780;
-           
-           
+
+
             /* Keep border */
             border-radius: 5px;
             /* Keep radius */
@@ -168,7 +168,7 @@
         .drop-zone {
             background-color: #272780;
             color: white;
-           
+
             border-radius: 5px;
             padding: 40px 20px;
             text-align: center;
@@ -509,13 +509,13 @@
 
         @media (max-width: 767.98px) {
             /* Target mobile screens */
-            
+
 
             /* --- Make specific modals fullscreen --- */
             #addAssetModal .modal-dialog,
             #rincianAssetModal .modal-dialog,
             #updateAssetModal .modal-dialog {
-                
+
                 max-width: 100%;
                 width: 100%;
                 height: 100%;
@@ -714,13 +714,14 @@
         /* Container for the custom dropdown */
         .custom-search-select-container {
             position: relative;
-            font-family: sans-serif; /* Or your preferred font */
+            font-family: sans-serif;
+            /* Or your preferred font */
         }
 
         /* The visible part showing the selected value */
         .selected-value {
-            padding: 0.375rem 2rem 0.375rem 0.75rem; 
-            border: 1px solid #ced4da; 
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            border: 1px solid #ced4da;
             border-radius: 0.25rem;
             background-color: #fff;
             cursor: pointer;
@@ -733,26 +734,31 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             user-select: none;
-            position: relative; 
+            position: relative;
         }
 
-       
+
         .selected-value::after {
             content: '';
             position: absolute;
-            right: 0.75rem; /* Position arrow on the right */
+            right: 0.75rem;
+            /* Position arrow on the right */
             top: 50%;
             transform: translateY(-50%);
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-top: 6px solid #555; /* Arrow color */
-            pointer-events: none; /* Ensure arrow doesn't block clicks */
+            border-top: 6px solid #555;
+            /* Arrow color */
+            pointer-events: none;
+            /* Ensure arrow doesn't block clicks */
         }
 
-        
+
         .selected-value:focus,
-        .custom-search-select-container.open .selected-value { /* Style when dropdown is open */
-            border-color: #007bff; /* Blue border color */
+        .custom-search-select-container.open .selected-value {
+            /* Style when dropdown is open */
+            border-color: #007bff;
+            /* Blue border color */
             outline: 0;
             /* Keep shadow or remove if you prefer the simpler blue border */
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
@@ -763,15 +769,18 @@
         .dropdown-list-container {
             display: none;
             position: absolute;
-            top: calc(100% + 2px); /* !FIX! Position slightly below with a small gap */
+            top: calc(100% + 2px);
+            /* !FIX! Position slightly below with a small gap */
             left: 0;
             right: 0;
-            border: 1px solid #ced4da; /* !FIX! Full border around the dropdown */
+            border: 1px solid #ced4da;
+            /* !FIX! Full border around the dropdown */
             background-color: #fff;
             max-height: 200px;
             overflow-y: auto;
             z-index: 1051;
-            border-radius: 0.25rem; /* !FIX! Apply border radius to the whole dropdown */
+            border-radius: 0.25rem;
+            /* !FIX! Apply border radius to the whole dropdown */
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
             /* Removed margin-top: -1px and border-top: none */
         }
@@ -784,12 +793,16 @@
         /* Search input inside the dropdown */
         .search-box {
             padding: 0.375rem 0.75rem;
-            width: calc(100% - 16px); /* !FIX! Account for margin */
+            width: calc(100% - 16px);
+            /* !FIX! Account for margin */
             box-sizing: border-box;
-            border: 1px solid #ced4da; /* !FIX! Full border like a standard input */
+            border: 1px solid #ced4da;
+            /* !FIX! Full border like a standard input */
             outline: none;
-            margin: 8px; /* !FIX! Add margin for spacing */
-            border-radius: 0.25rem; /* !FIX! Add border-radius */
+            margin: 8px;
+            /* !FIX! Add margin for spacing */
+            border-radius: 0.25rem;
+            /* !FIX! Add border-radius */
             /* Removed border: none and border-bottom */
         }
 
@@ -799,36 +812,41 @@
             padding: 0;
             margin: 0;
             /* !FIX! Add padding top if search box has margin, or adjust search box margin */
-            padding-top: 0; /* Adjust if needed */
-            padding-bottom: 5px; /* Add some space at the bottom */
+            padding-top: 0;
+            /* Adjust if needed */
+            padding-bottom: 5px;
+            /* Add some space at the bottom */
         }
 
         /* Individual option item */
         .options-list li {
-            padding: 0.5rem 0.75rem; /* Keep padding as is, looks okay */
+            padding: 0.5rem 0.75rem;
+            /* Keep padding as is, looks okay */
             cursor: pointer;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            line-height: 1.5; /* !FIX! Ensure consistent line height */
+            line-height: 1.5;
+            /* !FIX! Ensure consistent line height */
         }
 
         /* Hover/Highlight effect for options */
         .options-list li:hover,
         .options-list li.highlighted {
-            background-color: #f8f9fa; /* !FIX! Slightly lighter grey for hover */
-            color: #16181b; /* !FIX! Ensure text is readable on hover */
+            background-color: #f8f9fa;
+            /* !FIX! Slightly lighter grey for hover */
+            color: #16181b;
+            /* !FIX! Ensure text is readable on hover */
         }
 
         /* Style for hidden original select */
         .original-select-hidden {
             display: none !important;
         }
-
     </style>
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
- 
+
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -877,13 +895,16 @@
                                 </div>
                             </div>
                             {{-- <div class="col-sm-12 col-md-6">
-                    <form method="GET" action="{{ route('aset_barang.index') }}" class="d-flex justify-content-md-end">
-                        <label class="mr-2">Search:</label>
-                        <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" placeholder="Cari barang...">
-                        <button type="submit" class="btn btn-success btn-sm ml-2">Cari</button>
-                        <a href="{{ route('aset_barang.index') }}" class="btn btn-secondary btn-sm ml-2">Reset</a>
-                    </form>
-                </div> --}}
+                                <form method="GET" action="{{ route('aset_barang.index') }}"
+                                    class="d-flex justify-content-md-end">
+                                    <label class="mr-2">Search:</label>
+                                    <input type="search" name="search" value="{{ request('search') }}"
+                                        class="form-control form-control-sm" placeholder="Cari barang...">
+                                    <button type="submit" class="btn btn-success btn-sm ml-2">Cari</button>
+                                    <a href="{{ route('aset_barang.index') }}"
+                                        class="btn btn-secondary btn-sm ml-2">Reset</a>
+                                </form>
+                            </div> --}}
                         </div>
 
                         <!-- Table row -->
@@ -960,10 +981,9 @@
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ $item->namaBarang && $item->namaBarang->gambar_barang ? asset('storage/uploads/' . $item->namaBarang->gambar_barang) : '' }}"
-                                                            data-desc="{{ $item->namaBarang->deskripsi }}"
-                                                            data-toggle="modal" data-target="#rincianAssetModal"
-                                                            title="Rincian">
-                                                            
+                                                            data-desc="{{ $item->namaBarang->deskripsi }}" data-toggle="modal"
+                                                            data-target="#rincianAssetModal" title="Rincian">
+
                                                             Rincian
 
                                                         </button>
@@ -971,14 +991,13 @@
                                                         {{-- Update Button --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->namaBarang->id ?? '' }}"
-                                                            {{-- Pass ID for select --}}
-                                                            data-harga="{{ $item->harga_jual_barang }}"
+                                                            data-nama="{{ $item->namaBarang->id ?? '' }}" {{-- Pass ID for
+                                                            select --}} data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ $item->namaBarang && $item->namaBarang->gambar_barang ? asset('storage/uploads/' . $item->namaBarang->gambar_barang) : '' }}"
                                                             data-url="{{ route('aset_barang.update', $item->id) }}"
-                                                            data-toggle="modal" data-target="#updateAssetModal"
-                                                            title="Update"> {{-- Added title --}}
+                                                            data-toggle="modal" data-target="#updateAssetModal" title="Update">
+                                                            {{-- Added title --}}
                                                             Update
 
                                                         </button>
@@ -988,8 +1007,8 @@
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang ?? 'N/A' }}"
                                                             data-url="{{ route('aset_barang.destroy', $item->id) }}"
-                                                            data-toggle="modal" data-target="#deleteAssetModal"
-                                                            title="Hapus"> {{-- Added title --}}
+                                                            data-toggle="modal" data-target="#deleteAssetModal" title="Hapus">
+                                                            {{-- Added title --}}
                                                             Hapus
 
                                                         </button>
@@ -1016,16 +1035,14 @@
                                         {{-- Tombol Previous --}}
                                         <li
                                             class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
-                                            <a href="{{ $barang->previousPageUrl() ?? '#' }}"
-                                                class="page-link">Previous</a>
+                                            <a href="{{ $barang->previousPageUrl() ?? '#' }}" class="page-link">Previous</a>
                                         </li>
 
                                         {{-- Nomor Halaman --}}
                                         @for ($i = 1; $i <= $barang->lastPage(); $i++)
                                             <li
                                                 class="paginate_button page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
-                                                <a href="{{ $barang->url($i) }}"
-                                                    class="page-link">{{ $i }}</a>
+                                                <a href="{{ $barang->url($i) }}" class="page-link">{{ $i }}</a>
                                             </li>
                                         @endfor
 
@@ -1052,69 +1069,66 @@
 
     <!-- Modal -->
 
-<!-- Rincian Asset Modal -->
-<div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header modal-color text-white">
-            <h5 class="modal-title" id="rincianAssetLabel">Rincian Asset Barang</h5>
-            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body d-flex p-4">
-            <!-- Image container -->
-            <div class="modal-color position-relative"
-                style="width: 250px; height: 250px;  overflow: hidden;">
-                <div id="rincian-default-view"
-                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
-                    <i class="fa fa-image fa-3x" style="color: white;"></i>
+    <!-- Rincian Asset Modal -->
+    <div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title" id="rincianAssetLabel">Rincian Asset Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body d-flex p-4">
+                    <!-- Image container -->
+                    <div class="modal-color position-relative" style="width: 250px; height: 250px;  overflow: hidden;">
+                        <div id="rincian-default-view"
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 100%; height: 100%;">
+                            <i class="fa fa-image fa-3x" style="color: white;"></i>
+                        </div>
 
-                <!-- image  -->
-                <div id="rincian-image-view"
-                    style="display: none; height: 100%; width: 100%; position: relative;">
-                    <img id="rincian-preview-img" src="" alt="Preview"
-                        style="height: 100%; width: 100%; object-fit: contain;">
+                        <!-- image  -->
+                        <div id="rincian-image-view" style="display: none; height: 100%; width: 100%; position: relative;">
+                            <img id="rincian-preview-img" src="" alt="Preview"
+                                style="height: 100%; width: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <div class="ml-4">
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">id Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-id">nomor id barang</span>
+                        </p>
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">Nama Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
+                        </p>
+                        <p class="mb-4">
+                            <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
+                            <span style="color: #777; font-size: 14px;" id="rincian-jenis">jenis barang</span>
+                        </p>
+                        {{-- Link --}}
+                        <p class="mb-3">
+                            <strong style="color: #555; font-size: 16px;">Link Deskripsi</strong><br>
+
+                            <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
+                                {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide
+                                initially if no link --}} rel="noopener noreferrer">
+                                Link
+                                <i class="fas fa-external-link-alt fa-xs"></i>
+                            </a>
+                            {{-- Text to show if no link is available --}}
+                            <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn modal-color text-white font-weight-bold"
+                        data-dismiss="modal">Tutup</button>
                 </div>
             </div>
-
-            <div class="ml-4">
-                <p class="mb-4">
-                    <strong style="color: #555; font-size: 16px;">id Barang</strong><br>
-                    <span style="color: #777; font-size: 14px;" id="rincian-id">nomor id barang</span>
-                </p>
-                <p class="mb-4">
-                    <strong style="color: #555; font-size: 16px;">Nama Barang</strong><br>
-                    <span style="color: #777; font-size: 14px;" id="rincian-nama">nama barang</span>
-                </p>
-                <p class="mb-4">
-                    <strong style="color: #555; font-size: 16px;">Jenis Barang</strong><br>
-                    <span style="color: #777; font-size: 14px;" id="rincian-jenis">jenis barang</span>
-                </p>
-                {{-- Link --}}
-                <p class="mb-3">
-                    <strong style="color: #555; font-size: 16px;">Link Deskripsi</strong><br>
-
-                    <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
-                        {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide initially if no link --}}
-                        rel="noopener noreferrer">
-                        Link
-                        <i class="fas fa-external-link-alt fa-xs"></i>
-                    </a>
-                    {{-- Text to show if no link is available --}}
-                    <span id="rincian-no-link" class="text-muted" style="display: none;">(Tidak ada link)</span>
-                </p>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-end">
-            <button type="button" class="btn modal-color text-white font-weight-bold"
-                data-dismiss="modal">Tutup</button>
         </div>
     </div>
-</div>
-</div>
 
     <!-- Add Asset Modal -->
     <div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetLabel"
@@ -1135,19 +1149,21 @@ aria-hidden="true">
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="nama_barang">Nama Barang</label>
                             {{-- CURRENTLY FIXING DROPDOWN, MUST ADJUST OTHER USES OF THE ORIGINAL NAME --}}
-                            <select name="nama_barang" id="nama_barang_select_add" class="original-select-hidden form-control" required>
+                            <select name="nama_barang" id="nama_barang_select_add"
+                                class="original-select-hidden form-control" required>
                                 <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                                 @endforeach
                             </select>
 
-                            <div class="custom-search-select-container" id="custom-nama-barang-container">
-                                <div class="selected-value" data-target-select="nama_barang_select_add" tabindex="0">Pilih Nama Barang...</div>
+                            <div class="custom-search-select-container" id="custom_nama_barang_add_container">
+                                <div class="selected-value" data-target-select="nama_barang_select_add" tabindex="0">Pilih
+                                    Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list">
-                                        </ul>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -1158,9 +1174,10 @@ aria-hidden="true">
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
-                            
+
                             <!-- Hidden Original Select -->
-                            <select name="jenis_barang" id="jenis_barang_select_add" class="original-select-hidden" required>
+                            <select name="jenis_barang" id="jenis_barang_select_add" class="original-select-hidden"
+                                required>
                                 <option value="">Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Microcontroller">Microcontroller</option>
@@ -1169,10 +1186,11 @@ aria-hidden="true">
                                 <option value="Equipment">Equipment</option>
                                 <!-- Tambahkan opsi lainnya di sini -->
                             </select>
-                        
+
                             <!-- Custom Searchable Dropdown -->
-                            <div class="custom-search-select-container" id="custom-jenis-barang-container">
-                                <div class="selected-value" data-target-select="jenis_barang_select_add" tabindex="0">Pilih Jenis Barang...</div>
+                            <div class="custom-search-select-container" id="custom_jenis_barang_add_container">
+                                <div class="selected-value" data-target-select="jenis_barang_select_add" tabindex="0">Pilih
+                                    Jenis Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list"></ul>
@@ -1192,7 +1210,7 @@ aria-hidden="true">
         </div>
     </div>
 
-    
+
 
     <!-- Update Asset Modal -->
     <div class="modal fade" id="updateAssetModal" tabindex="-1" aria-hidden="true">
@@ -1214,45 +1232,48 @@ aria-hidden="true">
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="update-nama">Nama Barang</label>
-                            <select name="nama_barang" id="nama_barang_select_update" class="original-select-hidden" required>
+                            <select name="nama_barang" id="nama_barang_select_update" class="original-select-hidden"
+                                required>
                                 <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                                 @endforeach
                             </select>
                             <div class="custom-search-select-container" id="custom-update-nama-container">
-                                <div class="selected-value" data-target-select="nama_barang_select_update" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="selected-value" data-target-select="nama_barang_select_update" tabindex="0">
+                                    Pilih Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list">
-                                        </ul>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
-                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
-                            required>
+                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3" required>
 
-                            <div class="form-group mb-3">
-                                <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
-                                <select name="jenis_barang" id="jenis_barang_select_update" class="original-select-hidden" required>
-                                    <option value="">Pilih Jenis Barang...</option>
-                                    <option value="Sensor">Sensor</option>
-                                    <option value="Microcontroller">Microcontroller</option>
-                                    <option value="Actuator">Actuator</option>
-                                    <option value="Power">Power</option>
-                                    <option value="Equipment">Equipment</option>
-                                </select>
-                            
-                                <div class="custom-search-select-container" id="custom-update-jenis-container">
-                                    <div class="selected-value" data-target-select="jenis_barang_select_update" tabindex="0">Pilih Jenis Barang...</div>
-                                    <div class="dropdown-list-container">
-                                        <input type="text" class="search-box" placeholder="Cari...">
-                                        <ul class="options-list"></ul>
-                                    </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
+                            <select name="jenis_barang" id="jenis_barang_select_update" class="original-select-hidden"
+                                required>
+                                <option value="">Pilih Jenis Barang...</option>
+                                <option value="Sensor">Sensor</option>
+                                <option value="Microcontroller">Microcontroller</option>
+                                <option value="Actuator">Actuator</option>
+                                <option value="Power">Power</option>
+                                <option value="Equipment">Equipment</option>
+                            </select>
+
+                            <div class="custom-search-select-container" id="custom-update-jenis-container">
+                                <div class="selected-value" data-target-select="jenis_barang_select_update" tabindex="0">
+                                    Pilih Jenis Barang...</div>
+                                <div class="dropdown-list-container">
+                                    <input type="text" class="search-box" placeholder="Cari...">
+                                    <ul class="options-list"></ul>
                                 </div>
                             </div>
+                        </div>
 
                     </div>
 
@@ -1300,7 +1321,7 @@ aria-hidden="true">
     </div>
 
 
-    
+
 
     @if (session('success'))
         <script>
@@ -1327,133 +1348,201 @@ aria-hidden="true">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script>
-        // (search in modal)
         document.addEventListener('DOMContentLoaded', function() {
-
-            function setupSearchableDropdown(containerSelector) {
-                const container = document.querySelector(containerSelector);
-                if (!container) return;
-
-                const triggerButton = container.querySelector('.dropdown-toggle');
-                const hiddenInput = container.querySelector('input[type="hidden"]');
-                const dropdownMenu = container.querySelector('.dropdown-menu');
-                const searchInput = container.querySelector('.search-input');
-                const itemsList = container.querySelector('.dropdown-items-list');
-                const selectedTextSpan = triggerButton.querySelector('.selected-text');
-
-                // --- Filter items based on search input ---
-                searchInput.addEventListener('input', function() {
-                    const searchTerm = searchInput.value.toLowerCase();
-                    const items = itemsList.querySelectorAll('.searchable-item');
-
-                    items.forEach(item => {
-                        const itemText = item.textContent.toLowerCase();
-                        // Show/hide based on match. Skip the placeholder item.
-                        if (item.dataset.value ===
-                            "") { // Keep placeholder always visible or handle differently
-                            // item.style.display = 'block'; // Or hide it: item.style.display = 'none';
-                            return; // Skip filtering the placeholder
+    
+            /**
+             * Initializes a custom searchable dropdown.
+             * @param {string} containerId - The ID of the main container div.
+             * @param {string} originalSelectId - The ID of the original hidden select.
+             */
+            function setupSearchableDropdown(containerId, originalSelectId) {
+                const container = document.getElementById(containerId);
+                if (!container) {
+                    console.warn(`Searchable dropdown container not found: #${containerId}`);
+                    return;
+                }
+                const originalSelect = document.getElementById(originalSelectId);
+                if (!originalSelect) {
+                    console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
+                    return;
+                }
+    
+                const selectedValueDiv = container.querySelector('.selected-value');
+                const dropdownContainer = container.querySelector('.dropdown-list-container');
+                const searchBox = container.querySelector('.search-box');
+                const optionsList = container.querySelector('.options-list');
+                let listItems = [];
+    
+                function populateOptionsList() {
+                    optionsList.innerHTML = '';
+                    listItems = [];
+                    Array.from(originalSelect.options).forEach(option => {
+                        const li = document.createElement('li');
+                        li.textContent = option.textContent;
+                        li.dataset.value = option.value;
+                        if (!option.value) {
+                            li.classList.add('placeholder-option');
                         }
-
-                        if (itemText.includes(searchTerm)) {
-                            item.classList.remove('d-none'); // Use Bootstrap class for consistency
-                        } else {
-                            item.classList.add('d-none');
+                        optionsList.appendChild(li);
+                        if (option.value) {
+                            listItems.push(li);
                         }
                     });
-                });
-
-                // --- Handle item selection ---
-                itemsList.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('searchable-item')) {
-                        e.preventDefault();
-                        const selectedValue = e.target.dataset.value;
-                        const selectedText = e.target.textContent;
-
-                        // Update hidden input and visible text
-                        hiddenInput.value = selectedValue;
-                        selectedTextSpan.textContent = selectedText;
-
-                        // Manually close dropdown (using Bootstrap's jQuery dependency here)
-                        $(triggerButton).dropdown('toggle');
-
-                        // Trigger change event for any other scripts listening
-                        var event = new Event('change', {
-                            bubbles: true
-                        });
-                        hiddenInput.dispatchEvent(event);
+                }
+                populateOptionsList();
+    
+                function syncDisplayWithSelect() {
+                    if (!originalSelect || !selectedValueDiv) return;
+    
+                    const selectedOption = originalSelect.options[originalSelect.selectedIndex];
+                    if (selectedOption) {
+                        selectedValueDiv.textContent = selectedOption.textContent;
+                        if (!selectedOption.value) {
+                            selectedValueDiv.classList.add('placeholder-selected');
+                        } else {
+                            selectedValueDiv.classList.remove('placeholder-selected');
+                        }
+                    } else {
+                        selectedValueDiv.textContent = 'Select...';
+                        selectedValueDiv.classList.add('placeholder-selected');
+                    }
+                }
+                syncDisplayWithSelect();
+    
+                selectedValueDiv.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    if (!dropdownContainer || !searchBox) return;
+                    closeAllDropdowns(containerId);
+                    dropdownContainer.classList.toggle('show');
+                    if (dropdownContainer.classList.contains('show')) {
+                        searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+                        searchBox.focus();
                     }
                 });
-
-                // --- Reset search when dropdown is shown ---
-                // Need jQuery here because Bootstrap's dropdown events rely on it
-                $(triggerButton).on('shown.bs.dropdown', function() {
-                    searchInput.value = ''; // Clear search box
-                    // Show all items except placeholder if needed
-                    const items = itemsList.querySelectorAll('.searchable-item');
-                    items.forEach(item => item.classList.remove('d-none'));
-                    searchInput.focus(); // Focus search input
+    
+                document.addEventListener('click', (event) => {
+                    if (container && !container.contains(event.target)) {
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                    }
                 });
-
-                // Reset to placeholder text if hidden input is empty (useful for Update modal init)
-                if (!hiddenInput.value && hiddenInput.required) { // Check if required and empty
-                    const placeholderItem = itemsList.querySelector('.searchable-item[data-value=""]');
-                    selectedTextSpan.textContent = placeholderItem ? placeholderItem.textContent : 'Pilih...';
+    
+                optionsList.addEventListener('click', (event) => {
+                    if (originalSelect && selectedValueDiv && dropdownContainer && event.target.tagName === 'LI' && event.target.dataset.value) {
+                        selectedValueDiv.textContent = event.target.textContent;
+                        originalSelect.value = event.target.dataset.value;
+                        dropdownContainer.classList.remove('show');
+                        originalSelect.dispatchEvent(new Event('change'));
+                    } else if (dropdownContainer && event.target.tagName === 'LI' && !event.target.dataset.value) {
+                        dropdownContainer.classList.remove('show');
+                    }
+                });
+    
+                searchBox.addEventListener('input', () => {
+                    const searchTerm = searchBox.value.toLowerCase();
+                    listItems.forEach(li => {
+                        const itemText = li.textContent.toLowerCase();
+                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
+                    });
+                });
+    
+                originalSelect.addEventListener('change', syncDisplayWithSelect);
+    
+                const modal = container.closest('.modal');
+                if (modal) {
+                    if (typeof $ !== 'undefined') {
+                        $(modal).on('hidden.bs.modal', function() {
+                            if (modal.id === 'addAssetModal') {
+                                if (originalSelect.options.length > 0) {
+                                    originalSelect.selectedIndex = 0;
+                                }
+                                syncDisplayWithSelect();
+                                if (searchBox) searchBox.value = '';
+                                listItems.forEach(li => li.style.display = '');
+                                if (dropdownContainer) dropdownContainer.classList.remove('show');
+                            }
+                        });
+                    } else {
+                        console.warn('jQuery not found, modal reset might not work correctly.');
+                    }
                 }
             }
-
-            // Initialize for Add Modal
-            setupSearchableDropdown('#addAssetModal .searchable-dropdown-container');
-
-            // Initialize for Update Modal
-            setupSearchableDropdown('#updateAssetModal .searchable-dropdown-container');
-
-
-            // --- Populate Update Modal (Example - NEEDS to be in your 'show.bs.modal' event) ---
-            $('#updateAssetModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Button that triggered the modal
-                var assetNamaValue = button.data('nama'); // Get the value (e.g., "Sensor")
-
-                // Find the corresponding item text
-                var selectedItemText = 'Pilih Nama Barang...'; // Default
-                var itemLink = $(this).find('#update-nama-list .searchable-item[data-value="' +
-                    assetNamaValue + '"]');
-                if (itemLink.length) {
-                    selectedItemText = itemLink.text();
-                }
-
-                // Set the hidden input value
-                $(this).find('#update-nama-value').val(assetNamaValue);
-                // Set the visible button text
-                $(this).find('#update-nama-trigger .selected-text').text(selectedItemText);
-
-                // Other update modal population logic (ID, price, stock, image)...
-            });
-
-            // --- Reset Add Modal state on close ---
-            $('#addAssetModal').on('hidden.bs.modal', function() {
-                const container = document.querySelector('#addAssetModal .searchable-dropdown-container');
-                const hiddenInput = container.querySelector('input[type="hidden"]');
-                const selectedTextSpan = container.querySelector('.selected-text');
-                const placeholderItem = container.querySelector('.searchable-item[data-value=""]');
-
-                hiddenInput.value = ""; // Clear hidden value
-                selectedTextSpan.textContent = placeholderItem ? placeholderItem.textContent :
-                    'Pilih...'; // Reset text
-
-                // Also reset other form fields if not done by form.reset()
-                $(this).find('form').trigger('reset'); // Reset other standard fields
-            });
-
-        });
-
-        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('searchForm').submit();
+    
+            function closeAllDropdowns(excludeContainerId = null) {
+                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
+                    const currentContainer = dropdown.closest('.custom-search-select-container');
+                    if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
+                        dropdown.classList.remove('show');
+                    }
+                });
             }
-        });
-        // Tombol Rincian - Isi otomatis modal dengan data
+    
+            setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
+            setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
+            setupSearchableDropdown('custom-update-nama-container', 'nama_barang_select_update');
+            setupSearchableDropdown('custom-update-jenis-container', 'jenis_barang_select_update');
+    
+            document.querySelectorAll('.btn-update').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const namaBarangId = this.dataset.nama;
+                    const harga = this.dataset.harga;
+                    const jenisBarangValue = this.dataset.jenis;
+                    const gambar = this.dataset.gambar;
+                    const url = this.dataset.url;
+    
+                    console.log(`Button Data: id=${id}, namaId=${namaBarangId}, harga=${harga}, jenisValue=${jenisBarangValue}, url=${url}`);
+    
+                    const updateModalElement = document.getElementById('updateAssetModal');
+                    if (!updateModalElement) {
+                        console.error("Update modal element (#updateAssetModal) not found!");
+                        return;
+                    }
+                    const updateForm = updateModalElement.querySelector('form');
+                    const idInput = updateModalElement.querySelector('#update-id');
+                    const namaSelect = updateModalElement.querySelector('#nama_barang_select_update');
+                    const hargaInput = updateModalElement.querySelector('#update-harga');
+                    const jenisSelect = updateModalElement.querySelector('#jenis_barang_select_update');
+    
+                    if (updateForm) updateForm.action = url || '#';
+                    if (idInput) idInput.value = id || '';
+                    if (hargaInput) hargaInput.value = harga || '';
+    
+                    if (namaSelect) {
+                        namaSelect.value = namaBarangId || "";
+                        console.log(`Set nama_barang_select_update value to: ${namaSelect.value}`);
+                        namaSelect.dispatchEvent(new Event('change'));
+                    } else {
+                        console.error('Element with ID "nama_barang_select_update" not found.');
+                    }
+    
+                    if (jenisSelect) {
+                        jenisSelect.value = jenisBarangValue || "";
+                        console.log(`Set jenis_barang_select_update value to: ${jenisSelect.value}`);
+                        jenisSelect.dispatchEvent(new Event('change'));
+                    } else {
+                        console.error('Element with ID "jenis_barang_select_update" not found.');
+                    }
+    
+                    const previewImg = updateModalElement.querySelector('#update-preview-img');
+                    const previewWrapper = updateModalElement.querySelector('#update-image-preview');
+                    const uploadView = updateModalElement.querySelector('#update-button-view');
+    
+                    if (previewImg && previewWrapper && uploadView) {
+                        if (gambar) {
+                            previewImg.src = gambar;
+                            previewWrapper.style.display = 'block';
+                            uploadView.style.display = 'none';
+                        } else {
+                            previewImg.src = '';
+                            previewWrapper.style.display = 'none';
+                            uploadView.style.display = 'flex';
+                        }
+                    }
+                });
+            });
+    
+            // Tombol Rincian - Isi otomatis modal dengan data
         document.querySelectorAll('.rincian-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const id = this.dataset.id;
@@ -1517,238 +1606,10 @@ aria-hidden="true">
                 document.getElementById('delete-id').value = id;
             });
         });
+    
+            // Add your Fetch listeners ('Tambah Sama', 'Kurangi') here as well...
 
-
-        // Tombol Update - Isi otomatis modal
-        document.querySelectorAll('.btn-update').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const nama = this.dataset.nama;
-                const harga = this.dataset.harga;
-                const jenis = this.dataset.jenis;
-                const gambar = this.dataset.gambar;
-                const url = this.dataset.url;
-
-                console.log(jenis)
-                document.getElementById('update-id').value = id;
-                const selectNama = document.getElementById('update-nama');
-                selectNama.value = nama;
-
-                document.getElementById('update-harga').value = harga;
-                document.getElementById('update-jenis').value = jenis;
-
-                document.querySelector('#updateAssetModal form').action = url;
-
-                const previewImg = document.getElementById('update-preview-img');
-                const previewWrapper = document.getElementById('update-image-preview');
-                const uploadView = document.getElementById('update-button-view');
-
-                if (gambar) {
-                    previewImg.src = gambar;
-                    previewWrapper.style.display = 'block';
-                    uploadView.style.display = 'none';
-                } else {
-                    previewWrapper.style.display = 'none';
-                    uploadView.style.display = 'flex';
-                }
-            });
-        });
-
-        // Fitur dropdown
-        document.addEventListener('DOMContentLoaded', function() {
-
-/**
- * Initializes a custom searchable dropdown.
- * @param {string} containerId - The ID of the main container div for the custom dropdown.
- * @param {string} originalSelectId - The ID of the original (now hidden) select element.
- */
-function setupSearchableDropdown(containerId, originalSelectId) {
-    const container = document.getElementById(containerId);
-    if (!container) return; // Exit if container not found
-
-    const originalSelect = document.getElementById(originalSelectId);
-    if (!originalSelect) return; // Exit if original select not found
-
-    const selectedValueDiv = container.querySelector('.selected-value');
-    const dropdownContainer = container.querySelector('.dropdown-list-container');
-    const searchBox = container.querySelector('.search-box');
-    const optionsList = container.querySelector('.options-list');
-
-    // --- Populate the custom list from the original select ---
-    // Reason: Creates the visual list based on the hidden select's options.
-    optionsList.innerHTML = ''; // Clear existing options
-    let listItems = []; // To store references to the li elements for filtering
-    Array.from(originalSelect.options).forEach(option => {
-        if (option.value) { // Skip empty value option if it's just a placeholder
-            const li = document.createElement('li');
-            li.textContent = option.textContent;
-            li.dataset.value = option.value; // Store the value in a data attribute
-            optionsList.appendChild(li);
-            listItems.push(li); // Add to array for filtering
-        }
-    });
-
-    // --- Toggle Dropdown Visibility ---
-    // Reason: Show/hide the dropdown when the display area is clicked.
-    selectedValueDiv.addEventListener('click', (event) => {
-        event.stopPropagation(); // Prevent click from bubbling to document listener
-        closeAllDropdowns(containerId); // Close others before opening this one
-        dropdownContainer.classList.toggle('show');
-        if (dropdownContainer.classList.contains('show')) {
-            searchBox.focus(); // Focus search box when opened
-        }
-    });
-
-    // --- Close dropdown when clicking outside ---
-    // Reason: Standard dropdown behavior to close when focus is lost.
-    document.addEventListener('click', (event) => {
-        if (!container.contains(event.target)) {
-            dropdownContainer.classList.remove('show');
-        }
-    });
-
-    // --- Handle Option Selection ---
-    // Reason: Update display and hidden select when an option is clicked.
-    optionsList.addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI') {
-            selectedValueDiv.textContent = event.target.textContent; // Update display text
-            originalSelect.value = event.target.dataset.value; // Update hidden select value
-            dropdownContainer.classList.remove('show'); // Close dropdown
-
-            // Optional: Trigger change event on original select if needed by other scripts
-            originalSelect.dispatchEvent(new Event('change'));
-        }
-    });
-
-    // --- Handle Searching/Filtering ---
-    // Reason: Filter the list based on search box input.
-    searchBox.addEventListener('input', () => {
-        const searchTerm = searchBox.value.toLowerCase();
-        listItems.forEach(li => {
-            const itemText = li.textContent.toLowerCase();
-            // Show item if search term is empty or item text includes the term
-            li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
-        });
-    });
-
-     // --- Update custom dropdown if original select value changes externally (e.g., setting initial value) ---
-     // Reason: Keep the custom display synchronized with the actual select value.
-     function syncDisplayWithSelect() {
-        const selectedOption = originalSelect.options[originalSelect.selectedIndex];
-        if (selectedOption && selectedOption.value) {
-            selectedValueDiv.textContent = selectedOption.textContent;
-        } else {
-            // Find the placeholder text from the first option if it has no value
-             const placeholderOption = Array.from(originalSelect.options).find(opt => !opt.value);
-             selectedValueDiv.textContent = placeholderOption ? placeholderOption.textContent : 'Select...';
-        }
-     }
-     // Initial sync
-     syncDisplayWithSelect();
-     // Sync if the original select changes programmatically
-     originalSelect.addEventListener('change', syncDisplayWithSelect);
-
-
-      // --- Reset dropdown when modal is hidden (Bootstrap specific) ---
-      // Reason: Reset selection and search when modal closes for next use.
-      const modal = container.closest('.modal');
-      if (modal) {
-        
-             if (typeof $ !== 'undefined') {
-                $(modal).on('hidden.bs.modal', function () {
-                    originalSelect.selectedIndex = 0; // Reset to placeholder
-                    syncDisplayWithSelect();
-                    searchBox.value = ''; // Clear search
-                    listItems.forEach(li => li.style.display = ''); // Show all items
-                    dropdownContainer.classList.remove('show'); // Ensure closed
-                });
-             }
-      }
-
-} // End of setupSearchableDropdown function
-
-// --- Helper to close other dropdowns ---
-function closeAllDropdowns(excludeContainerId = null) {
-    document.querySelectorAll('.custom-search-select-container .dropdown-list-container').forEach(dropdown => {
-        if (!excludeContainerId || dropdown.closest('.custom-search-select-container').id !== excludeContainerId) {
-            dropdown.classList.remove('show');
-        }
-    });
-}
-
-
-// --- Initialize for both modals ---
-// Add Modal Dropdowns
-        setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
-        setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
-        setupSearchableDropdown('custom_nama_barang_update_container', 'nama_barang_select_update');
-        setupSearchableDropdown('custom_jenis_barang_update_container', 'jenis_barang_select_update');
-
-
-
-
- // --- Handle Update Modal Specifics (Example: loading data) ---
- // You might need to re-populate or re-sync the update modal dropdown
- // when it's shown, especially if you load data dynamically.
- const updateModal = document.getElementById('updateAssetModal');
- if (updateModal) {
-    // Example using jQuery for Bootstrap event
-     if (typeof $ !== 'undefined') {
-        $(updateModal).on('show.bs.modal', function() {
-            // Example: Simulate setting the value when the modal opens
-            // Replace this logic with how you actually get the asset's current 'nama_barang' ID
-            const currentAssetBarangId = document.getElementById('update-id').value; // Assuming update-id holds the barang_id
-            const updateSelect = document.getElementById('update-nama');
-            if (currentAssetBarangId) {
-                updateSelect.value = currentAssetBarangId;
-            } else {
-                 updateSelect.selectedIndex = 0; // Default to placeholder if no ID
-            }
-             // Trigger sync after setting value
-             updateSelect.dispatchEvent(new Event('change'));
-        });
-     }
-      // Example using Bootstrap 5 Vanilla JS:
-      // const bootstrapUpdateModal = bootstrap.Modal.getInstance(updateModal);
-      // if (bootstrapUpdateModal) {
-      //     updateModal.addEventListener('show.bs.modal', () => {
-      //          // ... (logic to set updateSelect.value) ...
-      //          updateSelect.dispatchEvent(new Event('change')); // Sync display
-      //      });
-      // }
-
- }
-
-
-});
-
-
-        // document.addEventListener("click", function(event) {
-        //     if (event.target.closest(".btn-tambah")) {
-        //         let button = event.target.closest(".btn-tambah");
-
-        //         let data = {
-        //             nama_barang: parseInt(button.getAttribute("data-nama")),
-        //             harga_jual_barang: parseInt(button.getAttribute("data-harga")),
-        //             jenis_barang: button.getAttribute("data-jenis"),
-        //             _token: "{{ csrf_token() }}"
-        //         };
-
-        //         fetch("{{ route('aset_barang.storeSame') }}", {
-        //                 method: "POST",
-        //                 headers: {
-        //                     "Content-Type": "application/json",
-        //                     "X-CSRF-TOKEN": data._token
-        //                 },
-        //                 body: JSON.stringify(data)
-        //             })
-        //             .then(response => response.json())
-        //             .then(() => location.reload())
-        //             .catch(error => console.error("Error:", error));
-        //     }
-        // });
-
-        document.addEventListener("click", function(event) {
+            document.addEventListener("click", function(event) {
             if (event.target.closest(".btn-tambah")) {
                 let button = event.target.closest(".btn-tambah");
 
@@ -1856,5 +1717,7 @@ function closeAllDropdowns(excludeContainerId = null) {
                     });
             }
         });
+        });
     </script>
+    
 @endsection

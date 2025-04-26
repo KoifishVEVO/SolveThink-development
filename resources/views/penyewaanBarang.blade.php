@@ -177,8 +177,109 @@
          color: #00c853; /* Dark green text */
        
     }
-    /* Add other statuses as needed */
+    /* Mobile style */
+    @media (max-width: 767.98px) {
+    /* Target mobile screens */
 
+    /* --- Make specific modals fullscreen --- */
+    /* ADD #rincianPenjualanModal to the list */
+    #addAssetModal .modal-dialog,
+    #rincianAssetModal .modal-dialog,
+    #updateAssetModal .modal-dialog,
+    #rincianPenyewaanModal .modal-dialog { /* Added */
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        position: fixed; /* Position relative to viewport */
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        transform: none !important; /* Override potential centering transforms */
+        /* Remove the centered class effect */
+        display: flex;
+        align-items: normal;
+        justify-content: normal;
+    }
+
+    /* ADD #rincianPenjualanModal to the list */
+    #addAssetModal .modal-content,
+    #rincianAssetModal .modal-content,
+    #updateAssetModal .modal-content,
+    #rincianPenyewaanModal .modal-content { /* Added */
+        height: 100%; /* Fill the dialog height */
+        border-radius: 0; /* No rounded corners */
+        border: none; /* No border */
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack header/body/footer */
+        flex: 1; /* Allow content to fill dialog */
+    }
+
+    /* Allow modal body to scroll */
+    /* ADD #rincianPenjualanModal to the list */
+    #addAssetModal .modal-body,
+    #rincianAssetModal .modal-body,
+    #updateAssetModal .modal-body,
+    #rincianPenyewaanModal .modal-body { /* Added */
+        overflow-y: auto; /* Enable vertical scroll */
+        flex-grow: 1; /* Allow body to take available vertical space */
+        padding: 1.5rem; /* Adjusted padding for mobile */
+    }
+
+    /* --- Keep delete modal default (no changes needed here) --- */
+    #deleteAssetModal .modal-dialog { /* ... styles as before ... */ }
+    #deleteAssetModal .modal-content { /* ... styles as before ... */ }
+    #deleteAssetModal .modal-body { /* ... styles as before ... */ }
+
+    /* --- Specific Styles for Rincian ASSET Modal Mobile (KEEP SEPARATE unless layout is identical) --- */
+    /* These styles likely DON'T apply to rincianPenjualanModal based on the image provided */
+    #rincianAssetModal .modal-body {
+        /* Styles for centering image etc. */
+        /* display: flex; ... etc */
+    }
+    #rincianAssetModal .modal-body > div:first-child { /* Image container */ }
+    #rincianAssetModal .modal-body > div.ml-4 { /* Details container */ }
+
+    /* --- Footer Button Styling (Apply to rincianPenjualanModal too) --- */
+    /* ADD #rincianPenjualanModal to the list */
+    #rincianAssetModal .modal-footer,
+    #rincianPenyewaanModal .modal-footer { /* Added */
+        justify-content: center !important; /* Center the footer button(s) */
+        border-top: none; /* Remove top border */
+        padding: 1rem; /* Add some padding */
+        margin-top: auto; /* Push footer to bottom in flex column */
+    }
+
+    /* ADD #rincianPenjualanModal to the list */
+    #rincianAssetModal .modal-footer .btn,
+    #rincianPenyewaanModal .modal-footer .btn { /* Added */
+        width: 90%; /* Make button wide */
+        max-width: 400px; /* Limit max width */
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        font-size: 1rem; /* Ensure readable font size */
+    }
+
+    /* --- Form Modals Fullscreen adjustments (KEEP SEPARATE) --- */
+    #addAssetModal .modal-dialog,
+    #updateAssetModal .modal-dialog { /* ... */ }
+    #addAssetModal .modal-content,
+    #updateAssetModal .modal-content { /* ... */ }
+    #addAssetModal form,
+    #updateAssetModal form { /* ... */ }
+    #addAssetModal .modal-body,
+    #updateAssetModal .modal-body { /* ... */ }
+    #addAssetModal .modal-footer,
+    #updateAssetModal .modal-footer { /* ... */ }
+    #updateAssetModal .modal-footer { /* ... */ }
+    #addAssetModal .modal-footer .btn,
+    #updateAssetModal .modal-footer .btn { /* ... */ }
+
+    /* --- Dropdown options styling (KEEP SEPARATE) --- */
+    .searchable-dropdown .dropdown-options-container { /* ... */ }
+
+} /* End of @media query */
 
     /* Pagination */
 
@@ -233,6 +334,145 @@
         .batal-btn {
             color: #272780 !important;
             border-color: #272780 !important;
+        }
+
+       /* Searchable Dropdown Styles (as provided) */
+       .custom-search-select-container {
+            position: relative;
+            font-family: sans-serif; /* Or your preferred font */
+        }
+
+        .selected-value {
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem; /* Adjusted padding for Bootstrap arrow space */
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            background-color: #fff;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: calc(1.5em + 0.75rem + 2px); /* Match BS select height */
+            line-height: 1.5;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            user-select: none;
+            position: relative;
+            /* Mimic Bootstrap's dropdown arrow */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+        }
+
+        /* Style for placeholder text */
+        .selected-value.placeholder-selected {
+            color: #6c757d; /* Bootstrap's placeholder color */
+        }
+
+
+        /* Remove the custom ::after arrow */
+        /* .selected-value::after { ... } */ /* REMOVED */
+
+        .selected-value:focus,
+        .custom-search-select-container.open .selected-value {
+            border-color: #86b7fe; /* BS focus color */
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* BS focus shadow */
+        }
+
+        .dropdown-list-container {
+            display: none;
+            position: absolute;
+            top: calc(100% + 2px);
+            left: 0;
+            right: 0;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1051; /* Ensure it's above modal content but potentially below modal itself if needed */
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown-list-container.show {
+            display: block;
+        }
+
+        .search-box {
+            padding: 0.375rem 0.75rem;
+            width: calc(100% - 16px); /* Account for margin */
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            outline: none;
+            margin: 8px;
+            border-radius: 0.25rem;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0 0 5px 0; /* Add padding bottom */
+            margin: 0;
+        }
+
+        .options-list li {
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 1.5;
+        }
+
+        .options-list li:hover,
+        .options-list li.highlighted { /* Added .highlighted for potential keyboard nav */
+            background-color: #e9ecef; /* BS hover color */
+            color: #000;
+        }
+
+        /* Style for hidden original select */
+        .original-select-hidden {
+            /* Make it take no space and not be visible/interactive */
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            height: 0;
+            width: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            overflow: hidden;
+        }
+
+
+        /* Radio button */
+        .form-check-input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            border: 1px solid #1a237e; /* Border biru */
+            border-radius: 9999px;
+            background-color: white;
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Saat radio dipilih, isi dengan biru */
+        .form-check-input[type="radio"]:checked {
+            background-color: #1a237e;
+            border: 2px solid #1a237e;
+        }
+
+        /* Buat bulatan kecil di tengah saat checked */
+
+
+        /* Optional: hover effect sedikit */
+        .form-check-input[type="radio"]:hover {
+            box-shadow: 0 0 0 2px rgba(26, 35, 126, 0.3);
         }
 </style>
 
@@ -293,7 +533,7 @@
 
                                  {{-- Filter Button (Placeholder) --}}
                                  {{-- @TODO: Link button to Filter Modal or implement filter logic --}}
-                                 <button class="btn btn-filter btn-sm ml-2" data-toggle="modal" data-target="#filterPenyewaanModal">Filter</button>
+                                 <button class="btn btn-filter btn-sm ml-2 px-3 py-2" data-toggle="modal" data-target="#filterPenyewaanModal">Filter</button>
 
                                  {{-- Tambah Button --}}
                                  
@@ -414,7 +654,7 @@
                                                             {{-- Add other fields to pre-fill the update form --}}
                                                             data-url="{{-- route('penyewaan_barang.update', $item->id) --}}" {{-- Placeholder URL --}}
                                                             data-toggle="modal"
-                                                            data-target="#updatePenyewaanModal">
+                                                            data-target="{{-- #updatePenyewaanModal --}}">
                                                         Update
                                                     </button>
 
@@ -526,7 +766,7 @@
                     {{-- Add other fields here --}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 mx-2" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
                 </div>
             </form>
@@ -607,9 +847,7 @@
         <div class="modal-content">
             <div class="modal-header modal-color text-white">
                 <h5 class="modal-title" id="rincianPenyewaanModalLabel">Rincian Penyewaan Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                
             </div>
             <div class="modal-body">
 
@@ -712,23 +950,39 @@
 <div class="modal fade" id="filterPenyewaanModal" tabindex="-1" aria-labelledby="filterPenyewaanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="filterPenyewaanModalLabel">Filter</h5> {{-- Title from Image --}}
-                <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> 
+            {{-- Header with specific color and BS5 close button --}}
+            <div class="modal-header text-white" style="background-color: #1a237e; border-bottom: none;">
+                <h5 class="modal-title" id="filterPenyewaanModalLabel">Filter</h5>
+                <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
             </div>
+
             {{-- Point form to the correct index route with GET method --}}
-            <form action="" method="GET">
+            {{-- Added ID to form for potential JS targeting --}}
+            <form action="" method="GET" id="filterPenyewaanForm">
                 <div class="modal-body">
 
-                    {{-- Periode Filter --}}
-                    <div class="mb-3">
-                        <label for="filter-periode" class="form-label">Periode</label>
-                        <select class="form-select" id="filter-periode" name="periode">
-                            <option value="">- Pilih Periode -</option>
-                            {{-- Add specific period options here, matching your data/image if possible --}}
+                    {{-- Periode Filter (Searchable Dropdown) --}}
+                    {{-- *** Use a NEW unique container ID *** --}}
+                    <div class="custom-search-select-container mb-3" id="custom-penyewaan-periode-container">
+                        <label for="filter-periode-penyewaan" class="form-label">Periode</label> {{-- Changed 'for' attribute slightly for clarity if needed --}}
+                        {{-- This div will display the selected value and trigger the dropdown --}}
+                        <div class="selected-value" tabindex="0">- Pilih Periode -</div>
+                        {{-- This container holds the search box and the options list --}}
+                        <div class="dropdown-list-container">
+                            <input type="text" class="search-box" placeholder="Cari Periode...">
+                            <ul class="options-list">
+                                {{-- Options will be populated by JavaScript --}}
+                            </ul>
+                        </div>
+                        {{-- The original select is hidden but holds the actual form value --}}
+                        {{-- *** Ensure this select ID is unique OR corresponds to the JS call *** --}}
+                        <select class="original-select-hidden" id="filter-periode-penyewaan" name="periode">
+                            <option value="" selected>- Pilih Periode -</option>
+                            {{-- Add specific period options here --}}
                             <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01</option>
                             <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02</option>
-                            {{-- Add other periods as needed --}}
+                            <option value="periode03" {{ request('periode') == 'periode03' ? 'selected' : '' }}>Periode 03</option>
+                            {{-- Add all your actual periode options for this filter --}}
                         </select>
                     </div>
 
@@ -736,7 +990,7 @@
                     <div class="mb-3">
                         <label class="form-label d-block">Metode Pengiriman</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="penyewaanPengirimanDefault" value="default" {{ request('metode_pengiriman', 'default') == 'default' ? 'checked' : '' }}> 
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="penyewaanPengirimanDefault" value="default" {{ request('metode_pengiriman', 'default') == 'default' ? 'checked' : '' }}>
                             <label class="form-check-label" for="penyewaanPengirimanDefault">Default</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -749,30 +1003,28 @@
                         </div>
                     </div>
 
-                    {{--Radio Buttons --}}
+                    {{-- Status Filter --}}
                     <div class="mb-3">
                          <label class="form-label d-block">Status</label>
                          <div class="form-check form-check-inline">
-                             <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusDefault" value="default" {{ request('status_sewa', 'default') == 'default' ? 'checked' : '' }}> {{-- Default checked initially --}}
-                             <label class="form-check-label" for="penyewaanStatusDefault">Default</label>
+                              <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusDefault" value="default" {{ request('status_sewa', 'default') == 'default' ? 'checked' : '' }}>
+                              <label class="form-check-label" for="penyewaanStatusDefault">Default</label>
                          </div>
                          <div class="form-check form-check-inline">
-                             <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusSelesai" value="Selesai" {{ request('status_sewa') == 'Selesai' ? 'checked' : '' }}>
-                             <label class="form-check-label" for="penyewaanStatusSelesai">Selesai</label>
+                              <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusSelesai" value="Selesai" {{ request('status_sewa') == 'Selesai' ? 'checked' : '' }}>
+                              <label class="form-check-label" for="penyewaanStatusSelesai">Selesai</label>
                          </div>
                          <div class="form-check form-check-inline">
-                             <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusBerlangsung" value="Berlangsung" {{ request('status_sewa') == 'Berlangsung' ? 'checked' : '' }}>
-                             <label class="form-check-label" for="penyewaanStatusBerlangsung">Berlangsung</label>
+                              <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusBerlangsung" value="Berlangsung" {{ request('status_sewa') == 'Berlangsung' ? 'checked' : '' }}>
+                              <label class="form-check-label" for="penyewaanStatusBerlangsung">Berlangsung</label>
                          </div>
-                     </div>
-
+                    </div>
 
                 </div>
-                <div class="modal-footer">
-
-                    {{-- Buttons matching the image --}}
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn modal-color text-white">Simpan</button>
+                <div class="modal-footer" style="border-top: none;"> {{-- Remove border --}}
+                    {{-- Buttons matching the image style and using BS5 attributes --}}
+                    <button type="button" class="btn batal-btn" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white" style="background-color: #1a237e;">Simpan</button>
                 </div>
             </form>
         </div>
@@ -781,8 +1033,175 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
-
-</script>
-
-</script>
+    document.addEventListener('DOMContentLoaded', function() {
+    
+        /**
+         * Initializes a custom searchable dropdown.
+         * @param {string} containerId - The ID of the main container div.
+         * @param {string} originalSelectId - The ID of the original hidden select.
+         */
+        function setupSearchableDropdown(containerId, originalSelectId) {
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.warn(`Searchable dropdown container not found: #${containerId}`);
+                return;
+            }
+            const originalSelect = document.getElementById(originalSelectId);
+            if (!originalSelect) {
+                console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
+                return;
+            }
+    
+            const selectedValueDiv = container.querySelector('.selected-value');
+            const dropdownContainer = container.querySelector('.dropdown-list-container');
+            const searchBox = container.querySelector('.search-box');
+            const optionsList = container.querySelector('.options-list');
+            let listItems = []; // Holds the actual LIs that are not placeholders
+    
+            // --- Populate the custom list from the original select ---
+            function populateOptionsList() {
+                optionsList.innerHTML = ''; // Clear existing options
+                listItems = []; // Reset list items array
+                Array.from(originalSelect.options).forEach((option, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = option.textContent;
+                    li.dataset.value = option.value;
+                    li.dataset.index = index; // Store original index
+    
+                    if (!option.value) {
+                        // Skip placeholder for the searchable list
+                    } else {
+                        optionsList.appendChild(li);
+                        listItems.push(li); // Add to the filterable list
+                    }
+                });
+            }
+    
+            // --- Sync the visible div with the hidden select's value ---
+            function syncDisplayWithSelect() {
+                if (!originalSelect || !selectedValueDiv) return;
+    
+                const selectedOption = originalSelect.options[originalSelect.selectedIndex];
+                if (selectedOption) {
+                    selectedValueDiv.textContent = selectedOption.textContent;
+                    // Add/remove class for placeholder styling
+                    if (!selectedOption.value) {
+                        selectedValueDiv.classList.add('placeholder-selected');
+                    } else {
+                        selectedValueDiv.classList.remove('placeholder-selected');
+                    }
+                } else {
+                    // Fallback if somehow no option is selected
+                    selectedValueDiv.textContent = 'Select...'; // Default text
+                    selectedValueDiv.classList.add('placeholder-selected');
+                }
+            }
+    
+            // --- Open/Close Dropdown ---
+            selectedValueDiv.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent document click listener from closing immediately
+                if (!dropdownContainer || !searchBox) return;
+                closeAllDropdowns(containerId); // Close other open dropdowns first
+                const isOpen = dropdownContainer.classList.toggle('show');
+                container.classList.toggle('open', isOpen); // Add .open class to container
+                if (isOpen) {
+                    searchBox.value = ''; // Reset search
+                    listItems.forEach(li => li.style.display = ''); // Reset filter
+                    searchBox.focus();
+                }
+            });
+    
+            // --- Close dropdown when clicking outside ---
+            document.addEventListener('click', (event) => {
+                if (container && !container.contains(event.target)) {
+                    if (dropdownContainer) dropdownContainer.classList.remove('show');
+                    container.classList.remove('open');
+                }
+            });
+    
+            // --- Handle selecting an option ---
+            optionsList.addEventListener('click', (event) => {
+                if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
+                    const value = event.target.dataset.value;
+                    const index = event.target.dataset.index;
+                    originalSelect.value = value; // Update the hidden select
+                    if (index !== undefined) originalSelect.selectedIndex = parseInt(index, 10);
+                    syncDisplayWithSelect(); // Update the visible display
+                    if (dropdownContainer) dropdownContainer.classList.remove('show'); // Close dropdown
+                     container.classList.remove('open');
+                    originalSelect.dispatchEvent(new Event('change', { bubbles: true })); // Trigger change event
+                }
+            });
+    
+            // --- Handle searching/filtering ---
+            searchBox.addEventListener('input', () => {
+                const searchTerm = searchBox.value.toLowerCase().trim();
+                listItems.forEach(li => {
+                    const itemText = li.textContent.toLowerCase();
+                    li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
+                });
+            });
+    
+            // --- Sync display if original select changes programmatically ---
+            originalSelect.addEventListener('change', syncDisplayWithSelect);
+    
+            // --- Initial setup ---
+            populateOptionsList();
+            syncDisplayWithSelect();
+    
+            // --- Reset on Modal Close ---
+            const modal = container.closest('.modal');
+            if (modal) {
+                modal.addEventListener('hidden.bs.modal', function() {
+                    if (originalSelect.options.length > 0) {
+                        let placeholderIndex = 0;
+                        for(let i=0; i < originalSelect.options.length; i++) {
+                            if (originalSelect.options[i].value === "") { placeholderIndex = i; break; }
+                        }
+                        originalSelect.selectedIndex = placeholderIndex;
+                    }
+                    syncDisplayWithSelect();
+                    if (searchBox) searchBox.value = '';
+                    listItems.forEach(li => li.style.display = '');
+                    if (dropdownContainer) dropdownContainer.classList.remove('show');
+                    container.classList.remove('open');
+    
+                     // Optional: Reset radio buttons in *this specific modal* on close
+                     const form = document.getElementById('filterPenyewaanForm'); // Target this modal's form
+                     if (form) {
+                        // Reset Metode Pengiriman
+                        const metodeDefaultRadio = form.querySelector('input[name="metode_pengiriman"][value="default"]');
+                        if (metodeDefaultRadio) metodeDefaultRadio.checked = true; // Or set your desired default
+    
+                         // Reset Status
+                        const statusDefaultRadio = form.querySelector('input[name="status_sewa"][value="default"]');
+                        if (statusDefaultRadio) statusDefaultRadio.checked = true; // Or set your desired default
+                     }
+                });
+            }
+        } // End of setupSearchableDropdown function
+    
+        // --- Close all dropdowns function ---
+        function closeAllDropdowns(excludeContainerId = null) {
+            document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
+                const currentContainer = dropdown.closest('.custom-search-select-container');
+                if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
+                    dropdown.classList.remove('show');
+                    if (currentContainer) currentContainer.classList.remove('open');
+                }
+            });
+        }
+    
+        // --- Initialize the specific dropdown for the filterPenyewaanModal ---
+        // *** Use the unique IDs assigned in the HTML for this modal ***
+        setupSearchableDropdown('custom-penyewaan-periode-container', 'filter-periode-penyewaan');
+    
+        // --- Initialize dropdowns from the previous modal IF THEY ARE ON THE SAME PAGE ---
+        // setupSearchableDropdown('custom-periode-filter-container', 'filter-periode'); // From filterPenjualanModal
+    
+        // --- Initialize any other searchable dropdowns on the page ---
+        // setupSearchableDropdown('another-container-id', 'another-select-id');
+    
+    });
+    </script>
 @endsection
