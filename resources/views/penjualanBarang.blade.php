@@ -502,75 +502,110 @@
 </div>
 
 <div class="modal fade" id="rincianPenjualanModal" tabindex="-1" aria-labelledby="rincianPenjualanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Adjust size as needed --}}
+    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Large size --}}
         <div class="modal-content">
             <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="rincianPenjualanModalLabel">Rincian Penjualan Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{-- Title matches the image header style --}}
+                <h5 class="modal-title font-weight-bold" id="rincianPenjualanModalLabel">Rincian Penjualan</h5>
+                {{-- Use data-bs-dismiss for Bootstrap 5 if needed, data-dismiss is for BS4 --}}
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body">
-                {{-- @TODO: Structure the details display. Use JS to populate this from data-* attributes --}}
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6>Informasi Pembeli</h6>
-                        <p><strong>Nama:</strong> <span id="rincian-nama-pembeli"></span></p>
-                        <p><strong>Alamat:</strong> <span id="rincian-alamat-pembeli"></span></p>
-                        {{-- Add more fields as needed --}}
+            <div class="modal-body p-4" style="font-size: 0.9rem;"> {{-- Padding and font size --}}
+
+                <div class="row mb-4"> {{-- Top row for Pembeli and Pengiriman --}}
+                    <div class="col-md-7">
+                        <h6 class="font-weight-bold mb-3 ">Informasi Pembeli</h6>
+                        <p class="mb-1"><strong>Nama Pembeli</strong> : <span id="rincian-nama-penjual"></span></p>
+                        <p class="mb-1"><strong>No. WA</strong> : <span id="rincian-telp-penjual"></span></p>
+                        <p class="mb-1"><strong>Alamat Pembeli</strong> : <span id="rincian-alamat-penjual"></span></p>
                     </div>
-                    <div class="col-md-6">
-                        <h6>Detail Transaksi</h6>
-                        <p><strong>Barang:</strong> <span id="rincian-barang"></span></p>
-                        <p><strong>Total Harga:</strong> <span id="rincian-harga"></span></p>
-                        <p><strong>Tanggal:</strong> <span id="rincian-tanggal"></span></p>
-                         {{-- Add more fields as needed --}}
+
+                    <div class="col-md-5">
+                        <h6 class="font-weight-bold mb-3">Pengiriman</h6>
+                        <p class="mb-1"><strong>Metode Pengiriman</strong> : <span id="rincian-metode-penjual">-</span></p>
                     </div>
                 </div>
-                 <hr>
-                 <div class="row">
-                     <div class="col-md-6">
-                         <h6>Detail Pembayaran</h6>
-                         <p><strong>Bukti Bayar:</strong> <span id="rincian-bukti-bayar"></span></p> {{-- Link or Status --}}
-                     </div>
-                     <div class="col-md-6">
-                         <h6>Pengiriman</h6>
-                         <p><strong>Metode:</strong> <span id="rincian-metode-kirim"></span></p>
-                     </div>
-                 </div>
-            </div>
+
+             
+
+                <div class="row mb-4"> {{-- Middle row for Transaksi --}}
+                     <div class="col-md-12"> {{-- Full width for this section --}}
+                        <h6 class="font-weight-bold mb-3 ">Detail Transaksi</h6>
+                        <p class="mb-1"><strong>Nama Barang</strong> : <span id="rincian-pj-barang">-</span></p>
+                        <p class="mb-1"><strong>Total Harga</strong> : <span id="rincian-pj-harga">-</span></p>
+                        <p class="mb-1"><strong>Tanggal Pembelian</strong> : <span id="rincian-pj-tanggal">-</span></p>
+                    </div>
+                </div>
+
+          
+
+                <div class="row"> {{-- Bottom row for Pembayaran --}}
+                     <div class="col-md-12">
+                        <h6 class="font-weight-bold mb-3">Detail Pembayaran</h6>
+                        {{-- Container where the button or text will be placed by JS --}}
+                         <div id="rincian-bukti-bayar-container">
+                            {{-- Default text, will be replaced by JS --}}
+                            <span class="text-muted small">(Belum Ada Bukti)</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div> {{-- End modal-body --}}
             <div class="modal-footer">
-                <button type="button" class="btn modal-color text-white font-weight-bold rounded-3" data-dismiss="modal">Tutup</button>
+                {{-- Footer button matches style in image --}}
+                <button type="button" class="btn modal-color text-white font-weight-bold rounded-3 px-4" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
 </div>
 
- <div class="modal fade" id="filterPenjualanModal" tabindex="-1" aria-labelledby="filterPenjualanModalLabel" aria-hidden="true">
+<div class="modal fade" id="filterPenjualanModal" tabindex="-1" aria-labelledby="filterPenjualanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="filterPenjualanModalLabel">Filter Penjualan</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header modal-color text-white" style=""> 
+                <h5 class="modal-title" id="filterPenjualanModalLabel">Filter</h5> {{-- Changed Title --}}
             </div>
-             {{-- @TODO: Point form to index route with GET method --}}
-            <form action="{{-- route('penjualan_barang.index') --}}" method="GET">
+          
+            <form action="" method="GET">
                 <div class="modal-body">
-                    {{-- @TODO: Add filter fields (e.g., date range, status, buyer) --}}
-                    <p>Placeholder for Filter Fields (e.g., Date Range, Status)</p>
-                    <div class="form-group">
-                        <label for="filter-start-date">Tanggal Mulai</label>
-                        <input type="date" class="form-control" id="filter-start-date" name="start_date" value="{{-- request('start_date') --}}">
+                    {{-- Periode Filter --}}
+                    <div class="mb-3"> {{-- Use mb-3 for spacing in BS5 --}}
+                        <label for="filter-periode" class="form-label">Periode</label>
+                        <select class="form-select" id="filter-periode" name="periode">
+                            <option value="" selected>- Pilih Periode -</option>
+                            {{-- Add other period options here e.g. --}}
+                            <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01</option>
+                            <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02</option>
+                        </select>
                     </div>
-                     <div class="form-group">
-                        <label for="filter-end-date">Tanggal Akhir</label>
-                        <input type="date" class="form-control" id="filter-end-date" name="end_date" value="{{-- request('end_date') --}}">
+
+                    {{-- Metode Pengiriman Filter --}}
+                    <div class="mb-3">
+                        <label class="form-label d-block">Metode Pengiriman</label> {{-- d-block ensures label is on its own line --}}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengirimanDefault" value="default" {{ request('metode_pengiriman', 'default') == 'default' ? 'checked' : '' }}> {{-- Example: Default checked --}}
+                            <label class="form-check-label" for="pengirimanDefault">Default</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengirimanTakeaway" value="takeaway" {{ request('metode_pengiriman') == 'takeaway' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="pengirimanTakeaway">Take-away</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengirimanDiantar" value="diantar" {{ request('metode_pengiriman') == 'diantar' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="pengirimanDiantar">Diantar</label>
+                        </div>
                     </div>
-                    {{-- Add other filter inputs --}}
+
                 </div>
                 <div class="modal-footer">
-                    {{-- Link to clear filters (redirect to index without filter params) --}}
-                     <a href="{{-- route('penjualan_barang.index') --}}" class="btn btn-outline-secondary rounded-3 me-2">Clear</a>
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Apply Filter</button>
+                
+                 
+
+                    {{-- Buttons matching the image --}}
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button> {{-- Changed class, text --}}
+                    <button type="submit" class="btn modal-color text-white" style="">Simpan</button> {{-- Changed text, kept modal-color assumption --}}
                 </div>
             </form>
         </div>

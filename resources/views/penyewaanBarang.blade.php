@@ -533,23 +533,22 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="updatePenyewaanModal" tabindex="-1" aria-labelledby="updatePenyewaanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+{{-- 
+    masih placeholder, blm diimplementasi
         <div class="modal-content">
             <div class="modal-header modal-color text-white">
                 <h5 class="modal-title" id="updatePenyewaanModalLabel">Update Penyewaan Barang</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            {{-- @TODO: Action URL is set dynamically via JS --}}
+          
             <form action="#" method="POST" id="updatePenyewaanForm" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="id" id="update-penyewaan-id"> {{-- To store the ID of the item being updated --}}
+                <input type="hidden" name="id" id="update-penyewaan-id"> 
                 <div class="modal-body">
-                    {{-- Add form fields similar to Add Modal, pre-filled via JS --}}
+                    
                     <p>Placeholder for Update Penyewaan Form Fields...</p>
-                     {{-- Example Fields --}}
+                    
                     <div class="form-group">
                         <label for="update-nama-penyewa">Nama Penyewa</label>
                         <input type="text" class="form-control" id="update-nama-penyewa" name="nama_penyewa" required>
@@ -559,16 +558,16 @@
                         <select class="form-control" id="update-status-sewa" name="status_sewa">
                             <option value="Berlangsung">Berlangsung</option>
                             <option value="Selesai">Selesai</option>
-                            {{-- Add other statuses --}}
+                            
                         </select>
                     </div>
                     <div class="form-group">
                          <label>Bukti KTM/KTP Saat Ini</label>
-                         <div id="update-current-ktm"></div> {{-- Display current file/link here --}}
+                         <div id="update-current-ktm"></div> 
                          <label for="update-bukti-ktm">Ganti Bukti KTM/KTP (Opsional)</label>
                          <input type="file" class="form-control-file" id="update-bukti-ktm" name="bukti_ktm" accept="image/*,application/pdf">
                      </div>
-                     {{-- Add other fields here --}}
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
@@ -578,7 +577,7 @@
         </div>
     </div>
 </div>
-
+--}}
 <div class="modal fade" id="deletePenyewaanModal" tabindex="-1" aria-labelledby="deletePenyewaanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -604,50 +603,103 @@
 </div>
 
 <div class="modal fade" id="rincianPenyewaanModal" tabindex="-1" aria-labelledby="rincianPenyewaanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Adjust size as needed --}}
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header modal-color text-white">
                 <h5 class="modal-title" id="rincianPenyewaanModalLabel">Rincian Penyewaan Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                {{-- @TODO: Structure the details display. Use JS to populate this from data-* attributes --}}
-                {{-- Example structure --}}
-                 <div class="row">
+
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <h6>Informasi Penyewa</h6>
-                        <p><strong>Nama:</strong> <span id="rincian-nama-penyewa"></span></p>
-                        <p><strong>Alamat:</strong> <span id="rincian-alamat-penyewa"></span></p>
-                        {{-- Add more fields --}}
+                        <p class="mb-1"><strong>Nama:</strong> <span id="rincian-nama-penyewa"></span></p>
+                        <p class="mb-1"><strong>No. WA:</strong> <span id="rincian-telp-penyewa"></span></p>
+                        <p class="mb-1"><strong>Alamat:</strong> <span id="rincian-alamat-penyewa"></span></p>
                     </div>
                     <div class="col-md-6">
-                        <h6>Detail Transaksi</h6>
-                        <p><strong>Barang Disewa:</strong> <span id="rincian-barang-disewa"></span></p>
-                        <p><strong>Total Harga:</strong> <span id="rincian-harga-sewa"></span></p>
-                         {{-- Add more fields --}}
+                        <h6>Detail Sewa</h6>
+                        <p class="mb-1"><strong>Tanggal Penyewaan:</strong> <span id="rincian-tgl-penyewaan"></span></p>
+                        <p class="mb-1"><strong>Waktu Sewa:</strong> <span id="rincian-waktu-sewa"></span></p>
+                        <p class="mb-1">
+                            <strong>Status:</strong>
+                            <span id="rincian-status-sewa" class="ml-2 status-badge">(Status not loaded)</span>
+                            {{-- Example structure, berbasis logika table
+                                if (status === 'Selesai') {
+                                    $('#rincian-status-sewa').text('Selesai').removeClass('status-berlangsung').addClass('status-selesai');
+                                } else {
+                                    $('#rincian-status-sewa').text('Berlangsung').removeClass('status-selesai').addClass('status-berlangsung');
+                                }
+                            --}}
+                        </p>
                     </div>
                 </div>
-                <hr>
-                 <div class="row">
+
+             
+
+                {{-- Pembeyaran dan sewa --}}
+                <div class="row mb-3">
                     <div class="col-md-6">
-                         <h6>Detail Pembayaran</h6>
-                         <p><strong>Bukti Bayar:</strong> <span id="rincian-bukti-bayar"></span></p> {{-- Link or Status --}}
-                         <p><strong>Bukti KTM/KTP:</strong> <span id="rincian-bukti-ktm"></span></p> {{-- Link or Status --}}
+                        <h6>Detail Transaksi</h6>
+                        <p class="mb-1"><strong>Nama Barang:</strong> <span id="rincian-barang-disewa"></span></p>
+                        <p class="mb-1"><strong>Total Harga:</strong> <span id="rincian-harga-sewa"></span></p>
                     </div>
                     <div class="col-md-6">
-                         <h6>Detail Sewa</h6>
-                         <p><strong>Tanggal Mulai:</strong> <span id="rincian-tgl-mulai"></span></p>
-                         <p><strong>Durasi:</strong> <span id="rincian-durasi"></span></p>
-                         <p><strong>Status:</strong> <span id="rincian-status-sewa"></span></p>
-                    </div>
-                 </div>
-                  <hr>
-                 <div class="row">
-                    <div class="col-md-12">
                         <h6>Pengiriman</h6>
-                        <p><strong>Metode:</strong> <span id="rincian-metode-kirim"></span></p>
+                        <p class="mb-1"><strong>Metode Pengiriman:</strong> <span id="rincian-metode-kirim"></span></p>
                     </div>
-                 </div>
+                </div>
+
+              
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6>Detail Pembayaran</h6>
+                        <div class="mb-2">
+                            
+                            <div id="rincian-bukti-bayar-container" class="d-inline-block ml-2">
+                                <span class="text-muted">(Data not loaded)</span>
+                                {{-- Example Blade Logic 
+                                    pakai class btn-bukti again buat styling
+                                    <div class="btn-bukti-container d-inline-block">
+                                    @if($item->bukti_pembayaran_url)
+                                        <a href="#" target="_blank" class="btn btn-sm btn-bukti">
+                                            <i class="fas fa-receipt"></i> Lihat Bukti
+                                        </a>
+                                    @else
+                                        <button class="btn btn-sm btn-bukti disabled" disabled>
+                                            <i class="fas fa-receipt"></i> (Belum Ada)
+                                        </button>
+                                    @endif
+                                    </div>
+                                --}}
+                            </div>
+                        </div>
+                        <div>
+                        
+                            <div id="rincian-bukti-ktm-container" class="d-inline-block ml-2">
+                                <span class="text-muted">(Data not loaded)</span>
+                                {{-- Example Blade Logic 
+                                    Pakai class btn buktinya for styling
+                                    <div class="btn-bukti-container d-inline-block">
+                                    @if($item->bukti_ktm_url)
+                                        <a href="#" target="_blank" class="btn btn-sm btn-bukti">
+                                            <i class="fas fa-id-card"></i> Lihat Bukti
+                                        </a>
+                                    @else
+                                        <button class="btn btn-sm btn-bukti disabled" disabled>
+                                            <i class="fas fa-id-card"></i> (Belum Ada)
+                                        </button>
+                                    @endif
+                                    </div>
+                                --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn modal-color text-white font-weight-bold rounded-3" data-dismiss="modal">Tutup</button>
@@ -656,42 +708,71 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="filterPenyewaanModal" tabindex="-1" aria-labelledby="filterPenyewaanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="filterPenyewaanModalLabel">Filter Penyewaan</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title" id="filterPenyewaanModalLabel">Filter</h5> {{-- Title from Image --}}
+                <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> 
             </div>
-             {{-- @TODO: Point form to index route with GET method --}}
-            <form action="{{-- route('penyewaan_barang.index') --}}" method="GET">
+            {{-- Point form to the correct index route with GET method --}}
+            <form action="" method="GET">
                 <div class="modal-body">
-                    {{-- @TODO: Add filter fields (e.g., date range, status, penyewa) --}}
-                    <p>Placeholder for Filter Fields (e.g., Date Range, Status)</p>
-                    <div class="form-group">
-                        <label for="filter-start-date">Tanggal Mulai Sewa Dari</label>
-                        <input type="date" class="form-control" id="filter-start-date" name="start_date" value="{{-- request('start_date') --}}">
+
+                    {{-- Periode Filter --}}
+                    <div class="mb-3">
+                        <label for="filter-periode" class="form-label">Periode</label>
+                        <select class="form-select" id="filter-periode" name="periode">
+                            <option value="">- Pilih Periode -</option>
+                            {{-- Add specific period options here, matching your data/image if possible --}}
+                            <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01</option>
+                            <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02</option>
+                            {{-- Add other periods as needed --}}
+                        </select>
                     </div>
-                     <div class="form-group">
-                        <label for="filter-end-date">Tanggal Mulai Sewa Sampai</label>
-                        <input type="date" class="form-control" id="filter-end-date" name="end_date" value="{{-- request('end_date') --}}">
+
+                    {{-- Metode Pengiriman Filter --}}
+                    <div class="mb-3">
+                        <label class="form-label d-block">Metode Pengiriman</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="penyewaanPengirimanDefault" value="default" {{ request('metode_pengiriman', 'default') == 'default' ? 'checked' : '' }}> 
+                            <label class="form-check-label" for="penyewaanPengirimanDefault">Default</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="penyewaanPengirimanTakeaway" value="takeaway" {{ request('metode_pengiriman') == 'takeaway' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="penyewaanPengirimanTakeaway">Take-away</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="penyewaanPengirimanDiantar" value="diantar" {{ request('metode_pengiriman') == 'diantar' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="penyewaanPengirimanDiantar">Diantar</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                         <label for="filter-status-sewa">Status Sewa</label>
-                         <select class="form-control" id="filter-status-sewa" name="status_sewa">
-                             <option value="">Semua Status</option>
-                             <option value="Berlangsung" {{-- request('status_sewa') == 'Berlangsung' ? 'selected' : '' --}}>Berlangsung</option>
-                             <option value="Selesai" {{-- request('status_sewa') == 'Selesai' ? 'selected' : '' --}}>Selesai</option>
-                             {{-- Add other statuses --}}
-                         </select>
+
+                    {{--Radio Buttons --}}
+                    <div class="mb-3">
+                         <label class="form-label d-block">Status</label>
+                         <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusDefault" value="default" {{ request('status_sewa', 'default') == 'default' ? 'checked' : '' }}> {{-- Default checked initially --}}
+                             <label class="form-check-label" for="penyewaanStatusDefault">Default</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusSelesai" value="Selesai" {{ request('status_sewa') == 'Selesai' ? 'checked' : '' }}>
+                             <label class="form-check-label" for="penyewaanStatusSelesai">Selesai</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="radio" name="status_sewa" id="penyewaanStatusBerlangsung" value="Berlangsung" {{ request('status_sewa') == 'Berlangsung' ? 'checked' : '' }}>
+                             <label class="form-check-label" for="penyewaanStatusBerlangsung">Berlangsung</label>
+                         </div>
                      </div>
-                    {{-- Add other filter inputs --}}
+
+
                 </div>
                 <div class="modal-footer">
-                    {{-- Link to clear filters (redirect to index without filter params) --}}
-                     <a href="{{-- route('penyewaan_barang.index') --}}" class="btn btn-outline-secondary rounded-3 me-2">Clear</a>
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Apply Filter</button>
+
+                    {{-- Buttons matching the image --}}
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white">Simpan</button>
                 </div>
             </form>
         </div>

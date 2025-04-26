@@ -1653,20 +1653,7 @@ function setupSearchableDropdown(containerId, originalSelectId) {
       // Reason: Reset selection and search when modal closes for next use.
       const modal = container.closest('.modal');
       if (modal) {
-            // Using jQuery here because Bootstrap events are easier with it.
-            // If you are completely avoiding jQuery, you'd need to use Bootstrap's vanilla JS event listeners.
-            // Example using Bootstrap 5 Vanilla JS:
-            // const bootstrapModal = bootstrap.Modal.getInstance(modal); // Get instance if initialized
-            // if(bootstrapModal) {
-            //     modal.addEventListener('hidden.bs.modal', () => {
-            //         originalSelect.selectedIndex = 0; // Reset to placeholder
-            //         syncDisplayWithSelect();
-            //         searchBox.value = ''; // Clear search
-            //         listItems.forEach(li => li.style.display = ''); // Show all items
-            //         dropdownContainer.classList.remove('show'); // Ensure closed
-            //     });
-            // }
-            // --- Fallback using jQuery if available (more common with older Bootstrap) ---
+        
              if (typeof $ !== 'undefined') {
                 $(modal).on('hidden.bs.modal', function () {
                     originalSelect.selectedIndex = 0; // Reset to placeholder
@@ -1691,11 +1678,9 @@ function closeAllDropdowns(excludeContainerId = null) {
 
 
 // --- Initialize for both modals ---
-// Reason: Apply the setup to the dropdowns in both Add and Update modals.
 // Add Modal Dropdowns
         setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
         setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
-        // Update Modal Dropdowns
         setupSearchableDropdown('custom_nama_barang_update_container', 'nama_barang_select_update');
         setupSearchableDropdown('custom_jenis_barang_update_container', 'jenis_barang_select_update');
 
