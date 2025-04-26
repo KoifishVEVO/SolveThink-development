@@ -939,7 +939,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-top: none;">
                 <button type="button" class="btn modal-color text-white font-weight-bold rounded-3" data-dismiss="modal">Tutup</button>
             </div>
         </div>

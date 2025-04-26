@@ -238,6 +238,26 @@
     /* --- Dropdown options styling (KEEP SEPARATE) --- */
     .searchable-dropdown .dropdown-options-container { /* ... */ }
 
+    #filterPenjualanModal .modal-footer {
+        justify-content: center !important; 
+        border-top: none;
+        padding: 1.5rem 1rem;
+        margin-top: auto;
+    }
+
+    #filterPenjualanModal .modal-footer .btn {
+        width: 50%; /* Biar dua tombol sejajar */
+        max-width: none;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+
+    /* Tambahkan gap di antara tombol */
+    #filterPenjualanModal .modal-footer .d-flex {
+        gap: 0.5rem;
+    }
+
 } /* End of @media query */
 
 
