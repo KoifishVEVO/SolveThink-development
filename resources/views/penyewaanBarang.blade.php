@@ -202,7 +202,7 @@
             #addAssetModal .modal-dialog,
             #rincianAssetModal .modal-dialog,
             #updateAssetModal .modal-dialog,
-            #rincianPenjualanModal .modal-dialog {
+            #rincianPenyewaanModal .modal-dialog {
                 /* Added */
                 max-width: 100%;
                 width: 100%;
@@ -226,7 +226,7 @@
             #addAssetModal .modal-content,
             #rincianAssetModal .modal-content,
             #updateAssetModal .modal-content,
-            #rincianPenjualanModal .modal-content {
+            #rincianPenyewaanModal .modal-content {
                 /* Added */
                 height: 100%;
                 /* Fill the dialog height */
@@ -247,7 +247,7 @@
             #addAssetModal .modal-body,
             #rincianAssetModal .modal-body,
             #updateAssetModal .modal-body,
-            #rincianPenjualanModal .modal-body {
+            #rincianPenyewaanModal .modal-body {
                 /* Added */
                 overflow-y: auto;
                 /* Enable vertical scroll */
@@ -288,7 +288,7 @@
             /* --- Footer Button Styling (Apply to rincianPenjualanModal too) --- */
             /* ADD #rincianPenjualanModal to the list */
             #rincianAssetModal .modal-footer,
-            #rincianPenjualanModal .modal-footer,
+            #rincianPenyewaanModal .modal-footer,
             #filterPenyewaanModal .modal-footer {
                 /* Added */
                 justify-content: center !important;
@@ -303,7 +303,7 @@
 
             /* ADD #rincianPenjualanModal to the list */
             #rincianAssetModal .modal-footer .btn,
-            #rincianPenjualanModal .modal-footer .btn,
+            #rincianPenyewaanModal .modal-footer .btn,
             #filterPenyewaanModal .modal-footer .btn {
                 /* Added */
                 width: 90%;
@@ -1294,7 +1294,7 @@ if (tableBody) {
             if (data.buktiBayar && baseUrl) {
                 buktiBayarContainer.innerHTML = `
                     <a href="${baseUrl}${data.buktiBayar}" target="_blank" class="btn btn-sm btn-bukti">
-                        <i class="fas fa-receipt"></i> Lihat Bukti Pembayaran
+                        <i class="fas fa-receipt"></i> Bukti Pembayaran
                     </a>`;
             } else {
                 buktiBayarContainer.innerHTML = `
@@ -1309,7 +1309,7 @@ if (tableBody) {
             if (data.buktiKtm && baseUrl) {
                  buktiKtmContainer.innerHTML = `
                      <a href="${baseUrl}${data.buktiKtm}" target="_blank" class="btn btn-sm btn-bukti">
-                         <i class="fas fa-id-card"></i> Lihat Bukti KTM/KTP
+                         <i class="fas fa-id-card"></i> Bukti KTM/KTP
                      </a>`;
             } else {
                  buktiKtmContainer.innerHTML = `
