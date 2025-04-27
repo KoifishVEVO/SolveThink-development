@@ -548,82 +548,102 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
-                                    {{-- Placeholder: Loop through $penjualan data from backend --}}
-                                    {{-- Example Dummy Data (Replace with @foreach loop) --}}
                                     @php
-                                        // Dummy data for demonstration
+                                        // Dummy data for demonstration 
                                         $dummyPenjualan = [
-                                            (object)['id' => 1, 'nama_pembeli' => 'INI NAMA PEMBELI', 'alamat_pembeli' => 'XXXXXXXXXXX', 'barang_dijual' => 'BARANG YANG DIJUAL', 'total_harga' => 'RPXXXXXX', 'tanggal_transaksi' => 'DD/MM/YYYY', 'bukti_pembayaran_url' => '#', 'metode_pengiriman' => 'Metode Pengiriman'],
-                                            (object)['id' => 2, 'nama_pembeli' => 'INI NAMA PEMBELI', 'alamat_pembeli' => 'XXXXXXXXXXX', 'barang_dijual' => 'BARANG YANG DIJUAL', 'total_harga' => 'RPXXXXXX', 'tanggal_transaksi' => 'DD/MM/YYYY', 'bukti_pembayaran_url' => '#', 'metode_pengiriman' => 'Metode Pengiriman'],
-                                            (object)['id' => 3, 'nama_pembeli' => 'INI NAMA PEMBELI', 'alamat_pembeli' => 'XXXXXXXXXXX', 'barang_dijual' => 'BARANG YANG DIJUAL', 'total_harga' => 'RPXXXXXX', 'tanggal_transaksi' => 'DD/MM/YYYY', 'bukti_pembayaran_url' => null, 'metode_pengiriman' => 'Metode Pengiriman'], // Example without payment proof
-                                            (object)['id' => 4, 'nama_pembeli' => 'INI NAMA PEMBELI', 'alamat_pembeli' => 'XXXXXXXXXXX', 'barang_dijual' => 'BARANG YANG DIJUAL', 'total_harga' => 'RPXXXXXX', 'tanggal_transaksi' => 'DD/MM/YYYY', 'bukti_pembayaran_url' => '#', 'metode_pengiriman' => 'Metode Pengiriman'],
-                                            (object)['id' => 5, 'nama_pembeli' => 'INI NAMA PEMBELI', 'alamat_pembeli' => 'XXXXXXXXXXX', 'barang_dijual' => 'BARANG YANG DIJUAL', 'total_harga' => 'RPXXXXXX', 'tanggal_transaksi' => 'DD/MM/YYYY', 'bukti_pembayaran_url' => '#', 'metode_pengiriman' => 'Metode Pengiriman'],
-                                            (object)['id' => 6, 'nama_pembeli' => 'INI NAMA PEMBELI', 'alamat_pembeli' => 'XXXXXXXXXXX', 'barang_dijual' => 'BARANG YANG DIJUAL', 'total_harga' => 'RPXXXXXX', 'tanggal_transaksi' => 'DD/MM/YYYY', 'bukti_pembayaran_url' => '#', 'metode_pengiriman' => 'Metode Pengiriman'],
+                                            (object)[
+                                            'id' => 1,
+                                            'nama_pembeli' => 'Budi Santoso',
+                                            'alamat_pembeli' => 'Jl. Merdeka No. 10, Bandung',
+                                            'no_telepon_pembeli' => '081234567890', // Added phone number
+                                            'barang_dijual' => 'Laptop ABC, Mouse XYZ',
+                                            'total_harga' => 12500000,
+                                            'tanggal_transaksi' => '25/04/2025',
+                                            'bukti_pembayaran_penjualan' => 'bukti_penjualan_1.jpg', // Example file name
+                                            'metode_pengiriman' => 'Diantar Kurir'
+                                        ],
+                                        (object)[
+                                            'id' => 2,
+                                            'nama_pembeli' => 'Citra Lestari',
+                                            'alamat_pembeli' => 'Jl. Sudirman No. 5, Jakarta',
+                                            'no_telepon_pembeli' => '08111223344', // Added phone number
+                                            'barang_dijual' => 'Keyboard Mechanical',
+                                            'total_harga' => 850000,
+                                            'tanggal_transaksi' => '26/04/2025',
+                                            'bukti_pembayaran_penjualan' => null, // No proof
+                                            'metode_pengiriman' => 'Ambil di Toko'
+                                        ],
                                         ];
-                                         // Dummy Pagination Data (Replace with actual $penjualan variable from controller)
-                                         $penjualan = new \Illuminate\Pagination\LengthAwarePaginator($dummyPenjualan, count($dummyPenjualan), 10, 1); // Example: 6 items, 10 per page, current page 1
+                                        $penjualan = new \Illuminate\Pagination\LengthAwarePaginator($dummyPenjualan, count($dummyPenjualan), 10, 1);
                                     @endphp
-
+                                
                                     @forelse ($penjualan as $item)
                                         <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
-                                            <td>{{ $loop->iteration + $penjualan->firstItem() - 1 }}</td> {{-- Correct ID based on pagination --}}
+                                            <td>{{ $loop->iteration + $penjualan->firstItem() - 1 }}</td> 
+                                
+                                            {{-- Informasi Pembeli --}}
                                             <td>
                                                 <strong>{{ $item->nama_pembeli }}</strong><br>
                                                 <small>{{ $item->alamat_pembeli }}</small>
                                             </td>
+                                
+                                            {{-- Detail Transaksi --}}
                                             <td>
                                                 <strong>{{ $item->barang_dijual }}</strong><br>
-                                                <small>{{ $item->total_harga }}</small><br>
+                                                <small>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</small><br>
                                                 <small>{{ $item->tanggal_transaksi }}</small>
                                             </td>
-                                            <td class="text-center">
-                                                {{-- Placeholder: Link to view payment proof if available --}}
-                                                @if($item->bukti_pembayaran_url)
-                                                    <a href="{{ $item->bukti_pembayaran_url }}" target="_blank" class="btn btn-sm btn-bukti">
-                                                        <i class="fas fa-receipt"></i> Bukti Pembayaran
-                                                    </a>
-                                                @else
-                                                    <span class="text-muted small">(Belum Ada)</span>
-                                                @endif
+                                
+                                            {{-- Detail Pembayaran --}}
+                                            <td class="text-center" style="min-width: 130px;">
+                                                <div class="btn-bukti-container">
+                                                    {{-- Bukti Pembayaran --}}
+                                                    @if (!empty($item->bukti_pembayaran_penjualan))
+                                                        <a href="{{ asset('storage/bukti_penjualan/' . $item->bukti_pembayaran_penjualan) }}"
+                                                            target="_blank" class="btn btn-sm btn-bukti">
+                                                            <i class="fas fa-receipt"></i> Bukti Pembayaran
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-sm btn-bukti disabled" disabled>
+                                                            <i class="fas fa-receipt"></i> (Belum Ada)
+                                                        </button>
+                                                    @endif
+                                                </div>
                                             </td>
-                                            <td>{{ $item->metode_pengiriman }}</td>
+                                
+                                            {{-- Pengiriman --}}
+                                            <td>
+                                                {{ $item->metode_pengiriman }}
+                                            </td>
+                                
+                                            {{-- Aksi --}}
                                             <td class="px-3 text-center aksi-buttons">
-                                                {{-- Action Buttons --}}
                                                 <div class="d-inline-block">
                                                     {{-- Rincian Button --}}
-                                                    {{-- @TODO: Populate data-* attributes with actual data from $item --}}
                                                     <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item->id }}"
-                                                            data-pembeli="{{ $item->nama_pembeli }}"
-                                                            {{-- Add other necessary data attributes --}}
+                                                            data-nama-pembeli="{{ $item->nama_pembeli }}"
+                                                            data-telp-pembeli="{{ $item->no_telepon_pembeli ?? '-' }}"
+                                                            data-alamat-pembeli="{{ $item->alamat_pembeli ?? '-' }}"
+                                                            data-metode-pengiriman="{{ $item->metode_pengiriman ?? '-' }}"
+                                                            data-barang-dijual="{{ $item->barang_dijual ?? '-' }}"
+                                                            data-total-harga="{{ $item->total_harga ?? 0 }}"
+                                                            data-tanggal-transaksi="{{ $item->tanggal_transaksi ?? '-' }}"
+                                                            data-bukti-url="{{ $item->bukti_pembayaran_penjualan ? asset('storage/bukti_penjualan/' . $item->bukti_pembayaran_penjualan) : '' }}" 
                                                             data-toggle="modal"
                                                             data-target="#rincianPenjualanModal">
-                                                            
                                                         Rincian
                                                     </button>
-
+                                
                                                     {{-- Update Button --}}
-                                                     {{-- @TODO: Populate data-* attributes and set correct update URL --}}
                                                     <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
                                                             data-pembeli="{{ $item->nama_pembeli }}"
-                                                            {{-- Add other fields to pre-fill the update form --}}
-                                                            data-url="{{-- route('penjualan_barang.update', $item->id) --}}" {{-- Placeholder URL --}}
+                                                            data-url=""
                                                             data-toggle="modal"
-                                                            data-target="{{-- #updatePenjualanModal --}}">
+                                                            data-target="#updatePenjualanModal">
                                                         Update
                                                     </button>
-
-                                                    {{-- Hapus Button --}}
-                                                     {{-- @TODO: Populate data-* attributes and set correct delete URL --}}
-                                                    {{-- <button class="btn btn-sm btn-danger m-1 btn-delete"
-                                                            data-id="{{ $item->id }}"
-                                                            data-info="Penjualan ID {{ $item->id }} oleh {{ $item->nama_pembeli }}" 
-                                                            data-url="" 
-                                                            data-toggle="modal"
-                                                            data-target="#deletePenjualanModal">
-                                                        Hapus
-                                                    </button> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -633,7 +653,9 @@
                                         </tr>
                                     @endforelse
                                 </tbody>
+                                
                             </table>
+                            
                         </div>
                     </div>
 
@@ -688,38 +710,6 @@
 
 {{-- modals --}}
 
-<div class="modal fade" id="addPenjualanModal" tabindex="-1" aria-labelledby="addPenjualanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
-        <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="addPenjualanModalLabel">Tambah Penjualan Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {{-- @TODO: Set correct route for storing data --}}
-            <form action="{{-- route('penjualan_barang.store') --}}" method="POST" id="addPenjualanForm" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    {{-- Add form fields for: --}}
-                    {{-- Informasi Pembeli (Nama, Alamat, Kontak?) --}}
-                    {{-- Detail Transaksi (Barang selection, Jumlah, Harga, Tanggal) --}}
-                    {{-- Detail Pembayaran (Metode Pembayaran, Status Pembayaran, Upload Bukti?) --}}
-                    {{-- Pengiriman (Metode Pengiriman, Alamat Pengiriman, Status Pengiriman?) --}}
-                    <p>Placeholder for Add Penjualan Form Fields...</p>
-                     {{-- Example Field --}}
-                     <div class="form-group">
-                         <label for="add-nama-pembeli">Nama Pembeli</label>
-                         <input type="text" class="form-control" id="add-nama-pembeli" name="nama_pembeli" required>
-                     </div>
-                     {{-- Add other fields here --}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="updatePenjualanModal" tabindex="-1" aria-labelledby="updatePenjualanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
@@ -752,29 +742,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="deletePenjualanModal" tabindex="-1" aria-labelledby="deletePenjualanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="deletePenjualanModalLabel">Hapus Penjualan Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {{-- @TODO: Action URL is set dynamically via JS --}}
-            <form action="#" method="POST" id="deletePenjualanForm">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    <p class="text-center delete-text mb-1">Anda yakin ingin menghapus data penjualan ini?</p>
-                    <p class="text-center font-weight-bold" id="delete-penjualan-info"></p> {{-- Populated by JS --}}
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Hapus</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="rincianPenjualanModal" tabindex="-1" aria-labelledby="rincianPenjualanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Large size --}}
@@ -1098,6 +1065,99 @@ setupSearchableDropdown('custom-periode-filter-container', 'filter-periode');
 // setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
 // setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
 // ... etc
+
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+// Helper function to format currency (simple version) - reuse if needed elsewhere
+function formatRupiah(angka) {
+    // Ensure angka is treated as a number
+    const num = Number(angka) || 0;
+    let number_string = num.toString(), // Use the number's string representation
+        split = number_string.split(','), // Not really needed for integers
+        sisa = number_string.length % 3,
+        rupiah = number_string.substr(0, sisa),
+        ribuan = number_string.substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+    // No decimals typically for Rupiah display unless needed
+    // rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return 'Rp ' + rupiah;
+}
+
+// --- Listener for Rincian PENJUALAN Modal ---
+const tableBodyPenjualan = document.getElementById('table-body'); 
+if (tableBodyPenjualan) {
+    tableBodyPenjualan.addEventListener('click', function(event) {
+        // Target the specific button class for PENJUALAN
+        const button = event.target.closest('.rincian-btn');
+        if (!button) {
+            return; // Exit if not a rincian penjualan button click
+        }
+
+        const data = button.dataset; // Get data from the clicked button
+
+        // --- Select target elements in the Rincian PENJUALAN Modal ---
+        const modal = document.getElementById('rincianPenjualanModal'); // Target the correct modal
+        if (!modal) return; // Exit if modal not found
+
+        const namaPembeliEl = modal.querySelector('#rincian-nama-penjual');
+        const telpPembeliEl = modal.querySelector('#rincian-telp-penjual');
+        const alamatPembeliEl = modal.querySelector('#rincian-alamat-penjual');
+        const metodePengirimanEl = modal.querySelector('#rincian-metode-penjual'); // Note: ID reused, check if correct
+        const barangDijualEl = modal.querySelector('#rincian-pj-barang');
+        const totalHargaEl = modal.querySelector('#rincian-pj-harga');
+        const tanggalPembelianEl = modal.querySelector('#rincian-pj-tanggal');
+        const buktiBayarContainer = modal.querySelector('#rincian-bukti-bayar-container');
+
+        // --- Populate modal fields ---
+        if (namaPembeliEl) namaPembeliEl.textContent = data.namaPembeli || '-';
+        if (telpPembeliEl) telpPembeliEl.textContent = data.telpPembeli || '-';
+        if (alamatPembeliEl) alamatPembeliEl.textContent = data.alamatPembeli || '-';
+        if (metodePengirimanEl) metodePengirimanEl.textContent = data.metodePengiriman || '-';
+        if (barangDijualEl) barangDijualEl.textContent = data.barangDijual || '-';
+        if (totalHargaEl) totalHargaEl.textContent = formatRupiah(data.totalHarga || 0); // Format the price
+        if (tanggalPembelianEl) tanggalPembelianEl.textContent = data.tanggalTransaksi || '-';
+
+        // --- Populate Bukti Pembayaran ---
+        if (buktiBayarContainer) {
+            const buktiUrl = data.buktiUrl; // Get the full URL passed from Blade
+            if (buktiUrl) {
+                buktiBayarContainer.innerHTML = `
+                    <a href="${buktiUrl}" target="_blank" class="btn btn-sm btn-bukti">
+                        <i class="fas fa-receipt"></i> Bukti Pembayaran
+                    </a>`;
+            } else {
+                buktiBayarContainer.innerHTML = `
+                    <button class="btn btn-sm btn-bukti disabled" disabled>
+                        <i class="fas fa-receipt"></i> (Belum Ada)
+                    </button>`;
+            }
+        }
+
+        // Modal is triggered by data-bs attributes on the button
+    }); // End click listener for Penjualan
+} // End if tableBodyPenjualan exists
+
+// --- Listener for Rincian PENYEWAAN Modal (Keep the previous one if needed) ---
+const tableBodyPenyewaan = document.getElementById('table-body'); // Assuming original ID was for Penyewaan
+ if (tableBodyPenyewaan) {
+     tableBodyPenyewaan.addEventListener('click', function(event) {
+        // Use the original class for the rental buttons
+         const button = event.target.closest('.rincian-btn');
+         if (!button) return;
+         // ... (rest of the populating logic for rincianPenyewaanModal as provided before) ...
+         console.log("Populating Penyewaan Modal for ID:", button.dataset.id);
+     });
+ }
+
+// Add other listeners (Update, Delete etc.) if necessary
 
 });
 </script>

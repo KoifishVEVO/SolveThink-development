@@ -9,7 +9,7 @@ class penyewaanBarangController extends Controller
 {
     public function index()
     {
-        $response = Http::get('https://rental.solvethink.id/api/penyewaan-komponen-solvethink');
+        $response = Http::withoutVerifying()->get('https://rental.solvethink.id/api/penyewaan-komponen-solvethink');
         $data = $response->json();
 
         $penyewaan = collect($data['data']);
