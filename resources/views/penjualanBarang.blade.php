@@ -25,11 +25,13 @@
     .batal-btn {
         border-color: #2B2684;
         color: #2B2684;
+    
     }
-    .batal-btn:hover {
-        background-color: #2B2684;
-        color: white;
+
+    .simpan-btn {
+       
     }
+    
     .btn-success {
             background-color: #00B634 !important;
         }
@@ -246,6 +248,13 @@
     }
 
     #filterPenjualanModal .modal-footer .btn {
+        width: 50%; /* Biar dua tombol sejajar */
+        max-width: none;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+    #filterPenjualanModal .modal-footer .batal-btn {
         width: 50%; /* Biar dua tombol sejajar */
         max-width: none;
         padding-top: 0.75rem;
@@ -879,9 +888,9 @@
                 </div>
                 <div class="modal-footer mt-4" style="border-top: none;"> 
                     {{-- Buttons matching the image --}}
-                    <div class="d-flex w-100 gap-2">
-                        <button type="button" class="btn batal-btn flex-grow-1" data-dismiss="modal" style="border: 1px solid #1a237e; color: #1a237e;">Batal</button>
-                        <button type="submit" class="btn text-white flex-grow-1" style="background-color: #1a237e;">Hapus</button>
+                    <div class="d-flex w-100 gap-2 justify-content-end">
+                        <button type="button" class="btn batal-btn " data-dismiss="modal" style="border: 1px solid #1a237e; color: #1a237e;">Batal</button>
+                        <button type="submit" class="btn simpan-btn text-white ml-2" style="background-color: #1a237e;">Simpan</button>
                     </div>
                 </div>
             </form>

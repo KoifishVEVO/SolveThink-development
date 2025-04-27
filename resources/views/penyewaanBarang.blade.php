@@ -26,10 +26,9 @@
         border-color: #2B2684;
         color: #2B2684;
     }
-    .batal-btn:hover {
-        background-color: #2B2684;
-        color: white;
-    }
+
+    
+    
     /* buttons */
     .btn-success {
             background-color: #00B634 !important;
@@ -177,7 +176,7 @@
          color: #00c853; /* Dark green text */
        
     }
-    /* Mobile style */
+    /* mobile style */
     @media (max-width: 767.98px) {
     /* Target mobile screens */
 
@@ -186,7 +185,7 @@
     #addAssetModal .modal-dialog,
     #rincianAssetModal .modal-dialog,
     #updateAssetModal .modal-dialog,
-    #rincianPenyewaanModal .modal-dialog { /* Added */
+    #rincianPenjualanModal .modal-dialog { /* Added */
         max-width: 100%;
         width: 100%;
         height: 100%;
@@ -207,7 +206,7 @@
     #addAssetModal .modal-content,
     #rincianAssetModal .modal-content,
     #updateAssetModal .modal-content,
-    #rincianPenyewaanModal .modal-content { /* Added */
+    #rincianPenjualanModal .modal-content { /* Added */
         height: 100%; /* Fill the dialog height */
         border-radius: 0; /* No rounded corners */
         border: none; /* No border */
@@ -221,7 +220,7 @@
     #addAssetModal .modal-body,
     #rincianAssetModal .modal-body,
     #updateAssetModal .modal-body,
-    #rincianPenyewaanModal .modal-body { /* Added */
+    #rincianPenjualanModal .modal-body { /* Added */
         overflow-y: auto; /* Enable vertical scroll */
         flex-grow: 1; /* Allow body to take available vertical space */
         padding: 1.5rem; /* Adjusted padding for mobile */
@@ -244,16 +243,18 @@
     /* --- Footer Button Styling (Apply to rincianPenjualanModal too) --- */
     /* ADD #rincianPenjualanModal to the list */
     #rincianAssetModal .modal-footer,
-    #rincianPenyewaanModal .modal-footer { /* Added */
+    #rincianPenjualanModal .modal-footer,
+    #filterPenyewaanModal .modal-footer { /* Added */
         justify-content: center !important; /* Center the footer button(s) */
         border-top: none; /* Remove top border */
-        padding: 1rem; /* Add some padding */
+        padding: 2rem; /* Add some padding */
         margin-top: auto; /* Push footer to bottom in flex column */
     }
 
     /* ADD #rincianPenjualanModal to the list */
     #rincianAssetModal .modal-footer .btn,
-    #rincianPenyewaanModal .modal-footer .btn { /* Added */
+    #rincianPenjualanModal .modal-footer .btn,
+    #filterPenyewaanModal .modal-footer .btn { /* Added */
         width: 90%; /* Make button wide */
         max-width: 400px; /* Limit max width */
         padding-top: 0.75rem;
@@ -278,6 +279,33 @@
 
     /* --- Dropdown options styling (KEEP SEPARATE) --- */
     .searchable-dropdown .dropdown-options-container { /* ... */ }
+
+    #filterPenyewaanModal .modal-footer {
+        justify-content: center !important; 
+        border-top: none;
+        padding: 1.5rem 1rem;
+        margin-top: auto;
+    }
+
+    #filterPenyewaanModal .modal-footer .btn {
+        width: 50%; /* Biar dua tombol sejajar */
+        max-width: none;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+    #filterPenyewaanModal .modal-footer .batal-btn {
+        width: 50%; /* Biar dua tombol sejajar */
+        max-width: none;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+
+    /* Tambahkan gap di antara tombol */
+    #filterPenyewaanModal .modal-footer .d-flex {
+        gap: 0.5rem;
+    }
 
 } /* End of @media query */
 
@@ -334,6 +362,7 @@
         .batal-btn {
             color: #272780 !important;
             border-color: #272780 !important;
+            padding: 6px 18px;
         }
 
        /* Searchable Dropdown Styles (as provided) */
@@ -1021,11 +1050,12 @@
                     </div>
 
                 </div>
-                <div class="modal-footer" style="border-top: none;"> {{-- Remove border --}}
-                    {{-- Buttons matching the image style and using BS5 attributes --}}
-                    <button type="button" class="btn batal-btn" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn text-white" style="background-color: #1a237e;">Simpan</button>
-                </div>
+                <div class="modal-footer mt-4" style="border-top: none;"> 
+                    {{-- Buttons matching the image --}}
+                    <div class="d-flex w-100 gap-2 justify-content-end">
+                        <button type="button" class="btn batal-btn " data-dismiss="modal" style="border: 1px solid #1a237e; color: #1a237e;">Batal</button>
+                        <button type="submit" class="btn simpan-btn text-white ml-2" style="background-color: #1a237e;">Simpan</button>
+                    </div>
             </form>
         </div>
     </div>
@@ -1191,16 +1221,10 @@
                 }
             });
         }
-    
-        // --- Initialize the specific dropdown for the filterPenyewaanModal ---
-        // *** Use the unique IDs assigned in the HTML for this modal ***
+
         setupSearchableDropdown('custom-penyewaan-periode-container', 'filter-periode-penyewaan');
     
-        // --- Initialize dropdowns from the previous modal IF THEY ARE ON THE SAME PAGE ---
-        // setupSearchableDropdown('custom-periode-filter-container', 'filter-periode'); // From filterPenjualanModal
-    
-        // --- Initialize any other searchable dropdowns on the page ---
-        // setupSearchableDropdown('another-container-id', 'another-select-id');
+ 
     
     });
     </script>

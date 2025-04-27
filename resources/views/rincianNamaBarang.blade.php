@@ -701,7 +701,42 @@
 
         }
 
-        /* --- End Mobile Styles --- */
+        /* Add upload area */
+        #upload-section-container.preview-active {
+        /* Styles for the container when preview is shown */
+        /* background-color: #f8f9fa; */ /* Light background for the row */
+        /* border: 1px solid #dee2e6; */ /* Optional border */
+        }
+     
+        #file-info-area {
+            /* Styles for the text area */
+        }
+        
+        /* Ensure close button in preview area is visible and dark */
+        #remove-image-btn.close {
+            color: #000;
+            opacity: 0.6;
+        }
+        #remove-image-btn.close:hover {
+            opacity: 0.9;
+        }
+        .text-truncate { /* Ensure long filenames don't break layout */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #image-upload-preview-area {
+        height: 100px; 
+        width: 100%;
+        cursor: pointer;
+        background-color: #1a237e;
+        background-size: cover;
+        background-position: center;
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+    }
     </style>
 
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -875,63 +910,78 @@
     <!-- Modals -->
 
     <!-- add -->
-    <div class="modal fade" id="addNamaBarangModal" tabindex="-1" aria-labelledby="addNamaBarangModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addNamaBarangModal" tabindex="-1" aria-labelledby="addNamaBarangModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header modal-color text-white">
+                <div class="modal-header modal-color text-white" style="background-color: #1a237e; border-bottom: none;">
                     <h5 class="modal-title" id="addNamaBarangModalLabel">Tambah Nama Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <form action="{{ route('nama_barang.store') }}" method="POST" id="addNamaBarangForm"
-                    enctype="multipart/form-data">
+                <form action="{{ route('nama_barang.store') }}" method="POST" id="addNamaBarangForm" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-
+    
                         {{-- Upload Foto Barang Section --}}
                         <div class="form-group mb-3">
-                            <label class="form-label fw-bold">Upload Foto Barang</label>
-                            <div id="add-nama-barang-upload-area"
-                                class="modal-color rounded-3 d-flex align-items-center justify-content-center mb-2"
-                                onclick="document.getElementById('add-nama-barang-gambar-input').click();">
-
-                                <img src="#" alt="Preview" class="img-thumbnail d-none img-fluid"
-                                    id="preview-img">
-
-                                <i class="fa fa-image fa-3x text-white" id="add-default-icon"></i>
+                            <label class="font-weight-bold">Upload Foto Barang</label>
+    
+                            {{-- Container that changes layout --}}
+                            <div id="upload-section-container" class="d-flex align-items-center mb-2 p-2 rounded">
+    
+                                {{-- 1. Clickable Area / Becomes Preview Box --}}
+                                <div id="image-upload-preview-area"
+                                     class="modal-color rounded d-flex align-items-center justify-content-center"
+                                     onclick="triggerFileInput()">
+                                    {{-- Default Icon (Centered) --}}
+                                    <i class="fa fa-image fa-3x text-white" id="add-default-icon"></i>
+                                    {{-- The actual preview image (hidden initially) - Use this instead of background for better control --}}
+                                    <img src="#" alt="Preview" id="preview-img-element" style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
+    
+                                </div>
+    
+                                {{-- 2. File Info Area (Hidden initially, appears next to preview) --}}
+                                <div id="file-info-area" class="file-info flex-grow-1 d-none align-items-center pl-3">
+                                    {{-- Icon representing file/upload --}}
+                                    <div class="mr-2" style="flex-shrink: 0;">
+                                        <i class="fa fa-box fa-2x" style="color: #1a237e;"></i>
+                                    </div>
+                                    {{-- Text Details --}}
+                                    <div style="line-height: 1.2;">
+                                        <span id="add-nama-barang-filename" class="font-weight-bold d-block text-truncate" style="max-width: 200px;"></span> {{-- Added text-truncate --}}
+                                        <small class="text-success">Successfully Uploaded!</small>
+                                    </div>
+                                </div>
+    
+                                {{-- 3. Remove Button (Hidden initially, appears at the end) --}}
+                                <button type="button" class="close d-none ml-auto pl-2" aria-label="Remove image" id="remove-image-btn" style="font-size: 1.5rem; align-self: center;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+    
                             </div>
-                            <input type="file" class="d-none" id="add-nama-barang-gambar-input" name="gambar_barang"
-                                accept="image/*">
-                            {{-- Show filename (Optional) --}}
-                            <p class="mt-1 mb-0 text-muted small text-center" id="add-nama-barang-filename"></p>
-
-                            {{-- skrg preview di uploadarea --}}
-                            {{-- <div id="add-nama-barang-preview" class="mt-2 text-center" style="display: none;"> --}}
-                            {{--     <img src="#" alt="Preview" class="img-thumbnail" id="preview-img"/> --}}
-                            {{--     <p class="mt-1 mb-0 text-muted small" id="add-nama-barang-filename"></p> --}}
-                            {{-- </div> --}}
+    
+                            {{-- Hidden File Input --}}
+                            <input type="file" class="d-none" id="add-nama-barang-gambar-input" name="gambar_barang" accept="image/*">
                         </div>
-
+    
+    
                         {{-- Nama Barang Input --}}
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                            <input type="text" name="nama_barang" id="add-nama-barang" class="form-control"
-                                placeholder="Masukkan Nama Barang..." required>
+                            <input type="text" name="nama_barang" id="add-nama-barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
                         </div>
-
+    
                         {{-- Link Deskripsi --}}
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-deskripsi-nama-barang">Link Deskripsi</label>
-                            <input type="text" name="deskripsi" id="add-deskripsi-nama-barang" class="form-control">
+                            <input type="text" name="deskripsi" id="add-deskripsi-nama-barang" class="form-control" placeholder="Masukkan Link Deskripsi...">
                         </div>
-
+    
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
-                            data-dismiss="modal">Batal</button>
-                        <button type="submit"
-                            class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
+                    <div class="modal-footer" style="border-top: none;">
+                        <button type="button" class="btn btn-outline-secondary rounded-lg" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn text-white font-weight-bold rounded-lg ml-2" style="background-color: #1a237e;">Tambah</button>
                     </div>
                 </form>
             </div>
@@ -1263,7 +1313,96 @@
 
 
     // addnamabarang thing
-    
+    function triggerFileInput() {
+    const container = document.getElementById('upload-section-container');
+    // Only trigger if the preview is NOT active
+    if (!container.classList.contains('preview-active')) {
+        document.getElementById('add-nama-barang-gambar-input').click();
+    }
+    // If preview is active, clicking the small image does nothing
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('add-nama-barang-gambar-input');
+    const container = document.getElementById('upload-section-container');
+    const uploadPreviewArea = document.getElementById('image-upload-preview-area');
+    const defaultIcon = document.getElementById('add-default-icon');
+    const previewImageElement = document.getElementById('preview-img-element'); // Get the img tag
+    const fileInfoArea = document.getElementById('file-info-area');
+    const fileNameDisplay = document.getElementById('add-nama-barang-filename');
+    const removeButton = document.getElementById('remove-image-btn');
+
+    // --- Function to show preview ---
+    function showPreview(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // 1. Update Preview Area appearance
+            uploadPreviewArea.style.width = '100px'; // Shrink width
+            uploadPreviewArea.style.height = '100px'; // Set fixed height
+            uploadPreviewArea.style.cursor = 'default'; // Change cursor
+            // uploadPreviewArea.style.backgroundImage = `url(${e.target.result})`; // Option 1: Use background
+            previewImageElement.src = e.target.result; // Option 2: Use img tag
+            previewImageElement.style.display = 'block'; // Show the img tag
+            defaultIcon.style.display = 'none'; // Hide default icon
+
+            // 2. Show File Info & Remove Button
+            fileInfoArea.classList.remove('d-none');
+            fileInfoArea.classList.add('d-flex'); // Make sure flex is enabled
+            removeButton.classList.remove('d-none');
+
+            // 3. Update Filename
+            fileNameDisplay.textContent = file.name;
+
+            // 4. Mark container as active
+            container.classList.add('preview-active');
+        }
+        reader.readAsDataURL(file);
+    }
+
+    // --- Function to reset to initial state ---
+    function resetUploader() {
+        // 1. Reset Preview Area appearance
+        uploadPreviewArea.style.width = '100%'; // Back to full width
+        uploadPreviewArea.style.height = '80px'; // Back to initial height
+        uploadPreviewArea.style.cursor = 'pointer'; // Back to clickable
+        // uploadPreviewArea.style.backgroundImage = 'none'; // Option 1: Remove background
+        previewImageElement.src = '#'; // Option 2: Reset img tag
+        previewImageElement.style.display = 'none'; // Hide the img tag
+        defaultIcon.style.display = 'block'; // Show default icon
+
+        // 2. Hide File Info & Remove Button
+        fileInfoArea.classList.add('d-none');
+        fileInfoArea.classList.remove('d-flex');
+        removeButton.classList.add('d-none');
+
+        // 3. Clear Filename & Input
+        fileNameDisplay.textContent = '';
+        imageInput.value = ''; // Clear the file input
+
+        // 4. Mark container as inactive
+        container.classList.remove('preview-active');
+    }
+
+    // --- Event Listeners ---
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            showPreview(file);
+        }
+    });
+
+    removeButton.addEventListener('click', function() {
+        resetUploader();
+    });
+
+    // Optional: Reset preview when modal is hidden
+    $('#addNamaBarangModal').on('hidden.bs.modal', function () {
+        // Only reset if a file was actually selected (preview is active)
+        if (container.classList.contains('preview-active')) {
+             resetUploader();
+        }
+    });
+});
 
     //Link
 </script>
