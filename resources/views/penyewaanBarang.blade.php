@@ -768,8 +768,16 @@
                                                         <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item['id'] }}"
                                                             data-penyewa="{{ $item['nama_penyewa'] }}"
-                                                            {{-- Add other necessary data attributes (barang, tanggal, status, urls etc.) --}} data-toggle="modal"
-                                                            data-target="#rincianPenyewaanModal">
+                                                            data-alamat="{{ $item['alamat_penyewa'] }}"
+                                                            data-penyewaan="{{ $item['penyewaan'] }}"
+                                                            data-totalharga="{{ $item['total_harga'] }}"
+                                                            data-tanggal="{{ $item['tanggal_penyewaan'] }}"
+                                                            data-jumlahminggu="{{ $totalMinggu }}"
+                                                            data-status="{{ $item['status_penyewaan'] }}"
+                                                            data-buktipembayaran="{{ $item['bukti_pembayaran_penyewa'] }}"
+                                                            data-buktiidentitas="{{ $item['bukti_identitas_penyewa'] }}"
+                                                            data-pengambilan="{{ $item['pengambilan_barang_penyewa'] }}"
+                                                            data-toggle="modal" data-target="#rincianPenyewaanModal">
 
                                                             Rincian
                                                         </button>
@@ -1199,6 +1207,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            document.querySelectorAll('.rincian-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Set semua data dari tombol ke modal
+                    document.getElementById('rincian-nama-penyewa').textContent = this.dataset
+                        .penyewa || '-';
+                    document.getElementById('rincian-telp-penyewa').textContent = this.dataset
+                        .telepon || '-';
+                    document.getElementById('rincian-alamat-penyewa').textContent = this.dataset
+                        .alamat || '-';
+                    document.getElementById('rincian-tgl-penyewaan').textContent = this.dataset
+                        .tanggal || '-';
+                    document.getElementById('rincian-waktu-sewa').textContent = (this.dataset
+                        .jumlahminggu || '-') + ' Minggu';
+                    document.getElementById('rincian-status-sewa').textContent = this.dataset
+                        .status || '-';
+                    document.getElementById('rincian-barang-disewa').textContent = this.dataset
+                        .penyewaan || '-';
+                    document.getElementById('rincian-harga-sewa').textContent = this.dataset
+                        .totalharga || '-';
+                    document.getElementById('rincian-metode-kirim').textContent = this.dataset
+                        .pengambilan || '-';
+
+                    // Bukti pembayaran
+                    const buktiBayarContainer = document.getElementById(
+                        'rincian-bukti-bayar-container');
+                    if (this.dataset.buktipembayaran && this.dataset.buktipembayaran !== '-') {
+                        buktiBayarContainer.innerHTML = `
+                <a href="${this.dataset.buktipembayaran}" target="_blank" class="btn btn-sm btn-bukti">
+                    <i class="fas fa-receipt"></i> Lihat Bukti
+                </a>
+            `;
+                    } else {
+                        buktiBayarContainer.innerHTML = `
+                <button class="btn btn-sm btn-bukti disabled" disabled>
+                    <i class="fas fa-receipt"></i> (Belum Ada)
+                </button>
+            `;
+                    }
+
+                    // Bukti identitas (KTP/KTM)
+                    const buktiKtmContainer = document.getElementById(
+                    'rincian-bukti-ktm-container');
+                    if (this.dataset.buktiidentitas && this.dataset.buktiidentitas !== '-') {
+                        buktiKtmContainer.innerHTML = `
+                <a href="${this.dataset.buktiidentitas}" target="_blank" class="btn btn-sm btn-bukti">
+                    <i class="fas fa-id-card"></i> Lihat Bukti
+                </a>
+            `;
+                    } else {
+                        buktiKtmContainer.innerHTML = `
+                <button class="btn btn-sm btn-bukti disabled" disabled>
+                    <i class="fas fa-id-card"></i> (Belum Ada)
+                </button>
+            `;
+                    }
+
+                    // Update warna status (opsional bonus)
+                    const statusElement = document.getElementById('rincian-status-sewa');
+                    statusElement.classList.remove('status-berlangsung', 'status-selesai');
+                    if (this.dataset.status === 'Selesai') {
+                        statusElement.classList.add('status-selesai');
+                    } else {
+                        statusElement.classList.add('status-berlangsung');
+                    }
+                });
+            });
+
 
             /**
              * Initializes a custom searchable dropdown.
