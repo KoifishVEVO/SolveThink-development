@@ -744,8 +744,17 @@
                                                         @endphp
                                                         {{ $totalMinggu }} Minggu
                                                     </small><br>
-                                    
-                                                    <span class="badge status-badge">
+                                                
+                                                    @php
+                                                       
+                                                        $statusClass = 'status-berlangsung'; 
+                                                        if (strtolower($item['status_sewa'] ?? '') == 'selesai') {
+                                                            $statusClass = 'status-selesai';
+                                                        }
+                                                     
+                                                    @endphp
+                                                
+                                                    <span class="badge status-badge {{ $statusClass }}">
                                                         <span class="status-dot"></span>
                                                         {{ $item['status_sewa'] ?? 'N/A' }}
                                                     </span>
@@ -1275,18 +1284,28 @@ if (tableBody) {
         // --- Populate Status Badge ---
         if (statusBarangEl) {
             const statusText = data.statusSewa || 'N/A';
-            statusBarangEl.textContent = statusText; // Set text content
-            // Remove existing status classes
-            statusBarangEl.classList.remove('status-selesai', 'status-berlangsung', 'status-default'); // Add other statuses if needed
 
-            // Add appropriate class based on status text
-            if (statusText.toLowerCase() === 'selesai') {
-                statusBarangEl.classList.add('status-selesai');
-            } else if (statusText.toLowerCase() === 'berlangsung') {
-                statusBarangEl.classList.add('status-berlangsung');
-            } else {
-                statusBarangEl.classList.add('status-default'); // Or another default class
-            }
+                // Clean old status classes
+                statusBarangEl.classList.remove('status-berlangsung', 'status-selesai', 'status-batal', 'status-menunggu', 'status-default');
+
+                // Determine status class
+                let statusClass = 'status-berlangsung'; // Default
+                const statusLower = statusText.toLowerCase();
+                if (statusLower === 'selesai') {
+                    statusClass = 'status-selesai';
+                } else if (statusLower === 'batal' || statusLower === 'dibatalkan') {
+                    statusClass = 'status-batal';
+                } else if (statusLower === 'menunggu') {
+                    statusClass = 'status-menunggu';
+                }
+
+                // Apply the new class
+                statusBarangEl.classList.add(statusClass);
+
+                // Set the inner HTML to include the dot and text
+                statusBarangEl.innerHTML = `
+                    <span class="status-dot"></span> ${statusText}
+                `;
         }
 
         // --- Populate Bukti Pembayaran ---
@@ -1325,11 +1344,7 @@ if (tableBody) {
     }); // End click listener
 } // End if tableBody exists
 
-// Optional: Add similar logic for .btn-update to populate the update modal
-// document.querySelectorAll('.btn-update').forEach(button => { ... });
 
-// Optional: Add listener for delete button
-// document.querySelectorAll('.btn-delete').forEach(button => { ... });
 
 });
     </script>
