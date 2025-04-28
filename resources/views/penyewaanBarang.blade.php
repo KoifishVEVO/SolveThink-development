@@ -748,9 +748,23 @@
                                                         @endphp
                                                         {{ $totalMinggu }} Minggu
                                                     </small><br>
+<<<<<<< HEAD
 
                                                     <span
                                                         class="badge status-badge {{ $item['status_penyewaan'] == 'Belum Dibalikkan' ? 'status-berlangsung' : 'status-selesai' }}">
+=======
+                                                
+                                                    @php
+                                                       
+                                                        $statusClass = 'status-berlangsung'; 
+                                                        if (strtolower($item['status_sewa'] ?? '') == 'selesai') {
+                                                            $statusClass = 'status-selesai';
+                                                        }
+                                                     
+                                                    @endphp
+                                                
+                                                    <span class="badge status-badge {{ $statusClass }}">
+>>>>>>> b7fca6b77f6430efe0618ae0d34cdc2cc2902721
                                                         <span class="status-dot"></span>
                                                         {{ $item['status_penyewaan'] ?? 'N/A' }}
                                                     </span>
@@ -1277,6 +1291,7 @@
                     if (hargaSewaEl) hargaSewaEl.textContent = formatRupiah(data.hargaSewa || 0);
                     if (metodeKirimEl) metodeKirimEl.textContent = data.metodeKirim || '-';
 
+<<<<<<< HEAD
                     // --- Populate Status Badge ---
                     if (statusBarangEl) {
                         const statusText = data.statusSewa || 'N/A';
@@ -1294,6 +1309,34 @@
                             statusBarangEl.classList.add('status-default'); // Or another default class
                         }
                     }
+=======
+        // --- Populate Status Badge ---
+        if (statusBarangEl) {
+            const statusText = data.statusSewa || 'N/A';
+
+                // Clean old status classes
+                statusBarangEl.classList.remove('status-berlangsung', 'status-selesai', 'status-batal', 'status-menunggu', 'status-default');
+
+                // Determine status class
+                let statusClass = 'status-berlangsung'; // Default
+                const statusLower = statusText.toLowerCase();
+                if (statusLower === 'selesai') {
+                    statusClass = 'status-selesai';
+                } else if (statusLower === 'batal' || statusLower === 'dibatalkan') {
+                    statusClass = 'status-batal';
+                } else if (statusLower === 'menunggu') {
+                    statusClass = 'status-menunggu';
+                }
+
+                // Apply the new class
+                statusBarangEl.classList.add(statusClass);
+
+                // Set the inner HTML to include the dot and text
+                statusBarangEl.innerHTML = `
+                    <span class="status-dot"></span> ${statusText}
+                `;
+        }
+>>>>>>> b7fca6b77f6430efe0618ae0d34cdc2cc2902721
 
                     // --- Populate Bukti Pembayaran ---
                     if (buktiBayarContainer) {
@@ -1331,11 +1374,15 @@
                 }); // End click listener
             } // End if tableBody exists
 
+<<<<<<< HEAD
             // Optional: Add similar logic for .btn-update to populate the update modal
             // document.querySelectorAll('.btn-update').forEach(button => { ... });
 
             // Optional: Add listener for delete button
             // document.querySelectorAll('.btn-delete').forEach(button => { ... });
+=======
+
+>>>>>>> b7fca6b77f6430efe0618ae0d34cdc2cc2902721
 
         });
     </script>
