@@ -8,34 +8,37 @@
 @endsection
 
 @section('content')
-
-<style>
-    .heading-text {
+    <style>
+        .heading-text {
             color: #272780 !important;
             font-weight: bold !important;
         }
-    .card-color {
-        background-color: #2B2684; /* Color from screenshot header */
-        border-color: #2B2684;
-    }
-    .modal-color {
-         background-color: #2B2684; /* Modal Header/Button Color */
-         border-color: #2B2684;
-    }
-    .batal-btn {
-        border-color: #2B2684;
-        color: #2B2684;
-    
-    }
 
-    .simpan-btn {
-       
-    }
-    
-    .btn-success {
+        .card-color {
+            background-color: #2B2684;
+            /* Color from screenshot header */
+            border-color: #2B2684;
+        }
+
+        .modal-color {
+            background-color: #2B2684;
+            /* Modal Header/Button Color */
+            border-color: #2B2684;
+        }
+
+        .batal-btn {
+            border-color: #2B2684;
+            color: #2B2684;
+
+        }
+
+        .simpan-btn {}
+
+        .btn-success {
             background-color: #00B634 !important;
         }
-    .rincian-btn {
+
+        .rincian-btn {
             background-color: transparent !important;
             color: #A9B5DF !important;
             border: 2px solid #A9B5DF !important;
@@ -84,7 +87,7 @@
         }
 
 
-.rincian-btn i {
+        .rincian-btn i {
             font-size: 16px !important;
             margin-right: 0 !important;/
         }
@@ -94,183 +97,254 @@
             color: white !important;
             border-color: #A9B5DF !important;
         }
-        .btn-filter{
+
+        .btn-filter {
             background-color: #A9B5DF !important;
             color: white !important;
         }
-    
-    .delete-text {
-        color: #858796; /* Subdued text color for confirmation */
-    }
-     /* Adjust button spacing and alignment if needed */
-    .aksi-buttons .btn {
-         margin-right: 5px; /* Add some space between buttons */
-    }
-    .aksi-buttons .btn:last-child {
-         margin-right: 0;
-    }
-    /* Style for Bukti Pembayaran button */
-    .btn-bukti {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background-color: white;
-        color: #1b2e91; /* Biru tua */
-        border: 2px solid #1b2e91;
-        border-radius: 8px;
-        padding: 6px 12px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        transition: 0.2s ease-in-out;
-    }
 
-    .btn-bukti i {
-        font-size: 1rem;
-    }
+        .delete-text {
+            color: #858796;
+            /* Subdued text color for confirmation */
+        }
 
-    .btn-bukti:hover {
-        background-color: #f0f4ff; 
-        border-color: #1b2e91;
-        color: #1b2e91;
-        text-decoration: none;
-    }
+        /* Adjust button spacing and alignment if needed */
+        .aksi-buttons .btn {
+            margin-right: 5px;
+            /* Add some space between buttons */
+        }
 
-    /* mobile style */
-    @media (max-width: 767.98px) {
-    /* Target mobile screens */
+        .aksi-buttons .btn:last-child {
+            margin-right: 0;
+        }
 
-    /* --- Make specific modals fullscreen --- */
-    /* ADD #rincianPenjualanModal to the list */
-    #addAssetModal .modal-dialog,
-    #rincianAssetModal .modal-dialog,
-    #updateAssetModal .modal-dialog,
-    #rincianPenjualanModal .modal-dialog { /* Added */
-        max-width: 100%;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        position: fixed; /* Position relative to viewport */
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        transform: none !important; /* Override potential centering transforms */
-        /* Remove the centered class effect */
-        display: flex;
-        align-items: normal;
-        justify-content: normal;
-    }
+        /* Style for Bukti Pembayaran button */
+        .btn-bukti {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: white;
+            color: #1b2e91;
+            /* Biru tua */
+            border: 2px solid #1b2e91;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s ease-in-out;
+        }
 
-    /* ADD #rincianPenjualanModal to the list */
-    #addAssetModal .modal-content,
-    #rincianAssetModal .modal-content,
-    #updateAssetModal .modal-content,
-    #rincianPenjualanModal .modal-content { /* Added */
-        height: 100%; /* Fill the dialog height */
-        border-radius: 0; /* No rounded corners */
-        border: none; /* No border */
-        display: flex; /* Use flexbox for layout */
-        flex-direction: column; /* Stack header/body/footer */
-        flex: 1; /* Allow content to fill dialog */
-    }
+        .btn-bukti i {
+            font-size: 1rem;
+        }
 
-    /* Allow modal body to scroll */
-    /* ADD #rincianPenjualanModal to the list */
-    #addAssetModal .modal-body,
-    #rincianAssetModal .modal-body,
-    #updateAssetModal .modal-body,
-    #rincianPenjualanModal .modal-body { /* Added */
-        overflow-y: auto; /* Enable vertical scroll */
-        flex-grow: 1; /* Allow body to take available vertical space */
-        padding: 1.5rem; /* Adjusted padding for mobile */
-    }
+        .btn-bukti:hover {
+            background-color: #f0f4ff;
+            border-color: #1b2e91;
+            color: #1b2e91;
+            text-decoration: none;
+        }
 
-    /* --- Keep delete modal default (no changes needed here) --- */
-    #deleteAssetModal .modal-dialog { /* ... styles as before ... */ }
-    #deleteAssetModal .modal-content { /* ... styles as before ... */ }
-    #deleteAssetModal .modal-body { /* ... styles as before ... */ }
+        /* mobile style */
+        @media (max-width: 767.98px) {
+            /* Target mobile screens */
 
-    /* --- Specific Styles for Rincian ASSET Modal Mobile (KEEP SEPARATE unless layout is identical) --- */
-    /* These styles likely DON'T apply to rincianPenjualanModal based on the image provided */
-    #rincianAssetModal .modal-body {
-        /* Styles for centering image etc. */
-        /* display: flex; ... etc */
-    }
-    #rincianAssetModal .modal-body > div:first-child { /* Image container */ }
-    #rincianAssetModal .modal-body > div.ml-4 { /* Details container */ }
+            /* --- Make specific modals fullscreen --- */
+            /* ADD #rincianPenjualanModal to the list */
+            #addAssetModal .modal-dialog,
+            #rincianAssetModal .modal-dialog,
+            #updateAssetModal .modal-dialog,
+            #rincianPenjualanModal .modal-dialog {
+                /* Added */
+                max-width: 100%;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                position: fixed;
+                /* Position relative to viewport */
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                transform: none !important;
+                /* Override potential centering transforms */
+                /* Remove the centered class effect */
+                display: flex;
+                align-items: normal;
+                justify-content: normal;
+            }
 
-    /* --- Footer Button Styling (Apply to rincianPenjualanModal too) --- */
-    /* ADD #rincianPenjualanModal to the list */
-    #rincianAssetModal .modal-footer,
-    #rincianPenjualanModal .modal-footer,
-    #filterPenjualanModal .modal-footer { /* Added */
-        justify-content: center !important; /* Center the footer button(s) */
-        border-top: none; /* Remove top border */
-        padding: 2rem; /* Add some padding */
-        margin-top: auto; /* Push footer to bottom in flex column */
-    }
+            /* ADD #rincianPenjualanModal to the list */
+            #addAssetModal .modal-content,
+            #rincianAssetModal .modal-content,
+            #updateAssetModal .modal-content,
+            #rincianPenjualanModal .modal-content {
+                /* Added */
+                height: 100%;
+                /* Fill the dialog height */
+                border-radius: 0;
+                /* No rounded corners */
+                border: none;
+                /* No border */
+                display: flex;
+                /* Use flexbox for layout */
+                flex-direction: column;
+                /* Stack header/body/footer */
+                flex: 1;
+                /* Allow content to fill dialog */
+            }
 
-    /* ADD #rincianPenjualanModal to the list */
-    #rincianAssetModal .modal-footer .btn,
-    #rincianPenjualanModal .modal-footer .btn,
-    #filterPenjualanModal .modal-footer .btn { /* Added */
-        width: 90%; /* Make button wide */
-        max-width: 400px; /* Limit max width */
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        font-size: 1rem; /* Ensure readable font size */
-    }
+            /* Allow modal body to scroll */
+            /* ADD #rincianPenjualanModal to the list */
+            #addAssetModal .modal-body,
+            #rincianAssetModal .modal-body,
+            #updateAssetModal .modal-body,
+            #rincianPenjualanModal .modal-body {
+                /* Added */
+                overflow-y: auto;
+                /* Enable vertical scroll */
+                flex-grow: 1;
+                /* Allow body to take available vertical space */
+                padding: 1.5rem;
+                /* Adjusted padding for mobile */
+            }
 
-    /* --- Form Modals Fullscreen adjustments (KEEP SEPARATE) --- */
-    #addAssetModal .modal-dialog,
-    #updateAssetModal .modal-dialog { /* ... */ }
-    #addAssetModal .modal-content,
-    #updateAssetModal .modal-content { /* ... */ }
-    #addAssetModal form,
-    #updateAssetModal form { /* ... */ }
-    #addAssetModal .modal-body,
-    #updateAssetModal .modal-body { /* ... */ }
-    #addAssetModal .modal-footer,
-    #updateAssetModal .modal-footer { /* ... */ }
-    #updateAssetModal .modal-footer { /* ... */ }
-    #addAssetModal .modal-footer .btn,
-    #updateAssetModal .modal-footer .btn { /* ... */ }
+            /* --- Keep delete modal default (no changes needed here) --- */
+            #deleteAssetModal .modal-dialog {
+                /* ... styles as before ... */
+            }
 
-    /* --- Dropdown options styling (KEEP SEPARATE) --- */
-    .searchable-dropdown .dropdown-options-container { /* ... */ }
+            #deleteAssetModal .modal-content {
+                /* ... styles as before ... */
+            }
 
-    #filterPenjualanModal .modal-footer {
-        justify-content: center !important; 
-        border-top: none;
-        padding: 1.5rem 1rem;
-        margin-top: auto;
-    }
+            #deleteAssetModal .modal-body {
+                /* ... styles as before ... */
+            }
 
-    #filterPenjualanModal .modal-footer .btn {
-        width: 50%; /* Biar dua tombol sejajar */
-        max-width: none;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        font-size: 1rem;
-    }
-    #filterPenjualanModal .modal-footer .batal-btn {
-        width: 50%; /* Biar dua tombol sejajar */
-        max-width: none;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        font-size: 1rem;
-    }
+            /* --- Specific Styles for Rincian ASSET Modal Mobile (KEEP SEPARATE unless layout is identical) --- */
+            /* These styles likely DON'T apply to rincianPenjualanModal based on the image provided */
+            #rincianAssetModal .modal-body {
+                /* Styles for centering image etc. */
+                /* display: flex; ... etc */
+            }
 
-    /* Tambahkan gap di antara tombol */
-    #filterPenjualanModal .modal-footer .d-flex {
-        gap: 0.5rem;
-    }
+            #rincianAssetModal .modal-body>div:first-child {
+                /* Image container */
+            }
 
-} /* End of @media query */
+            #rincianAssetModal .modal-body>div.ml-4 {
+                /* Details container */
+            }
+
+            /* --- Footer Button Styling (Apply to rincianPenjualanModal too) --- */
+            /* ADD #rincianPenjualanModal to the list */
+            #rincianAssetModal .modal-footer,
+            #rincianPenjualanModal .modal-footer,
+            #filterPenjualanModal .modal-footer {
+                /* Added */
+                justify-content: center !important;
+                /* Center the footer button(s) */
+                border-top: none;
+                /* Remove top border */
+                padding: 2rem;
+                /* Add some padding */
+                margin-top: auto;
+                /* Push footer to bottom in flex column */
+            }
+
+            /* ADD #rincianPenjualanModal to the list */
+            #rincianAssetModal .modal-footer .btn,
+            #rincianPenjualanModal .modal-footer .btn,
+            #filterPenjualanModal .modal-footer .btn {
+                /* Added */
+                width: 90%;
+                /* Make button wide */
+                max-width: 400px;
+                /* Limit max width */
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                font-size: 1rem;
+                /* Ensure readable font size */
+            }
+
+            /* --- Form Modals Fullscreen adjustments (KEEP SEPARATE) --- */
+            #addAssetModal .modal-dialog,
+            #updateAssetModal .modal-dialog {
+                /* ... */
+            }
+
+            #addAssetModal .modal-content,
+            #updateAssetModal .modal-content {
+                /* ... */
+            }
+
+            #addAssetModal form,
+            #updateAssetModal form {
+                /* ... */
+            }
+
+            #addAssetModal .modal-body,
+            #updateAssetModal .modal-body {
+                /* ... */
+            }
+
+            #addAssetModal .modal-footer,
+            #updateAssetModal .modal-footer {
+                /* ... */
+            }
+
+            #updateAssetModal .modal-footer {
+                /* ... */
+            }
+
+            #addAssetModal .modal-footer .btn,
+            #updateAssetModal .modal-footer .btn {
+                /* ... */
+            }
+
+            /* --- Dropdown options styling (KEEP SEPARATE) --- */
+            .searchable-dropdown .dropdown-options-container {
+                /* ... */
+            }
+
+            #filterPenjualanModal .modal-footer {
+                justify-content: center !important;
+                border-top: none;
+                padding: 1.5rem 1rem;
+                margin-top: auto;
+            }
+
+            #filterPenjualanModal .modal-footer .btn {
+                width: 50%;
+                /* Biar dua tombol sejajar */
+                max-width: none;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                font-size: 1rem;
+            }
+
+            #filterPenjualanModal .modal-footer .batal-btn {
+                width: 50%;
+                /* Biar dua tombol sejajar */
+                max-width: none;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                font-size: 1rem;
+            }
+
+            /* Tambahkan gap di antara tombol */
+            #filterPenjualanModal .modal-footer .d-flex {
+                gap: 0.5rem;
+            }
+
+        }
+
+        /* End of @media query */
 
 
-    /* Pagination */
+        /* Pagination */
 
         /* Style the main pagination container */
         .dataTables_paginate .pagination {
@@ -329,11 +403,13 @@
         /* Searchable Dropdown Styles (as provided) */
         .custom-search-select-container {
             position: relative;
-            font-family: sans-serif; /* Or your preferred font */
+            font-family: sans-serif;
+            /* Or your preferred font */
         }
 
         .selected-value {
-            padding: 0.375rem 2.25rem 0.375rem 0.75rem; /* Adjusted padding for Bootstrap arrow space */
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+            /* Adjusted padding for Bootstrap arrow space */
             border: 1px solid #ced4da;
             border-radius: 0.25rem;
             background-color: #fff;
@@ -341,7 +417,8 @@
             display: block;
             width: 100%;
             box-sizing: border-box;
-            min-height: calc(1.5em + 0.75rem + 2px); /* Match BS select height */
+            min-height: calc(1.5em + 0.75rem + 2px);
+            /* Match BS select height */
             line-height: 1.5;
             overflow: hidden;
             white-space: nowrap;
@@ -357,18 +434,22 @@
 
         /* Style for placeholder text */
         .selected-value.placeholder-selected {
-            color: #6c757d; /* Bootstrap's placeholder color */
+            color: #6c757d;
+            /* Bootstrap's placeholder color */
         }
 
 
         /* Remove the custom ::after arrow */
-        /* .selected-value::after { ... } */ /* REMOVED */
+        /* .selected-value::after { ... } */
+        /* REMOVED */
 
         .selected-value:focus,
         .custom-search-select-container.open .selected-value {
-            border-color: #86b7fe; /* BS focus color */
+            border-color: #86b7fe;
+            /* BS focus color */
             outline: 0;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* BS focus shadow */
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            /* BS focus shadow */
         }
 
         .dropdown-list-container {
@@ -381,7 +462,8 @@
             background-color: #fff;
             max-height: 200px;
             overflow-y: auto;
-            z-index: 1051; /* Ensure it's above modal content but potentially below modal itself if needed */
+            z-index: 1051;
+            /* Ensure it's above modal content but potentially below modal itself if needed */
             border-radius: 0.25rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         }
@@ -392,7 +474,8 @@
 
         .search-box {
             padding: 0.375rem 0.75rem;
-            width: calc(100% - 16px); /* Account for margin */
+            width: calc(100% - 16px);
+            /* Account for margin */
             box-sizing: border-box;
             border: 1px solid #ced4da;
             outline: none;
@@ -403,7 +486,8 @@
 
         .options-list {
             list-style: none;
-            padding: 0 0 5px 0; /* Add padding bottom */
+            padding: 0 0 5px 0;
+            /* Add padding bottom */
             margin: 0;
         }
 
@@ -417,8 +501,10 @@
         }
 
         .options-list li:hover,
-        .options-list li.highlighted { /* Added .highlighted for potential keyboard nav */
-            background-color: #e9ecef; /* BS hover color */
+        .options-list li.highlighted {
+            /* Added .highlighted for potential keyboard nav */
+            background-color: #e9ecef;
+            /* BS hover color */
             color: #000;
         }
 
@@ -441,7 +527,8 @@
         .form-check-input[type="radio"] {
             width: 18px;
             height: 18px;
-            border: 1px solid #1a237e; /* Border biru */
+            border: 1px solid #1a237e;
+            /* Border biru */
             border-radius: 9999px;
             background-color: white;
             appearance: none;
@@ -464,703 +551,710 @@
         .form-check-input[type="radio"]:hover {
             box-shadow: 0 0 0 2px rgba(26, 35, 126, 0.3);
         }
-</style>
+    </style>
 
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> {{-- Use asset() helper for proper path --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> {{-- Updated Font Awesome link --}}
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> {{-- Use asset() helper for proper path --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {{-- Updated Font Awesome link --}}
 
 
-{{-- begin page content --}}
-<div class="container-fluid">
+    {{-- begin page content --}}
+    <div class="container-fluid">
 
-    {{-- Page Heading --}}
-    <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">PENJUALAN BARANG</h1>
-    <p class="mb-4 heading-text font-weight-bold">Tabel Penjualan Barang adalah tabel yang menunjukkan data penjualan dalam rentang periode tertentu</p>
+        {{-- Page Heading --}}
+        <h1 class="h3 mb-2 mt-4 heading-text font-weight-bold">PENJUALAN BARANG</h1>
+        <p class="mb-4 heading-text font-weight-bold">Tabel Penjualan Barang adalah tabel yang menunjukkan data penjualan
+            dalam rentang periode tertentu</p>
 
-    {{-- DataTales Example --}}
-    <div class="card shadow mb-4">
-        <div class="card-header py-5 card-color"> {{-- Adjusted padding --}}
-            <h6 class="m-0 font-weight-bold text-white">Data Tabel Penjualan Barang</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        {{-- DataTales Example --}}
+        <div class="card shadow mb-4">
+            <div class="card-header py-5 card-color"> {{-- Adjusted padding --}}
+                <h6 class="m-0 font-weight-bold text-white">Data Tabel Penjualan Barang</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                    {{-- Top Controls Row: Show Entries, Search, Filter, Tambah --}}
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-sm-12 col-md-auto"> {{-- Adjust columns for responsiveness --}}
-                            <div class="dataTables_length" id="dataTable_length">
-                                <label class="mb-0">Show
-                                    <select id="showEntries" name="dataTable_length" aria-controls="dataTable"
+                        {{-- Top Controls Row: Show Entries, Search, Filter, Tambah --}}
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-sm-12 col-md-auto"> {{-- Adjust columns for responsiveness --}}
+                                <div class="dataTables_length" id="dataTable_length">
+                                    <label class="mb-0">Show
+                                        <select id="showEntries" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm"
                                             style="width: auto; display: inline-block;">
-                                        {{-- Placeholder: Link value to backend query limit --}}
-                                        {{-- @TODO: Add JS to handle entry limit change and reload data --}}
-                                        <option value="10" {{-- @TODO: Check request('limit') == 10 ? 'selected' : '' --}} >10</option>
-                                        <option value="25" {{-- @TODO: Check request('limit') == 25 ? 'selected' : '' --}} >25</option>
-                                        <option value="50" {{-- @TODO: Check request('limit') == 50 ? 'selected' : '' --}} >50</option>
-                                        <option value="100" {{-- @TODO: Check request('limit') == 100 ? 'selected' : '' --}} >100</option>
-                                    </select> entries
-                                </label>
+                                            {{-- Placeholder: Link value to backend query limit --}}
+                                            {{-- @TODO: Add JS to handle entry limit change and reload data --}}
+                                            <option value="10" {{-- @TODO: Check request('limit') == 10 ? 'selected' : '' --}}>10</option>
+                                            <option value="25" {{-- @TODO: Check request('limit') == 25 ? 'selected' : '' --}}>25</option>
+                                            <option value="50" {{-- @TODO: Check request('limit') == 50 ? 'selected' : '' --}}>50</option>
+                                            <option value="100" {{-- @TODO: Check request('limit') == 100 ? 'selected' : '' --}}>100</option>
+                                        </select> entries
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md"> {{-- Takes remaining space --}}
+                                <div id="dataTable_filter"
+                                    class="dataTables_filter d-flex justify-content-md-end align-items-center">
+                                    {{-- Search Form --}}
+                                    <label class="mr-2 mb-0">Search:
+                                        {{-- Placeholder: Link form to backend search --}}
+                                        {{-- @TODO: Point action to the correct route for penjualanBarang search --}}
+                                        <form id="searchForm" method="GET" action="{{-- route('penjualan_barang.index') --}}"
+                                            class="d-inline">
+                                            <input type="search" name="search" value="{{-- request()->search --}}"
+                                                class="form-control form-control-sm d-inline-block" style="width: auto;"
+                                                aria-controls="dataTable" placeholder="">
+                                            {{-- Add hidden input for limit if needed --}}
+                                            {{-- <input type="hidden" name="limit" value="{{ request()->limit ?? 10 }}"> --}}
+                                        </form>
+                                    </label>
+
+                                    {{-- Filter Button (Placeholder) --}}
+
+                                    <button class="btn btn-filter btn-sm ml-2 px-3 py-2" data-toggle="modal"
+                                        data-target="#filterPenjualanModal">Filter</button>
+
+                                    {{-- Tambah Button --}}
+
+                                    {{-- <button class="btn btn-success btn-sm ml-2" data-toggle="modal" data-target="#addPenjualanModal">Tambah</button> --}}
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md"> {{-- Takes remaining space --}}
-                            <div id="dataTable_filter"
-                                 class="dataTables_filter d-flex justify-content-md-end align-items-center">
-                                 {{-- Search Form --}}
-                                <label class="mr-2 mb-0">Search:
-                                    {{-- Placeholder: Link form to backend search --}}
-                                    {{-- @TODO: Point action to the correct route for penjualanBarang search --}}
-                                    <form id="searchForm" method="GET" action="{{-- route('penjualan_barang.index') --}}" class="d-inline">
-                                        <input type="search" name="search" value="{{-- request()->search --}}"
-                                               class="form-control form-control-sm d-inline-block" style="width: auto;"
-                                               aria-controls="dataTable" placeholder="">
-                                        {{-- Add hidden input for limit if needed --}}
-                                        {{-- <input type="hidden" name="limit" value="{{ request()->limit ?? 10 }}"> --}}
-                                    </form>
-                                </label>
+                        {{-- Table Row --}}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                                    role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>ID</th>
+                                            <th>Informasi Pembeli</th>
+                                            <th>Detail Transaksi</th>
+                                            <th>Detail Pembayaran</th>
+                                            <th>Pengiriman</th>
+                                            <th class="text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-body">
 
-                                {{-- Filter Button (Placeholder) --}}
-                                
-                                <button class="btn btn-filter btn-sm ml-2 px-3 py-2" data-toggle="modal" data-target="#filterPenjualanModal">Filter</button>
+                                        @forelse ($penjualan as $item)
+                                            <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
+                                                <td>{{ $loop->iteration }}</td>
 
-                                {{-- Tambah Button --}}
-                                
-                                {{-- <button class="btn btn-success btn-sm ml-2" data-toggle="modal" data-target="#addPenjualanModal">Tambah</button> --}}
-                            </div>
-                        </div>
-                    </div>
+                                                {{-- Informasi Pembeli --}}
+                                                <td>
+                                                    <strong>{{ $item['nama_pembeli'] }}</strong><br>
+                                                    <small>{{ $item['alamat_pembeli'] }}</small>
+                                                </td>
 
-                    {{-- Table Row --}}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                <thead>
-                                    <tr role="row">
-                                        <th>ID</th>
-                                        <th>Informasi Pembeli</th>
-                                        <th>Detail Transaksi</th>
-                                        <th>Detail Pembayaran</th>
-                                        <th>Pengiriman</th>
-                                        <th class="text-center">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table-body">
-                                    @php
-                                        // Dummy data for demonstration 
-                                        $dummyPenjualan = [
-                                            (object)[
-                                            'id' => 1,
-                                            'nama_pembeli' => 'Budi Santoso',
-                                            'alamat_pembeli' => 'Jl. Merdeka No. 10, Bandung',
-                                            'no_telepon_pembeli' => '081234567890', // Added phone number
-                                            'barang_dijual' => 'Laptop ABC, Mouse XYZ',
-                                            'total_harga' => 12500000,
-                                            'tanggal_transaksi' => '25/04/2025',
-                                            'bukti_pembayaran_penjualan' => 'bukti_penjualan_1.jpg', // Example file name
-                                            'metode_pengiriman' => 'Diantar Kurir'
-                                        ],
-                                        (object)[
-                                            'id' => 2,
-                                            'nama_pembeli' => 'Citra Lestari',
-                                            'alamat_pembeli' => 'Jl. Sudirman No. 5, Jakarta',
-                                            'no_telepon_pembeli' => '08111223344', // Added phone number
-                                            'barang_dijual' => 'Keyboard Mechanical',
-                                            'total_harga' => 850000,
-                                            'tanggal_transaksi' => '26/04/2025',
-                                            'bukti_pembayaran_penjualan' => null, // No proof
-                                            'metode_pengiriman' => 'Ambil di Toko'
-                                        ],
-                                        ];
-                                        $penjualan = new \Illuminate\Pagination\LengthAwarePaginator($dummyPenjualan, count($dummyPenjualan), 10, 1);
-                                    @endphp
-                                
-                                    @forelse ($penjualan as $item)
-                                        <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
-                                            <td>{{ $loop->iteration + $penjualan->firstItem() - 1 }}</td> 
-                                
-                                            {{-- Informasi Pembeli --}}
-                                            <td>
-                                                <strong>{{ $item->nama_pembeli }}</strong><br>
-                                                <small>{{ $item->alamat_pembeli }}</small>
-                                            </td>
-                                
-                                            {{-- Detail Transaksi --}}
-                                            <td>
-                                                <strong>{{ $item->barang_dijual }}</strong><br>
-                                                <small>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</small><br>
-                                                <small>{{ $item->tanggal_transaksi }}</small>
-                                            </td>
-                                
-                                            {{-- Detail Pembayaran --}}
-                                            <td class="text-center" style="min-width: 130px;">
-                                                <div class="btn-bukti-container">
-                                                    {{-- Bukti Pembayaran --}}
-                                                    @if (!empty($item->bukti_pembayaran_penjualan))
-                                                        <a href="{{ asset('storage/bukti_penjualan/' . $item->bukti_pembayaran_penjualan) }}"
-                                                            target="_blank" class="btn btn-sm btn-bukti">
-                                                            <i class="fas fa-receipt"></i> Bukti Pembayaran
-                                                        </a>
-                                                    @else
-                                                        <button class="btn btn-sm btn-bukti disabled" disabled>
-                                                            <i class="fas fa-receipt"></i> (Belum Ada)
+                                                {{-- Detail Transaksi --}}
+                                                <td>
+                                                    <strong>{{ $item['pembelian'] }}</strong><br>
+                                                    <small>Rp
+                                                        {{ number_format($item['total_harga'], 0, ',', '.') }}</small><br>
+                                                    <small>{{ $item['tanggal_pembelian'] }}</small>
+                                                </td>
+
+                                                {{-- Detail Pembayaran --}}
+                                                <td class="text-center" style="min-width: 130px;">
+                                                    <div class="btn-bukti-container">
+                                                        {{-- Bukti Pembayaran --}}
+                                                        @if (!empty($item['bukti_pembayaran_pembeli']))
+                                                            <a href="{{ 'https://sale.solvethink.id/api/penjualan-komponen-solvethink/' . $item['bukti_pembayaran_pembeli'] }}"
+                                                                target="_blank" class="btn btn-sm btn-bukti">
+                                                                <i class="fas fa-receipt"></i> Bukti Pembayaran
+                                                            </a>
+                                                        @else
+                                                            <button class="btn btn-sm btn-bukti disabled" disabled>
+                                                                <i class="fas fa-receipt"></i> (Belum Ada)
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                </td>
+
+                                                {{-- Pengiriman --}}
+                                                <td>
+                                                    {{ $item['pengambilan_barang_pembeli'] }}
+                                                </td>
+
+                                                {{-- Aksi --}}
+                                                <td class="px-3 text-center aksi-buttons">
+                                                    <div class="d-inline-block">
+                                                        {{-- Rincian Button --}}
+                                                        <button class="btn btn-sm rincian-btn m-1"
+                                                            data-id="{{ $item['id'] }}"
+                                                            data-nama-pembeli="{{ $item['nama_pembeli'] }}"
+                                                            data-telp-pembeli="{{ $item['no_pembeli'] ?? '-' }}"
+                                                            data-alamat-pembeli="{{ $item['alamat_pembeli'] ?? '-' }}"
+                                                            data-metode-pengiriman="{{ $item['pengambilan_barang_pembeli'] ?? '-' }}"
+                                                            data-barang-dijual="{{ $item['pembelian'] ?? '-' }}"
+                                                            data-total-harga="{{ $item['total_harga'] ?? 0 }}"
+                                                            data-tanggal-transaksi="{{ $item['tanggal_pembelian'] ?? '-' }}"
+                                                            data-bukti-url="{{ $item['bukti_pembayaran_pembeli'] ? 'https://sale.solvethink.id/api/penjualan-komponen-solvethink/' . $item['bukti_pembayaran_pembeli'] : '' }}"
+                                                            data-toggle="modal" data-target="#rincianPenjualanModal">
+                                                            Rincian
                                                         </button>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                
-                                            {{-- Pengiriman --}}
-                                            <td>
-                                                {{ $item->metode_pengiriman }}
-                                            </td>
-                                
-                                            {{-- Aksi --}}
-                                            <td class="px-3 text-center aksi-buttons">
-                                                <div class="d-inline-block">
-                                                    {{-- Rincian Button --}}
-                                                    <button class="btn btn-sm rincian-btn m-1"
-                                                            data-id="{{ $item->id }}"
-                                                            data-nama-pembeli="{{ $item->nama_pembeli }}"
-                                                            data-telp-pembeli="{{ $item->no_telepon_pembeli ?? '-' }}"
-                                                            data-alamat-pembeli="{{ $item->alamat_pembeli ?? '-' }}"
-                                                            data-metode-pengiriman="{{ $item->metode_pengiriman ?? '-' }}"
-                                                            data-barang-dijual="{{ $item->barang_dijual ?? '-' }}"
-                                                            data-total-harga="{{ $item->total_harga ?? 0 }}"
-                                                            data-tanggal-transaksi="{{ $item->tanggal_transaksi ?? '-' }}"
-                                                            data-bukti-url="{{ $item->bukti_pembayaran_penjualan ? asset('storage/bukti_penjualan/' . $item->bukti_pembayaran_penjualan) : '' }}" 
-                                                            data-toggle="modal"
-                                                            data-target="#rincianPenjualanModal">
-                                                        Rincian
-                                                    </button>
-                                
-                                                    {{-- Update Button --}}
-                                                    <button class="btn btn-sm btn-warning m-1 btn-update"
-                                                            data-id="{{ $item->id }}"
-                                                            data-pembeli="{{ $item->nama_pembeli }}"
-                                                            data-url=""
-                                                            data-toggle="modal"
-                                                            data-target="#updatePenjualanModal">
-                                                        Update
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6" class="text-center">No data available in table</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                                
-                            </table>
-                            
+
+                                                        {{-- Update Button --}}
+                                                        <button class="btn btn-sm btn-warning m-1 btn-update"
+                                                            data-id="{{ $item['id'] }}"
+                                                            data-pembeli="{{ $item['nama_pembeli'] }}" data-url=""
+                                                            data-toggle="modal" data-target="#updatePenjualanModal">
+                                                            Update
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center">No data available in table</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+
+                        {{-- Pagination Row --}}
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" role="status" aria-live="polite">
+                                    Showing 1 to 10 of 50 entries
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers">
+                                    <ul class="pagination justify-content-end">
+                                        <!-- Previous Button -->
+                                        <li class="paginate_button page-item disabled">
+                                            <a href="#" class="page-link">Previous</a>
+                                        </li>
+
+                                        <!-- Page Numbers -->
+                                        <li class="paginate_button page-item active">
+                                            <a href="#" class="page-link">1</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href="#" class="page-link">2</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href="#" class="page-link">3</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href="#" class="page-link">4</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href="#" class="page-link">5</a>
+                                        </li>
+
+                                        <!-- Next Button -->
+                                        <li class="paginate_button page-item">
+                                            <a href="#" class="page-link">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {{-- modals --}}
+
+
+    <div class="modal fade" id="updatePenjualanModal" tabindex="-1" aria-labelledby="updatePenjualanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title" id="updatePenjualanModalLabel">Update Penjualan Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                {{-- @TODO: Action URL is set dynamically via JS --}}
+                <form action="#" method="POST" id="updatePenjualanForm" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" id="update-penjualan-id"> {{-- To store the ID of the item being updated --}}
+                    <div class="modal-body">
+                        {{-- Add form fields similar to Add Modal, pre-filled via JS --}}
+                        <p>Placeholder for Update Penjualan Form Fields...</p>
+                        {{-- Example Field --}}
+                        <div class="form-group">
+                            <label for="update-nama-pembeli">Nama Pembeli</label>
+                            <input type="text" class="form-control" id="update-nama-pembeli" name="nama_pembeli"
+                                required>
+                        </div>
+                        {{-- Add other fields here --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit"
+                            class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="rincianPenjualanModal" tabindex="-1" aria-labelledby="rincianPenjualanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Large size --}}
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+
+                    <h5 class="modal-title font-weight-bold" id="rincianPenjualanModalLabel">Rincian Penjualan</h5>
+
+                </div>
+                <div class="modal-body p-4" style="font-size: 0.9rem;"> {{-- Padding and font size --}}
+
+                    <div class="row mb-4"> {{-- Top row for Pembeli and Pengiriman --}}
+                        <div class="col-md-7">
+                            <h6 class="font-weight-bold mb-3 ">Informasi Pembeli</h6>
+                            <p class="mb-1"><strong>Nama Pembeli</strong> : <span id="rincian-nama-penjual"></span></p>
+                            <p class="mb-1"><strong>No. WA</strong> : <span id="rincian-telp-penjual"></span></p>
+                            <p class="mb-1"><strong>Alamat Pembeli</strong> : <span id="rincian-alamat-penjual"></span>
+                            </p>
+                        </div>
+
+                        <div class="col-md-5">
+                            <h6 class="font-weight-bold mb-3">Pengiriman</h6>
+                            <p class="mb-1"><strong>Metode Pengiriman</strong> : <span
+                                    id="rincian-metode-penjual">-</span></p>
                         </div>
                     </div>
 
-                    {{-- Pagination Row --}}
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" role="status" aria-live="polite">
-                                Showing 1 to 10 of 50 entries
+
+
+                    <div class="row mb-4"> {{-- Middle row for Transaksi --}}
+                        <div class="col-md-12"> {{-- Full width for this section --}}
+                            <h6 class="font-weight-bold mb-3 ">Detail Transaksi</h6>
+                            <p class="mb-1"><strong>Nama Barang</strong> : <span id="rincian-pj-barang">-</span></p>
+                            <p class="mb-1"><strong>Total Harga</strong> : <span id="rincian-pj-harga">-</span></p>
+                            <p class="mb-1"><strong>Tanggal Pembelian</strong> : <span id="rincian-pj-tanggal">-</span>
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row"> {{-- Bottom row for Pembayaran --}}
+                        <div class="col-md-12">
+                            <h6 class="font-weight-bold mb-3">Detail Pembayaran</h6>
+                            {{-- Container where the button or text will be placed by JS --}}
+                            <div id="rincian-bukti-bayar-container">
+                                {{-- Default text, will be replaced by JS --}}
+                                <span class="text-muted small">(Belum Ada Bukti)</span>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers">
-                                <ul class="pagination justify-content-end">
-                                    <!-- Previous Button -->
-                                    <li class="paginate_button page-item disabled">
-                                        <a href="#" class="page-link">Previous</a>
-                                    </li>
-                    
-                                    <!-- Page Numbers -->
-                                    <li class="paginate_button page-item active">
-                                        <a href="#" class="page-link">1</a>
-                                    </li>
-                                    <li class="paginate_button page-item">
-                                        <a href="#" class="page-link">2</a>
-                                    </li>
-                                    <li class="paginate_button page-item">
-                                        <a href="#" class="page-link">3</a>
-                                    </li>
-                                    <li class="paginate_button page-item">
-                                        <a href="#" class="page-link">4</a>
-                                    </li>
-                                    <li class="paginate_button page-item">
-                                        <a href="#" class="page-link">5</a>
-                                    </li>
-                    
-                                    <!-- Next Button -->
-                                    <li class="paginate_button page-item">
-                                        <a href="#" class="page-link">Next</a>
-                                    </li>
+                    </div>
+
+                </div> {{-- End modal-body --}}
+                <div class="modal-footer">
+                    {{-- Footer button matches style in image --}}
+                    <button type="button" class="btn modal-color text-white font-weight-bold rounded-3 px-2 mr-2"
+                        data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filterPenjualanModal" tabindex="-1" aria-labelledby="filterPenjualanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #1a237e; border-bottom: none;">
+                    {{-- Specific dark blue color like the image, remove border --}}
+                    <h5 class="modal-title" id="filterPenjualanModalLabel">Filter</h5>
+                </div>
+
+                <form action="" method="GET" id="filterPenjualanForm"> {{-- Added ID for potential reset --}}
+                    <div class="modal-body">
+
+                        {{-- Periode Filter (Searchable Dropdown) --}}
+                        <div class="custom-search-select-container mb-3" id="custom-periode-filter-container">
+                            <label for="filter-periode" class="form-label">Periode</label>
+                            {{-- This div will display the selected value and trigger the dropdown --}}
+                            <div class="selected-value" tabindex="0">- Pilih Periode -</div>
+                            {{-- This container holds the search box and the options list --}}
+                            <div class="dropdown-list-container">
+                                <input type="text" class="search-box" placeholder="Cari Periode...">
+                                <ul class="options-list">
+                                    {{-- Options will be populated by JavaScript --}}
                                 </ul>
                             </div>
+                            {{-- The original select is hidden but holds the actual form value --}}
+                            <select class="original-select-hidden" id="filter-periode" name="periode">
+                                <option value="" selected>- Pilih Periode -</option>
+                                {{-- Add other period options here e.g. --}}
+                                {{-- Make sure you have the options here for the JS to pick up --}}
+                                <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>
+                                    Periode 01</option>
+                                <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>
+                                    Periode 02</option>
+                                <option value="periode03" {{ request('periode') == 'periode03' ? 'selected' : '' }}>
+                                    Periode 03</option>
+                                <option value="periode04_long_name_example"
+                                    {{ request('periode') == 'periode04_long_name_example' ? 'selected' : '' }}>Periode 04
+                                    With A Very Long Name Example</option>
+                                {{-- Add all your actual periode options --}}
+                            </select>
+                        </div>
+
+                        {{-- Metode Pengiriman Filter --}}
+                        <div class="mb-5">
+                            <label class="form-label d-block">Metode Pengiriman</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="metode_pengiriman"
+                                    id="pengirimanDefault" value="default"
+                                    {{ request('metode_pengiriman', 'default') == 'default' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pengirimanDefault">Default</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="metode_pengiriman"
+                                    id="pengirimanTakeaway" value="takeaway"
+                                    {{ request('metode_pengiriman') == 'takeaway' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pengirimanTakeaway">Take-away</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="metode_pengiriman"
+                                    id="pengirimanDiantar" value="diantar"
+                                    {{ request('metode_pengiriman') == 'diantar' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pengirimanDiantar">Diantar</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer mt-4" style="border-top: none;">
+                        {{-- Buttons matching the image --}}
+                        <div class="d-flex w-100 gap-2 justify-content-end">
+                            <button type="button" class="btn batal-btn " data-dismiss="modal"
+                                style="border: 1px solid #1a237e; color: #1a237e;">Batal</button>
+                            <button type="submit" class="btn simpan-btn text-white ml-2"
+                                style="background-color: #1a237e;">Simpan</button>
                         </div>
                     </div>
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
 
-</div>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-{{-- modals --}}
+            /**
+             * Initializes a custom searchable dropdown.
+             * @param {string} containerId - The ID of the main container div.
+             * @param {string} originalSelectId - The ID of the original hidden select.
+             */
+            function setupSearchableDropdown(containerId, originalSelectId) {
+                const container = document.getElementById(containerId);
+                if (!container) {
+                    console.warn(`Searchable dropdown container not found: #${containerId}`);
+                    return;
+                }
+                const originalSelect = document.getElementById(originalSelectId);
+                if (!originalSelect) {
+                    console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
+                    return;
+                }
 
+                const selectedValueDiv = container.querySelector('.selected-value');
+                const dropdownContainer = container.querySelector('.dropdown-list-container');
+                const searchBox = container.querySelector('.search-box');
+                const optionsList = container.querySelector('.options-list');
+                let listItems = []; // Holds the actual LIs that are not placeholders
 
-<div class="modal fade" id="updatePenjualanModal" tabindex="-1" aria-labelledby="updatePenjualanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
-        <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-                <h5 class="modal-title" id="updatePenjualanModalLabel">Update Penjualan Barang</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            {{-- @TODO: Action URL is set dynamically via JS --}}
-            <form action="#" method="POST" id="updatePenjualanForm" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="id" id="update-penjualan-id"> {{-- To store the ID of the item being updated --}}
-                <div class="modal-body">
-                    {{-- Add form fields similar to Add Modal, pre-filled via JS --}}
-                    <p>Placeholder for Update Penjualan Form Fields...</p>
-                     {{-- Example Field --}}
-                     <div class="form-group">
-                         <label for="update-nama-pembeli">Nama Pembeli</label>
-                         <input type="text" class="form-control" id="update-nama-pembeli" name="nama_pembeli" required>
-                     </div>
-                     {{-- Add other fields here --}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                // --- Populate the custom list from the original select ---
+                function populateOptionsList() {
+                    optionsList.innerHTML = ''; // Clear existing options
+                    listItems = []; // Reset list items array
+                    Array.from(originalSelect.options).forEach((option, index) => {
+                        const li = document.createElement('li');
+                        li.textContent = option.textContent;
+                        li.dataset.value = option.value;
+                        li.dataset.index = index; // Store original index
 
+                        if (!option.value) {
+                            // Optional: Don't add placeholder to the searchable list,
+                            // or style it differently if you want it selectable.
+                            // If you want it to be selectable to 'reset' the filter:
+                            // li.classList.add('placeholder-option');
+                            // optionsList.appendChild(li);
+                            // For now, we skip adding the placeholder to the dropdown list
+                        } else {
+                            optionsList.appendChild(li);
+                            listItems.push(li); // Add to the filterable list
+                        }
+                    });
+                }
 
-<div class="modal fade" id="rincianPenjualanModal" tabindex="-1" aria-labelledby="rincianPenjualanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Large size --}}
-        <div class="modal-content">
-            <div class="modal-header modal-color text-white">
-            
-                <h5 class="modal-title font-weight-bold" id="rincianPenjualanModalLabel">Rincian Penjualan</h5>
-              
-            </div>
-            <div class="modal-body p-4" style="font-size: 0.9rem;"> {{-- Padding and font size --}}
+                // --- Sync the visible div with the hidden select's value ---
+                function syncDisplayWithSelect() {
+                    if (!originalSelect || !selectedValueDiv) return;
 
-                <div class="row mb-4"> {{-- Top row for Pembeli and Pengiriman --}}
-                    <div class="col-md-7">
-                        <h6 class="font-weight-bold mb-3 ">Informasi Pembeli</h6>
-                        <p class="mb-1"><strong>Nama Pembeli</strong> : <span id="rincian-nama-penjual"></span></p>
-                        <p class="mb-1"><strong>No. WA</strong> : <span id="rincian-telp-penjual"></span></p>
-                        <p class="mb-1"><strong>Alamat Pembeli</strong> : <span id="rincian-alamat-penjual"></span></p>
-                    </div>
-
-                    <div class="col-md-5">
-                        <h6 class="font-weight-bold mb-3">Pengiriman</h6>
-                        <p class="mb-1"><strong>Metode Pengiriman</strong> : <span id="rincian-metode-penjual">-</span></p>
-                    </div>
-                </div>
-
-             
-
-                <div class="row mb-4"> {{-- Middle row for Transaksi --}}
-                     <div class="col-md-12"> {{-- Full width for this section --}}
-                        <h6 class="font-weight-bold mb-3 ">Detail Transaksi</h6>
-                        <p class="mb-1"><strong>Nama Barang</strong> : <span id="rincian-pj-barang">-</span></p>
-                        <p class="mb-1"><strong>Total Harga</strong> : <span id="rincian-pj-harga">-</span></p>
-                        <p class="mb-1"><strong>Tanggal Pembelian</strong> : <span id="rincian-pj-tanggal">-</span></p>
-                    </div>
-                </div>
-
-          
-
-                <div class="row"> {{-- Bottom row for Pembayaran --}}
-                     <div class="col-md-12">
-                        <h6 class="font-weight-bold mb-3">Detail Pembayaran</h6>
-                        {{-- Container where the button or text will be placed by JS --}}
-                         <div id="rincian-bukti-bayar-container">
-                            {{-- Default text, will be replaced by JS --}}
-                            <span class="text-muted small">(Belum Ada Bukti)</span>
-                         </div>
-                    </div>
-                </div>
-
-            </div> {{-- End modal-body --}}
-            <div class="modal-footer">
-                {{-- Footer button matches style in image --}}
-                <button type="button" class="btn modal-color text-white font-weight-bold rounded-3 px-2 mr-2" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="filterPenjualanModal" tabindex="-1" aria-labelledby="filterPenjualanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #1a237e; border-bottom: none;"> {{-- Specific dark blue color like the image, remove border --}}
-                <h5 class="modal-title" id="filterPenjualanModalLabel">Filter</h5>
-            </div>
-
-            <form action="" method="GET" id="filterPenjualanForm"> {{-- Added ID for potential reset --}}
-                <div class="modal-body">
-
-                    {{-- Periode Filter (Searchable Dropdown) --}}
-                    <div class="custom-search-select-container mb-3" id="custom-periode-filter-container">
-                        <label for="filter-periode" class="form-label">Periode</label>
-                        {{-- This div will display the selected value and trigger the dropdown --}}
-                        <div class="selected-value" tabindex="0">- Pilih Periode -</div>
-                        {{-- This container holds the search box and the options list --}}
-                        <div class="dropdown-list-container">
-                            <input type="text" class="search-box" placeholder="Cari Periode...">
-                            <ul class="options-list">
-                                {{-- Options will be populated by JavaScript --}}
-                            </ul>
-                        </div>
-                        {{-- The original select is hidden but holds the actual form value --}}
-                        <select class="original-select-hidden" id="filter-periode" name="periode">
-                            <option value="" selected>- Pilih Periode -</option>
-                            {{-- Add other period options here e.g. --}}
-                            {{-- Make sure you have the options here for the JS to pick up --}}
-                            <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01</option>
-                            <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02</option>
-                            <option value="periode03" {{ request('periode') == 'periode03' ? 'selected' : '' }}>Periode 03</option>
-                            <option value="periode04_long_name_example" {{ request('periode') == 'periode04_long_name_example' ? 'selected' : '' }}>Periode 04 With A Very Long Name Example</option>
-                            {{-- Add all your actual periode options --}}
-                        </select>
-                    </div>
-
-                    {{-- Metode Pengiriman Filter --}}
-                    <div class="mb-5">
-                        <label class="form-label d-block">Metode Pengiriman</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengirimanDefault" value="default" {{ request('metode_pengiriman', 'default') == 'default' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="pengirimanDefault">Default</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengirimanTakeaway" value="takeaway" {{ request('metode_pengiriman') == 'takeaway' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="pengirimanTakeaway">Take-away</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="pengirimanDiantar" value="diantar" {{ request('metode_pengiriman') == 'diantar' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="pengirimanDiantar">Diantar</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer mt-4" style="border-top: none;"> 
-                    {{-- Buttons matching the image --}}
-                    <div class="d-flex w-100 gap-2 justify-content-end">
-                        <button type="button" class="btn batal-btn " data-dismiss="modal" style="border: 1px solid #1a237e; color: #1a237e;">Batal</button>
-                        <button type="submit" class="btn simpan-btn text-white ml-2" style="background-color: #1a237e;">Simpan</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-
-/**
- * Initializes a custom searchable dropdown.
- * @param {string} containerId - The ID of the main container div.
- * @param {string} originalSelectId - The ID of the original hidden select.
- */
-function setupSearchableDropdown(containerId, originalSelectId) {
-    const container = document.getElementById(containerId);
-    if (!container) {
-        console.warn(`Searchable dropdown container not found: #${containerId}`);
-        return;
-    }
-    const originalSelect = document.getElementById(originalSelectId);
-    if (!originalSelect) {
-        console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
-        return;
-    }
-
-    const selectedValueDiv = container.querySelector('.selected-value');
-    const dropdownContainer = container.querySelector('.dropdown-list-container');
-    const searchBox = container.querySelector('.search-box');
-    const optionsList = container.querySelector('.options-list');
-    let listItems = []; // Holds the actual LIs that are not placeholders
-
-    // --- Populate the custom list from the original select ---
-    function populateOptionsList() {
-        optionsList.innerHTML = ''; // Clear existing options
-        listItems = []; // Reset list items array
-        Array.from(originalSelect.options).forEach((option, index) => {
-            const li = document.createElement('li');
-            li.textContent = option.textContent;
-            li.dataset.value = option.value;
-            li.dataset.index = index; // Store original index
-
-            if (!option.value) {
-                // Optional: Don't add placeholder to the searchable list,
-                // or style it differently if you want it selectable.
-                // If you want it to be selectable to 'reset' the filter:
-                // li.classList.add('placeholder-option');
-                // optionsList.appendChild(li);
-                // For now, we skip adding the placeholder to the dropdown list
-            } else {
-                optionsList.appendChild(li);
-                listItems.push(li); // Add to the filterable list
-            }
-        });
-    }
-
-    // --- Sync the visible div with the hidden select's value ---
-    function syncDisplayWithSelect() {
-        if (!originalSelect || !selectedValueDiv) return;
-
-        const selectedOption = originalSelect.options[originalSelect.selectedIndex];
-        if (selectedOption) {
-            selectedValueDiv.textContent = selectedOption.textContent;
-            // Add/remove class for placeholder styling
-            if (!selectedOption.value) {
-                selectedValueDiv.classList.add('placeholder-selected');
-            } else {
-                selectedValueDiv.classList.remove('placeholder-selected');
-            }
-        } else {
-            // Fallback if somehow no option is selected
-            selectedValueDiv.textContent = 'Select...'; // Default text
-            selectedValueDiv.classList.add('placeholder-selected');
-        }
-    }
-
-    // --- Open/Close Dropdown ---
-    selectedValueDiv.addEventListener('click', (event) => {
-        event.stopPropagation(); // Prevent document click listener from closing immediately
-        if (!dropdownContainer || !searchBox) return;
-
-        // Close other open dropdowns first
-        closeAllDropdowns(containerId);
-
-        // Toggle this dropdown
-        const isOpen = dropdownContainer.classList.toggle('show');
-        container.classList.toggle('open', isOpen); // Add .open class to container
-
-        if (isOpen) {
-            // Reset search and filter when opening
-            searchBox.value = '';
-            listItems.forEach(li => li.style.display = '');
-            searchBox.focus(); // Focus the search box
-            // Position dropdown (optional, basic positioning is via CSS)
-        }
-    });
-
-    // --- Close dropdown when clicking outside ---
-    document.addEventListener('click', (event) => {
-        if (container && !container.contains(event.target)) {
-            if (dropdownContainer) dropdownContainer.classList.remove('show');
-            container.classList.remove('open');
-        }
-    });
-
-    // --- Handle selecting an option ---
-    optionsList.addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
-            const value = event.target.dataset.value;
-            const index = event.target.dataset.index;
-
-            // Update the hidden select
-            originalSelect.value = value;
-            // A more robust way to set selectedIndex if values might not be unique
-            if (index !== undefined) {
-                originalSelect.selectedIndex = parseInt(index, 10);
-            }
-
-
-            // Update the visible display
-            syncDisplayWithSelect();
-
-            // Close the dropdown
-            if (dropdownContainer) dropdownContainer.classList.remove('show');
-             container.classList.remove('open');
-
-            // Trigger change event on original select if needed for other scripts
-            originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-    });
-
-    // --- Handle searching/filtering ---
-    searchBox.addEventListener('input', () => {
-        const searchTerm = searchBox.value.toLowerCase().trim();
-        listItems.forEach(li => {
-            const itemText = li.textContent.toLowerCase();
-            // Show if search term is empty or item text includes the search term
-            li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
-        });
-    });
-
-    // --- Sync display if original select changes programmatically ---
-    originalSelect.addEventListener('change', syncDisplayWithSelect);
-
-    // --- Initial setup ---
-    populateOptionsList(); // Create the list items
-    syncDisplayWithSelect(); // Set initial display text
-
-    // --- Reset on Modal Close (Optional but Recommended) ---
-    // Find the modal this dropdown belongs to
-    const modal = container.closest('.modal');
-    if (modal) {
-        // Using Bootstrap's native events (no jQuery needed)
-        modal.addEventListener('hidden.bs.modal', function() {
-            // Reset the select to its placeholder
-            if (originalSelect.options.length > 0) {
-                 // Find the placeholder option (usually the first one with value="")
-                let placeholderIndex = 0;
-                for(let i=0; i < originalSelect.options.length; i++) {
-                    if (originalSelect.options[i].value === "") {
-                        placeholderIndex = i;
-                        break;
+                    const selectedOption = originalSelect.options[originalSelect.selectedIndex];
+                    if (selectedOption) {
+                        selectedValueDiv.textContent = selectedOption.textContent;
+                        // Add/remove class for placeholder styling
+                        if (!selectedOption.value) {
+                            selectedValueDiv.classList.add('placeholder-selected');
+                        } else {
+                            selectedValueDiv.classList.remove('placeholder-selected');
+                        }
+                    } else {
+                        // Fallback if somehow no option is selected
+                        selectedValueDiv.textContent = 'Select...'; // Default text
+                        selectedValueDiv.classList.add('placeholder-selected');
                     }
                 }
-                originalSelect.selectedIndex = placeholderIndex;
+
+                // --- Open/Close Dropdown ---
+                selectedValueDiv.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent document click listener from closing immediately
+                    if (!dropdownContainer || !searchBox) return;
+
+                    // Close other open dropdowns first
+                    closeAllDropdowns(containerId);
+
+                    // Toggle this dropdown
+                    const isOpen = dropdownContainer.classList.toggle('show');
+                    container.classList.toggle('open', isOpen); // Add .open class to container
+
+                    if (isOpen) {
+                        // Reset search and filter when opening
+                        searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+                        searchBox.focus(); // Focus the search box
+                        // Position dropdown (optional, basic positioning is via CSS)
+                    }
+                });
+
+                // --- Close dropdown when clicking outside ---
+                document.addEventListener('click', (event) => {
+                    if (container && !container.contains(event.target)) {
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+                    }
+                });
+
+                // --- Handle selecting an option ---
+                optionsList.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
+                        const value = event.target.dataset.value;
+                        const index = event.target.dataset.index;
+
+                        // Update the hidden select
+                        originalSelect.value = value;
+                        // A more robust way to set selectedIndex if values might not be unique
+                        if (index !== undefined) {
+                            originalSelect.selectedIndex = parseInt(index, 10);
+                        }
+
+
+                        // Update the visible display
+                        syncDisplayWithSelect();
+
+                        // Close the dropdown
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+
+                        // Trigger change event on original select if needed for other scripts
+                        originalSelect.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
+                    }
+                });
+
+                // --- Handle searching/filtering ---
+                searchBox.addEventListener('input', () => {
+                    const searchTerm = searchBox.value.toLowerCase().trim();
+                    listItems.forEach(li => {
+                        const itemText = li.textContent.toLowerCase();
+                        // Show if search term is empty or item text includes the search term
+                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ?
+                            '' : 'none';
+                    });
+                });
+
+                // --- Sync display if original select changes programmatically ---
+                originalSelect.addEventListener('change', syncDisplayWithSelect);
+
+                // --- Initial setup ---
+                populateOptionsList(); // Create the list items
+                syncDisplayWithSelect(); // Set initial display text
+
+                // --- Reset on Modal Close (Optional but Recommended) ---
+                // Find the modal this dropdown belongs to
+                const modal = container.closest('.modal');
+                if (modal) {
+                    // Using Bootstrap's native events (no jQuery needed)
+                    modal.addEventListener('hidden.bs.modal', function() {
+                        // Reset the select to its placeholder
+                        if (originalSelect.options.length > 0) {
+                            // Find the placeholder option (usually the first one with value="")
+                            let placeholderIndex = 0;
+                            for (let i = 0; i < originalSelect.options.length; i++) {
+                                if (originalSelect.options[i].value === "") {
+                                    placeholderIndex = i;
+                                    break;
+                                }
+                            }
+                            originalSelect.selectedIndex = placeholderIndex;
+                        }
+                        syncDisplayWithSelect(); // Update display
+
+                        // Reset search box and list visibility
+                        if (searchBox) searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+
+                        // Ensure dropdown is closed
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+
+                        // Optional: Reset radio buttons if needed
+                        // const form = document.getElementById('filterPenjualanForm');
+                        // if (form) {
+                        //    const defaultRadio = form.querySelector('input[name="metode_pengiriman"][value="default"]');
+                        //    if (defaultRadio) defaultRadio.checked = true;
+                        // }
+                    });
+                }
+            } // End of setupSearchableDropdown function
+
+            // --- Close all dropdowns function ---
+            function closeAllDropdowns(excludeContainerId = null) {
+                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(
+                    dropdown => {
+                        const currentContainer = dropdown.closest('.custom-search-select-container');
+                        if (!excludeContainerId || (currentContainer && currentContainer.id !==
+                                excludeContainerId)) {
+                            dropdown.classList.remove('show');
+                            if (currentContainer) currentContainer.classList.remove('open');
+                        }
+                    });
             }
-            syncDisplayWithSelect(); // Update display
 
-            // Reset search box and list visibility
-            if (searchBox) searchBox.value = '';
-            listItems.forEach(li => li.style.display = '');
+            // --- Initialize the specific dropdown for the filter modal ---
+            setupSearchableDropdown('custom-periode-filter-container', 'filter-periode');
 
-            // Ensure dropdown is closed
-            if (dropdownContainer) dropdownContainer.classList.remove('show');
-             container.classList.remove('open');
+            // --- Initialize any other searchable dropdowns you might have ---
+            // setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
+            // setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
+            // ... etc
 
-            // Optional: Reset radio buttons if needed
-            // const form = document.getElementById('filterPenjualanForm');
-            // if (form) {
-            //    const defaultRadio = form.querySelector('input[name="metode_pengiriman"][value="default"]');
-            //    if (defaultRadio) defaultRadio.checked = true;
-            // }
         });
-    }
-} // End of setupSearchableDropdown function
-
-// --- Close all dropdowns function ---
-function closeAllDropdowns(excludeContainerId = null) {
-    document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
-        const currentContainer = dropdown.closest('.custom-search-select-container');
-        if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
-            dropdown.classList.remove('show');
-             if (currentContainer) currentContainer.classList.remove('open');
-        }
-    });
-}
-
-// --- Initialize the specific dropdown for the filter modal ---
-setupSearchableDropdown('custom-periode-filter-container', 'filter-periode');
-
-// --- Initialize any other searchable dropdowns you might have ---
-// setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
-// setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
-// ... etc
-
-});
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
 
-// Helper function to format currency (simple version) - reuse if needed elsewhere
-function formatRupiah(angka) {
-    // Ensure angka is treated as a number
-    const num = Number(angka) || 0;
-    let number_string = num.toString(), // Use the number's string representation
-        split = number_string.split(','), // Not really needed for integers
-        sisa = number_string.length % 3,
-        rupiah = number_string.substr(0, sisa),
-        ribuan = number_string.substr(sisa).match(/\d{3}/gi);
+            // Helper function to format currency (simple version) - reuse if needed elsewhere
+            function formatRupiah(angka) {
+                // Ensure angka is treated as a number
+                const num = Number(angka) || 0;
+                let number_string = num.toString(), // Use the number's string representation
+                    split = number_string.split(','), // Not really needed for integers
+                    sisa = number_string.length % 3,
+                    rupiah = number_string.substr(0, sisa),
+                    ribuan = number_string.substr(sisa).match(/\d{3}/gi);
 
-    if (ribuan) {
-        separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
-    }
-    // No decimals typically for Rupiah display unless needed
-    // rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return 'Rp ' + rupiah;
-}
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+                // No decimals typically for Rupiah display unless needed
+                // rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return 'Rp ' + rupiah;
+            }
 
-// --- Listener for Rincian PENJUALAN Modal ---
-const tableBodyPenjualan = document.getElementById('table-body'); 
-if (tableBodyPenjualan) {
-    tableBodyPenjualan.addEventListener('click', function(event) {
-        // Target the specific button class for PENJUALAN
-        const button = event.target.closest('.rincian-btn');
-        if (!button) {
-            return; // Exit if not a rincian penjualan button click
-        }
+            // --- Listener for Rincian PENJUALAN Modal ---
+            const tableBodyPenjualan = document.getElementById('table-body');
+            if (tableBodyPenjualan) {
+                tableBodyPenjualan.addEventListener('click', function(event) {
+                    // Target the specific button class for PENJUALAN
+                    const button = event.target.closest('.rincian-btn');
+                    if (!button) {
+                        return; // Exit if not a rincian penjualan button click
+                    }
 
-        const data = button.dataset; // Get data from the clicked button
+                    const data = button.dataset; // Get data from the clicked button
 
-        // --- Select target elements in the Rincian PENJUALAN Modal ---
-        const modal = document.getElementById('rincianPenjualanModal'); // Target the correct modal
-        if (!modal) return; // Exit if modal not found
+                    // --- Select target elements in the Rincian PENJUALAN Modal ---
+                    const modal = document.getElementById(
+                        'rincianPenjualanModal'); // Target the correct modal
+                    if (!modal) return; // Exit if modal not found
 
-        const namaPembeliEl = modal.querySelector('#rincian-nama-penjual');
-        const telpPembeliEl = modal.querySelector('#rincian-telp-penjual');
-        const alamatPembeliEl = modal.querySelector('#rincian-alamat-penjual');
-        const metodePengirimanEl = modal.querySelector('#rincian-metode-penjual'); // Note: ID reused, check if correct
-        const barangDijualEl = modal.querySelector('#rincian-pj-barang');
-        const totalHargaEl = modal.querySelector('#rincian-pj-harga');
-        const tanggalPembelianEl = modal.querySelector('#rincian-pj-tanggal');
-        const buktiBayarContainer = modal.querySelector('#rincian-bukti-bayar-container');
+                    const namaPembeliEl = modal.querySelector('#rincian-nama-penjual');
+                    const telpPembeliEl = modal.querySelector('#rincian-telp-penjual');
+                    const alamatPembeliEl = modal.querySelector('#rincian-alamat-penjual');
+                    const metodePengirimanEl = modal.querySelector(
+                        '#rincian-metode-penjual'); // Note: ID reused, check if correct
+                    const barangDijualEl = modal.querySelector('#rincian-pj-barang');
+                    const totalHargaEl = modal.querySelector('#rincian-pj-harga');
+                    const tanggalPembelianEl = modal.querySelector('#rincian-pj-tanggal');
+                    const buktiBayarContainer = modal.querySelector('#rincian-bukti-bayar-container');
 
-        // --- Populate modal fields ---
-        if (namaPembeliEl) namaPembeliEl.textContent = data.namaPembeli || '-';
-        if (telpPembeliEl) telpPembeliEl.textContent = data.telpPembeli || '-';
-        if (alamatPembeliEl) alamatPembeliEl.textContent = data.alamatPembeli || '-';
-        if (metodePengirimanEl) metodePengirimanEl.textContent = data.metodePengiriman || '-';
-        if (barangDijualEl) barangDijualEl.textContent = data.barangDijual || '-';
-        if (totalHargaEl) totalHargaEl.textContent = formatRupiah(data.totalHarga || 0); // Format the price
-        if (tanggalPembelianEl) tanggalPembelianEl.textContent = data.tanggalTransaksi || '-';
+                    // --- Populate modal fields ---
+                    if (namaPembeliEl) namaPembeliEl.textContent = data.namaPembeli || '-';
+                    if (telpPembeliEl) telpPembeliEl.textContent = data.telpPembeli || '-';
+                    if (alamatPembeliEl) alamatPembeliEl.textContent = data.alamatPembeli || '-';
+                    if (metodePengirimanEl) metodePengirimanEl.textContent = data.metodePengiriman || '-';
+                    if (barangDijualEl) barangDijualEl.textContent = data.barangDijual || '-';
+                    if (totalHargaEl) totalHargaEl.textContent = formatRupiah(data.totalHarga ||
+                        0); // Format the price
+                    if (tanggalPembelianEl) tanggalPembelianEl.textContent = data.tanggalTransaksi || '-';
 
-        // --- Populate Bukti Pembayaran ---
-        if (buktiBayarContainer) {
-            const buktiUrl = data.buktiUrl; // Get the full URL passed from Blade
-            if (buktiUrl) {
-                buktiBayarContainer.innerHTML = `
+                    // --- Populate Bukti Pembayaran ---
+                    if (buktiBayarContainer) {
+                        const buktiUrl = data.buktiUrl; // Get the full URL passed from Blade
+                        if (buktiUrl) {
+                            buktiBayarContainer.innerHTML = `
                     <a href="${buktiUrl}" target="_blank" class="btn btn-sm btn-bukti">
                         <i class="fas fa-receipt"></i> Bukti Pembayaran
                     </a>`;
-            } else {
-                buktiBayarContainer.innerHTML = `
+                        } else {
+                            buktiBayarContainer.innerHTML = `
                     <button class="btn btn-sm btn-bukti disabled" disabled>
                         <i class="fas fa-receipt"></i> (Belum Ada)
                     </button>`;
+                        }
+                    }
+
+                    // Modal is triggered by data-bs attributes on the button
+                }); // End click listener for Penjualan
+            } // End if tableBodyPenjualan exists
+
+            // --- Listener for Rincian PENYEWAAN Modal (Keep the previous one if needed) ---
+            const tableBodyPenyewaan = document.getElementById(
+                'table-body'); // Assuming original ID was for Penyewaan
+            if (tableBodyPenyewaan) {
+                tableBodyPenyewaan.addEventListener('click', function(event) {
+                    // Use the original class for the rental buttons
+                    const button = event.target.closest('.rincian-btn');
+                    if (!button) return;
+                    // ... (rest of the populating logic for rincianPenyewaanModal as provided before) ...
+                    console.log("Populating Penyewaan Modal for ID:", button.dataset.id);
+                });
             }
-        }
 
-        // Modal is triggered by data-bs attributes on the button
-    }); // End click listener for Penjualan
-} // End if tableBodyPenjualan exists
+            // Add other listeners (Update, Delete etc.) if necessary
 
-// --- Listener for Rincian PENYEWAAN Modal (Keep the previous one if needed) ---
-const tableBodyPenyewaan = document.getElementById('table-body'); // Assuming original ID was for Penyewaan
- if (tableBodyPenyewaan) {
-     tableBodyPenyewaan.addEventListener('click', function(event) {
-        // Use the original class for the rental buttons
-         const button = event.target.closest('.rincian-btn');
-         if (!button) return;
-         // ... (rest of the populating logic for rincianPenyewaanModal as provided before) ...
-         console.log("Populating Penyewaan Modal for ID:", button.dataset.id);
-     });
- }
-
-// Add other listeners (Update, Delete etc.) if necessary
-
-});
-</script>
-
-
+        });
+    </script>
 @endsection
