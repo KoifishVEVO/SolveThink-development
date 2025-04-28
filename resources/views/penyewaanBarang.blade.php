@@ -202,7 +202,7 @@
             #addAssetModal .modal-dialog,
             #rincianAssetModal .modal-dialog,
             #updateAssetModal .modal-dialog,
-            #rincianPenyewaanModal .modal-dialog {
+            #rincianPenjualanModal .modal-dialog {
                 /* Added */
                 max-width: 100%;
                 width: 100%;
@@ -226,7 +226,7 @@
             #addAssetModal .modal-content,
             #rincianAssetModal .modal-content,
             #updateAssetModal .modal-content,
-            #rincianPenyewaanModal .modal-content {
+            #rincianPenjualanModal .modal-content {
                 /* Added */
                 height: 100%;
                 /* Fill the dialog height */
@@ -247,7 +247,7 @@
             #addAssetModal .modal-body,
             #rincianAssetModal .modal-body,
             #updateAssetModal .modal-body,
-            #rincianPenyewaanModal .modal-body {
+            #rincianPenjualanModal .modal-body {
                 /* Added */
                 overflow-y: auto;
                 /* Enable vertical scroll */
@@ -288,7 +288,7 @@
             /* --- Footer Button Styling (Apply to rincianPenjualanModal too) --- */
             /* ADD #rincianPenjualanModal to the list */
             #rincianAssetModal .modal-footer,
-            #rincianPenyewaanModal .modal-footer,
+            #rincianPenjualanModal .modal-footer,
             #filterPenyewaanModal .modal-footer {
                 /* Added */
                 justify-content: center !important;
@@ -303,7 +303,7 @@
 
             /* ADD #rincianPenjualanModal to the list */
             #rincianAssetModal .modal-footer .btn,
-            #rincianPenyewaanModal .modal-footer .btn,
+            #rincianPenjualanModal .modal-footer .btn,
             #filterPenyewaanModal .modal-footer .btn {
                 /* Added */
                 width: 90%;
@@ -679,33 +679,31 @@
                                             <th>Informasi Penyewa</th>
                                             <th>Detail Transaksi</th>
                                             <th>Detail Pembayaran</th>
-                                            <th>Detail Sewa</th> 
+                                            <th>Detail Sewa</th> {{-- New Column --}}
                                             <th>Pengiriman</th>
-                                            <th\>Aksi</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
+                                        {{-- Placeholder: Loop through $penyewaan data from backend --}}
+                                        {{-- Example Dummy Data (Replace with @foreach loop and actual data) --}}
+
                                         @forelse ($penyewaan as $item)
                                             <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
                                                 <td>{{ $loop->iteration }}</td>
-                                            
-                                                {{-- Informasi Penyewa --}}
+                                                {{-- Correct ID based on pagination --}}
                                                 <td>
                                                     <strong>{{ $item['nama_penyewa'] }}</strong><br>
                                                     <small>{{ $item['alamat_penyewa'] }}</small>
                                                 </td>
-                                            
-                                                {{-- Detail Transaksi (Barang disewa + Total Harga) --}}
                                                 <td>
                                                     <strong>{{ $item['penyewaan'] }}</strong><br>
-                                                    <small>Rp {{ number_format($item['total_harga'], 0, ',', '.') }}</small>
+                                                    <small>{{ $item['total_harga'] }}</small>
                                                 </td>
-                                            
-                                                {{-- Detail Pembayaran (Bukti Pembayaran + Bukti KTM/KTP) --}}
-                                                <td class="text-center" style="min-width: 130px;">
-                                                    <div class="btn-bukti-container">
-                                                        {{-- Bukti Pembayaran --}}
-                                                        @if (!empty($item['bukti_pembayaran_penyewa']))
+                                                <td class="text-center" style="min-width: 130px;"> {{-- Ensure enough width for buttons --}}
+                                                    {{-- Bukti Pembayaran Button --}}
+                                                    <div class = "btn-bukti-container">
+                                                        @if ($item['bukti_pembayaran_penyewa'])
                                                             <a href="https://rental.solvethink.id/api/penyewaan-komponen-solvethink/{{ $item['bukti_pembayaran_penyewa'] }}"
                                                                 target="_blank" class="btn btn-sm btn-bukti">
                                                                 <i class="fas fa-receipt"></i> Bukti Pembayaran
@@ -715,9 +713,8 @@
                                                                 <i class="fas fa-receipt"></i> (Belum Ada)
                                                             </button>
                                                         @endif
-                                    
-                                                        {{-- Bukti KTM/KTP --}}
-                                                        @if (!empty($item['bukti_identitas_penyewa']))
+                                                        {{-- Bukti KTM/KTP Button --}}
+                                                        @if ($item['bukti_identitas_penyewa'])
                                                             <a href="https://rental.solvethink.id/api/penyewaan-komponen-solvethink/{{ $item['bukti_identitas_penyewa'] }}"
                                                                 target="_blank" class="btn btn-sm btn-bukti">
                                                                 <i class="fas fa-id-card"></i> Bukti KTM/KTP
@@ -729,81 +726,94 @@
                                                         @endif
                                                     </div>
                                                 </td>
-                                            
-                                                {{-- Detail Sewa (Tanggal + Minggu + Status) --}}
                                                 <td>
-                                                    {{ $item['tanggal_penyewaan'] }}<br>
+                                                    {{ $item['tanggal_penyewaan'] }}<br> {{-- Assuming tanggal_mulai contains start date --}}
                                                     <small>
                                                         @php
                                                             $jumlahMinggu = [];
-                                                            preg_match_all('/Jumlah Minggu: (\d+)/', $item['penyewaan'], $matches);
+                                                            preg_match_all(
+                                                                '/Jumlah Minggu: (\d+)/',
+                                                                $item['penyewaan'],
+                                                                $matches,
+                                                            );
                                                             if (isset($matches[1])) {
                                                                 $jumlahMinggu = $matches[1];
                                                             }
                                                             $totalMinggu = array_sum($jumlahMinggu);
                                                         @endphp
-                                                        {{ $totalMinggu }} Minggu
-                                                    </small><br>
-                                                
+
+                                                        {{ $totalMinggu }} Minggu</small><br>
+
                                                     @php
-                                                       
-                                                        $statusClass = 'status-berlangsung'; 
-                                                        if (strtolower($item['status_sewa'] ?? '') == 'selesai') {
+
+                                                        $statusClass = 'status-berlangsung';
+                                                        if (strtolower($item['status_penyewaan'] ?? '') == 'selesai') {
                                                             $statusClass = 'status-selesai';
                                                         }
-                                                     
+
                                                     @endphp
-                                                
+
                                                     <span class="badge status-badge {{ $statusClass }}">
                                                         <span class="status-dot"></span>
-                                                        {{ $item['status_sewa'] ?? 'N/A' }}
+                                                        {{ $item['status_penyewaan'] ?? 'N/A' }}
                                                     </span>
+
                                                 </td>
-                                    
-                                                {{-- Pengiriman --}}
-                                                <td>
-                                                    {{ $item['pengambilan_barang_penyewa'] }}
-                                                </td>
-                                    
-                                                {{-- Aksi --}}
+                                                <td>{{ $item['pengambilan_barang_penyewa'] }}</td>
                                                 <td class="px-3 text-center aksi-buttons">
+                                                    {{-- Action Buttons --}}
                                                     <div class="d-inline-block">
+                                                        {{-- Rincian Button --}}
+                                                        {{-- @TODO: Populate data-* attributes with actual data from $item for penyewaan --}}
                                                         <button class="btn btn-sm rincian-btn m-1"
-                                                                data-id="{{ $item['id'] }}"
-                                                                data-nama-penyewa="{{ $item['nama_penyewa'] }}"
-                                                                data-telp-penyewa="{{ $item['no_telepon_penyewa'] ?? '-' }}"
-                                                                data-alamat-penyewa="{{ $item['alamat_penyewa'] ?? '-' }}" 
-                                                                data-barang-disewa="{{ $item['penyewaan'] ?? '-' }}" 
-                                                                data-harga-sewa="{{ $item['total_harga'] ?? 0 }}" 
-                                                                data-tgl-penyewaan="{{ $item['tanggal_penyewaan'] ?? '-' }}" 
-                                                                data-waktu-sewa="{{ $totalMinggu ?? 0 }} Minggu" 
-                                                                data-status-sewa="{{ $item['status_sewa'] ?? 'N/A' }}" 
-                                                                data-metode-kirim="{{ $item['pengambilan_barang_penyewa'] ?? '-' }}" 
-                                                                data-bukti-bayar="{{ $item['bukti_pembayaran_penyewa'] ?? '' }}" 
-                                                                data-bukti-ktm="{{ $item['bukti_identitas_penyewa'] ?? '' }}" 
-                                                                data-base-url="https://rental.solvethink.id/api/penyewaan-komponen-solvethink/" 
-                                                                data-toggle="modal" 
-                                                                data-target="#rincianPenyewaanModal"> 
+                                                            data-id="{{ $item['id'] }}"
+                                                            data-penyewa="{{ $item['nama_penyewa'] }}"
+                                                            data-no="{{ $item['no_penyewa'] }}"
+                                                            data-alamat="{{ $item['alamat_penyewa'] }}"
+                                                            data-penyewaan="{{ $item['penyewaan'] }}"
+                                                            data-totalharga="{{ $item['total_harga'] }}"
+                                                            data-tanggal="{{ $item['tanggal_penyewaan'] }}"
+                                                            data-jumlahminggu="{{ $totalMinggu }}"
+                                                            data-status="{{ $item['status_penyewaan'] }}"
+                                                            data-buktipembayaran="{{ $item['bukti_pembayaran_penyewa'] }}"
+                                                            data-buktiidentitas="{{ $item['bukti_identitas_penyewa'] }}"
+                                                            data-pengambilan="{{ $item['pengambilan_barang_penyewa'] }}"
+                                                            data-toggle="modal" data-target="#rincianPenyewaanModal">
+
                                                             Rincian
                                                         </button>
+
+                                                        {{-- Update Button --}}
+                                                        {{-- @TODO: Populate data-* attributes and set correct update URL for penyewaan --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item['id'] }}"
                                                             data-penyewa="{{ $item['nama_penyewa'] }}"
-                                                            data-toggle="modal"
-                                                            data-target="#updatePenyewaanModal">
+                                                            {{-- Add other fields to pre-fill the update form --}} data-url="{{-- route('penyewaan_barang.update', $item->id) --}}"
+                                                            {{-- Placeholder URL --}} data-toggle="modal"
+                                                            data-target="{{-- #updatePenyewaanModal --}}">
                                                             Update
                                                         </button>
+
+                                                        {{-- Hapus Button --}}
+
+                                                        {{-- <button class="btn btn-sm btn-danger m-1 btn-delete"
+                                                            data-id="{{ $item->id }}"
+                                                            data-info="Penyewaan ID {{ $item->id }} oleh {{ $item->nama_penyewa }}"
+                                                            data-url=""
+                                                            data-toggle="modal"
+                                                            data-target="#deletePenyewaanModal">
+                                                        Hapus
+                                                    </button> --}}
                                                     </div>
                                                 </td>
                                             </tr>
-                                    
                                         @empty
                                             <tr>
-                                                <td colspan="7" class="text-center">No data available in table</td> {{-- 7 columns now --}}
+                                                <td colspan="7" class="text-center">No data available in table</td>
+                                                {{-- Updated colspan --}}
                                             </tr>
                                         @endforelse
                                     </tbody>
-                                    
                                 </table>
                             </div>
                         </div>
@@ -859,8 +869,128 @@
 
     {{-- modals --}}
 
-    
-{{-- Rincian --}}
+    <div class="modal fade" id="addPenyewaanModal" tabindex="-1" aria-labelledby="addPenyewaanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Consider modal size --}}
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title" id="addPenyewaanModalLabel">Tambah Penyewaan Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                {{-- @TODO: Set correct route for storing data --}}
+                <form action="{{-- route('penyewaan_barang.store') --}}" method="POST" id="addPenyewaanForm"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        {{-- Add form fields for: --}}
+                        {{-- Informasi Penyewa (Nama, Alamat, Kontak?) --}}
+                        {{-- Detail Transaksi (Barang selection, Harga Sewa) --}}
+                        {{-- Detail Pembayaran (Metode, Upload Bukti Bayar, Upload Bukti KTM/KTP) --}}
+                        {{-- Detail Sewa (Tanggal Mulai, Tanggal Akhir/Durasi) --}}
+                        {{-- Pengiriman (Metode, Alamat, Status?) --}}
+                        <p>Placeholder for Add Penyewaan Form Fields...</p>
+                        {{-- Example Fields --}}
+                        <div class="form-group">
+                            <label for="add-nama-penyewa">Nama Penyewa</label>
+                            <input type="text" class="form-control" id="add-nama-penyewa" name="nama_penyewa"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-tanggal-mulai">Tanggal Mulai Sewa</label>
+                            <input type="date" class="form-control" id="add-tanggal-mulai" name="tanggal_mulai"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-bukti-ktm">Upload Bukti KTM/KTP</label>
+                            <input type="file" class="form-control-file" id="add-bukti-ktm" name="bukti_ktm"
+                                accept="image/*,application/pdf">
+                        </div>
+                        {{-- Add other fields here --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline batal-btn rounded-3 mx-2"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit"
+                            class="btn modal-color text-white font-weight-bold rounded-3">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{--
+    masih placeholder, blm diimplementasi
+        <div class="modal-content">
+            <div class="modal-header modal-color text-white">
+                <h5 class="modal-title" id="updatePenyewaanModalLabel">Update Penyewaan Barang</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <form action="#" method="POST" id="updatePenyewaanForm" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="id" id="update-penyewaan-id">
+                <div class="modal-body">
+
+                    <p>Placeholder for Update Penyewaan Form Fields...</p>
+
+                    <div class="form-group">
+                        <label for="update-nama-penyewa">Nama Penyewa</label>
+                        <input type="text" class="form-control" id="update-nama-penyewa" name="nama_penyewa" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="update-status-sewa">Status Sewa</label>
+                        <select class="form-control" id="update-status-sewa" name="status_sewa">
+                            <option value="Berlangsung">Berlangsung</option>
+                            <option value="Selesai">Selesai</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                         <label>Bukti KTM/KTP Saat Ini</label>
+                         <div id="update-current-ktm"></div>
+                         <label for="update-bukti-ktm">Ganti Bukti KTM/KTP (Opsional)</label>
+                         <input type="file" class="form-control-file" id="update-bukti-ktm" name="bukti_ktm" accept="image/*,application/pdf">
+                     </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+--}}
+    <div class="modal fade" id="deletePenyewaanModal" tabindex="-1" aria-labelledby="deletePenyewaanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header modal-color text-white">
+                    <h5 class="modal-title" id="deletePenyewaanModalLabel">Hapus Penyewaan Barang</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                {{-- @TODO: Action URL is set dynamically via JS --}}
+                <form action="#" method="POST" id="deletePenyewaanForm">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-body">
+                        <p class="text-center delete-text mb-1">Anda yakin ingin menghapus data penyewaan ini?</p>
+                        <p class="text-center font-weight-bold" id="delete-penyewaan-info"></p> {{-- Populated by JS --}}
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit"
+                            class="btn modal-color text-white font-weight-bold rounded-3">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="rincianPenyewaanModal" tabindex="-1" aria-labelledby="rincianPenyewaanModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -886,6 +1016,13 @@
                             <p class="mb-1">
                                 <strong>Status:</strong>
                                 <span id="rincian-status-sewa" class="ml-2 status-badge">(Status not loaded)</span>
+                                {{-- Example structure, berbasis logika table
+                                if (status === 'Selesai') {
+                                    $('#rincian-status-sewa').text('Selesai').removeClass('status-berlangsung').addClass('status-selesai');
+                                } else {
+                                    $('#rincian-status-sewa').text('Berlangsung').removeClass('status-selesai').addClass('status-berlangsung');
+                                }
+                            --}}
                             </p>
                         </div>
                     </div>
@@ -907,7 +1044,7 @@
                     </div>
 
 
-                    {{-- Detail pembayaran --}}
+
                     <div class="row">
                         <div class="col-md-12">
                             <h6>Detail Pembayaran</h6>
@@ -915,14 +1052,40 @@
 
                                 <div id="rincian-bukti-bayar-container" class="d-inline-block ml-2">
                                     <span class="text-muted">(Data not loaded)</span>
-                                    
+                                    {{-- Example Blade Logic
+                                    pakai class btn-bukti again buat styling
+                                    <div class="btn-bukti-container d-inline-block">
+                                    @if ($item->bukti_pembayaran_url)
+                                        <a href="#" target="_blank" class="btn btn-sm btn-bukti">
+                                            <i class="fas fa-receipt"></i> Lihat Bukti
+                                        </a>
+                                    @else
+                                        <button class="btn btn-sm btn-bukti disabled" disabled>
+                                            <i class="fas fa-receipt"></i> (Belum Ada)
+                                        </button>
+                                    @endif
+                                    </div>
+                                --}}
                                 </div>
                             </div>
                             <div>
 
                                 <div id="rincian-bukti-ktm-container" class="d-inline-block ml-2">
                                     <span class="text-muted">(Data not loaded)</span>
-                                    
+                                    {{-- Example Blade Logic
+                                    Pakai class btn buktinya for styling
+                                    <div class="btn-bukti-container d-inline-block">
+                                    @if ($item->bukti_ktm_url)
+                                        <a href="#" target="_blank" class="btn btn-sm btn-bukti">
+                                            <i class="fas fa-id-card"></i> Lihat Bukti
+                                        </a>
+                                    @else
+                                        <button class="btn btn-sm btn-bukti disabled" disabled>
+                                            <i class="fas fa-id-card"></i> (Belum Ada)
+                                        </button>
+                                    @endif
+                                    </div>
+                                --}}
                                 </div>
                             </div>
                         </div>
@@ -967,18 +1130,18 @@
                                     {{-- Options will be populated by JavaScript --}}
                                 </ul>
                             </div>
-
-                            {{-- Periode --}}
+                            {{-- The original select is hidden but holds the actual form value --}}
+                            {{-- *** Ensure this select ID is unique OR corresponds to the JS call *** --}}
                             <select class="original-select-hidden" id="filter-periode-penyewaan" name="periode">
                                 <option value="" selected>- Pilih Periode -</option>
-                                
+                                {{-- Add specific period options here --}}
                                 <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>
                                     Periode 01</option>
                                 <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>
                                     Periode 02</option>
                                 <option value="periode03" {{ request('periode') == 'periode03' ? 'selected' : '' }}>
                                     Periode 03</option>
-                  
+                                {{-- Add all your actual periode options for this filter --}}
                             </select>
                         </div>
 
@@ -1045,6 +1208,75 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            document.querySelectorAll('.rincian-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Set semua data dari tombol ke modal
+                    document.getElementById('rincian-nama-penyewa').textContent = this.dataset
+                        .penyewa || '-';
+                    document.getElementById('rincian-telp-penyewa').textContent = this.dataset
+                        .no || '-';
+                    document.getElementById('rincian-alamat-penyewa').textContent = this.dataset
+                        .alamat || '-';
+                    document.getElementById('rincian-tgl-penyewaan').textContent = this.dataset
+                        .tanggal || '-';
+                    document.getElementById('rincian-waktu-sewa').textContent = (this.dataset
+                        .jumlahminggu || '-') + ' Minggu';
+                    document.getElementById('rincian-status-sewa').textContent = this.dataset
+                        .status || '-';
+                    document.getElementById('rincian-barang-disewa').textContent = this.dataset
+                        .penyewaan || '-';
+                    document.getElementById('rincian-harga-sewa').textContent = this.dataset
+                        .totalharga || '-';
+                    document.getElementById('rincian-metode-kirim').textContent = this.dataset
+                        .pengambilan || '-';
+
+
+                    // Bukti pembayaran
+                    const buktiBayarContainer = document.getElementById(
+                        'rincian-bukti-bayar-container');
+                    if (this.dataset.buktipembayaran && this.dataset.buktipembayaran !== '-') {
+                        buktiBayarContainer.innerHTML = `
+                <a href="${this.dataset.buktipembayaran}" target="_blank" class="btn btn-sm btn-bukti">
+                    <i class="fas fa-receipt"></i> Lihat Bukti
+                </a>
+            `;
+                    } else {
+                        buktiBayarContainer.innerHTML = `
+                <button class="btn btn-sm btn-bukti disabled" disabled>
+                    <i class="fas fa-receipt"></i> (Belum Ada)
+                </button>
+            `;
+                    }
+
+                    // Bukti identitas (KTP/KTM)
+                    const buktiKtmContainer = document.getElementById(
+                        'rincian-bukti-ktm-container');
+                    if (this.dataset.buktiidentitas && this.dataset.buktiidentitas !== '-') {
+                        buktiKtmContainer.innerHTML = `
+                <a href="${this.dataset.buktiidentitas}" target="_blank" class="btn btn-sm btn-bukti">
+                    <i class="fas fa-id-card"></i> Lihat Bukti
+                </a>
+            `;
+                    } else {
+                        buktiKtmContainer.innerHTML = `
+                <button class="btn btn-sm btn-bukti disabled" disabled>
+                    <i class="fas fa-id-card"></i> (Belum Ada)
+                </button>
+            `;
+                    }
+
+                    // Update warna status (opsional bonus)
+                    const statusElement = document.getElementById('rincian-status-sewa');
+                    statusElement.classList.remove('status-berlangsung', 'status-selesai');
+                    if (this.dataset.status === 'Selesai') {
+                        statusElement.classList.add('status-selesai');
+                    } else {
+                        statusElement.classList.add('status-berlangsung');
+                    }
+                });
+            });
+
 
             /**
              * Initializes a custom searchable dropdown.
@@ -1221,131 +1453,5 @@
 
 
         });
-
-        document.addEventListener('DOMContentLoaded', function() {
-
-const rincianModalElement = document.getElementById('rincianPenyewaanModal');
-const rincianModal = new bootstrap.Modal(rincianModalElement); // Get BS5 Modal instance
-
-// Use event delegation on the table body for potentially dynamic rows
-const tableBody = document.getElementById('table-body');
-if (tableBody) {
-    tableBody.addEventListener('click', function(event) {
-        // Check if the clicked element or its parent is a rincian button
-        const button = event.target.closest('.rincian-btn');
-        if (!button) {
-            return; // Exit if not a rincian button click
-        }
-
-        // --- Get data from the button's dataset ---
-        const data = button.dataset;
-        const baseUrl = data.baseUrl || ''; // Get base URL for bukti
-
-        // Helper function to format currency (simple version)
-        function formatRupiah(angka) {
-            let number_string = String(angka).replace(/[^,\d]/g, ''),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return 'Rp ' + rupiah;
-        }
-
-
-        // --- Select target elements in the modal ---
-        const namaPenyewaEl = document.getElementById('rincian-nama-penyewa');
-        const telpPenyewaEl = document.getElementById('rincian-telp-penyewa');
-        const alamatPenyewaEl = document.getElementById('rincian-alamat-penyewa');
-        const tglPenyewaanEl = document.getElementById('rincian-tgl-penyewaan');
-        const waktuSewaEl = document.getElementById('rincian-waktu-sewa');
-        const statusBarangEl = document.getElementById('rincian-status-sewa'); // Status Badge Span
-        const barangDisewaEl = document.getElementById('rincian-barang-disewa');
-        const hargaSewaEl = document.getElementById('rincian-harga-sewa');
-        const metodeKirimEl = document.getElementById('rincian-metode-kirim');
-        const buktiBayarContainer = document.getElementById('rincian-bukti-bayar-container');
-        const buktiKtmContainer = document.getElementById('rincian-bukti-ktm-container');
-
-        // --- Populate basic text fields ---
-        if (namaPenyewaEl) namaPenyewaEl.textContent = data.namaPenyewa || '-';
-        if (telpPenyewaEl) telpPenyewaEl.textContent = data.telpPenyewa || '-';
-        if (alamatPenyewaEl) alamatPenyewaEl.textContent = data.alamatPenyewa || '-';
-        if (tglPenyewaanEl) tglPenyewaanEl.textContent = data.tglPenyewaan || '-';
-        if (waktuSewaEl) waktuSewaEl.textContent = data.waktuSewa || '-';
-        if (barangDisewaEl) barangDisewaEl.textContent = data.barangDisewa || '-';
-        if (hargaSewaEl) hargaSewaEl.textContent = formatRupiah(data.hargaSewa || 0);
-        if (metodeKirimEl) metodeKirimEl.textContent = data.metodeKirim || '-';
-
-        // --- Populate Status Badge ---
-        if (statusBarangEl) {
-            const statusText = data.statusSewa || 'N/A';
-
-                // Clean old status classes
-                statusBarangEl.classList.remove('status-berlangsung', 'status-selesai', 'status-batal', 'status-menunggu', 'status-default');
-
-                // Determine status class
-                let statusClass = 'status-berlangsung'; // Default
-                const statusLower = statusText.toLowerCase();
-                if (statusLower === 'selesai') {
-                    statusClass = 'status-selesai';
-                } else if (statusLower === 'batal' || statusLower === 'dibatalkan') {
-                    statusClass = 'status-batal';
-                } else if (statusLower === 'menunggu') {
-                    statusClass = 'status-menunggu';
-                }
-
-                // Apply the new class
-                statusBarangEl.classList.add(statusClass);
-
-                // Set the inner HTML to include the dot and text
-                statusBarangEl.innerHTML = `
-                    <span class="status-dot"></span> ${statusText}
-                `;
-        }
-
-        // --- Populate Bukti Pembayaran ---
-        if (buktiBayarContainer) {
-            if (data.buktiBayar && baseUrl) {
-                buktiBayarContainer.innerHTML = `
-                    <a href="${baseUrl}${data.buktiBayar}" target="_blank" class="btn btn-sm btn-bukti">
-                        <i class="fas fa-receipt"></i> Bukti Pembayaran
-                    </a>`;
-            } else {
-                buktiBayarContainer.innerHTML = `
-                    <button class="btn btn-sm btn-bukti disabled" disabled>
-                        <i class="fas fa-receipt"></i> (Belum Ada)
-                    </button>`;
-            }
-        }
-
-        // --- Populate Bukti KTM/KTP ---
-        if (buktiKtmContainer) {
-            if (data.buktiKtm && baseUrl) {
-                 buktiKtmContainer.innerHTML = `
-                     <a href="${baseUrl}${data.buktiKtm}" target="_blank" class="btn btn-sm btn-bukti">
-                         <i class="fas fa-id-card"></i> Bukti KTM/KTP
-                     </a>`;
-            } else {
-                 buktiKtmContainer.innerHTML = `
-                     <button class="btn btn-sm btn-bukti disabled" disabled>
-                         <i class="fas fa-id-card"></i> (Belum Ada)
-                     </button>`;
-            }
-        }
-
-        // Modal is triggered by data-bs attributes, no need to manually call show here
-        // rincianModal.show(); // Only needed if button doesn't have data-bs-toggle/target
-
-    }); // End click listener
-} // End if tableBody exists
-
-
-
-});
     </script>
 @endsection
