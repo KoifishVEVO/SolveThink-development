@@ -768,6 +768,7 @@
                                                         <button class="btn btn-sm rincian-btn m-1"
                                                             data-id="{{ $item['id'] }}"
                                                             data-penyewa="{{ $item['nama_penyewa'] }}"
+                                                            data-no="{{ $item['no_penyewa'] }}"
                                                             data-alamat="{{ $item['alamat_penyewa'] }}"
                                                             data-penyewaan="{{ $item['penyewaan'] }}"
                                                             data-totalharga="{{ $item['total_harga'] }}"
@@ -1214,7 +1215,7 @@
                     document.getElementById('rincian-nama-penyewa').textContent = this.dataset
                         .penyewa || '-';
                     document.getElementById('rincian-telp-penyewa').textContent = this.dataset
-                        .telepon || '-';
+                        .no || '-';
                     document.getElementById('rincian-alamat-penyewa').textContent = this.dataset
                         .alamat || '-';
                     document.getElementById('rincian-tgl-penyewaan').textContent = this.dataset
@@ -1229,6 +1230,7 @@
                         .totalharga || '-';
                     document.getElementById('rincian-metode-kirim').textContent = this.dataset
                         .pengambilan || '-';
+
 
                     // Bukti pembayaran
                     const buktiBayarContainer = document.getElementById(
@@ -1249,7 +1251,7 @@
 
                     // Bukti identitas (KTP/KTM)
                     const buktiKtmContainer = document.getElementById(
-                    'rincian-bukti-ktm-container');
+                        'rincian-bukti-ktm-container');
                     if (this.dataset.buktiidentitas && this.dataset.buktiidentitas !== '-') {
                         buktiKtmContainer.innerHTML = `
                 <a href="${this.dataset.buktiidentitas}" target="_blank" class="btn btn-sm btn-bukti">
