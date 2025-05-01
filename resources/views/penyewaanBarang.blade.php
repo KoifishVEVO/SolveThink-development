@@ -704,7 +704,7 @@
                                                     {{-- Bukti Pembayaran Button --}}
                                                     <div class = "btn-bukti-container">
                                                         @if ($item['bukti_pembayaran_penyewa'])
-                                                            <a href="https://rental.solvethink.id/storage/penyewaan-komponen-solvethink/{{ $item['bukti_pembayaran_penyewa'] }}"
+                                                            <a href="https://rental.solvethink.id/storage/{{ $item['bukti_pembayaran_penyewa'] }}"
                                                                 target="_blank" class="btn btn-sm btn-bukti">
                                                                 <i class="fas fa-receipt"></i> Bukti Pembayaran
                                                             </a>
@@ -715,7 +715,7 @@
                                                         @endif
                                                         {{-- Bukti KTM/KTP Button --}}
                                                         @if ($item['bukti_identitas_penyewa'])
-                                                            <a href="https://rental.solvethink.id/api/penyewaan-komponen-solvethink/{{ $item['bukti_identitas_penyewa'] }}"
+                                                            <a href="https://rental.solvethink.id/storage/{{ $item['bukti_identitas_penyewa'] }}"
                                                                 target="_blank" class="btn btn-sm btn-bukti">
                                                                 <i class="fas fa-id-card"></i> Bukti KTM/KTP
                                                             </a>
