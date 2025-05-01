@@ -664,7 +664,7 @@
                                                     <div class="btn-bukti-container">
                                                         {{-- Bukti Pembayaran --}}
                                                         @if (!empty($item['bukti_pembayaran_pembeli']))
-                                                            <a href="{{ 'https://sale.solvethink.id/api/penjualan-komponen-solvethink/' . $item['bukti_pembayaran_pembeli'] }}"
+                                                            <a href="{{ 'https://sale.solvethink.id/storage/' . $item['bukti_pembayaran_pembeli'] }}"
                                                                 target="_blank" class="btn btn-sm btn-bukti">
                                                                 <i class="fas fa-receipt"></i> Bukti Pembayaran
                                                             </a>
@@ -694,7 +694,7 @@
                                                             data-barang-dijual="{{ $item['pembelian'] ?? '-' }}"
                                                             data-total-harga="{{ $item['total_harga'] ?? 0 }}"
                                                             data-tanggal-transaksi="{{ $item['tanggal_pembelian'] ?? '-' }}"
-                                                            data-bukti-url="{{ $item['bukti_pembayaran_pembeli'] ? 'https://sale.solvethink.id/api/penjualan-komponen-solvethink/' . $item['bukti_pembayaran_pembeli'] : '' }}"
+                                                            data-bukti-url="{{ $item['bukti_pembayaran_pembeli'] ? 'https://sale.solvethink.id/storage/bukti_pembayaran/' . $item['bukti_pembayaran_pembeli'] : '' }}"
                                                             data-toggle="modal" data-target="#rincianPenjualanModal">
                                                             Rincian
                                                         </button>
