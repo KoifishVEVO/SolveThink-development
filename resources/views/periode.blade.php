@@ -356,11 +356,11 @@
             /* --- Specific adjustments if needed --- */
             /* e.g., if Batal button needs slightly different flex behavior */
             /*
-                                                                                                                                                                                                                                                                                                        #addPeriodeModal .modal-footer .batal-btn,
-                                                                                                                                                                                                                                                                                                        #updatePeriodeModal .modal-footer .batal-btn {
-                                                                                                                                                                                                                                                                                                            flex-grow: 0.8; // Example: Make cancel slightly smaller if desired
-                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                                                                                                                    #addPeriodeModal .modal-footer .batal-btn,
+                                                                                                                                                                                                                                                                                                                                                                                                    #updatePeriodeModal .modal-footer .batal-btn {
+                                                                                                                                                                                                                                                                                                                                                                                                        flex-grow: 0.8; // Example: Make cancel slightly smaller if desired
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                    */
 
         }
 
@@ -461,36 +461,38 @@
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="dataTable_length">
-                                    <label>Show
-                                        <select id="showEntries" name="dataTable_length" aria-controls="dataTable"
-                                            class="custom-select custom-select-sm form-control form-control-sm"
-                                            style="width: auto; display: inline-block;">
-
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> entries
-                                    </label>
+                                    <form method="GET" action="{{ route('periode.show') }}" id="showEntriesForm">
+                                        <label>Show
+                                            <select id="showEntries" name="showEntries" onchange="this.form.submit()"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                @foreach ([5, 10, 30, 100] as $value)
+                                                    <option value="{{ $value }}"
+                                                        {{ request('showEntries', 3) == $value ? 'selected' : '' }}>
+                                                        {{ $value }}
+                                                    </option>
+                                                @endforeach
+                                            </select> entries
+                                        </label>
+                                        <input type="hidden" name="search" value="{{ request('search') }}">
+                                    </form>
                                 </div>
                             </div>
 
                             <div class="col-sm-12 col-md-6">
                                 <div id="dataTable_filter"
                                     class="dataTables_filter d-flex justify-content-md-end align-items-center">
-                                    <label class="mr-2 mb-0">Search:
+                                    <form id="searchForm" method="GET" action="{{ route('periode.show') }}"
+                                        class="form-inline">
+                                        <label class="mr-2 mb-0">Search:</label>
+                                        <input type="search" name="search" value="{{ request('search') }}"
+                                            class="form-control form-control-sm" placeholder="Cari Periode...">
+                                    </form>
 
-                                        <form id="searchForm" method="GET" action="#" class="d-inline">
-                                            <input type="search" name="search" value=""
-                                                class="form-control form-control-sm d-inline" aria-controls="dataTable"
-                                                placeholder="">
-                                        </form>
-                                    </label>
-                                    <!-- add modal -->
                                     <button class="btn btn-success btn-sm ml-2" data-toggle="modal"
                                         data-target="#addPeriodeModal">Tambah</button>
                                 </div>
                             </div>
+
                         </div>
 
                         {{-- Table Row --}}
@@ -506,66 +508,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
-                                        <!-- example data -->
-                                        @php
-                                            // Placeholder data array
-                                            $exampleData = [
-                                                [
-                                                    'id' => 1,
-                                                    'nama_periode' => 'Periode 1',
-                                                    'tanggal_mulai' => '2025-01-01',
-                                                    'tanggal_akhir' => '2025-01-31',
-                                                ],
-                                                [
-                                                    'id' => 2,
-                                                    'nama_periode' => 'Periode 2',
-                                                    'tanggal_mulai' => '2025-02-01',
-                                                    'tanggal_akhir' => '2025-02-28',
-                                                ],
-                                                [
-                                                    'id' => 3,
-                                                    'nama_periode' => 'Periode 3',
-                                                    'tanggal_mulai' => '2025-03-01',
-                                                    'tanggal_akhir' => '2025-03-31',
-                                                ],
-                                                [
-                                                    'id' => 4,
-                                                    'nama_periode' => 'Periode 4',
-                                                    'tanggal_mulai' => '2025-04-01',
-                                                    'tanggal_akhir' => '2025-04-30',
-                                                ],
-                                                [
-                                                    'id' => 5,
-                                                    'nama_periode' => 'Periode 5',
-                                                    'tanggal_mulai' => '2025-05-01',
-                                                    'tanggal_akhir' => '2025-05-31',
-                                                ],
-                                                [
-                                                    'id' => 6,
-                                                    'nama_periode' => 'Periode 6',
-                                                    'tanggal_mulai' => '2025-06-01',
-                                                    'tanggal_akhir' => '2025-06-30',
-                                                ],
-                                                [
-                                                    'id' => 7,
-                                                    'nama_periode' => 'Periode 7',
-                                                    'tanggal_mulai' => '2025-07-01',
-                                                    'tanggal_akhir' => '2025-07-31',
-                                                ],
-                                                [
-                                                    'id' => 8,
-                                                    'nama_periode' => 'Periode 8',
-                                                    'tanggal_mulai' => '2025-08-01',
-                                                    'tanggal_akhir' => '2025-08-31',
-                                                ],
-                                                [
-                                                    'id' => 9,
-                                                    'nama_periode' => 'Periode 9',
-                                                    'tanggal_mulai' => '2025-09-01',
-                                                    'tanggal_akhir' => '2025-09-30',
-                                                ],
-                                            ];
-                                        @endphp
 
                                         @foreach ($periodes as $item)
                                             <tr>
@@ -601,28 +543,37 @@
                             </div>
                         </div>
 
-                        {{-- Pagination Row --}}
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" role="status" aria-live="polite">
-                                    {{-- placeholder again --}}
-                                    Showing 1 to 9 of 9 entries
+                                    Showing {{ $periodes->firstItem() }} to {{ $periodes->lastItem() }} of
+                                    {{ $periodes->total() }} entries
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers">
                                     <ul class="pagination justify-content-end">
-
-                                        <li class="paginate_button page-item disabled">
-                                            <a href="#" class="page-link">Previous</a>
-                                        </li>
-                                        <li class="paginate_button page-item active">
-                                            <a href="#" class="page-link">1</a>
-                                        </li>
-                                        <li class="paginate_button page-item disabled">
-                                            <a href="#" class="page-link">Next</a>
+                                        {{-- Tombol Previous --}}
+                                        <li
+                                            class="paginate_button page-item {{ $periodes->onFirstPage() ? 'disabled' : '' }}">
+                                            <a href="{{ $periodes->previousPageUrl() ?? '#' }}"
+                                                class="page-link">Previous</a>
                                         </li>
 
+                                        {{-- Nomor Halaman --}}
+                                        @for ($i = 1; $i <= $periodes->lastPage(); $i++)
+                                            <li
+                                                class="paginate_button page-item {{ $i == $periodes->currentPage() ? 'active' : '' }}">
+                                                <a href="{{ $periodes->url($i) }}"
+                                                    class="page-link">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        {{-- Tombol Next --}}
+                                        <li
+                                            class="paginate_button page-item {{ $periodes->hasMorePages() ? '' : 'disabled' }}">
+                                            <a href="{{ $periodes->nextPageUrl() ?? '#' }}" class="page-link">Next</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

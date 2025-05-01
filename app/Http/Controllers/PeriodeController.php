@@ -8,11 +8,19 @@ use App\Models\Periode;
 
 class PeriodeController extends Controller
 {
-     public function index()
+    public function index(Request $request)
     {
-        $periodes = Periode::all();
-        return view('periode', compact('periodes'));
+        $search = $request->input('search');
+        $perPage = $request->input('showEntries', 5);
+
+        $periodes = Periode::when($search, function ($query, $search) {
+            $query->where('nama_periode', 'like', "%{$search}%");
+        })->paginate($perPage)->appends(['search' => $search]); // default 10 per halaman
+
+        return view('periode', compact('periodes', 'search'));
     }
+
+
 
     public function create()
     {
