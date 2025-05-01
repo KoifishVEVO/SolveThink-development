@@ -10,11 +10,12 @@ class NamaBarangController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('showEntries', 5);
 
         if ($search) {
-            $barang = NamaBarang::where('nama_barang', 'like', "%{$search}%")->paginate(10);
+            $barang = NamaBarang::where('nama_barang', 'like', "%{$search}%")->paginate($perPage);
         } else {
-            $barang = NamaBarang::paginate(10);
+            $barang = NamaBarang::paginate($perPage);
         }
 
         return view('rincianNamaBarang', compact('barang'));
