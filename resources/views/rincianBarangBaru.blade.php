@@ -868,15 +868,20 @@
                             <!-- Show entries -->
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="dataTable_length">
-                                    <label>Show
-                                        <select id="showEntries" name="dataTable_length"
-                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> entries
-                                    </label>
+                                    <form method="GET" action="{{ route('aset_barang.index') }}" id="showEntriesForm">
+                                        <label>Show
+                                            <select id="showEntries" name="showEntries" onchange="this.form.submit()"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                @foreach ([5, 10, 30, 100] as $value)
+                                                    <option value="{{ $value }}"
+                                                        {{ request('showEntries', 3) == $value ? 'selected' : '' }}>
+                                                        {{ $value }}
+                                                    </option>
+                                                @endforeach
+                                            </select> entries
+                                        </label>
+                                        <input type="hidden" name="search" value="{{ request('search') }}">
+                                    </form>
                                 </div>
                             </div>
 
@@ -981,8 +986,9 @@
                                                             data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ $item->namaBarang && $item->namaBarang->gambar_barang ? asset('storage/uploads/' . $item->namaBarang->gambar_barang) : '' }}"
-                                                            data-desc="{{ $item->namaBarang->deskripsi }}" data-toggle="modal"
-                                                            data-target="#rincianAssetModal" title="Rincian">
+                                                            data-desc="{{ $item->namaBarang->deskripsi }}"
+                                                            data-toggle="modal" data-target="#rincianAssetModal"
+                                                            title="Rincian">
 
                                                             Rincian
 
@@ -991,12 +997,15 @@
                                                         {{-- Update Button --}}
                                                         <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item->id }}"
-                                                            data-nama="{{ $item->namaBarang->id ?? '' }}" {{-- Pass ID for
-                                                            select --}} data-harga="{{ $item->harga_jual_barang }}"
+                                                            data-nama="{{ $item->namaBarang->id ?? '' }}"
+                                                            {{-- Pass ID for
+                                                            select --}}
+                                                            data-harga="{{ $item->harga_jual_barang }}"
                                                             data-jenis="{{ $item->jenis_barang }}"
                                                             data-gambar="{{ $item->namaBarang && $item->namaBarang->gambar_barang ? asset('storage/uploads/' . $item->namaBarang->gambar_barang) : '' }}"
                                                             data-url="{{ route('aset_barang.update', $item->id) }}"
-                                                            data-toggle="modal" data-target="#updateAssetModal" title="Update">
+                                                            data-toggle="modal" data-target="#updateAssetModal"
+                                                            title="Update">
                                                             {{-- Added title --}}
                                                             Update
 
@@ -1007,7 +1016,8 @@
                                                             data-id="{{ $item->id }}"
                                                             data-nama="{{ $item->namaBarang->nama_barang ?? 'N/A' }}"
                                                             data-url="{{ route('aset_barang.destroy', $item->id) }}"
-                                                            data-toggle="modal" data-target="#deleteAssetModal" title="Hapus">
+                                                            data-toggle="modal" data-target="#deleteAssetModal"
+                                                            title="Hapus">
                                                             {{-- Added title --}}
                                                             Hapus
 
@@ -1035,14 +1045,16 @@
                                         {{-- Tombol Previous --}}
                                         <li
                                             class="paginate_button page-item {{ $barang->onFirstPage() ? 'disabled' : '' }}">
-                                            <a href="{{ $barang->previousPageUrl() ?? '#' }}" class="page-link">Previous</a>
+                                            <a href="{{ $barang->previousPageUrl() ?? '#' }}"
+                                                class="page-link">Previous</a>
                                         </li>
 
                                         {{-- Nomor Halaman --}}
                                         @for ($i = 1; $i <= $barang->lastPage(); $i++)
                                             <li
                                                 class="paginate_button page-item {{ $i == $barang->currentPage() ? 'active' : '' }}">
-                                                <a href="{{ $barang->url($i) }}" class="page-link">{{ $i }}</a>
+                                                <a href="{{ $barang->url($i) }}"
+                                                    class="page-link">{{ $i }}</a>
                                             </li>
                                         @endfor
 
@@ -1070,7 +1082,8 @@
     <!-- Modal -->
 
     <!-- Rincian Asset Modal -->
-    <div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel" aria-hidden="true">
+    <div class="modal fade" id="rincianAssetModal" tabindex="-1" aria-labelledby="rincianAssetLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header modal-color text-white">
@@ -1088,7 +1101,8 @@
                         </div>
 
                         <!-- image  -->
-                        <div id="rincian-image-view" style="display: none; height: 100%; width: 100%; position: relative;">
+                        <div id="rincian-image-view"
+                            style="display: none; height: 100%; width: 100%; position: relative;">
                             <img id="rincian-preview-img" src="" alt="Preview"
                                 style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
@@ -1113,7 +1127,8 @@
 
                             <a href="#" {{-- Href will be set by JavaScript --}} id="rincian-link-deskripsi" target="_blank"
                                 {{-- Opens the link in a new tab --}} class="text-primary" style="display: none;" {{-- Hide
-                                initially if no link --}} rel="noopener noreferrer">
+                                initially if no link --}}
+                                rel="noopener noreferrer">
                                 Link
                                 <i class="fas fa-external-link-alt fa-xs"></i>
                             </a>
@@ -1158,7 +1173,8 @@
                             </select>
 
                             <div class="custom-search-select-container" id="custom_nama_barang_add_container">
-                                <div class="selected-value" data-target-select="nama_barang_select_add" tabindex="0">Pilih
+                                <div class="selected-value" data-target-select="nama_barang_select_add" tabindex="0">
+                                    Pilih
                                     Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
@@ -1189,7 +1205,8 @@
 
                             <!-- Custom Searchable Dropdown -->
                             <div class="custom-search-select-container" id="custom_jenis_barang_add_container">
-                                <div class="selected-value" data-target-select="jenis_barang_select_add" tabindex="0">Pilih
+                                <div class="selected-value" data-target-select="jenis_barang_select_add" tabindex="0">
+                                    Pilih
                                     Jenis Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
@@ -1240,7 +1257,8 @@
                                 @endforeach
                             </select>
                             <div class="custom-search-select-container" id="custom-update-nama-container">
-                                <div class="selected-value" data-target-select="nama_barang_select_update" tabindex="0">
+                                <div class="selected-value" data-target-select="nama_barang_select_update"
+                                    tabindex="0">
                                     Pilih Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
@@ -1251,7 +1269,8 @@
                         </div>
 
                         <label class="font-weight-bold">Harga Jual Barang</label>
-                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3" required>
+                        <input type="number" name="harga_jual_barang" id="update-harga" class="form-control mb-3"
+                            required>
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="jenis_barang">Jenis Barang</label>
@@ -1266,7 +1285,8 @@
                             </select>
 
                             <div class="custom-search-select-container" id="custom-update-jenis-container">
-                                <div class="selected-value" data-target-select="jenis_barang_select_update" tabindex="0">
+                                <div class="selected-value" data-target-select="jenis_barang_select_update"
+                                    tabindex="0">
                                     Pilih Jenis Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
@@ -1349,7 +1369,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    
+
             /**
              * Initializes a custom searchable dropdown.
              * @param {string} containerId - The ID of the main container div.
@@ -1366,13 +1386,13 @@
                     console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
                     return;
                 }
-    
+
                 const selectedValueDiv = container.querySelector('.selected-value');
                 const dropdownContainer = container.querySelector('.dropdown-list-container');
                 const searchBox = container.querySelector('.search-box');
                 const optionsList = container.querySelector('.options-list');
                 let listItems = [];
-    
+
                 function populateOptionsList() {
                     optionsList.innerHTML = '';
                     listItems = [];
@@ -1390,10 +1410,10 @@
                     });
                 }
                 populateOptionsList();
-    
+
                 function syncDisplayWithSelect() {
                     if (!originalSelect || !selectedValueDiv) return;
-    
+
                     const selectedOption = originalSelect.options[originalSelect.selectedIndex];
                     if (selectedOption) {
                         selectedValueDiv.textContent = selectedOption.textContent;
@@ -1408,7 +1428,7 @@
                     }
                 }
                 syncDisplayWithSelect();
-    
+
                 selectedValueDiv.addEventListener('click', (event) => {
                     event.stopPropagation();
                     if (!dropdownContainer || !searchBox) return;
@@ -1420,34 +1440,37 @@
                         searchBox.focus();
                     }
                 });
-    
+
                 document.addEventListener('click', (event) => {
                     if (container && !container.contains(event.target)) {
                         if (dropdownContainer) dropdownContainer.classList.remove('show');
                     }
                 });
-    
+
                 optionsList.addEventListener('click', (event) => {
-                    if (originalSelect && selectedValueDiv && dropdownContainer && event.target.tagName === 'LI' && event.target.dataset.value) {
+                    if (originalSelect && selectedValueDiv && dropdownContainer && event.target.tagName ===
+                        'LI' && event.target.dataset.value) {
                         selectedValueDiv.textContent = event.target.textContent;
                         originalSelect.value = event.target.dataset.value;
                         dropdownContainer.classList.remove('show');
                         originalSelect.dispatchEvent(new Event('change'));
-                    } else if (dropdownContainer && event.target.tagName === 'LI' && !event.target.dataset.value) {
+                    } else if (dropdownContainer && event.target.tagName === 'LI' && !event.target.dataset
+                        .value) {
                         dropdownContainer.classList.remove('show');
                     }
                 });
-    
+
                 searchBox.addEventListener('input', () => {
                     const searchTerm = searchBox.value.toLowerCase();
                     listItems.forEach(li => {
                         const itemText = li.textContent.toLowerCase();
-                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
+                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ?
+                            '' : 'none';
                     });
                 });
-    
+
                 originalSelect.addEventListener('change', syncDisplayWithSelect);
-    
+
                 const modal = container.closest('.modal');
                 if (modal) {
                     if (typeof $ !== 'undefined') {
@@ -1467,21 +1490,23 @@
                     }
                 }
             }
-    
+
             function closeAllDropdowns(excludeContainerId = null) {
-                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
-                    const currentContainer = dropdown.closest('.custom-search-select-container');
-                    if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
-                        dropdown.classList.remove('show');
-                    }
-                });
+                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(
+                    dropdown => {
+                        const currentContainer = dropdown.closest('.custom-search-select-container');
+                        if (!excludeContainerId || (currentContainer && currentContainer.id !==
+                                excludeContainerId)) {
+                            dropdown.classList.remove('show');
+                        }
+                    });
             }
-    
+
             setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add');
             setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add');
             setupSearchableDropdown('custom-update-nama-container', 'nama_barang_select_update');
             setupSearchableDropdown('custom-update-jenis-container', 'jenis_barang_select_update');
-    
+
             document.querySelectorAll('.btn-update').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.dataset.id;
@@ -1490,9 +1515,11 @@
                     const jenisBarangValue = this.dataset.jenis;
                     const gambar = this.dataset.gambar;
                     const url = this.dataset.url;
-    
-                    console.log(`Button Data: id=${id}, namaId=${namaBarangId}, harga=${harga}, jenisValue=${jenisBarangValue}, url=${url}`);
-    
+
+                    console.log(
+                        `Button Data: id=${id}, namaId=${namaBarangId}, harga=${harga}, jenisValue=${jenisBarangValue}, url=${url}`
+                    );
+
                     const updateModalElement = document.getElementById('updateAssetModal');
                     if (!updateModalElement) {
                         console.error("Update modal element (#updateAssetModal) not found!");
@@ -1500,14 +1527,16 @@
                     }
                     const updateForm = updateModalElement.querySelector('form');
                     const idInput = updateModalElement.querySelector('#update-id');
-                    const namaSelect = updateModalElement.querySelector('#nama_barang_select_update');
+                    const namaSelect = updateModalElement.querySelector(
+                        '#nama_barang_select_update');
                     const hargaInput = updateModalElement.querySelector('#update-harga');
-                    const jenisSelect = updateModalElement.querySelector('#jenis_barang_select_update');
-    
+                    const jenisSelect = updateModalElement.querySelector(
+                        '#jenis_barang_select_update');
+
                     if (updateForm) updateForm.action = url || '#';
                     if (idInput) idInput.value = id || '';
                     if (hargaInput) hargaInput.value = harga || '';
-    
+
                     if (namaSelect) {
                         namaSelect.value = namaBarangId || "";
                         console.log(`Set nama_barang_select_update value to: ${namaSelect.value}`);
@@ -1515,19 +1544,21 @@
                     } else {
                         console.error('Element with ID "nama_barang_select_update" not found.');
                     }
-    
+
                     if (jenisSelect) {
                         jenisSelect.value = jenisBarangValue || "";
-                        console.log(`Set jenis_barang_select_update value to: ${jenisSelect.value}`);
+                        console.log(
+                            `Set jenis_barang_select_update value to: ${jenisSelect.value}`);
                         jenisSelect.dispatchEvent(new Event('change'));
                     } else {
                         console.error('Element with ID "jenis_barang_select_update" not found.');
                     }
-    
+
                     const previewImg = updateModalElement.querySelector('#update-preview-img');
-                    const previewWrapper = updateModalElement.querySelector('#update-image-preview');
+                    const previewWrapper = updateModalElement.querySelector(
+                        '#update-image-preview');
                     const uploadView = updateModalElement.querySelector('#update-button-view');
-    
+
                     if (previewImg && previewWrapper && uploadView) {
                         if (gambar) {
                             previewImg.src = gambar;
@@ -1541,183 +1572,186 @@
                     }
                 });
             });
-    
+
             // Tombol Rincian - Isi otomatis modal dengan data
-        document.querySelectorAll('.rincian-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const nama = this.dataset.nama;
-                const harga = this.dataset.harga;
-                const jenis = this.dataset.jenis;
-                const gambar = this.dataset.gambar;
-                const desc = this.dataset.desc;
+            document.querySelectorAll('.rincian-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const nama = this.dataset.nama;
+                    const harga = this.dataset.harga;
+                    const jenis = this.dataset.jenis;
+                    const gambar = this.dataset.gambar;
+                    const desc = this.dataset.desc;
 
-                // console.log(jenis)
-                const linkElement = document.getElementById('rincian-link-deskripsi');
-                const noLinkText = document.getElementById('rincian-no-link');
+                    // console.log(jenis)
+                    const linkElement = document.getElementById('rincian-link-deskripsi');
+                    const noLinkText = document.getElementById('rincian-no-link');
 
-                $('#rincianAssetModal').on('shown.bs.modal', function() {
-                    // Isi data ke modal setelah modal benar-benar ditampilkan
-                    document.getElementById('rincian-id').innerText = id;
-                    document.getElementById('rincian-nama').innerText = nama;
-                    document.getElementById('rincian-jenis').innerText = jenis;
+                    $('#rincianAssetModal').on('shown.bs.modal', function() {
+                        // Isi data ke modal setelah modal benar-benar ditampilkan
+                        document.getElementById('rincian-id').innerText = id;
+                        document.getElementById('rincian-nama').innerText = nama;
+                        document.getElementById('rincian-jenis').innerText = jenis;
 
-                    if (desc) {
-                        linkElement.href = desc;
-                        linkElement.style.display = 'inline';
-                        noLinkText.style.display = 'none';
-                    } else {
-                        linkElement.style.display = 'none';
-                        noLinkText.style.display = 'inline';
-                    }
-                    // Preview gambar
-                    const rincianImageView = document.getElementById('rincian-image-view');
-                    const rincianDefaultView = document.getElementById('rincian-default-view');
-                    const rincianPreviewImg = document.getElementById('rincian-preview-img');
+                        if (desc) {
+                            linkElement.href = desc;
+                            linkElement.style.display = 'inline';
+                            noLinkText.style.display = 'none';
+                        } else {
+                            linkElement.style.display = 'none';
+                            noLinkText.style.display = 'inline';
+                        }
+                        // Preview gambar
+                        const rincianImageView = document.getElementById(
+                            'rincian-image-view');
+                        const rincianDefaultView = document.getElementById(
+                            'rincian-default-view');
+                        const rincianPreviewImg = document.getElementById(
+                            'rincian-preview-img');
 
-                    if (gambar) {
-                        rincianPreviewImg.src = gambar;
-                        rincianImageView.style.display = 'block';
-                        rincianDefaultView.style.display = 'none';
-                    } else {
-                        rincianImageView.style.display = 'none';
-                        rincianDefaultView.style.display = 'flex';
-                    }
-                });
-            })
-        });
-
-        // Tombol Delete - Isi otomatis modal dan set form action
-        document.querySelectorAll('.btn-delete').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const nama = this.dataset.nama;
-                const url = this.dataset.url;
-
-                // Tampilkan nama di modal
-                document.getElementById('delete-item-name').innerText =
-                    `Apakah kamu yakin ingin menghapus "${nama}"?`;
-
-                // Set form action
-                const deleteForm = document.querySelector('#deleteAssetModal form');
-                deleteForm.action = url;
-
-                // Set ID hidden (opsional, kalau diperlukan)
-                document.getElementById('delete-id').value = id;
+                        if (gambar) {
+                            rincianPreviewImg.src = gambar;
+                            rincianImageView.style.display = 'block';
+                            rincianDefaultView.style.display = 'none';
+                        } else {
+                            rincianImageView.style.display = 'none';
+                            rincianDefaultView.style.display = 'flex';
+                        }
+                    });
+                })
             });
-        });
-    
+
+            // Tombol Delete - Isi otomatis modal dan set form action
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const nama = this.dataset.nama;
+                    const url = this.dataset.url;
+
+                    // Tampilkan nama di modal
+                    document.getElementById('delete-item-name').innerText =
+                        `Apakah kamu yakin ingin menghapus "${nama}"?`;
+
+                    // Set form action
+                    const deleteForm = document.querySelector('#deleteAssetModal form');
+                    deleteForm.action = url;
+
+                    // Set ID hidden (opsional, kalau diperlukan)
+                    document.getElementById('delete-id').value = id;
+                });
+            });
+
             // Add your Fetch listeners ('Tambah Sama', 'Kurangi') here as well...
 
             document.addEventListener("click", function(event) {
-            if (event.target.closest(".btn-tambah")) {
-                let button = event.target.closest(".btn-tambah");
+                if (event.target.closest(".btn-tambah")) {
+                    let button = event.target.closest(".btn-tambah");
 
-                let data = {
-                    nama_barang: button.getAttribute("data-nama"),
-                    harga_jual_barang: parseInt(button.getAttribute("data-harga")),
-                    jenis_barang: button.getAttribute("data-jenis"),
-                    _token: "{{ csrf_token() }}"
-                };
+                    let data = {
+                        nama_barang: button.getAttribute("data-nama"),
+                        harga_jual_barang: parseInt(button.getAttribute("data-harga")),
+                        jenis_barang: button.getAttribute("data-jenis"),
+                        _token: "{{ csrf_token() }}"
+                    };
 
-                fetch("{{ route('aset_barang.storeSame') }}", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": data._token,
-                            "Accept": "application/json" // <--- ini penting biar Laravel balikin JSON saat error
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(async (response) => {
-                        const result = await response.json();
-
-                        if (!response.ok) {
-                            // Tangani error validasi Laravel
-                            if (result.errors) {
-                                let errorMessages = Object.values(result.errors).flat().join("\n");
-                                alert("Gagal menambahkan barang:\n" + errorMessages);
-                            } else {
-                                alert("Terjadi kesalahan tak dikenal.");
-                            }
-                            throw new Error("Validation failed");
-                        }
-
-                        // Kalau sukses, reload
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                    });
-            }
-        });
-
-
-        // document.addEventListener("click", function(event) {
-        //     if (event.target.closest(".btn-kurangi")) {
-        //         let button = event.target.closest(".btn-kurangi");
-        //         let namaBarang = button.getAttribute("data-nama");
-
-        //         fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
-        //                 encodeURIComponent(namaBarang)), {
-        //                 method: "DELETE",
-        //                 headers: {
-        //                     "Content-Type": "application/json",
-        //                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
-        //                 }
-        //             })
-        //             .then(response => response.json())
-        //             .then(() => location.reload())
-        //             .catch(error => console.error("Error:", error));
-        //     }
-        // });
-
-        document.addEventListener("click", function(event) {
-            if (event.target.closest(".btn-kurangi")) {
-                let button = event.target.closest(".btn-kurangi");
-                let namaBarang = button.getAttribute("data-nama");
-                let gambarBarang = button.getAttribute("data-gambar");
-                let hargaJualBarang = button.getAttribute("data-harga");
-                let jenisBarang = button.getAttribute("data-jenis");
-
-                console.log(namaBarang)
-                console.log(gambarBarang)
-                console.log(hargaJualBarang)
-                console.log(jenisBarang)
-
-                fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
-                        encodeURIComponent(namaBarang)), {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        },
-                        body: JSON.stringify({
-                            _method: "DELETE",
-                            gambar_barang: namaBarang,
-                            harga_jual_barang: hargaJualBarang,
-                            jenis_barang: jenisBarang
+                    fetch("{{ route('aset_barang.storeSame') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": data._token,
+                                "Accept": "application/json" // <--- ini penting biar Laravel balikin JSON saat error
+                            },
+                            body: JSON.stringify(data)
                         })
-                    })
-                    .then(response => {
-                        if (!response.ok) throw new Error("HTTP error " + response.status);
-                        return response
-                            .json(); // error "<!DOCTYPE" bisa dihindari kalau ini error di atas jalan duluan
-                    })
-                    .then(result => {
-                        if (!result.success) {
-                            alert(result.message || "Terjadi kesalahan.");
-                        } else {
+                        .then(async (response) => {
+                            const result = await response.json();
+
+                            if (!response.ok) {
+                                // Tangani error validasi Laravel
+                                if (result.errors) {
+                                    let errorMessages = Object.values(result.errors).flat().join(
+                                        "\n");
+                                    alert("Gagal menambahkan barang:\n" + errorMessages);
+                                } else {
+                                    alert("Terjadi kesalahan tak dikenal.");
+                                }
+                                throw new Error("Validation failed");
+                            }
+
+                            // Kalau sukses, reload
                             location.reload();
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("Terjadi kesalahan dalam penghapusan barang.");
-                    });
-            }
-        });
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                        });
+                }
+            });
+
+
+            // document.addEventListener("click", function(event) {
+            //     if (event.target.closest(".btn-kurangi")) {
+            //         let button = event.target.closest(".btn-kurangi");
+            //         let namaBarang = button.getAttribute("data-nama");
+
+            //         fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
+            //                 encodeURIComponent(namaBarang)), {
+            //                 method: "DELETE",
+            //                 headers: {
+            //                     "Content-Type": "application/json",
+            //                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            //                 }
+            //             })
+            //             .then(response => response.json())
+            //             .then(() => location.reload())
+            //             .catch(error => console.error("Error:", error));
+            //     }
+            // });
+
+            document.addEventListener("click", function(event) {
+                if (event.target.closest(".btn-kurangi")) {
+                    let button = event.target.closest(".btn-kurangi");
+                    let namaBarang = button.getAttribute("data-nama");
+                    let gambarBarang = button.getAttribute("data-gambar");
+                    let hargaJualBarang = button.getAttribute("data-harga");
+                    let jenisBarang = button.getAttribute("data-jenis");
+
+                    console.log(namaBarang)
+                    console.log(gambarBarang)
+                    console.log(hargaJualBarang)
+                    console.log(jenisBarang)
+
+                    fetch("{{ route('aset_barang.deleteOne', ':nama_barang') }}".replace(':nama_barang',
+                            encodeURIComponent(namaBarang)), {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                _method: "DELETE",
+                                gambar_barang: namaBarang,
+                                harga_jual_barang: hargaJualBarang,
+                                jenis_barang: jenisBarang
+                            })
+                        })
+                        .then(response => {
+                            if (!response.ok) throw new Error("HTTP error " + response.status);
+                            return response
+                                .json(); // error "<!DOCTYPE" bisa dihindari kalau ini error di atas jalan duluan
+                        })
+                        .then(result => {
+                            if (!result.success) {
+                                alert(result.message || "Terjadi kesalahan.");
+                            } else {
+                                location.reload();
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            alert("Terjadi kesalahan dalam penghapusan barang.");
+                        });
+                }
+            });
         });
     </script>
-    
 @endsection

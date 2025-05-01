@@ -443,15 +443,16 @@
             color: #272780 !important;
             border-color: #272780 !important;
         }
+
         @media (max-width: 767.98px) {
             /* Target mobile screens */
-            
+
 
             /* --- Make specific modals fullscreen --- */
             #addAssetModal .modal-dialog,
             #rincianAssetModal .modal-dialog,
             #updateAssetModal .modal-dialog {
-                
+
                 max-width: 100%;
                 width: 100%;
                 height: 100%;
@@ -651,13 +652,14 @@
         /* Container for the custom dropdown */
         .custom-search-select-container {
             position: relative;
-            font-family: sans-serif; /* Or your preferred font */
+            font-family: sans-serif;
+            /* Or your preferred font */
         }
 
         /* The visible part showing the selected value */
         .selected-value {
-            padding: 0.375rem 2rem 0.375rem 0.75rem; 
-            border: 1px solid #ced4da; 
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            border: 1px solid #ced4da;
             border-radius: 0.25rem;
             background-color: #fff;
             cursor: pointer;
@@ -670,26 +672,31 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             user-select: none;
-            position: relative; 
+            position: relative;
         }
 
-       
+
         .selected-value::after {
             content: '';
             position: absolute;
-            right: 0.75rem; /* Position arrow on the right */
+            right: 0.75rem;
+            /* Position arrow on the right */
             top: 50%;
             transform: translateY(-50%);
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-top: 6px solid #555; /* Arrow color */
-            pointer-events: none; /* Ensure arrow doesn't block clicks */
+            border-top: 6px solid #555;
+            /* Arrow color */
+            pointer-events: none;
+            /* Ensure arrow doesn't block clicks */
         }
 
-        
+
         .selected-value:focus,
-        .custom-search-select-container.open .selected-value { /* Style when dropdown is open */
-            border-color: #007bff; /* Blue border color */
+        .custom-search-select-container.open .selected-value {
+            /* Style when dropdown is open */
+            border-color: #007bff;
+            /* Blue border color */
             outline: 0;
             /* Keep shadow or remove if you prefer the simpler blue border */
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
@@ -700,15 +707,18 @@
         .dropdown-list-container {
             display: none;
             position: absolute;
-            top: calc(100% + 2px); /* !FIX! Position slightly below with a small gap */
+            top: calc(100% + 2px);
+            /* !FIX! Position slightly below with a small gap */
             left: 0;
             right: 0;
-            border: 1px solid #ced4da; /* !FIX! Full border around the dropdown */
+            border: 1px solid #ced4da;
+            /* !FIX! Full border around the dropdown */
             background-color: #fff;
             max-height: 200px;
             overflow-y: auto;
             z-index: 1051;
-            border-radius: 0.25rem; /* !FIX! Apply border radius to the whole dropdown */
+            border-radius: 0.25rem;
+            /* !FIX! Apply border radius to the whole dropdown */
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
             /* Removed margin-top: -1px and border-top: none */
         }
@@ -721,12 +731,16 @@
         /* Search input inside the dropdown */
         .search-box {
             padding: 0.375rem 0.75rem;
-            width: calc(100% - 16px); /* !FIX! Account for margin */
+            width: calc(100% - 16px);
+            /* !FIX! Account for margin */
             box-sizing: border-box;
-            border: 1px solid #ced4da; /* !FIX! Full border like a standard input */
+            border: 1px solid #ced4da;
+            /* !FIX! Full border like a standard input */
             outline: none;
-            margin: 8px; /* !FIX! Add margin for spacing */
-            border-radius: 0.25rem; /* !FIX! Add border-radius */
+            margin: 8px;
+            /* !FIX! Add margin for spacing */
+            border-radius: 0.25rem;
+            /* !FIX! Add border-radius */
             /* Removed border: none and border-bottom */
         }
 
@@ -736,25 +750,31 @@
             padding: 0;
             margin: 0;
             /* !FIX! Add padding top if search box has margin, or adjust search box margin */
-            padding-top: 0; /* Adjust if needed */
-            padding-bottom: 5px; /* Add some space at the bottom */
+            padding-top: 0;
+            /* Adjust if needed */
+            padding-bottom: 5px;
+            /* Add some space at the bottom */
         }
 
         /* Individual option item */
         .options-list li {
-            padding: 0.5rem 0.75rem; /* Keep padding as is, looks okay */
+            padding: 0.5rem 0.75rem;
+            /* Keep padding as is, looks okay */
             cursor: pointer;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            line-height: 1.5; /* !FIX! Ensure consistent line height */
+            line-height: 1.5;
+            /* !FIX! Ensure consistent line height */
         }
 
         /* Hover/Highlight effect for options */
         .options-list li:hover,
         .options-list li.highlighted {
-            background-color: #f8f9fa; /* !FIX! Slightly lighter grey for hover */
-            color: #16181b; /* !FIX! Ensure text is readable on hover */
+            background-color: #f8f9fa;
+            /* !FIX! Slightly lighter grey for hover */
+            color: #16181b;
+            /* !FIX! Ensure text is readable on hover */
         }
 
         /* Style for hidden original select */
@@ -784,15 +804,21 @@
                             <!-- Show entries -->
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="dataTable_length">
-                                    <label>Show
-                                        <select id="showEntries" name="dataTable_length"
-                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> entries
-                                    </label>
+                                    <form method="GET" action="{{ route('aset_barang_bekas.index') }}"
+                                        id="showEntriesForm">
+                                        <label>Show
+                                            <select id="showEntries" name="showEntries" onchange="this.form.submit()"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                @foreach ([5, 10, 30, 100] as $value)
+                                                    <option value="{{ $value }}"
+                                                        {{ request('showEntries', 3) == $value ? 'selected' : '' }}>
+                                                        {{ $value }}
+                                                    </option>
+                                                @endforeach
+                                            </select> entries
+                                        </label>
+                                        <input type="hidden" name="search" value="{{ request('search') }}">
+                                    </form>
                                 </div>
                             </div>
 
@@ -895,7 +921,7 @@
                                                             data-desc="{{ $item->namaBarang->deskripsi }}"
                                                             data-toggle="modal" data-target="#rincianAssetModal"
                                                             title="Rincian">
-                                                            
+
                                                             Rincian
                                                         </button>
 
@@ -1000,7 +1026,8 @@
                         <!-- Other Inputs -->
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-nama-barang">Nama Barang</label>
-                            <select name="nama_barang" id="nama_barang_select_add" class="original-select-hidden" required>
+                            <select name="nama_barang" id="nama_barang_select_add" class="original-select-hidden"
+                                required>
                                 <option value="">Pilih Nama Barang...</option>
                                 @foreach ($data_nama_barang as $barang)
                                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
@@ -1008,11 +1035,12 @@
                             </select>
 
                             <div class="custom-search-select-container" id="custom_nama_barang_add_container">
-                                <div class="selected-value" data-target-select="add-nama-barang" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="selected-value" data-target-select="add-nama-barang" tabindex="0">Pilih
+                                    Nama Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list">
-                                        </ul>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -1022,9 +1050,10 @@
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold" for="add-nama-barang">Jenis Barang</label>
-                        
+
                             <!-- Hidden Original Select -->
-                            <select name="jenis_barang" id="jenis_barang_select_add" class="original-select-hidden" required>
+                            <select name="jenis_barang" id="jenis_barang_select_add" class="original-select-hidden"
+                                required>
                                 <option value="" disabled selected>Pilih Jenis Barang...</option>
                                 <option value="Sensor">Sensor</option>
                                 <option value="Microcontroller">Microcontroller</option>
@@ -1032,10 +1061,11 @@
                                 <option value="Power">Power</option>
                                 <option value="Equipment">Equipment</option>
                             </select>
-                        
+
                             <!-- Custom Searchable Dropdown -->
                             <div class="custom-search-select-container" id="custom_jenis_barang_add_container">
-                                <div class="selected-value" data-target-select="add-nama-barang" tabindex="0">Pilih Jenis Barang...</div>
+                                <div class="selected-value" data-target-select="add-nama-barang" tabindex="0">Pilih
+                                    Jenis Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list"></ul>
@@ -1146,7 +1176,8 @@
                             </select>
 
                             <div class="custom-search-select-container" id="custom-update-nama-container">
-                                <div class="selected-value" data-target-select="update-nama" tabindex="0">Pilih Nama Barang...</div>
+                                <div class="selected-value" data-target-select="update-nama" tabindex="0">Pilih Nama
+                                    Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list"></ul>
@@ -1171,7 +1202,8 @@
                             </select>
 
                             <div class="custom-search-select-container" id="custom-update-jenis-container">
-                                <div class="selected-value" data-target-select="update-jenis" tabindex="0">Pilih Jenis Barang...</div>
+                                <div class="selected-value" data-target-select="update-jenis" tabindex="0">Pilih Jenis
+                                    Barang...</div>
                                 <div class="dropdown-list-container">
                                     <input type="text" class="search-box" placeholder="Cari...">
                                     <ul class="options-list"></ul>
@@ -1251,7 +1283,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    
+
             // --- Search Form Enter Key ---
             const searchInput = document.querySelector('input[name="search"]');
             if (searchInput) {
@@ -1269,9 +1301,9 @@
             } else {
                 console.warn("Search input element not found.");
             }
-    
+
             // --- Custom Searchable Dropdown Logic ---
-    
+
             /**
              * Initializes a custom searchable dropdown.
              * @param {string} containerId - The ID of the main container div.
@@ -1288,18 +1320,18 @@
                     console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
                     return;
                 }
-    
+
                 const selectedValueDiv = container.querySelector('.selected-value');
                 const dropdownContainer = container.querySelector('.dropdown-list-container');
                 const searchBox = container.querySelector('.search-box');
                 const optionsList = container.querySelector('.options-list');
                 let listItems = [];
-    
+
                 if (!selectedValueDiv || !dropdownContainer || !searchBox || !optionsList) {
                     console.warn(`Missing elements within custom dropdown container: #${containerId}`);
                     return;
                 }
-    
+
                 function populateOptionsList() {
                     optionsList.innerHTML = '';
                     listItems = [];
@@ -1318,14 +1350,15 @@
                     });
                 }
                 populateOptionsList();
-    
+
                 function syncDisplayWithSelect() {
                     if (!originalSelect || !selectedValueDiv) return;
-    
+
                     const selectedOption = originalSelect.options[originalSelect.selectedIndex];
                     if (selectedOption) {
                         selectedValueDiv.textContent = selectedOption.textContent;
-                        if (!selectedOption.value || selectedOption.disabled) { // Check for empty value or disabled placeholder
+                        if (!selectedOption.value || selectedOption
+                            .disabled) { // Check for empty value or disabled placeholder
                             selectedValueDiv.classList.add('placeholder-selected');
                         } else {
                             selectedValueDiv.classList.remove('placeholder-selected');
@@ -1337,9 +1370,9 @@
                     }
                 }
                 syncDisplayWithSelect(); // Initial sync
-    
+
                 // --- Event Listeners for the Dropdown ---
-    
+
                 selectedValueDiv.addEventListener('click', (event) => {
                     event.stopPropagation(); // Prevent document click listener from closing it immediately
                     closeAllDropdowns(containerId); // Close others before opening this one
@@ -1350,16 +1383,19 @@
                         searchBox.focus(); // Focus search box
                     }
                 });
-    
+
                 optionsList.addEventListener('click', (event) => {
                     if (event.target.tagName === 'LI' && event.target.dataset.value) {
                         // An actual option was clicked
                         selectedValueDiv.textContent = event.target.textContent;
                         originalSelect.value = event.target.dataset.value;
                         dropdownContainer.classList.remove('show');
-                        selectedValueDiv.classList.remove('placeholder-selected'); // Ensure placeholder class removed
+                        selectedValueDiv.classList.remove(
+                            'placeholder-selected'); // Ensure placeholder class removed
                         // Crucially, trigger the change event on the original select
-                        originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        originalSelect.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
                     } else if (event.target.tagName === 'LI' && !event.target.dataset.value) {
                         // Placeholder option was clicked (optional: reset or just close)
                         // To reset:
@@ -1369,19 +1405,20 @@
                         dropdownContainer.classList.remove('show'); // Just close
                     }
                 });
-    
+
                 searchBox.addEventListener('input', () => {
                     const searchTerm = searchBox.value.toLowerCase().trim();
                     listItems.forEach(li => {
                         const itemText = li.textContent.toLowerCase();
                         // Show if search term is empty OR if item text includes the search term
-                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
+                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ?
+                            '' : 'none';
                     });
                 });
-    
+
                 // Listen for changes on the original select (e.g., if set programmatically)
                 originalSelect.addEventListener('change', syncDisplayWithSelect);
-    
+
                 // --- Modal Reset Logic (Specific to Add Modal in this example) ---
                 // Adapt if needed for other modals or use a different reset trigger
                 const modal = container.closest('.modal');
@@ -1402,23 +1439,27 @@
                             dropdownContainer.classList.remove('show');
                         });
                     } else {
-                        console.warn('jQuery not found. Modal reset for custom dropdowns might not work automatically on close.');
+                        console.warn(
+                            'jQuery not found. Modal reset for custom dropdowns might not work automatically on close.'
+                        );
                         // Add vanilla JS alternative if needed, perhaps listening to the modal's close button/backdrop click
                     }
                 }
             }
-    
+
             /** Closes all open custom dropdowns, optionally excluding one */
             function closeAllDropdowns(excludeContainerId = null) {
-                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
-                    const currentContainer = dropdown.closest('.custom-search-select-container');
-                    // If no exclusion ID is provided, OR if an exclusion ID is provided and it doesn't match the current dropdown's container
-                    if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
-                        dropdown.classList.remove('show');
-                    }
-                });
+                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(
+                    dropdown => {
+                        const currentContainer = dropdown.closest('.custom-search-select-container');
+                        // If no exclusion ID is provided, OR if an exclusion ID is provided and it doesn't match the current dropdown's container
+                        if (!excludeContainerId || (currentContainer && currentContainer.id !==
+                                excludeContainerId)) {
+                            dropdown.classList.remove('show');
+                        }
+                    });
             }
-    
+
             // Close dropdowns if clicking outside
             document.addEventListener('click', (event) => {
                 // Check if the click was outside ANY custom dropdown container
@@ -1426,17 +1467,21 @@
                     closeAllDropdowns();
                 }
             });
-    
+
             // --- Initialize All Searchable Dropdowns on the Page ---
             // !! IMPORTANT: Ensure your ADD modal also has the corresponding HTML structure and IDs !!
-            setupSearchableDropdown('custom_nama_barang_add_container', 'nama_barang_select_add'); // Assumed ID for Add modal
-            setupSearchableDropdown('custom_jenis_barang_add_container', 'jenis_barang_select_add'); // Assumed ID for Add modal
-            setupSearchableDropdown('custom-update-nama-container', 'update-nama'); // ID from your Update modal HTML
-            setupSearchableDropdown('custom-update-jenis-container', 'update-jenis'); // ID from your Update modal HTML
-    
-    
+            setupSearchableDropdown('custom_nama_barang_add_container',
+                'nama_barang_select_add'); // Assumed ID for Add modal
+            setupSearchableDropdown('custom_jenis_barang_add_container',
+                'jenis_barang_select_add'); // Assumed ID for Add modal
+            setupSearchableDropdown('custom-update-nama-container',
+                'update-nama'); // ID from your Update modal HTML
+            setupSearchableDropdown('custom-update-jenis-container',
+                'update-jenis'); // ID from your Update modal HTML
+
+
             // --- Modal Button Event Listeners ---
-    
+
             // Tombol Rincian - Isi otomatis modal dengan data
             document.querySelectorAll('.rincian-btn').forEach(button => {
                 button.addEventListener('click', function() {
@@ -1446,10 +1491,10 @@
                     const jenis = this.dataset.jenis;
                     const gambar = this.dataset.gambar;
                     const desc = this.dataset.desc; // Description link
-    
+
                     const rincianModal = document.getElementById('rincianAssetModal');
                     if (!rincianModal) return;
-    
+
                     // Get elements inside the specific modal instance
                     const idElement = rincianModal.querySelector('#rincian-id');
                     const namaElement = rincianModal.querySelector('#rincian-nama');
@@ -1459,7 +1504,7 @@
                     const rincianImageView = rincianModal.querySelector('#rincian-image-view');
                     const rincianDefaultView = rincianModal.querySelector('#rincian-default-view');
                     const rincianPreviewImg = rincianModal.querySelector('#rincian-preview-img');
-    
+
                     // Use jQuery to hook into Bootstrap's modal shown event ensures elements are ready
                     // Make sure jQuery is loaded before this script
                     if (typeof $ !== 'undefined') {
@@ -1468,7 +1513,7 @@
                             if (idElement) idElement.innerText = id || 'N/A';
                             if (namaElement) namaElement.innerText = nama || 'N/A';
                             if (jenisElement) jenisElement.innerText = jenis || 'N/A';
-    
+
                             // Handle description link
                             if (linkElement && noLinkText) {
                                 if (desc) {
@@ -1481,9 +1526,10 @@
                                     noLinkText.style.display = 'inline';
                                 }
                             }
-    
+
                             // Handle image preview
-                            if (rincianPreviewImg && rincianImageView && rincianDefaultView) {
+                            if (rincianPreviewImg && rincianImageView &&
+                                rincianDefaultView) {
                                 if (gambar) {
                                     rincianPreviewImg.src = gambar;
                                     rincianImageView.style.display = 'block';
@@ -1495,70 +1541,89 @@
                                 }
                             }
                         });
-                         // Trigger the modal show (if not already handled by data-toggle attributes)
+                        // Trigger the modal show (if not already handled by data-toggle attributes)
                         // $(rincianModal).modal('show'); // Usually Bootstrap handles this via data-attributes
                     } else {
-                         // Fallback if jQuery is not available - populate directly, might have timing issues
-                         console.warn("jQuery not defined, using direct population for Rincian modal.");
-                         if (idElement) idElement.innerText = id || 'N/A';
-                         if (namaElement) namaElement.innerText = nama || 'N/A';
-                         // ... (populate other fields similarly) ...
+                        // Fallback if jQuery is not available - populate directly, might have timing issues
+                        console.warn(
+                            "jQuery not defined, using direct population for Rincian modal.");
+                        if (idElement) idElement.innerText = id || 'N/A';
+                        if (namaElement) namaElement.innerText = nama || 'N/A';
+                        // ... (populate other fields similarly) ...
                     }
                 });
             });
-    
+
             // Tombol Update - Isi otomatis modal (Refactored for Custom Dropdowns)
             document.querySelectorAll('.btn-update').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.dataset.id;
                     const namaBarangId = this.dataset.nama; // Expecting the ID/value for the select
                     const harga = this.dataset.harga;
-                    const jenisBarangValue = this.dataset.jenis; // Expecting the value for the select
-                    const gambar = this.dataset.gambar; // Assuming gambar URL is passed if available
+                    const jenisBarangValue = this.dataset
+                        .jenis; // Expecting the value for the select
+                    const gambar = this.dataset
+                        .gambar; // Assuming gambar URL is passed if available
                     const url = this.dataset.url; // Form action URL
-    
-                    console.log(`Update Button Data: id=${id}, namaId=${namaBarangId}, harga=${harga}, jenisValue=${jenisBarangValue}, url=${url}, gambar=${gambar}`);
-    
+
+                    console.log(
+                        `Update Button Data: id=${id}, namaId=${namaBarangId}, harga=${harga}, jenisValue=${jenisBarangValue}, url=${url}, gambar=${gambar}`
+                    );
+
                     const updateModalElement = document.getElementById('updateAssetModal');
                     if (!updateModalElement) {
                         console.error("Update modal element (#updateAssetModal) not found!");
                         return;
                     }
-    
+
                     // Find elements within the specific modal instance
                     const updateForm = updateModalElement.querySelector('form');
                     const idInput = updateModalElement.querySelector('#update-id');
-                    const namaSelect = updateModalElement.querySelector('#update-nama'); // The original hidden select
+                    const namaSelect = updateModalElement.querySelector(
+                        '#update-nama'); // The original hidden select
                     const hargaInput = updateModalElement.querySelector('#update-harga');
-                    const jenisSelect = updateModalElement.querySelector('#update-jenis'); // The original hidden select
-                    const previewImg = updateModalElement.querySelector('#update-preview-img'); // Assumed ID for update preview
-                    const previewWrapper = updateModalElement.querySelector('#update-image-preview'); // Assumed ID for update preview wrapper
-                    const uploadView = updateModalElement.querySelector('#update-button-view'); // Assumed ID for update upload view
-    
+                    const jenisSelect = updateModalElement.querySelector(
+                        '#update-jenis'); // The original hidden select
+                    const previewImg = updateModalElement.querySelector(
+                        '#update-preview-img'); // Assumed ID for update preview
+                    const previewWrapper = updateModalElement.querySelector(
+                        '#update-image-preview'); // Assumed ID for update preview wrapper
+                    const uploadView = updateModalElement.querySelector(
+                        '#update-button-view'); // Assumed ID for update upload view
+
                     // --- Populate Standard Fields ---
                     if (updateForm) updateForm.action = url || '#'; // Set form action
                     if (idInput) idInput.value = id || '';
                     if (hargaInput) hargaInput.value = harga || '';
-    
+
                     // --- Populate Custom Dropdowns ---
                     if (namaSelect) {
-                        namaSelect.value = namaBarangId || ""; // Set the value of the original select
+                        namaSelect.value = namaBarangId ||
+                            ""; // Set the value of the original select
                         console.log(`Set update-nama value to: ${namaSelect.value}`);
                         // !! Crucial: Dispatch change event AFTER setting value to trigger syncDisplayWithSelect !!
-                        namaSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        namaSelect.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
                     } else {
-                        console.error('Original select element with ID "update-nama" not found in modal.');
+                        console.error(
+                            'Original select element with ID "update-nama" not found in modal.');
                     }
-    
+
                     if (jenisSelect) {
-                        jenisSelect.value = jenisBarangValue || ""; // Set the value of the original select
+                        jenisSelect.value = jenisBarangValue ||
+                            ""; // Set the value of the original select
                         console.log(`Set update-jenis value to: ${jenisSelect.value}`);
                         // !! Crucial: Dispatch change event AFTER setting value to trigger syncDisplayWithSelect !!
-                        jenisSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        jenisSelect.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
                     } else {
-                        console.error('Original select element with ID "update-jenis" not found in modal.');
+                        console.error(
+                            'Original select element with ID "update-jenis" not found in modal.'
+                        );
                     }
-    
+
                     // --- Handle Image Preview (Assuming similar structure as Rincian/previous script) ---
                     // !! Add these elements to your Update modal HTML if they don't exist !!
                     // Example:
@@ -1571,34 +1636,39 @@
                         if (gambar) {
                             previewImg.src = gambar;
                             previewWrapper.style.display = 'block';
-                            uploadView.style.display = 'none'; // Hide upload if there's a current image
+                            uploadView.style.display =
+                                'none'; // Hide upload if there's a current image
                         } else {
                             previewImg.src = '';
                             previewWrapper.style.display = 'none';
                             uploadView.style.display = 'flex'; // Show upload if no current image
                         }
                     } else {
-                        console.warn("Image preview elements (#update-preview-img, #update-image-preview, #update-button-view) not found in update modal.");
+                        console.warn(
+                            "Image preview elements (#update-preview-img, #update-image-preview, #update-button-view) not found in update modal."
+                        );
                     }
                 });
             });
-    
+
             // Tombol Delete - Isi otomatis modal dan set form action
             document.querySelectorAll('.btn-delete').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.dataset.id;
                     const nama = this.dataset.nama; // Use the display name for confirmation
                     const url = this.dataset.url;
-    
+
                     const deleteModal = document.getElementById('deleteAssetModal');
                     if (!deleteModal) return;
-    
+
                     const itemNameElement = deleteModal.querySelector('#delete-item-name');
                     const deleteForm = deleteModal.querySelector('form');
-                    const deleteIdInput = deleteModal.querySelector('#delete-id'); // Optional hidden ID input
-    
+                    const deleteIdInput = deleteModal.querySelector(
+                        '#delete-id'); // Optional hidden ID input
+
                     if (itemNameElement) {
-                        itemNameElement.innerText = `Apakah kamu yakin ingin menghapus "${nama || 'item ini'}"?`;
+                        itemNameElement.innerText =
+                            `Apakah kamu yakin ingin menghapus "${nama || 'item ini'}"?`;
                     }
                     if (deleteForm) {
                         deleteForm.action = url || '#';
@@ -1608,28 +1678,29 @@
                     }
                 });
             });
-    
+
             // --- Fetch API Event Listeners (using Event Delegation) ---
-    
+
             document.addEventListener("click", function(event) {
                 // Tombol Tambah Sama (Add Same Item)
                 if (event.target.closest(".btn-tambah")) {
                     let button = event.target.closest(".btn-tambah");
                     let data = {
                         // Ensure these data attributes exist on your .btn-tambah buttons
-                        nama_barang: button.getAttribute("data-nama"), // Should be the ID/Value from the select
+                        nama_barang: button.getAttribute(
+                            "data-nama"), // Should be the ID/Value from the select
                         harga_jual_barang: parseInt(button.getAttribute("data-harga")),
                         jenis_barang: button.getAttribute("data-jenis"), // Should be the Value
                         _token: "{{ csrf_token() }}" // Assumes Blade template engine
                     };
-    
+
                     // Verify data before sending
                     if (!data.nama_barang || isNaN(data.harga_jual_barang) || !data.jenis_barang) {
                         console.error("Missing data attributes on 'Tambah Sama' button:", button);
                         alert("Gagal menambahkan: Data tidak lengkap pada tombol.");
                         return;
                     }
-    
+
                     fetch("{{ route('aset_barang_bekas.storeSame') }}", { // Route for the *new* page
                             method: "POST",
                             headers: {
@@ -1643,7 +1714,8 @@
                             const result = await response.json();
                             if (!response.ok) {
                                 let errorMessages = "Terjadi kesalahan.";
-                                if (response.status === 422 && result.errors) { // Laravel Validation Error
+                                if (response.status === 422 && result
+                                    .errors) { // Laravel Validation Error
                                     errorMessages = Object.values(result.errors).flat().join("\n");
                                 } else if (result.message) { // Other JSON error messages
                                     errorMessages = result.message;
@@ -1661,80 +1733,86 @@
                             // Alert was already shown in the first .then block for known errors
                         });
                 }
-    
+
                 // Tombol Kurangi (Delete One Item)
                 if (event.target.closest(".btn-kurangi")) {
-                let button = event.target.closest(".btn-kurangi");
-                let namaBarang = button.getAttribute("data-nama"); // Should be the ID/Value
-                let gambarBarang = button.getAttribute("data-gambar"); // Get gambar if needed by backend
-                let hargaJualBarang = button.getAttribute("data-harga");
-                let jenisBarang = button.getAttribute("data-jenis");
+                    let button = event.target.closest(".btn-kurangi");
+                    let namaBarang = button.getAttribute("data-nama"); // Should be the ID/Value
+                    let gambarBarang = button.getAttribute(
+                        "data-gambar"); // Get gambar if needed by backend
+                    let hargaJualBarang = button.getAttribute("data-harga");
+                    let jenisBarang = button.getAttribute("data-jenis");
 
-                // Add console logs for debugging data from the button
-                console.log("Kurangi Button Clicked:");
-                console.log("  data-nama:", namaBarang);
-                console.log("  data-gambar:", gambarBarang); // May or may not be present/needed
-                console.log("  data-harga:", hargaJualBarang);
-                console.log("  data-jenis:", jenisBarang);
+                    // Add console logs for debugging data from the button
+                    console.log("Kurangi Button Clicked:");
+                    console.log("  data-nama:", namaBarang);
+                    console.log("  data-gambar:", gambarBarang); // May or may not be present/needed
+                    console.log("  data-harga:", hargaJualBarang);
+                    console.log("  data-jenis:", jenisBarang);
 
 
-                if (!namaBarang) {
-                    console.error("Missing data-nama attribute on 'Kurangi' button:", button);
-                    alert("Gagal mengurangi: Data nama barang tidak ditemukan pada tombol.");
-                    return;
-                }
+                    if (!namaBarang) {
+                        console.error("Missing data-nama attribute on 'Kurangi' button:", button);
+                        alert("Gagal mengurangi: Data nama barang tidak ditemukan pada tombol.");
+                        return;
+                    }
 
-                // Construct the URL for the 'aset_barang_bekas' route
-                let deleteUrl = "{{ route('aset_barang_bekas.deleteOne', ':nama_barang') }}";
-                deleteUrl = deleteUrl.replace(':nama_barang', encodeURIComponent(namaBarang));
-                console.log("Delete URL:", deleteUrl); // Log the final URL
+                    // Construct the URL for the 'aset_barang_bekas' route
+                    let deleteUrl = "{{ route('aset_barang_bekas.deleteOne', ':nama_barang') }}";
+                    deleteUrl = deleteUrl.replace(':nama_barang', encodeURIComponent(namaBarang));
+                    console.log("Delete URL:", deleteUrl); // Log the final URL
 
-                fetch(deleteUrl, {
-                        method: "POST", // Using POST with _method override
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}" 
-                        },
-                        body: JSON.stringify({
-                            _method: "DELETE",
-                            gambar_barang: namaBarang, // Sending namaBarang as gambar_barang value
-                            harga_jual_barang: hargaJualBarang,
-                            jenis_barang: jenisBarang
+                    fetch(deleteUrl, {
+                            method: "POST", // Using POST with _method override
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                _method: "DELETE",
+                                gambar_barang: namaBarang, // Sending namaBarang as gambar_barang value
+                                harga_jual_barang: hargaJualBarang,
+                                jenis_barang: jenisBarang
+                            })
                         })
-                    })
-                    .then(response => {
-                        console.log("Raw Response Status:", response.status); // Log status
-                        if (!response.ok) {
-                             return response.text().then(text => {
-                                 console.error("Server Error Response Text:", text);
-                                 throw new Error("HTTP error " + response.status + ": " + text);
-                             });
-                        }
+                        .then(response => {
+                            console.log("Raw Response Status:", response.status); // Log status
+                            if (!response.ok) {
+                                return response.text().then(text => {
+                                    console.error("Server Error Response Text:", text);
+                                    throw new Error("HTTP error " + response.status + ": " +
+                                        text);
+                                });
+                            }
 
-                        const contentType = response.headers.get("content-type");
-                        if (contentType && contentType.includes("application/json")) {
-                            return response.json();
-                        } else {
-                             console.log("Response OK but not JSON. Content-Type:", contentType);
-                             return { success: true, message: "Operation successful (non-JSON response)." };
-                        }
-                    })
-                    .then(result => {
-                        console.log("Parsed Result:", result); // Log the parsed result
-                        if (!result.success) {
-                            alert(result.message || "Terjadi kesalahan.");
-                        } else {
-                            location.reload(); 
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error deleting item:", error);
-  
-                        alert("Terjadi kesalahan dalam penghapusan barang.\n" + (error.message.startsWith("HTTP error") ? error.message : ""));
-                    });
-            }
+                            const contentType = response.headers.get("content-type");
+                            if (contentType && contentType.includes("application/json")) {
+                                return response.json();
+                            } else {
+                                console.log("Response OK but not JSON. Content-Type:", contentType);
+                                return {
+                                    success: true,
+                                    message: "Operation successful (non-JSON response)."
+                                };
+                            }
+                        })
+                        .then(result => {
+                            console.log("Parsed Result:", result); // Log the parsed result
+                            if (!result.success) {
+                                alert(result.message || "Terjadi kesalahan.");
+                            } else {
+                                location.reload();
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error deleting item:", error);
+
+                            alert("Terjadi kesalahan dalam penghapusan barang.\n" + (error.message
+                                .startsWith("HTTP error") ? error.message : ""));
+                        });
+                }
             });
-    
+
         }); // End DOMContentLoaded
     </script>
 @endsection

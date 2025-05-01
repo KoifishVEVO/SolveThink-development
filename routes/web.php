@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // rincian barang baru
     Route::get('/rincianBarangBaru', function (Request $request) {
         $search = $request->input('search');
+        $perPage = $request->input('showEntries', 5);
 
         $barang = AsetBarangBaru::select(
                 DB::raw('MAX(id) as id'), // ambil satu ID wakil per grup
@@ -60,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
                 });
             })
             ->groupBy('id_nama_barang', 'jenis_barang', 'harga_jual_barang')
-            ->paginate(3)
+            ->paginate($perPage)
             ->appends(['search' => $search]);
 
         $data_nama_barang = NamaBarang::all();
@@ -100,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
     // rincian barang bekas
     Route::get('/rincianBarangBekas', function (Request $request) {
         $search = $request->input('search');
+        $perPage = $request->input('showEntries', 5);
 
         $barang = AsetBarangBekas::select(
                 DB::raw('MAX(id) as id'), // ambil salah satu id sebagai wakil
@@ -115,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
                 });
             })
             ->groupBy('id_nama_barang', 'jenis_barang', 'harga_jual_barang')
-            ->paginate(3)
+            ->paginate($perPage)
             ->appends(['search' => $search]);
 
         $data_nama_barang = NamaBarang::all();
