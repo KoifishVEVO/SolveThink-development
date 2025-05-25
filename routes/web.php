@@ -145,6 +145,8 @@ Route::put('/periode/{id}', [PeriodeController::class, 'update'])->name('periode
 Route::get('/penyewaanBarang', [penyewaanBarangController::class, 'index'])->name('penyewaan.show');
 // penjualan barang
 Route::get('/penjualanBarang', [penjualanBarangController::class, 'index'])->name('penjualan.show');
+Route::post('/penjualan-komponen-solvethink/update/{id}', [PenjualanController::class, 'updatePenjualan'])->name('penjualan.edit');
+
 
 Route::get('/tes', function () {
     return view('tes');

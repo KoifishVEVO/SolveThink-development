@@ -565,116 +565,139 @@
 
         /* Dropdown */
         .custom-search-select-container {
-    position: relative;
-    display: inline-block; /* Or block if you want it to take full width */
-    /* min-width: 200px; /* Adjust as needed */
-}
+            position: relative;
+            display: inline-block;
+            /* Or block if you want it to take full width */
+            /* min-width: 200px; /* Adjust as needed */
+        }
 
-.custom-search-select-container .selected-value {
-    /* background-color: #fff; */ /* Match your form-control style */
-    /* border: 1px solid #ced4da; */ /* Match your form-control style */
-    /* padding: .375rem .75rem; */ /* Match your form-control style */
-    /* border-radius: .25rem; */ /* Match your form-control style */
-    background-image: none !important;
-    appearance: none !important;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .custom-search-select-container .selected-value {
+            /* background-color: #fff; */
+            /* Match your form-control style */
+            /* border: 1px solid #ced4da; */
+            /* Match your form-control style */
+            /* padding: .375rem .75rem; */
+            /* Match your form-control style */
+            /* border-radius: .25rem; */
+            /* Match your form-control style */
+            background-image: none !important;
+            appearance: none !important;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-/* Add down arrow using pseudo-element */
-.custom-search-select-container .selected-value::after {
-    content: '\25BC'; /* Unicode for down arrow */
-    font-size: 0.8em;
-    margin-left: 8px;
-    color: #6c757d; /* Bootstrap's secondary text color */
-}
-.custom-search-select-container.open .selected-value::after {
-    content: '\25B2'; /* Unicode for up arrow when open */
-}
+        /* Add down arrow using pseudo-element */
+        .custom-search-select-container .selected-value::after {
+            content: '\25BC';
+            /* Unicode for down arrow */
+            font-size: 0.8em;
+            margin-left: 8px;
+            color: #6c757d;
+            /* Bootstrap's secondary text color */
+        }
 
-
-.custom-search-select-container .placeholder-selected {
-    color: #6c757d; /* Bootstrap's muted color for placeholder */
-}
-
-.custom-search-select-container .dropdown-list-container {
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-top: none;
-    border-radius: 0 0 .25rem .25rem;
-    z-index: 1050; 
-    width: 100%; 
-    max-height: 200px; 
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-}
-
-.custom-search-select-container .dropdown-list-container.show {
-    display: block;
-    border-top: 1px solid #ced4da; /* Add border top when shown */
-}
-.custom-search-select-container.open .dropdown-list-container {
-     /* Remove border top from selected value if it's part of the container */
-    /* For form-control style, the border top is handled by selected-value */
-}
+        .custom-search-select-container.open .selected-value::after {
+            content: '\25B2';
+            /* Unicode for up arrow when open */
+        }
 
 
-.custom-search-select-container .search-box {
-    width: calc(100% - 1.5rem); /* Adjust padding */
-    padding: .375rem .75rem;
-    border: none; /* Search box border can be removed if container has one */
-    border-bottom: 1px solid #eee; /* Separator line */
-    box-sizing: border-box; /* Ensure padding doesn't make it wider */
-}
-.custom-search-select-container .search-box:focus {
-    outline: none;
-}
+        .custom-search-select-container .placeholder-selected {
+            color: #6c757d;
+            /* Bootstrap's muted color for placeholder */
+        }
+
+        .custom-search-select-container .dropdown-list-container {
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-top: none;
+            border-radius: 0 0 .25rem .25rem;
+            z-index: 1050;
+            width: 100%;
+            max-height: 200px;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+        }
+
+        .custom-search-select-container .dropdown-list-container.show {
+            display: block;
+            border-top: 1px solid #ced4da;
+            /* Add border top when shown */
+        }
+
+        .custom-search-select-container.open .dropdown-list-container {
+            /* Remove border top from selected value if it's part of the container */
+            /* For form-control style, the border top is handled by selected-value */
+        }
 
 
-.custom-search-select-container .options-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+        .custom-search-select-container .search-box {
+            width: calc(100% - 1.5rem);
+            /* Adjust padding */
+            padding: .375rem .75rem;
+            border: none;
+            /* Search box border can be removed if container has one */
+            border-bottom: 1px solid #eee;
+            /* Separator line */
+            box-sizing: border-box;
+            /* Ensure padding doesn't make it wider */
+        }
 
-.custom-search-select-container .options-list li {
-    text-align: left;
-    padding: 8px 12px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.custom-search-select-container .options-list li:hover {
-    background-color: #f0f0f0;
-}
-
-.custom-search-select-container .options-list li.placeholder-option {
-    color: #6c757d;
-    font-style: italic;
-}
+        .custom-search-select-container .search-box:focus {
+            outline: none;
+        }
 
 
-.original-select-hidden {
-    display: none !important; /* Ensure it's completely hidden */
-}
+        .custom-search-select-container .options-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
-#pilih-periode-table-filter-container .selected-value {
-    height: calc(1.5em + .5rem + 2px); /* Match form-control-sm height */
-    padding: .25rem .5rem;            /* Match form-control-sm padding */
-    font-size: .875rem;              /* Match form-control-sm font-size */
-    line-height: 1.5;                /* Match form-control-sm line-height */
-    /* border-radius: .2rem; */      /* Match form-control-sm border-radius */
-}
+        .custom-search-select-container .options-list li {
+            text-align: left;
+            padding: 8px 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .custom-search-select-container .options-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .custom-search-select-container .options-list li.placeholder-option {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+
+        .original-select-hidden {
+            display: none !important;
+            /* Ensure it's completely hidden */
+        }
+
+        #pilih-periode-table-filter-container .selected-value {
+            height: calc(1.5em + .5rem + 2px);
+            /* Match form-control-sm height */
+            padding: .25rem .5rem;
+            /* Match form-control-sm padding */
+            font-size: .875rem;
+            /* Match form-control-sm font-size */
+            line-height: 1.5;
+            /* Match form-control-sm line-height */
+            /* border-radius: .2rem; */
+            /* Match form-control-sm border-radius */
+        }
     </style>
 
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -737,27 +760,36 @@
                                     </label>
 
                                     {{-- Custom Searchable Dropdown for Periode Filter --}}
-                                    <div class="custom-search-select-container ml-2" id="pilih-periode-table-filter-container" style="min-width: 180px;">
+                                    <div class="custom-search-select-container ml-2"
+                                        id="pilih-periode-table-filter-container" style="min-width: 180px;">
                                         {{-- This div will display the selected value and trigger the dropdown --}}
-                                        <div class="selected-value form-control form-control-sm" tabindex="0">-Pilih Periode-</div>
+                                        <div class="selected-value form-control form-control-sm" tabindex="0">-Pilih
+                                            Periode-</div>
                                         {{-- This container holds the search box and the options list --}}
                                         <div class="dropdown-list-container">
-                                            <input type="text" class="search-box form-control form-control-sm" placeholder="Cari Periode...">
+                                            <input type="text" class="search-box form-control form-control-sm"
+                                                placeholder="Cari Periode...">
                                             <ul class="options-list">
                                                 {{-- Options will be populated by JavaScript --}}
                                             </ul>
                                         </div>
                                         {{-- The original select is hidden but holds the actual form value & is used by JS --}}
                                         {{-- This select will be part of the main page form that gets submitted --}}
-                                        <select class="original-select-hidden" id="pilih-periode-table-filter" name="periode">
+                                        <select class="original-select-hidden" id="pilih-periode-table-filter"
+                                            name="periode">
                                             <option value="" selected>-Pilih Periode-</option>
                                             {{-- Example Periode Options - Populate these from your backend or JS --}}
                                             {{-- @foreach ($periodes as $periode) --}}
                                             {{-- <option value="{{ $periode->id }}" {{ request('periode') == $periode->id ? 'selected' : '' }}>{{ $periode->nama }}</option> --}}
                                             {{-- @endforeach --}}
-                                            <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01</option>
-                                            <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02</option>
-                                            <option value="all" {{ request('periode') == 'all' ? 'selected' : '' }}>Semua Periode</option>
+                                            <option value="periode01"
+                                                {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01
+                                            </option>
+                                            <option value="periode02"
+                                                {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02
+                                            </option>
+                                            <option value="all" {{ request('periode') == 'all' ? 'selected' : '' }}>Semua
+                                                Periode</option>
                                         </select>
                                     </div>
                                 </div>
@@ -839,12 +871,18 @@
                                                             Rincian
                                                         </button>
 
-                                                        {{-- Update Button --}}
-                                                        <button class="btn btn-sm btn-warning m-1 btn-update"
+                                                        {{-- <button class="btn btn-sm btn-warning m-1 btn-update"
                                                             data-id="{{ $item['id'] }}"
                                                             data-pembeli="{{ $item['nama_pembeli'] }}" data-url=""
                                                             data-toggle="modal" data-target="#updatePenjualanModal">
                                                             Update
+                                                        </button> --}}
+                                                        <button class="btn btn-sm btn-danger m-1"
+                                                            data-id="{{ $item['id'] }}"
+                                                            data-pembeli="{{ $item['nama_pembeli'] }}"
+                                                            data-url="https://sale.solvethink.id/api/penjualan-komponen-solvethink/{{ $item['id'] }}"
+                                                            onclick="deletePenjualan(this)">
+                                                            Delete
                                                         </button>
                                                     </div>
                                                 </td>
@@ -913,7 +951,8 @@
     {{-- modals --}}
 
 
-    <div class="modal fade" id="updatePenjualanModal" tabindex="-1" aria-labelledby="updatePenjualanModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updatePenjualanModal" tabindex="-1" aria-labelledby="updatePenjualanModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header modal-color text-white">
@@ -924,93 +963,101 @@
                 </div>
                 <form action="#" method="POST" id="updatePenjualanForm" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
                     <input type="hidden" name="id" id="update-penjualan-id">
                     <div class="modal-body">
                         <div class="row">
                             {{-- Left Column --}}
                             <div class="col-md-6">
-                                <p class="font-weight-bold mb-2">Informasi Penyewa</p>
+                                <input type="hidden" id="update-nama-barang" name="pembelian">
+                                <p class="font-weight-bold mb-2">Informasi Pembeli</p>
                                 <div class="form-group">
                                     <label for="update-no-wa">No. WA</label>
-                                    <input type="text" class="form-control" id="update-no-wa" name="no_wa" required>
+                                    <input type="text" class="form-control" id="update-no-wa" name="no_pembeli"
+                                        required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="update-nama-penyewa">Nama Penyewa</label>
-                                    <input type="text" class="form-control" id="update-nama-penyewa" name="nama_penyewa" required>
+                                    <label for="update-nama-penyewa">Nama Pembeli</label>
+                                    <input type="text" class="form-control" id="update-nama-penyewa"
+                                        name="nama_pembeli" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="update-alamat-penyewa">Alamat Penyewa</label>
-                                    <textarea class="form-control" id="update-alamat-penyewa" name="alamat_penyewa" rows="3"></textarea>
+                                    <label for="update-alamat-penyewa">Alamat Pembeli</label>
+                                    <textarea class="form-control" id="update-alamat-penyewa" name="alamat_pembeli" rows="3"></textarea>
                                 </div>
-    
+
                                 <p class="font-weight-bold mb-2 mt-3">Detail Transaksi</p>
                                 <div class="form-group">
                                     <label for="update-total-harga">Total Harga</label>
-                                    <input type="text" class="form-control" id="update-total-harga" name="total_harga" required> {{-- Consider using type="number" --}}
-                                </div>
-                                <div class="form-group">
-                                    <label for="update-nama-barang">Nama Barang</label>
-                                    <select class="form-control" id="update-nama-barang" name="nama_barang" required>
-                                        <option value="">-Pilih Nama Barang-</option>
-                                        {{-- Populate with options dynamically --}}
-                                    </select>
+                                    <input type="text" class="form-control" id="update-total-harga"
+                                        name="total_harga" required> {{-- Consider using type="number" --}}
                                 </div>
                                 <div class="form-group">
                                     <label for="update-tanggal-pembelian">Tanggal Pembelian</label>
-                                    <input type="date" class="form-control" id="update-tanggal-pembelian" name="tanggal_pembelian" required>
+                                    <input type="date" class="form-control" id="update-tanggal-pembelian"
+                                        name="tanggal_pembelian" required>
                                 </div>
                             </div>
-    
+
                             {{-- Right Column --}}
                             <div class="col-md-6">
                                 <p class="font-weight-bold mb-2">Detail Pembayaran</p>
                                 <div class="form-group mb-3">
                                     {{-- Container that changes layout --}}
-                                    <div id="update-upload-section-container" class="d-flex align-items-center mb-2 p-2 rounded ">
-    
+                                    <div id="update-upload-section-container"
+                                        class="d-flex align-items-center mb-2 p-2 rounded ">
+
                                         {{-- 1. Clickable Area / Becomes Preview Box --}}
                                         {{-- Initially shows icon, then thumbnail and "Ganti" button --}}
-                                        <div id="update-image-upload-preview-area" class="modal-color rounded d-flex align-items-center justify-content-center mr-2" style="width: 100px; height: 100px; position: relative; cursor: pointer;" onclick="triggerUpdateFileInput()">
+                                        <div id="update-image-upload-preview-area"
+                                            class="modal-color rounded d-flex align-items-center justify-content-center mr-2"
+                                            style="width: 100px; height: 100px; position: relative; cursor: pointer;"
+                                            onclick="triggerUpdateFileInput()">
                                             {{-- Default Icon (Centered) --}}
                                             <i class="fa fa-image fa-3x text-white" id="update-default-icon"></i>
                                             {{-- The actual preview image (hidden initially) --}}
-                                            <img src="#" alt="Preview Bukti" id="update-preview-img-element" style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
+                                            <img src="#" alt="Preview Bukti" id="update-preview-img-element"
+                                                style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
                                         </div>
-    
+
                                         {{-- 2. File Info Area (Or "Ganti" button logic) --}}
                                         <div id="update-file-info-area" class="file-info flex-grow-1 align-items-center">
                                             {{-- This part changes based on whether an image is loaded --}}
                                             <div id="update-file-details" class="d-none"> {{-- Shown when file is selected --}}
                                                 <div class="d-flex align-items-center">
-                                                   
+
                                                     <div>
-                                                        <span id="update-bukti-pembayaran-filename" class="font-weight-bold d-block text-truncate" style="max-width: 150px;">Bukti_Pembayaran.jpg</span>
+                                                        <span id="update-bukti-pembayaran-filename"
+                                                            class="font-weight-bold d-block text-truncate"
+                                                            style="max-width: 150px;">Bukti_Pembayaran.jpg</span>
                                                         <small class="text-success">Successfully Uploaded!</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div id="update-initial-upload-prompt"> {{-- Shown initially or if no image --}}
-                                                 <span class="text-muted">Upload Bukti Pembayaran</span>
+                                                <span class="text-muted">Upload Bukti Pembayaran</span>
                                             </div>
                                         </div>
-                                         <button type="button" class="btn btn-sm modal-color text-white ml-auto" id="update-ganti-btn" onclick="triggerUpdateFileInput()">Ganti</button>
+                                        <button type="button" class="btn btn-sm modal-color text-white ml-auto"
+                                            id="update-ganti-btn" onclick="triggerUpdateFileInput()">Ganti</button>
                                     </div>
                                     {{-- Hidden File Input --}}
-                                    <input type="file" class="d-none" id="update-bukti-pembayaran-input" name="bukti_pembayaran" accept="image/*">
+                                    <input type="file" class="d-none" id="update-bukti-pembayaran-input"
+                                        name="bukti_pembayaran" accept="image/*">
                                 </div>
-    
-    
+
+
                                 <p class="font-weight-bold mb-2 mt-4">Pengiriman</p>
                                 <div class="form-group">
                                     <label>Metode Pengiriman</label>
                                     <div class="ml-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="update-take-away" value="take_away" checked>
+                                            <input class="form-check-input" type="radio" name="metode_pengiriman"
+                                                id="update-take-away" value="take_away" checked>
                                             <label class="form-check-label" for="update-take-away">Take-away</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="metode_pengiriman" id="update-diantar" value="diantar">
+                                            <input class="form-check-input" type="radio" name="metode_pengiriman"
+                                                id="update-diantar" value="diantar">
                                             <label class="form-check-label" for="update-diantar">Diantar</label>
                                         </div>
                                     </div>
@@ -1019,8 +1066,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
+                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit"
+                            class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -1176,212 +1225,221 @@
         document.addEventListener('DOMContentLoaded', function() {
 
             /**
-     * Initializes a custom searchable dropdown.
-     * @param {string} containerId - The ID of the main container div.
-     * @param {string} originalSelectId - The ID of the original hidden select.
-     * @param {boolean} autoSubmitForm - Whether to submit the parent form on change.
-     * @param {string} formIdToSubmit - The ID of the form to submit (if autoSubmitForm is true).
-     */
-    function setupSearchableDropdown(containerId, originalSelectId, autoSubmitForm = false, formIdToSubmit = null) {
-        const container = document.getElementById(containerId);
-        if (!container) {
-            console.warn(`Searchable dropdown container not found: #${containerId}`);
-            return;
-        }
-        const originalSelect = document.getElementById(originalSelectId);
-        if (!originalSelect) {
-            console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
-            return;
-        }
-
-        const selectedValueDiv = container.querySelector('.selected-value');
-        const dropdownContainer = container.querySelector('.dropdown-list-container');
-        const searchBox = container.querySelector('.search-box');
-        const optionsList = container.querySelector('.options-list');
-        let listItems = [];
-
-        function populateOptionsList() {
-            optionsList.innerHTML = '';
-            listItems = [];
-            Array.from(originalSelect.options).forEach((option, index) => {
-                const li = document.createElement('li');
-                li.textContent = option.textContent;
-                li.dataset.value = option.value;
-                li.dataset.index = index;
-
-                // Do not add the initial placeholder to the visual list if it has no value
-                // but ensure it can be selected to clear the filter.
-                // For this on-page filter, we might always want the placeholder visible.
-                optionsList.appendChild(li);
-                listItems.push(li);
-            });
-        }
-
-        function syncDisplayWithSelect() {
-            if (!originalSelect || !selectedValueDiv) return;
-            const selectedOption = originalSelect.options[originalSelect.selectedIndex];
-            if (selectedOption) {
-                selectedValueDiv.textContent = selectedOption.textContent;
-                selectedValueDiv.classList.toggle('placeholder-selected', !selectedOption.value);
-            } else {
-                selectedValueDiv.textContent = '-Pilih Periode-'; // Default
-                selectedValueDiv.classList.add('placeholder-selected');
-            }
-        }
-
-        selectedValueDiv.addEventListener('click', (event) => {
-            event.stopPropagation();
-            if (!dropdownContainer || !searchBox) return;
-            closeAllDropdowns(containerId);
-            const isOpen = dropdownContainer.classList.toggle('show');
-            container.classList.toggle('open', isOpen);
-            if (isOpen) {
-                searchBox.value = '';
-                listItems.forEach(li => li.style.display = '');
-                searchBox.focus();
-            }
-        });
-
-        document.addEventListener('click', (event) => {
-            if (container && !container.contains(event.target)) {
-                if (dropdownContainer) dropdownContainer.classList.remove('show');
-                container.classList.remove('open');
-            }
-        });
-
-        optionsList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
-                const value = event.target.dataset.value;
-                const index = event.target.dataset.index;
-
-                if (index !== undefined) {
-                    originalSelect.selectedIndex = parseInt(index, 10);
+             * Initializes a custom searchable dropdown.
+             * @param {string} containerId - The ID of the main container div.
+             * @param {string} originalSelectId - The ID of the original hidden select.
+             * @param {boolean} autoSubmitForm - Whether to submit the parent form on change.
+             * @param {string} formIdToSubmit - The ID of the form to submit (if autoSubmitForm is true).
+             */
+            function setupSearchableDropdown(containerId, originalSelectId, autoSubmitForm = false, formIdToSubmit =
+                null) {
+                const container = document.getElementById(containerId);
+                if (!container) {
+                    console.warn(`Searchable dropdown container not found: #${containerId}`);
+                    return;
                 }
-                syncDisplayWithSelect();
-                if (dropdownContainer) dropdownContainer.classList.remove('show');
-                container.classList.remove('open');
+                const originalSelect = document.getElementById(originalSelectId);
+                if (!originalSelect) {
+                    console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
+                    return;
+                }
 
-                originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                const selectedValueDiv = container.querySelector('.selected-value');
+                const dropdownContainer = container.querySelector('.dropdown-list-container');
+                const searchBox = container.querySelector('.search-box');
+                const optionsList = container.querySelector('.options-list');
+                let listItems = [];
 
-                if (autoSubmitForm && formIdToSubmit) {
-                    const formToSubmit = document.getElementById(formIdToSubmit);
-                    if (formToSubmit) {
-                         // Update hidden periode input in searchForm before submitting
-                        const hiddenPeriodeInput = document.getElementById('hidden-periode-search-form');
-                        if(hiddenPeriodeInput) {
-                            hiddenPeriodeInput.value = originalSelect.value;
-                        }
-                        const hiddenLimitInput = document.getElementById('hidden-limit-search-form');
-                        if(hiddenLimitInput) {
-                             hiddenLimitInput.value = document.getElementById('showEntries').value;
-                        }
-                        formToSubmit.submit();
+                function populateOptionsList() {
+                    optionsList.innerHTML = '';
+                    listItems = [];
+                    Array.from(originalSelect.options).forEach((option, index) => {
+                        const li = document.createElement('li');
+                        li.textContent = option.textContent;
+                        li.dataset.value = option.value;
+                        li.dataset.index = index;
+
+                        // Do not add the initial placeholder to the visual list if it has no value
+                        // but ensure it can be selected to clear the filter.
+                        // For this on-page filter, we might always want the placeholder visible.
+                        optionsList.appendChild(li);
+                        listItems.push(li);
+                    });
+                }
+
+                function syncDisplayWithSelect() {
+                    if (!originalSelect || !selectedValueDiv) return;
+                    const selectedOption = originalSelect.options[originalSelect.selectedIndex];
+                    if (selectedOption) {
+                        selectedValueDiv.textContent = selectedOption.textContent;
+                        selectedValueDiv.classList.toggle('placeholder-selected', !selectedOption.value);
                     } else {
-                        console.warn(`Form to submit not found: #${formIdToSubmit}`);
+                        selectedValueDiv.textContent = '-Pilih Periode-'; // Default
+                        selectedValueDiv.classList.add('placeholder-selected');
                     }
                 }
-            }
-        });
 
-        searchBox.addEventListener('input', () => {
-            const searchTerm = searchBox.value.toLowerCase().trim();
-            listItems.forEach(li => {
-                const itemText = li.textContent.toLowerCase();
-                li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
-            });
-        });
+                selectedValueDiv.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    if (!dropdownContainer || !searchBox) return;
+                    closeAllDropdowns(containerId);
+                    const isOpen = dropdownContainer.classList.toggle('show');
+                    container.classList.toggle('open', isOpen);
+                    if (isOpen) {
+                        searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+                        searchBox.focus();
+                    }
+                });
 
-        originalSelect.addEventListener('change', syncDisplayWithSelect);
+                document.addEventListener('click', (event) => {
+                    if (container && !container.contains(event.target)) {
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+                    }
+                });
 
-        populateOptionsList();
-        syncDisplayWithSelect();
+                optionsList.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
+                        const value = event.target.dataset.value;
+                        const index = event.target.dataset.index;
 
-        const modal = container.closest('.modal');
-        if (modal) {
-            modal.addEventListener('hidden.bs.modal', function() {
-                if (originalSelect.options.length > 0) {
-                    let placeholderIndex = 0;
-                    for (let i = 0; i < originalSelect.options.length; i++) {
-                        if (originalSelect.options[i].value === "") {
-                            placeholderIndex = i;
-                            break;
+                        if (index !== undefined) {
+                            originalSelect.selectedIndex = parseInt(index, 10);
+                        }
+                        syncDisplayWithSelect();
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+
+                        originalSelect.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
+
+                        if (autoSubmitForm && formIdToSubmit) {
+                            const formToSubmit = document.getElementById(formIdToSubmit);
+                            if (formToSubmit) {
+                                // Update hidden periode input in searchForm before submitting
+                                const hiddenPeriodeInput = document.getElementById(
+                                    'hidden-periode-search-form');
+                                if (hiddenPeriodeInput) {
+                                    hiddenPeriodeInput.value = originalSelect.value;
+                                }
+                                const hiddenLimitInput = document.getElementById(
+                                    'hidden-limit-search-form');
+                                if (hiddenLimitInput) {
+                                    hiddenLimitInput.value = document.getElementById('showEntries').value;
+                                }
+                                formToSubmit.submit();
+                            } else {
+                                console.warn(`Form to submit not found: #${formIdToSubmit}`);
+                            }
                         }
                     }
-                    originalSelect.selectedIndex = placeholderIndex;
-                }
+                });
+
+                searchBox.addEventListener('input', () => {
+                    const searchTerm = searchBox.value.toLowerCase().trim();
+                    listItems.forEach(li => {
+                        const itemText = li.textContent.toLowerCase();
+                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ?
+                            '' : 'none';
+                    });
+                });
+
+                originalSelect.addEventListener('change', syncDisplayWithSelect);
+
+                populateOptionsList();
                 syncDisplayWithSelect();
-                if (searchBox) searchBox.value = '';
-                listItems.forEach(li => li.style.display = '');
-                if (dropdownContainer) dropdownContainer.classList.remove('show');
-                container.classList.remove('open');
-            });
-        }
-    }
 
-    function closeAllDropdowns(excludeContainerId = null) {
-        document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
-            const currentContainer = dropdown.closest('.custom-search-select-container');
-            if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
-                dropdown.classList.remove('show');
-                if (currentContainer) currentContainer.classList.remove('open');
+                const modal = container.closest('.modal');
+                if (modal) {
+                    modal.addEventListener('hidden.bs.modal', function() {
+                        if (originalSelect.options.length > 0) {
+                            let placeholderIndex = 0;
+                            for (let i = 0; i < originalSelect.options.length; i++) {
+                                if (originalSelect.options[i].value === "") {
+                                    placeholderIndex = i;
+                                    break;
+                                }
+                            }
+                            originalSelect.selectedIndex = placeholderIndex;
+                        }
+                        syncDisplayWithSelect();
+                        if (searchBox) searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+                    });
+                }
+            }
+
+            function closeAllDropdowns(excludeContainerId = null) {
+                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(
+                    dropdown => {
+                        const currentContainer = dropdown.closest('.custom-search-select-container');
+                        if (!excludeContainerId || (currentContainer && currentContainer.id !==
+                                excludeContainerId)) {
+                            dropdown.classList.remove('show');
+                            if (currentContainer) currentContainer.classList.remove('open');
+                        }
+                    });
+            }
+
+            // --- Initialize the "Pilih Periode" dropdown for the table filter ---
+            // The third argument `true` enables auto-submit, and the fourth is the ID of the form to submit.
+            setupSearchableDropdown('pilih-periode-table-filter-container', 'pilih-periode-table-filter', true,
+                'searchForm');
+
+            // --- Handle "Show Entries" Change ---
+            const showEntriesSelect = document.getElementById('showEntries');
+            if (showEntriesSelect) {
+                showEntriesSelect.addEventListener('change', function() {
+                    const limit = this.value;
+                    const searchForm = document.getElementById('searchForm');
+                    if (searchForm) {
+                        // Update the hidden limit input within the search form
+                        const hiddenLimitInput = document.getElementById('hidden-limit-search-form');
+                        if (hiddenLimitInput) {
+                            hiddenLimitInput.value = limit;
+                        }
+                        // Also ensure the periode is included if selected
+                        const periodeSelect = document.getElementById('pilih-periode-table-filter');
+                        const hiddenPeriodeInput = document.getElementById('hidden-periode-search-form');
+                        if (periodeSelect && hiddenPeriodeInput) {
+                            hiddenPeriodeInput.value = periodeSelect.value;
+                        }
+                        searchForm.submit();
+                    }
+                });
+            }
+            // Update the hidden limit input with the current value on page load
+            const initialLimit = showEntriesSelect ? showEntriesSelect.value : '10';
+            const hiddenLimitSearchInput = document.getElementById('hidden-limit-search-form');
+            if (hiddenLimitSearchInput) {
+                hiddenLimitSearchInput.value = initialLimit;
+            }
+
+
+            // Ensure the selected "Show Entries" and "Periode" are reflected if page reloads with query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const limitParam = urlParams.get('limit');
+            const periodeParam = urlParams.get('periode');
+
+            if (limitParam && showEntriesSelect) {
+                showEntriesSelect.value = limitParam;
+            }
+
+            const periodeFilterSelect = document.getElementById('pilih-periode-table-filter');
+            if (periodeParam && periodeFilterSelect) {
+                periodeFilterSelect.value = periodeParam;
+                // Manually trigger sync for the custom dropdown if value is set programmatically after page load
+                // This might be handled by the `syncDisplayWithSelect` if `setupSearchableDropdown` runs after this block
+                // or if originalSelect.addEventListener('change', syncDisplayWithSelect) fires.
+                // However, explicit sync after setting value is safer if there are timing issues.
+                const event = new Event('change');
+                periodeFilterSelect.dispatchEvent(event);
             }
         });
-    }
-
-    // --- Initialize the "Pilih Periode" dropdown for the table filter ---
-    // The third argument `true` enables auto-submit, and the fourth is the ID of the form to submit.
-    setupSearchableDropdown('pilih-periode-table-filter-container', 'pilih-periode-table-filter', true, 'searchForm');
-
-    // --- Handle "Show Entries" Change ---
-    const showEntriesSelect = document.getElementById('showEntries');
-    if (showEntriesSelect) {
-        showEntriesSelect.addEventListener('change', function() {
-            const limit = this.value;
-            const searchForm = document.getElementById('searchForm');
-            if (searchForm) {
-                // Update the hidden limit input within the search form
-                const hiddenLimitInput = document.getElementById('hidden-limit-search-form');
-                 if(hiddenLimitInput) {
-                    hiddenLimitInput.value = limit;
-                }
-                 // Also ensure the periode is included if selected
-                const periodeSelect = document.getElementById('pilih-periode-table-filter');
-                const hiddenPeriodeInput = document.getElementById('hidden-periode-search-form');
-                if(periodeSelect && hiddenPeriodeInput){
-                    hiddenPeriodeInput.value = periodeSelect.value;
-                }
-                searchForm.submit();
-            }
-        });
-    }
-    // Update the hidden limit input with the current value on page load
-    const initialLimit = showEntriesSelect ? showEntriesSelect.value : '10';
-    const hiddenLimitSearchInput = document.getElementById('hidden-limit-search-form');
-    if (hiddenLimitSearchInput) {
-        hiddenLimitSearchInput.value = initialLimit;
-    }
-
-
-    // Ensure the selected "Show Entries" and "Periode" are reflected if page reloads with query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const limitParam = urlParams.get('limit');
-    const periodeParam = urlParams.get('periode');
-
-    if (limitParam && showEntriesSelect) {
-        showEntriesSelect.value = limitParam;
-    }
-
-    const periodeFilterSelect = document.getElementById('pilih-periode-table-filter');
-    if (periodeParam && periodeFilterSelect) {
-        periodeFilterSelect.value = periodeParam;
-        // Manually trigger sync for the custom dropdown if value is set programmatically after page load
-        // This might be handled by the `syncDisplayWithSelect` if `setupSearchableDropdown` runs after this block
-        // or if originalSelect.addEventListener('change', syncDisplayWithSelect) fires.
-        // However, explicit sync after setting value is safer if there are timing issues.
-        const event = new Event('change');
-        periodeFilterSelect.dispatchEvent(event);
-    }
-});
 
 
 
@@ -1481,134 +1539,240 @@
         });
 
 
-    //update image
-    document.addEventListener('DOMContentLoaded', function() {
-    // --- Elements for Update Modal Bukti Pembayaran ---
-    const updateImageInput = document.getElementById('update-bukti-pembayaran-input');
-    const updateUploadPreviewArea = document.getElementById('update-image-upload-preview-area'); // The clickable div
-    const updateDefaultIcon = document.getElementById('update-default-icon');
-    const updatePreviewImageElement = document.getElementById('update-preview-img-element');
-    const updateFileInfoArea = document.getElementById('update-file-info-area'); // Parent of details and prompt
-    const updateFileDetails = document.getElementById('update-file-details'); // Specific div for filename and success msg
-    const updateFileNameDisplay = document.getElementById('update-bukti-pembayaran-filename');
-    const updateInitialPrompt = document.getElementById('update-initial-upload-prompt');
-    const updateGantiButton = document.getElementById('update-ganti-btn'); // Ganti button
+        //update image
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Elements for Update Modal Bukti Pembayaran ---
+            const updateImageInput = document.getElementById('update-bukti-pembayaran-input');
+            const updateUploadPreviewArea = document.getElementById(
+                'update-image-upload-preview-area'); // The clickable div
+            const updateDefaultIcon = document.getElementById('update-default-icon');
+            const updatePreviewImageElement = document.getElementById('update-preview-img-element');
+            const updateFileInfoArea = document.getElementById(
+                'update-file-info-area'); // Parent of details and prompt
+            const updateFileDetails = document.getElementById(
+                'update-file-details'); // Specific div for filename and success msg
+            const updateFileNameDisplay = document.getElementById('update-bukti-pembayaran-filename');
+            const updateInitialPrompt = document.getElementById('update-initial-upload-prompt');
+            const updateGantiButton = document.getElementById('update-ganti-btn'); // Ganti button
 
-    // Function to trigger file input for the update modal
-    window.triggerUpdateFileInput = function() {
-        updateImageInput.click();
-    }
-
-    // --- Function to show preview for Update Modal ---
-    function showUpdatePreview(file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            updatePreviewImageElement.src = e.target.result;
-            updatePreviewImageElement.style.display = 'block';
-            updateDefaultIcon.style.display = 'none'; // Hide icon
-
-            updateFileNameDisplay.textContent = file.name;
-            updateFileDetails.classList.remove('d-none'); // Show file details
-            updateInitialPrompt.classList.add('d-none');   // Hide initial prompt
-
-            // Optional: Change "Ganti" button text or style if needed
-        }
-        reader.readAsDataURL(file);
-    }
-
-    // --- Function to reset uploader for Update Modal (e.g., if you add a "remove" button) ---
-    // Or when loading existing data that has no image.
-    function resetUpdateUploader(existingImageUrl = null, existingImageName = null) {
-        if (existingImageUrl) {
-            updatePreviewImageElement.src = existingImageUrl;
-            updatePreviewImageElement.style.display = 'block';
-            updateDefaultIcon.style.display = 'none';
-
-            updateFileNameDisplay.textContent = existingImageName || 'Gambar termuat';
-            updateFileDetails.classList.remove('d-none');
-            updateInitialPrompt.classList.add('d-none');
-        } else {
-            updatePreviewImageElement.src = '#';
-            updatePreviewImageElement.style.display = 'none';
-            updateDefaultIcon.style.display = 'block'; // Show icon
-
-            updateFileNameDisplay.textContent = '';
-            updateFileDetails.classList.add('d-none');    // Hide file details
-            updateInitialPrompt.classList.remove('d-none'); // Show initial prompt
-        }
-        updateImageInput.value = ''; // Clear the file input
-    }
-
-    // --- Event Listener for Update Modal File Input ---
-    if (updateImageInput) {
-        updateImageInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                showUpdatePreview(file);
+            // Function to trigger file input for the update modal
+            window.triggerUpdateFileInput = function() {
+                updateImageInput.click();
             }
+
+            // --- Function to show preview for Update Modal ---
+            function showUpdatePreview(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    updatePreviewImageElement.src = e.target.result;
+                    updatePreviewImageElement.style.display = 'block';
+                    updateDefaultIcon.style.display = 'none'; // Hide icon
+
+                    updateFileNameDisplay.textContent = file.name;
+                    updateFileDetails.classList.remove('d-none'); // Show file details
+                    updateInitialPrompt.classList.add('d-none'); // Hide initial prompt
+
+                    // Optional: Change "Ganti" button text or style if needed
+                }
+                reader.readAsDataURL(file);
+            }
+
+            // --- Function to reset uploader for Update Modal (e.g., if you add a "remove" button) ---
+            // Or when loading existing data that has no image.
+            function resetUpdateUploader(existingImageUrl = null, existingImageName = null) {
+                if (existingImageUrl) {
+                    updatePreviewImageElement.src = existingImageUrl;
+                    updatePreviewImageElement.style.display = 'block';
+                    updateDefaultIcon.style.display = 'none';
+
+                    updateFileNameDisplay.textContent = existingImageName || 'Gambar termuat';
+                    updateFileDetails.classList.remove('d-none');
+                    updateInitialPrompt.classList.add('d-none');
+                } else {
+                    updatePreviewImageElement.src = '#';
+                    updatePreviewImageElement.style.display = 'none';
+                    updateDefaultIcon.style.display = 'block'; // Show icon
+
+                    updateFileNameDisplay.textContent = '';
+                    updateFileDetails.classList.add('d-none'); // Hide file details
+                    updateInitialPrompt.classList.remove('d-none'); // Show initial prompt
+                }
+                updateImageInput.value = ''; // Clear the file input
+            }
+
+            // --- Event Listener for Update Modal File Input ---
+            if (updateImageInput) {
+                updateImageInput.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        showUpdatePreview(file);
+                    }
+                });
+            }
+
+            // --- Logic to populate and show the update modal ---
+            // This is a simplified example. You'll fetch actual data.
+            $('#updatePenjualanModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Tombol yang memicu modal
+                var penjualanId = button.data('id');
+
+                // Lakukan request AJAX untuk mengambil data penjualan berdasarkan ID
+                $.ajax({
+                    url: 'https://sale.solvethink.id/api/penjualan-komponen-solvethink/' +
+                        penjualanId,
+                    method: 'GET',
+                    success: function(response) {
+                        if (response.success) {
+                            var existingData = response.data;
+                            var modal = $('#updatePenjualanModal');
+
+                            modal.find('#update-penjualan-id').val(existingData.id);
+                            modal.find('#update-no-wa').val(existingData.no_pembeli);
+                            modal.find('#update-nama-penyewa').val(existingData.nama_pembeli);
+                            modal.find('#update-alamat-penyewa').val(existingData
+                                .alamat_pembeli);
+                            modal.find('#update-total-harga').val(existingData.total_harga);
+                            modal.find('#update-nama-barang').val(existingData.pembelian);
+                            modal.find('#update-tanggal-pembelian').val(existingData
+                                .tanggal_pembelian);
+
+                            // Radio button untuk pengambilan barang
+                            if (existingData.pengambilan_barang_pembeli === 'Pesanan Diantar') {
+                                modal.find('#update-diantar').prop('checked', true);
+                            } else {
+                                modal.find('#update-take-away').prop('checked', true);
+                            }
+
+                            // Gambar bukti pembayaran
+                            if (existingData.bukti_pembayaran_pembeli) {
+                                resetUpdateUploader(
+                                    '/storage/' + existingData.bukti_pembayaran_pembeli,
+                                    existingData.bukti_pembayaran_pembeli.split('/').pop()
+                                );
+                            } else {
+                                resetUpdateUploader(); // Reset jika tidak ada gambar
+                            }
+                            // Set URL action pada form
+                            // $('#updatePenjualanForm').attr('action',
+                            //     'https://sale.solvethink.id/api/penjualan-komponen-solvethink/' +
+                            //     existingData.id);
+
+                            // Set action URL jika dibutuhkan (optional)
+                            // modal.find('#updatePenjualanForm').attr('action', '/api/penjualanBarang/' + existingData.id);
+                        } else {
+                            alert('Gagal mengambil data penjualan');
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Terjadi kesalahan saat mengambil data: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            document.getElementById('updatePenjualanForm').addEventListener('submit', function(e) {
+                e.preventDefault(); // penting agar tidak reload
+
+                const form = e.target;
+                const id = document.getElementById('update-penjualan-id').value;
+
+                const formData = new FormData(form);
+                formData.append('_method', 'PUT');
+
+                console.log('Isi FormData:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(key, value);
+                }
+
+                fetch(`https://sale.solvethink.id/api/penjualan-komponen-solvethink/${id}`, {
+                        method: 'POST',
+                        // headers: {
+                        //     'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        // },
+                        body: formData,
+                        credentials: 'omit',
+                    })
+                    .then(async response => {
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || 'Gagal memperbarui data.');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert('Data berhasil diperbarui!');
+                        $('#updatePenjualanModal').modal('hide');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        alert('Terjadi kesalahan: ' + error.message);
+                    });
+            });
+
+
+
+
+
+
+            // Optional: Reset preview when the update modal is hidden
+            $('#updatePenjualanModal').on('hidden.bs.modal', function() {
+                // Reset to the state before any new file was selected during this modal session
+                // This is tricky if you want to revert to the *original* data's image.
+                // For now, this just clears the input. You might need more sophisticated logic
+                // to reload the original image if a new one was selected but not saved.
+                resetUpdateUploader(); // Or reload with original data if you have it stored
+            });
+
         });
-    }
 
-    // --- Logic to populate and show the update modal ---
-    // This is a simplified example. You'll fetch actual data.
-    $('#updatePenjualanModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var penjualanId = button.data('id'); // Extract info from data-* attributes
-        // var noWa = button.data('no-wa');
-        // ... and so on for other fields
+        function deletePenjualan(button) {
+            const id = button.getAttribute('data-id');
+            const pembeli = button.getAttribute('data-pembeli');
+            const url = button.getAttribute('data-url');
 
-        // @TODO: Replace with actual AJAX call to get penjualan data by ID
-        // For demonstration, using placeholder data:
-        var existingData = {
-            id: penjualanId,
-            no_wa: '08123456789',
-            nama_penyewa: 'John Doe',
-            alamat_penyewa: 'Jl. Contoh No. 123',
-            total_harga: '500000',
-            nama_barang_id: 'barang_1', // Assuming you have IDs for barang
-            tanggal_pembelian: '2025-05-10',
-            bukti_pembayaran_url: null, // 'path/to/existing_image.jpg', // or null if no image
-            bukti_pembayaran_filename: null, //'existing_image.jpg',
-            metode_pengiriman: 'take_away' // or 'diantar'
-        };
-
-        var modal = $(this);
-        modal.find('#update-penjualan-id').val(existingData.id);
-        modal.find('#update-no-wa').val(existingData.no_wa);
-        modal.find('#update-nama-penyewa').val(existingData.nama_penyewa);
-        modal.find('#update-alamat-penyewa').val(existingData.alamat_penyewa);
-        modal.find('#update-total-harga').val(existingData.total_harga);
-        // For select, you might need to fetch options and then set selected
-        modal.find('#update-nama-barang').val(existingData.nama_barang_id);
-        modal.find('#update-tanggal-pembelian').val(existingData.tanggal_pembelian);
-
-        // Handle radio buttons for metode_pengiriman
-        if (existingData.metode_pengiriman === 'diantar') {
-            modal.find('#update-diantar').prop('checked', true);
-        } else {
-            modal.find('#update-take-away').prop('checked', true);
+            // Konfirmasi sebelum menghapus
+            Swal.fire({
+                title: `Hapus data?`,
+                text: `Data penjualan dari ${pembeli} akan dihapus.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(url, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'Authorization': 'Bearer YOUR_ACCESS_TOKEN_HERE', // Ganti token jika perlu
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: 'Berhasil!',
+                                    text: 'Data berhasil dihapus.',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                return response.json().then(data => {
+                                    throw new Error(data.message || 'Gagal menghapus data');
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            Swal.fire('Error!', error.message, 'error');
+                        });
+                }
+            });
         }
-
-        // Handle existing image for bukti pembayaran
-        if (existingData.bukti_pembayaran_url) {
-            resetUpdateUploader(existingData.bukti_pembayaran_url, existingData.bukti_pembayaran_filename);
-        } else {
-            resetUpdateUploader(); // Reset to initial state (no image)
-        }
-
-        // Update form action URL
-        // modal.find('#updatePenjualanForm').attr('action', '/penjualan/update/' + existingData.id); // Adjust URL as needed
-    });
-
-
-    // Optional: Reset preview when the update modal is hidden
-    $('#updatePenjualanModal').on('hidden.bs.modal', function () {
-        // Reset to the state before any new file was selected during this modal session
-        // This is tricky if you want to revert to the *original* data's image.
-        // For now, this just clears the input. You might need more sophisticated logic
-        // to reload the original image if a new one was selected but not saved.
-        resetUpdateUploader(); // Or reload with original data if you have it stored
-    });
-});
     </script>
 @endsection
