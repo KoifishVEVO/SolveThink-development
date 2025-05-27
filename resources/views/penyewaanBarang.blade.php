@@ -228,7 +228,7 @@
             #addAssetModal .modal-content,
             #rincianAssetModal .modal-content,
             #updateAssetModal .modal-content,
-            #rincianPenyewaanModal .modal-content, 
+            #rincianPenyewaanModal .modal-content,
             #updatePenyewaanModal .modal-content {
                 /* Added */
                 overflow-y: auto;
@@ -251,7 +251,7 @@
             #addAssetModal .modal-body,
             #rincianAssetModal .modal-body,
             #updateAssetModal .modal-body,
-            #rincianPenyewaanModal .modal-body, 
+            #rincianPenyewaanModal .modal-body,
             #updatePenyewaanModal .modal-body {
                 padding: 1.5rem;
             }
@@ -608,116 +608,139 @@
 
         /* Dropdown */
         .custom-search-select-container {
-    position: relative;
-    display: inline-block; /* Or block if you want it to take full width */
-    /* min-width: 200px; /* Adjust as needed */
-}
+            position: relative;
+            display: inline-block;
+            /* Or block if you want it to take full width */
+            /* min-width: 200px; /* Adjust as needed */
+        }
 
-.custom-search-select-container .selected-value {
-    /* background-color: #fff; */ /* Match your form-control style */
-    /* border: 1px solid #ced4da; */ /* Match your form-control style */
-    /* padding: .375rem .75rem; */ /* Match your form-control style */
-    /* border-radius: .25rem; */ /* Match your form-control style */
-    background-image: none !important;
-    appearance: none !important;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .custom-search-select-container .selected-value {
+            /* background-color: #fff; */
+            /* Match your form-control style */
+            /* border: 1px solid #ced4da; */
+            /* Match your form-control style */
+            /* padding: .375rem .75rem; */
+            /* Match your form-control style */
+            /* border-radius: .25rem; */
+            /* Match your form-control style */
+            background-image: none !important;
+            appearance: none !important;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-/* Add down arrow using pseudo-element */
-.custom-search-select-container .selected-value::after {
-    content: '\25BC'; /* Unicode for down arrow */
-    font-size: 0.8em;
-    margin-left: 8px;
-    color: #6c757d; /* Bootstrap's secondary text color */
-}
-.custom-search-select-container.open .selected-value::after {
-    content: '\25B2'; /* Unicode for up arrow when open */
-}
+        /* Add down arrow using pseudo-element */
+        .custom-search-select-container .selected-value::after {
+            content: '\25BC';
+            /* Unicode for down arrow */
+            font-size: 0.8em;
+            margin-left: 8px;
+            color: #6c757d;
+            /* Bootstrap's secondary text color */
+        }
 
-
-.custom-search-select-container .placeholder-selected {
-    color: #6c757d; /* Bootstrap's muted color for placeholder */
-}
-
-.custom-search-select-container .dropdown-list-container {
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-top: none;
-    border-radius: 0 0 .25rem .25rem;
-    z-index: 1050; 
-    width: 100%; 
-    max-height: 200px; 
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-}
-
-.custom-search-select-container .dropdown-list-container.show {
-    display: block;
-    border-top: 1px solid #ced4da; /* Add border top when shown */
-}
-.custom-search-select-container.open .dropdown-list-container {
-     /* Remove border top from selected value if it's part of the container */
-    /* For form-control style, the border top is handled by selected-value */
-}
+        .custom-search-select-container.open .selected-value::after {
+            content: '\25B2';
+            /* Unicode for up arrow when open */
+        }
 
 
-.custom-search-select-container .search-box {
-    width: calc(100% - 1.5rem); /* Adjust padding */
-    padding: .375rem .75rem;
-    border: none; /* Search box border can be removed if container has one */
-    border-bottom: 1px solid #eee; /* Separator line */
-    box-sizing: border-box; /* Ensure padding doesn't make it wider */
-}
-.custom-search-select-container .search-box:focus {
-    outline: none;
-}
+        .custom-search-select-container .placeholder-selected {
+            color: #6c757d;
+            /* Bootstrap's muted color for placeholder */
+        }
+
+        .custom-search-select-container .dropdown-list-container {
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-top: none;
+            border-radius: 0 0 .25rem .25rem;
+            z-index: 1050;
+            width: 100%;
+            max-height: 200px;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+        }
+
+        .custom-search-select-container .dropdown-list-container.show {
+            display: block;
+            border-top: 1px solid #ced4da;
+            /* Add border top when shown */
+        }
+
+        .custom-search-select-container.open .dropdown-list-container {
+            /* Remove border top from selected value if it's part of the container */
+            /* For form-control style, the border top is handled by selected-value */
+        }
 
 
-.custom-search-select-container .options-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+        .custom-search-select-container .search-box {
+            width: calc(100% - 1.5rem);
+            /* Adjust padding */
+            padding: .375rem .75rem;
+            border: none;
+            /* Search box border can be removed if container has one */
+            border-bottom: 1px solid #eee;
+            /* Separator line */
+            box-sizing: border-box;
+            /* Ensure padding doesn't make it wider */
+        }
 
-.custom-search-select-container .options-list li {
-    text-align: left;
-    padding: 8px 12px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.custom-search-select-container .options-list li:hover {
-    background-color: #f0f0f0;
-}
-
-.custom-search-select-container .options-list li.placeholder-option {
-    color: #6c757d;
-    font-style: italic;
-}
+        .custom-search-select-container .search-box:focus {
+            outline: none;
+        }
 
 
-.original-select-hidden {
-    display: none !important; /* Ensure it's completely hidden */
-}
+        .custom-search-select-container .options-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
-#pilih-periode-table-filter-container .selected-value {
-    height: calc(1.5em + .5rem + 2px); /* Match form-control-sm height */
-    padding: .25rem .5rem;            /* Match form-control-sm padding */
-    font-size: .875rem;              /* Match form-control-sm font-size */
-    line-height: 1.5;                /* Match form-control-sm line-height */
-    /* border-radius: .2rem; */      /* Match form-control-sm border-radius */
-}
+        .custom-search-select-container .options-list li {
+            text-align: left;
+            padding: 8px 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .custom-search-select-container .options-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .custom-search-select-container .options-list li.placeholder-option {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+
+        .original-select-hidden {
+            display: none !important;
+            /* Ensure it's completely hidden */
+        }
+
+        #pilih-periode-table-filter-container .selected-value {
+            height: calc(1.5em + .5rem + 2px);
+            /* Match form-control-sm height */
+            padding: .25rem .5rem;
+            /* Match form-control-sm padding */
+            font-size: .875rem;
+            /* Match form-control-sm font-size */
+            line-height: 1.5;
+            /* Match form-control-sm line-height */
+            /* border-radius: .2rem; */
+            /* Match form-control-sm border-radius */
+        }
     </style>
 
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -778,27 +801,36 @@
                                     </label>
 
                                     {{-- Custom Searchable Dropdown for Periode Filter --}}
-                                    <div class="custom-search-select-container ml-2" id="pilih-periode-table-filter-container" style="min-width: 180px;">
+                                    <div class="custom-search-select-container ml-2"
+                                        id="pilih-periode-table-filter-container" style="min-width: 180px;">
                                         {{-- This div will display the selected value and trigger the dropdown --}}
-                                        <div class="selected-value form-control form-control-sm" tabindex="0">-Pilih Periode-</div>
+                                        <div class="selected-value form-control form-control-sm" tabindex="0">-Pilih
+                                            Periode-</div>
                                         {{-- This container holds the search box and the options list --}}
                                         <div class="dropdown-list-container">
-                                            <input type="text" class="search-box form-control form-control-sm" placeholder="Cari Periode...">
+                                            <input type="text" class="search-box form-control form-control-sm"
+                                                placeholder="Cari Periode...">
                                             <ul class="options-list">
                                                 {{-- Options will be populated by JavaScript --}}
                                             </ul>
                                         </div>
                                         {{-- The original select is hidden but holds the actual form value & is used by JS --}}
                                         {{-- This select will be part of the main page form that gets submitted --}}
-                                        <select class="original-select-hidden" id="pilih-periode-table-filter" name="periode">
+                                        <select class="original-select-hidden" id="pilih-periode-table-filter"
+                                            name="periode">
                                             <option value="" selected>-Pilih Periode-</option>
                                             {{-- Example Periode Options - Populate these from your backend or JS --}}
                                             {{-- @foreach ($periodes as $periode) --}}
                                             {{-- <option value="{{ $periode->id }}" {{ request('periode') == $periode->id ? 'selected' : '' }}>{{ $periode->nama }}</option> --}}
                                             {{-- @endforeach --}}
-                                            <option value="periode01" {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01</option>
-                                            <option value="periode02" {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02</option>
-                                            <option value="all" {{ request('periode') == 'all' ? 'selected' : '' }}>Semua Periode</option>
+                                            <option value="periode01"
+                                                {{ request('periode') == 'periode01' ? 'selected' : '' }}>Periode 01
+                                            </option>
+                                            <option value="periode02"
+                                                {{ request('periode') == 'periode02' ? 'selected' : '' }}>Periode 02
+                                            </option>
+                                            <option value="all" {{ request('periode') == 'all' ? 'selected' : '' }}>Semua
+                                                Periode</option>
                                         </select>
                                     </div>
                                 </div>
@@ -822,7 +854,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
-                            
+
 
                                         @forelse ($penyewaan as $item)
                                             <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
@@ -919,27 +951,18 @@
                                                             Rincian
                                                         </button>
 
+
                                                         {{-- Update Button --}}
                                                         {{-- @TODO: Populate data-* attributes and set correct update URL for penyewaan --}}
-                                                        <button class="btn btn-sm btn-warning m-1 btn-update"
-                                                            data-id="{{ $item['id'] }}"
-                                                            data-penyewa="{{ $item['nama_penyewa'] }}"
-                                                            {{-- Add other fields to pre-fill the update form --}} data-url="{{-- route('penyewaan_barang.update', $item->id) --}}"
-                                                            {{-- Placeholder URL --}} data-toggle="modal"
-                                                            data-target="#updatePenyewaanModal ">
-                                                            Update
-                                                        </button>
 
                                                         {{-- Hapus Button --}}
-
-                                                        {{-- <button class="btn btn-sm btn-danger m-1 btn-delete"
-                                                            data-id="{{ $item->id }}"
-                                                            data-info="Penyewaan ID {{ $item->id }} oleh {{ $item->nama_penyewa }}"
-                                                            data-url=""
-                                                            data-toggle="modal"
-                                                            data-target="#deletePenyewaanModal">
-                                                        Hapus
-                                                    </button> --}}
+                                                        <button class="btn btn-sm btn-danger m-1"
+                                                            data-id="{{ $item['id'] }}"
+                                                            data-penyewa="{{ $item['nama_penyewa'] }}"
+                                                            data-url="https://rental.solvethink.id/api/penyewaan-komponen-solvethink/{{ $item['id'] }}"
+                                                            onclick="deletePenyewaan(this)">
+                                                            Delete
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1054,8 +1077,9 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="updatePenyewaanModal" tabindex="-1" aria-labelledby="updatePenyewaanModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="updatePenyewaanModal" tabindex="-1" aria-labelledby="updatePenyewaanModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header modal-color text-white">
@@ -1075,100 +1099,134 @@
                                 <p class="font-weight-bold mb-2">Informasi Penyewa</p>
                                 <div class="form-group">
                                     <label for="update-penyewaan-no-wa">No. WA</label>
-                                    <input type="text" class="form-control" id="update-penyewaan-no-wa" name="no_wa" required>
+                                    <input type="text" class="form-control" id="update-penyewaan-no-wa"
+                                        name="no_wa" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="update-penyewaan-nama-penyewa">Nama Penyewa</label>
-                                    <input type="text" class="form-control" id="update-penyewaan-nama-penyewa" name="nama_penyewa" required>
+                                    <input type="text" class="form-control" id="update-penyewaan-nama-penyewa"
+                                        name="nama_penyewa" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="update-penyewaan-alamat-penyewa">Alamat Penyewa</label>
                                     <textarea class="form-control" id="update-penyewaan-alamat-penyewa" name="alamat_penyewa" rows="3"></textarea>
                                 </div>
-    
+
                                 <p class="font-weight-bold mb-2 mt-3">Detail Transaksi</p>
                                 <div class="form-group">
                                     <label for="update-penyewaan-total-harga">Total Harga</label>
-                                    <input type="text" class="form-control" id="update-penyewaan-total-harga" name="total_harga" required> {{-- Consider type="number" --}}
+                                    <input type="text" class="form-control" id="update-penyewaan-total-harga"
+                                        name="total_harga" required> {{-- Consider type="number" --}}
                                 </div>
                                 <div class="form-group">
                                     <label for="update-penyewaan-nama-barang">Nama Barang</label>
-                                    <select class="form-control" id="update-penyewaan-nama-barang" name="nama_barang" required>
+                                    <select class="form-control" id="update-penyewaan-nama-barang" name="nama_barang"
+                                        required>
                                         <option value="">-Pilih Nama Barang-</option>
                                         {{-- Populate with options dynamically --}}
                                     </select>
                                 </div>
                             </div>
-    
+
                             {{-- Right Column --}}
                             <div class="col-md-6">
                                 <p class="font-weight-bold mb-2">Detail Pembayaran</p>
                                 {{-- Bukti Pembayaran Upload --}}
                                 <div class="form-group mb-3">
                                     <div class="d-flex align-items-center mb-1 p-2">
-                                        <div id="update-bukti-bayar-preview-area" class="modal-color rounded d-flex align-items-center justify-content-center mr-2" style="width: 60px; height: 60px; position: relative; cursor: pointer;" onclick="triggerUpdateBuktiBayarInput()">
-                                            <i class="fa fa-image fa-2x text-white" id="update-bukti-bayar-default-icon"></i>
-                                            <img src="#" alt="Bukti Bayar" id="update-bukti-bayar-preview-img" style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
+                                        <div id="update-bukti-bayar-preview-area"
+                                            class="modal-color rounded d-flex align-items-center justify-content-center mr-2"
+                                            style="width: 60px; height: 60px; position: relative; cursor: pointer;"
+                                            onclick="triggerUpdateBuktiBayarInput()">
+                                            <i class="fa fa-image fa-2x text-white"
+                                                id="update-bukti-bayar-default-icon"></i>
+                                            <img src="#" alt="Bukti Bayar" id="update-bukti-bayar-preview-img"
+                                                style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
                                         </div>
                                         <div class="file-info flex-grow-1">
-                                            <span id="update-bukti-bayar-filename" class="font-weight-bold d-block text-truncate" style="max-width: 150px;">Bukti_Pembayaran#1.jpg</span>
-                                            <small id="update-bukti-bayar-status" class="text-success">Successfully Uploaded!</small>
+                                            <span id="update-bukti-bayar-filename"
+                                                class="font-weight-bold d-block text-truncate"
+                                                style="max-width: 150px;">Bukti_Pembayaran#1.jpg</span>
+                                            <small id="update-bukti-bayar-status" class="text-success">Successfully
+                                                Uploaded!</small>
                                         </div>
-                                        <button type="button" class="btn btn-sm  modal-color text-white ml-auto" onclick="triggerUpdateBuktiBayarInput()">Ganti</button>
+                                        <button type="button" class="btn btn-sm  modal-color text-white ml-auto"
+                                            onclick="triggerUpdateBuktiBayarInput()">Ganti</button>
                                     </div>
-                                    <input type="file" class="d-none" id="update-bukti-bayar-input" name="bukti_pembayaran" accept="image/*,application/pdf">
+                                    <input type="file" class="d-none" id="update-bukti-bayar-input"
+                                        name="bukti_pembayaran" accept="image/*,application/pdf">
                                 </div>
-    
+
                                 {{-- Bukti KTM/KTP Upload --}}
                                 <div class="form-group mb-3">
                                     <div class="d-flex align-items-center mb-1 p-2 ">
-                                        <div id="update-bukti-ktm-preview-area" class="modal-color rounded d-flex align-items-center justify-content-center mr-2" style="width: 60px; height: 60px; position: relative; cursor: pointer;" onclick="triggerUpdateBuktiKtmInput()">
-                                            <i class="fa fa-image fa-2x text-white" id="update-bukti-ktm-default-icon"></i>
-                                            <img src="#" alt="Bukti KTM" id="update-bukti-ktm-preview-img" style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
+                                        <div id="update-bukti-ktm-preview-area"
+                                            class="modal-color rounded d-flex align-items-center justify-content-center mr-2"
+                                            style="width: 60px; height: 60px; position: relative; cursor: pointer;"
+                                            onclick="triggerUpdateBuktiKtmInput()">
+                                            <i class="fa fa-image fa-2x text-white"
+                                                id="update-bukti-ktm-default-icon"></i>
+                                            <img src="#" alt="Bukti KTM" id="update-bukti-ktm-preview-img"
+                                                style="width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0;">
                                         </div>
                                         <div class="file-info flex-grow-1">
-                                            <span id="update-bukti-ktm-filename" class="font-weight-bold d-block text-truncate" style="max-width: 150px;">Bukti_KTM_KTP#1.jpg</span>
-                                            <small id="update-bukti-ktm-status" class="text-success">Successfully Uploaded!</small>
+                                            <span id="update-bukti-ktm-filename"
+                                                class="font-weight-bold d-block text-truncate"
+                                                style="max-width: 150px;">Bukti_KTM_KTP#1.jpg</span>
+                                            <small id="update-bukti-ktm-status" class="text-success">Successfully
+                                                Uploaded!</small>
                                         </div>
-                                        <button type="button" class="btn btn-sm modal-color text-white ml-auto" onclick="triggerUpdateBuktiKtmInput()">Ganti</button>
+                                        <button type="button" class="btn btn-sm modal-color text-white ml-auto"
+                                            onclick="triggerUpdateBuktiKtmInput()">Ganti</button>
                                     </div>
-                                    <input type="file" class="d-none" id="update-bukti-ktm-input" name="bukti_ktm" accept="image/*,application/pdf">
+                                    <input type="file" class="d-none" id="update-bukti-ktm-input" name="bukti_ktm"
+                                        accept="image/*,application/pdf">
                                 </div>
-    
-    
+
+
                                 <p class="font-weight-bold mb-2 mt-3">Detail Sewa</p>
                                 <div class="form-group">
                                     <label for="update-tanggal-penyewaan">Tanggal Penyewaan</label>
-                                    <input type="date" class="form-control" id="update-tanggal-penyewaan" name="tanggal_penyewaan" required>
+                                    <input type="date" class="form-control" id="update-tanggal-penyewaan"
+                                        name="tanggal_penyewaan" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="update-waktu-sewa">Waktu Sewa</label>
-                                    <input type="text" class="form-control" id="update-waktu-sewa" name="waktu_sewa" placeholder="Contoh: 2 Minggu" required>
+                                    <input type="text" class="form-control" id="update-waktu-sewa" name="waktu_sewa"
+                                        placeholder="Contoh: 2 Minggu" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Status</label>
                                     <div class="ml-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status_sewa" id="update-status-selesai" value="Selesai">
+                                            <input class="form-check-input" type="radio" name="status_sewa"
+                                                id="update-status-selesai" value="Selesai">
                                             <label class="form-check-label" for="update-status-selesai">Selesai</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status_sewa" id="update-status-berlangsung" value="Berlangsung" checked>
-                                            <label class="form-check-label" for="update-status-berlangsung">Berlangsung</label>
+                                            <input class="form-check-input" type="radio" name="status_sewa"
+                                                id="update-status-berlangsung" value="Berlangsung" checked>
+                                            <label class="form-check-label"
+                                                for="update-status-berlangsung">Berlangsung</label>
                                         </div>
                                     </div>
                                 </div>
-    
+
                                 <p class="font-weight-bold mb-2 mt-3">Pengiriman</p>
                                 <div class="form-group">
                                     <label>Metode Pengiriman</label>
                                     <div class="ml-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="metode_pengiriman_penyewaan" id="update-penyewaan-take-away" value="take_away" checked>
-                                            <label class="form-check-label" for="update-penyewaan-take-away">Take-away</label>
+                                            <input class="form-check-input" type="radio"
+                                                name="metode_pengiriman_penyewaan" id="update-penyewaan-take-away"
+                                                value="take_away" checked>
+                                            <label class="form-check-label"
+                                                for="update-penyewaan-take-away">Take-away</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="metode_pengiriman_penyewaan" id="update-penyewaan-diantar" value="diantar">
+                                            <input class="form-check-input" type="radio"
+                                                name="metode_pengiriman_penyewaan" id="update-penyewaan-diantar"
+                                                value="diantar">
                                             <label class="form-check-label" for="update-penyewaan-diantar">Diantar</label>
                                         </div>
                                     </div>
@@ -1177,8 +1235,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
+                        <button type="button" class="btn btn-outline batal-btn rounded-3 me-2"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit"
+                            class="btn modal-color text-white font-weight-bold rounded-3">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -1447,8 +1507,8 @@
                         .tanggal || '-';
                     document.getElementById('rincian-waktu-sewa').textContent = (this.dataset
                         .jumlahminggu || '-') + ' Minggu';
-                        const statusText = this.dataset.status || '-';
-document.getElementById('rincian-status-sewa').innerHTML = `
+                    const statusText = this.dataset.status || '-';
+                    document.getElementById('rincian-status-sewa').innerHTML = `
     <span class="status-dot"></span> ${statusText}
 `;
                     document.getElementById('rincian-barang-disewa').textContent = this.dataset
@@ -1505,370 +1565,441 @@ document.getElementById('rincian-status-sewa').innerHTML = `
             });
 
 
-               /**
-     * Initializes a custom searchable dropdown.
-     * @param {string} containerId - The ID of the main container div.
-     * @param {string} originalSelectId - The ID of the original hidden select.
-     * @param {boolean} autoSubmitForm - Whether to submit the parent form on change.
-     * @param {string} formIdToSubmit - The ID of the form to submit (if autoSubmitForm is true).
-     */
-    function setupSearchableDropdown(containerId, originalSelectId, autoSubmitForm = false, formIdToSubmit = null) {
-        const container = document.getElementById(containerId);
-        if (!container) {
-            console.warn(`Searchable dropdown container not found: #${containerId}`);
-            return;
-        }
-        const originalSelect = document.getElementById(originalSelectId);
-        if (!originalSelect) {
-            console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
-            return;
-        }
-
-        const selectedValueDiv = container.querySelector('.selected-value');
-        const dropdownContainer = container.querySelector('.dropdown-list-container');
-        const searchBox = container.querySelector('.search-box');
-        const optionsList = container.querySelector('.options-list');
-        let listItems = [];
-
-        function populateOptionsList() {
-            optionsList.innerHTML = '';
-            listItems = [];
-            Array.from(originalSelect.options).forEach((option, index) => {
-                const li = document.createElement('li');
-                li.textContent = option.textContent;
-                li.dataset.value = option.value;
-                li.dataset.index = index;
-
-                // Do not add the initial placeholder to the visual list if it has no value
-                // but ensure it can be selected to clear the filter.
-                // For this on-page filter, we might always want the placeholder visible.
-                optionsList.appendChild(li);
-                listItems.push(li);
-            });
-        }
-
-        function syncDisplayWithSelect() {
-            if (!originalSelect || !selectedValueDiv) return;
-            const selectedOption = originalSelect.options[originalSelect.selectedIndex];
-            if (selectedOption) {
-                selectedValueDiv.textContent = selectedOption.textContent;
-                selectedValueDiv.classList.toggle('placeholder-selected', !selectedOption.value);
-            } else {
-                selectedValueDiv.textContent = '-Pilih Periode-'; // Default
-                selectedValueDiv.classList.add('placeholder-selected');
-            }
-        }
-
-        selectedValueDiv.addEventListener('click', (event) => {
-            event.stopPropagation();
-            if (!dropdownContainer || !searchBox) return;
-            closeAllDropdowns(containerId);
-            const isOpen = dropdownContainer.classList.toggle('show');
-            container.classList.toggle('open', isOpen);
-            if (isOpen) {
-                searchBox.value = '';
-                listItems.forEach(li => li.style.display = '');
-                searchBox.focus();
-            }
-        });
-
-        document.addEventListener('click', (event) => {
-            if (container && !container.contains(event.target)) {
-                if (dropdownContainer) dropdownContainer.classList.remove('show');
-                container.classList.remove('open');
-            }
-        });
-
-        optionsList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
-                const value = event.target.dataset.value;
-                const index = event.target.dataset.index;
-
-                if (index !== undefined) {
-                    originalSelect.selectedIndex = parseInt(index, 10);
+            /**
+             * Initializes a custom searchable dropdown.
+             * @param {string} containerId - The ID of the main container div.
+             * @param {string} originalSelectId - The ID of the original hidden select.
+             * @param {boolean} autoSubmitForm - Whether to submit the parent form on change.
+             * @param {string} formIdToSubmit - The ID of the form to submit (if autoSubmitForm is true).
+             */
+            function setupSearchableDropdown(containerId, originalSelectId, autoSubmitForm = false, formIdToSubmit =
+                null) {
+                const container = document.getElementById(containerId);
+                if (!container) {
+                    console.warn(`Searchable dropdown container not found: #${containerId}`);
+                    return;
                 }
-                syncDisplayWithSelect();
-                if (dropdownContainer) dropdownContainer.classList.remove('show');
-                container.classList.remove('open');
+                const originalSelect = document.getElementById(originalSelectId);
+                if (!originalSelect) {
+                    console.warn(`Original select not found for searchable dropdown: #${originalSelectId}`);
+                    return;
+                }
 
-                originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                const selectedValueDiv = container.querySelector('.selected-value');
+                const dropdownContainer = container.querySelector('.dropdown-list-container');
+                const searchBox = container.querySelector('.search-box');
+                const optionsList = container.querySelector('.options-list');
+                let listItems = [];
 
-                if (autoSubmitForm && formIdToSubmit) {
-                    const formToSubmit = document.getElementById(formIdToSubmit);
-                    if (formToSubmit) {
-                         // Update hidden periode input in searchForm before submitting
-                        const hiddenPeriodeInput = document.getElementById('hidden-periode-search-form');
-                        if(hiddenPeriodeInput) {
-                            hiddenPeriodeInput.value = originalSelect.value;
-                        }
-                        const hiddenLimitInput = document.getElementById('hidden-limit-search-form');
-                        if(hiddenLimitInput) {
-                             hiddenLimitInput.value = document.getElementById('showEntries').value;
-                        }
-                        formToSubmit.submit();
+                function populateOptionsList() {
+                    optionsList.innerHTML = '';
+                    listItems = [];
+                    Array.from(originalSelect.options).forEach((option, index) => {
+                        const li = document.createElement('li');
+                        li.textContent = option.textContent;
+                        li.dataset.value = option.value;
+                        li.dataset.index = index;
+
+                        // Do not add the initial placeholder to the visual list if it has no value
+                        // but ensure it can be selected to clear the filter.
+                        // For this on-page filter, we might always want the placeholder visible.
+                        optionsList.appendChild(li);
+                        listItems.push(li);
+                    });
+                }
+
+                function syncDisplayWithSelect() {
+                    if (!originalSelect || !selectedValueDiv) return;
+                    const selectedOption = originalSelect.options[originalSelect.selectedIndex];
+                    if (selectedOption) {
+                        selectedValueDiv.textContent = selectedOption.textContent;
+                        selectedValueDiv.classList.toggle('placeholder-selected', !selectedOption.value);
                     } else {
-                        console.warn(`Form to submit not found: #${formIdToSubmit}`);
+                        selectedValueDiv.textContent = '-Pilih Periode-'; // Default
+                        selectedValueDiv.classList.add('placeholder-selected');
                     }
                 }
-            }
-        });
 
-        searchBox.addEventListener('input', () => {
-            const searchTerm = searchBox.value.toLowerCase().trim();
-            listItems.forEach(li => {
-                const itemText = li.textContent.toLowerCase();
-                li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ? '' : 'none';
-            });
-        });
+                selectedValueDiv.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    if (!dropdownContainer || !searchBox) return;
+                    closeAllDropdowns(containerId);
+                    const isOpen = dropdownContainer.classList.toggle('show');
+                    container.classList.toggle('open', isOpen);
+                    if (isOpen) {
+                        searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+                        searchBox.focus();
+                    }
+                });
 
-        originalSelect.addEventListener('change', syncDisplayWithSelect);
+                document.addEventListener('click', (event) => {
+                    if (container && !container.contains(event.target)) {
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+                    }
+                });
 
-        populateOptionsList();
-        syncDisplayWithSelect();
+                optionsList.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'LI' && event.target.dataset.value !== undefined) {
+                        const value = event.target.dataset.value;
+                        const index = event.target.dataset.index;
 
-        const modal = container.closest('.modal');
-        if (modal) {
-            modal.addEventListener('hidden.bs.modal', function() {
-                if (originalSelect.options.length > 0) {
-                    let placeholderIndex = 0;
-                    for (let i = 0; i < originalSelect.options.length; i++) {
-                        if (originalSelect.options[i].value === "") {
-                            placeholderIndex = i;
-                            break;
+                        if (index !== undefined) {
+                            originalSelect.selectedIndex = parseInt(index, 10);
+                        }
+                        syncDisplayWithSelect();
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+
+                        originalSelect.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
+
+                        if (autoSubmitForm && formIdToSubmit) {
+                            const formToSubmit = document.getElementById(formIdToSubmit);
+                            if (formToSubmit) {
+                                // Update hidden periode input in searchForm before submitting
+                                const hiddenPeriodeInput = document.getElementById(
+                                    'hidden-periode-search-form');
+                                if (hiddenPeriodeInput) {
+                                    hiddenPeriodeInput.value = originalSelect.value;
+                                }
+                                const hiddenLimitInput = document.getElementById(
+                                    'hidden-limit-search-form');
+                                if (hiddenLimitInput) {
+                                    hiddenLimitInput.value = document.getElementById('showEntries').value;
+                                }
+                                formToSubmit.submit();
+                            } else {
+                                console.warn(`Form to submit not found: #${formIdToSubmit}`);
+                            }
                         }
                     }
-                    originalSelect.selectedIndex = placeholderIndex;
-                }
+                });
+
+                searchBox.addEventListener('input', () => {
+                    const searchTerm = searchBox.value.toLowerCase().trim();
+                    listItems.forEach(li => {
+                        const itemText = li.textContent.toLowerCase();
+                        li.style.display = (searchTerm === '' || itemText.includes(searchTerm)) ?
+                            '' : 'none';
+                    });
+                });
+
+                originalSelect.addEventListener('change', syncDisplayWithSelect);
+
+                populateOptionsList();
                 syncDisplayWithSelect();
-                if (searchBox) searchBox.value = '';
-                listItems.forEach(li => li.style.display = '');
-                if (dropdownContainer) dropdownContainer.classList.remove('show');
-                container.classList.remove('open');
+
+                const modal = container.closest('.modal');
+                if (modal) {
+                    modal.addEventListener('hidden.bs.modal', function() {
+                        if (originalSelect.options.length > 0) {
+                            let placeholderIndex = 0;
+                            for (let i = 0; i < originalSelect.options.length; i++) {
+                                if (originalSelect.options[i].value === "") {
+                                    placeholderIndex = i;
+                                    break;
+                                }
+                            }
+                            originalSelect.selectedIndex = placeholderIndex;
+                        }
+                        syncDisplayWithSelect();
+                        if (searchBox) searchBox.value = '';
+                        listItems.forEach(li => li.style.display = '');
+                        if (dropdownContainer) dropdownContainer.classList.remove('show');
+                        container.classList.remove('open');
+                    });
+                }
+            }
+
+            function closeAllDropdowns(excludeContainerId = null) {
+                document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(
+                    dropdown => {
+                        const currentContainer = dropdown.closest('.custom-search-select-container');
+                        if (!excludeContainerId || (currentContainer && currentContainer.id !==
+                                excludeContainerId)) {
+                            dropdown.classList.remove('show');
+                            if (currentContainer) currentContainer.classList.remove('open');
+                        }
+                    });
+            }
+
+            // --- Initialize the "Pilih Periode" dropdown for the table filter ---
+            // The third argument `true` enables auto-submit, and the fourth is the ID of the form to submit.
+            setupSearchableDropdown('pilih-periode-table-filter-container', 'pilih-periode-table-filter', true,
+                'searchForm');
+
+            // --- Handle "Show Entries" Change ---
+            const showEntriesSelect = document.getElementById('showEntries');
+            if (showEntriesSelect) {
+                showEntriesSelect.addEventListener('change', function() {
+                    const limit = this.value;
+                    const searchForm = document.getElementById('searchForm');
+                    if (searchForm) {
+                        // Update the hidden limit input within the search form
+                        const hiddenLimitInput = document.getElementById('hidden-limit-search-form');
+                        if (hiddenLimitInput) {
+                            hiddenLimitInput.value = limit;
+                        }
+                        // Also ensure the periode is included if selected
+                        const periodeSelect = document.getElementById('pilih-periode-table-filter');
+                        const hiddenPeriodeInput = document.getElementById('hidden-periode-search-form');
+                        if (periodeSelect && hiddenPeriodeInput) {
+                            hiddenPeriodeInput.value = periodeSelect.value;
+                        }
+                        searchForm.submit();
+                    }
+                });
+            }
+            // Update the hidden limit input with the current value on page load
+            const initialLimit = showEntriesSelect ? showEntriesSelect.value : '10';
+            const hiddenLimitSearchInput = document.getElementById('hidden-limit-search-form');
+            if (hiddenLimitSearchInput) {
+                hiddenLimitSearchInput.value = initialLimit;
+            }
+
+
+            // Ensure the selected "Show Entries" and "Periode" are reflected if page reloads with query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const limitParam = urlParams.get('limit');
+            const periodeParam = urlParams.get('periode');
+
+            if (limitParam && showEntriesSelect) {
+                showEntriesSelect.value = limitParam;
+            }
+
+            const periodeFilterSelect = document.getElementById('pilih-periode-table-filter');
+            if (periodeParam && periodeFilterSelect) {
+                periodeFilterSelect.value = periodeParam;
+                // Manually trigger sync for the custom dropdown if value is set programmatically after page load
+                // This might be handled by the `syncDisplayWithSelect` if `setupSearchableDropdown` runs after this block
+                // or if originalSelect.addEventListener('change', syncDisplayWithSelect) fires.
+                // However, explicit sync after setting value is safer if there are timing issues.
+                const event = new Event('change');
+                periodeFilterSelect.dispatchEvent(event);
+            }
+        });
+
+        function deletePenyewaan(button) {
+            const id = button.getAttribute('data-id');
+            const pembeli = button.getAttribute('data-penyewa');
+            const url = button.getAttribute('data-url');
+
+            // Konfirmasi sebelum menghapus
+            Swal.fire({
+                title: `Hapus data?`,
+                text: `Data penjualan dari ${pembeli} akan dihapus.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(url, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'Authorization': 'Bearer YOUR_ACCESS_TOKEN_HERE', // Ganti token jika perlu
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: 'Berhasil!',
+                                    text: 'Data berhasil dihapus.',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                return response.json().then(data => {
+                                    throw new Error(data.message || 'Gagal menghapus data');
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            Swal.fire('Error!', error.message, 'error');
+                        });
+                }
             });
         }
-    }
-
-    function closeAllDropdowns(excludeContainerId = null) {
-        document.querySelectorAll('.custom-search-select-container .dropdown-list-container.show').forEach(dropdown => {
-            const currentContainer = dropdown.closest('.custom-search-select-container');
-            if (!excludeContainerId || (currentContainer && currentContainer.id !== excludeContainerId)) {
-                dropdown.classList.remove('show');
-                if (currentContainer) currentContainer.classList.remove('open');
-            }
-        });
-    }
-
-    // --- Initialize the "Pilih Periode" dropdown for the table filter ---
-    // The third argument `true` enables auto-submit, and the fourth is the ID of the form to submit.
-    setupSearchableDropdown('pilih-periode-table-filter-container', 'pilih-periode-table-filter', true, 'searchForm');
-
-    // --- Handle "Show Entries" Change ---
-    const showEntriesSelect = document.getElementById('showEntries');
-    if (showEntriesSelect) {
-        showEntriesSelect.addEventListener('change', function() {
-            const limit = this.value;
-            const searchForm = document.getElementById('searchForm');
-            if (searchForm) {
-                // Update the hidden limit input within the search form
-                const hiddenLimitInput = document.getElementById('hidden-limit-search-form');
-                 if(hiddenLimitInput) {
-                    hiddenLimitInput.value = limit;
-                }
-                 // Also ensure the periode is included if selected
-                const periodeSelect = document.getElementById('pilih-periode-table-filter');
-                const hiddenPeriodeInput = document.getElementById('hidden-periode-search-form');
-                if(periodeSelect && hiddenPeriodeInput){
-                    hiddenPeriodeInput.value = periodeSelect.value;
-                }
-                searchForm.submit();
-            }
-        });
-    }
-    // Update the hidden limit input with the current value on page load
-    const initialLimit = showEntriesSelect ? showEntriesSelect.value : '10';
-    const hiddenLimitSearchInput = document.getElementById('hidden-limit-search-form');
-    if (hiddenLimitSearchInput) {
-        hiddenLimitSearchInput.value = initialLimit;
-    }
-
-
-    // Ensure the selected "Show Entries" and "Periode" are reflected if page reloads with query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const limitParam = urlParams.get('limit');
-    const periodeParam = urlParams.get('periode');
-
-    if (limitParam && showEntriesSelect) {
-        showEntriesSelect.value = limitParam;
-    }
-
-    const periodeFilterSelect = document.getElementById('pilih-periode-table-filter');
-    if (periodeParam && periodeFilterSelect) {
-        periodeFilterSelect.value = periodeParam;
-        // Manually trigger sync for the custom dropdown if value is set programmatically after page load
-        // This might be handled by the `syncDisplayWithSelect` if `setupSearchableDropdown` runs after this block
-        // or if originalSelect.addEventListener('change', syncDisplayWithSelect) fires.
-        // However, explicit sync after setting value is safer if there are timing issues.
-        const event = new Event('change');
-        periodeFilterSelect.dispatchEvent(event);
-    }
-});
 
 
         // Update, pictures
         document.addEventListener('DOMContentLoaded', function() {
 
-// --- Helper function for managing file upload UI ---
-function setupFileUpload(inputId, previewAreaId, defaultIconId, previewImgId, filenameId, statusId, initialPromptText = "No file chosen") {
-    const inputElement = document.getElementById(inputId);
-    const previewAreaElement = document.getElementById(previewAreaId); // Clickable area
-    const defaultIconElement = document.getElementById(defaultIconId);
-    const previewImgElement = document.getElementById(previewImgId);
-    const filenameElement = document.getElementById(filenameId);
-    const statusElement = document.getElementById(statusId);
+            // --- Helper function for managing file upload UI ---
+            function setupFileUpload(inputId, previewAreaId, defaultIconId, previewImgId, filenameId, statusId,
+                initialPromptText = "No file chosen") {
+                const inputElement = document.getElementById(inputId);
+                const previewAreaElement = document.getElementById(previewAreaId); // Clickable area
+                const defaultIconElement = document.getElementById(defaultIconId);
+                const previewImgElement = document.getElementById(previewImgId);
+                const filenameElement = document.getElementById(filenameId);
+                const statusElement = document.getElementById(statusId);
 
-    function showPreview(file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImgElement.src = e.target.result;
-            previewImgElement.style.display = 'block';
-            if(defaultIconElement) defaultIconElement.style.display = 'none';
-            if(filenameElement) filenameElement.textContent = file.name;
-            if(statusElement) {
-                statusElement.textContent = 'Successfully Uploaded!';
-                statusElement.className = 'text-success small';
-            }
-        }
-        reader.readAsDataURL(file);
-    }
+                function showPreview(file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImgElement.src = e.target.result;
+                        previewImgElement.style.display = 'block';
+                        if (defaultIconElement) defaultIconElement.style.display = 'none';
+                        if (filenameElement) filenameElement.textContent = file.name;
+                        if (statusElement) {
+                            statusElement.textContent = 'Successfully Uploaded!';
+                            statusElement.className = 'text-success small';
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                }
 
-    function resetUploader(existingImageUrl = null, existingImageName = null) {
-        inputElement.value = ''; // Clear file input
-        if (existingImageUrl && existingImageName) {
-            previewImgElement.src = existingImageUrl;
-            previewImgElement.style.display = 'block';
-            if(defaultIconElement) defaultIconElement.style.display = 'none';
-            if(filenameElement) filenameElement.textContent = existingImageName;
-            if(statusElement) {
-                 statusElement.textContent = 'Current file loaded.';
-                 statusElement.className = 'text-muted small';
-            }
-        } else {
-            previewImgElement.src = '#';
-            previewImgElement.style.display = 'none';
-            if(defaultIconElement) defaultIconElement.style.display = 'block';
-            if(filenameElement) filenameElement.textContent = initialPromptText;
-             if(statusElement) {
-                statusElement.textContent = 'No file selected.';
-                statusElement.className = 'text-muted small';
-            }
-        }
-    }
+                function resetUploader(existingImageUrl = null, existingImageName = null) {
+                    inputElement.value = ''; // Clear file input
+                    if (existingImageUrl && existingImageName) {
+                        previewImgElement.src = existingImageUrl;
+                        previewImgElement.style.display = 'block';
+                        if (defaultIconElement) defaultIconElement.style.display = 'none';
+                        if (filenameElement) filenameElement.textContent = existingImageName;
+                        if (statusElement) {
+                            statusElement.textContent = 'Current file loaded.';
+                            statusElement.className = 'text-muted small';
+                        }
+                    } else {
+                        previewImgElement.src = '#';
+                        previewImgElement.style.display = 'none';
+                        if (defaultIconElement) defaultIconElement.style.display = 'block';
+                        if (filenameElement) filenameElement.textContent = initialPromptText;
+                        if (statusElement) {
+                            statusElement.textContent = 'No file selected.';
+                            statusElement.className = 'text-muted small';
+                        }
+                    }
+                }
 
-    if (inputElement) {
-        inputElement.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                showPreview(file);
-            } else {
-                // If user cancels file selection, optionally reset to original or show "no file"
-                // For now, let's assume if data was loaded, it remains, else it shows "no file"
-                // This might need refinement based on exact UX desired
+                if (inputElement) {
+                    inputElement.addEventListener('change', function(event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            showPreview(file);
+                        } else {
+                            // If user cancels file selection, optionally reset to original or show "no file"
+                            // For now, let's assume if data was loaded, it remains, else it shows "no file"
+                            // This might need refinement based on exact UX desired
+                        }
+                    });
+                }
+                return {
+                    resetUploader,
+                    showPreview
+                }; // Expose reset and showPreview for external use if needed
             }
+
+            // Setup for Bukti Pembayaran
+            const buktiBayarUploader = setupFileUpload(
+                'update-bukti-bayar-input',
+                'update-bukti-bayar-preview-area',
+                'update-bukti-bayar-default-icon',
+                'update-bukti-bayar-preview-img',
+                'update-bukti-bayar-filename',
+                'update-bukti-bayar-status',
+                'Bukti Pembayaran' // Initial text for filename span
+            );
+            window.triggerUpdateBuktiBayarInput = function() {
+                document.getElementById('update-bukti-bayar-input').click();
+            }
+
+            // Setup for Bukti KTM/KTP
+            const buktiKtmUploader = setupFileUpload(
+                'update-bukti-ktm-input',
+                'update-bukti-ktm-preview-area',
+                'update-bukti-ktm-default-icon',
+                'update-bukti-ktm-preview-img',
+                'update-bukti-ktm-filename',
+                'update-bukti-ktm-status',
+                'Bukti KTM/KTP' // Initial text for filename span
+            );
+            window.triggerUpdateBuktiKtmInput = function() {
+                document.getElementById('update-bukti-ktm-input').click();
+            }
+
+
+            // --- Logic to populate and show the updatePenyewaanModal ---
+            $('#updatePenyewaanModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var penyewaanId = button.data('id'); // Extract info like data-id="..."
+                var modal = $(this);
+
+                // @TODO: AJAX call to fetch penyewaan data by penyewaanId
+                // For demonstration, using placeholder data:
+                var existingData = {
+                    id: penyewaanId,
+                    no_wa: '08987654321',
+                    nama_penyewa: 'Jane Doe',
+                    alamat_penyewa: 'Jl. Merdeka No. 45',
+                    total_harga: '250000',
+                    nama_barang_id: 'barang_2', // Placeholder
+                    bukti_pembayaran_url: null, // 'path/to/bukti_bayar.jpg', or null
+                    bukti_pembayaran_filename: null, // 'bukti_bayar.jpg',
+                    bukti_ktm_url: 'assets/img/ktm_placeholder.png', // Placeholder path for existing KTM
+                    bukti_ktm_filename: 'ktm_jane_doe.jpg',
+                    tanggal_penyewaan: '2025-06-15',
+                    waktu_sewa: '1 Minggu',
+                    status_sewa: 'Berlangsung', // 'Selesai' or 'Berlangsung'
+                    metode_pengiriman: 'diantar' // 'take_away' or 'diantar'
+                };
+
+                modal.find('#update-penyewaan-id').val(existingData.id);
+                modal.find('#update-penyewaan-no-wa').val(existingData.no_wa);
+                modal.find('#update-penyewaan-nama-penyewa').val(existingData.nama_penyewa);
+                modal.find('#update-penyewaan-alamat-penyewa').val(existingData.alamat_penyewa);
+                modal.find('#update-penyewaan-total-harga').val(existingData.total_harga);
+                modal.find('#update-penyewaan-nama-barang').val(existingData
+                    .nama_barang_id); // Make sure this option exists
+                modal.find('#update-tanggal-penyewaan').val(existingData.tanggal_penyewaan);
+                modal.find('#update-waktu-sewa').val(existingData.waktu_sewa);
+
+                // Set radio buttons for status_sewa
+                if (existingData.status_sewa === 'Selesai') {
+                    modal.find('#update-status-selesai').prop('checked', true);
+                } else {
+                    modal.find('#update-status-berlangsung').prop('checked', true);
+                }
+
+                // Set radio buttons for metode_pengiriman
+                if (existingData.metode_pengiriman === 'diantar') {
+                    modal.find('#update-penyewaan-diantar').prop('checked', true);
+                } else {
+                    modal.find('#update-penyewaan-take-away').prop('checked', true);
+                }
+
+                // Load existing file previews
+                buktiBayarUploader.resetUploader(existingData.bukti_pembayaran_url, existingData
+                    .bukti_pembayaran_filename);
+                buktiKtmUploader.resetUploader(existingData.bukti_ktm_url, existingData.bukti_ktm_filename);
+
+                // Update form action URL if needed
+                // modal.find('#updatePenyewaanForm').attr('action', '/penyewaan/update/' + existingData.id);
+            });
+
+            $('#updatePenyewaanModal').on('hidden.bs.modal', function() {
+                // Reset file inputs when modal is closed to avoid issues if reopened
+                // This will reset to the initial "no file chosen" or default icon state.
+                // If you need to retain the *original* loaded data state, more complex logic is needed.
+                buktiBayarUploader.resetUploader();
+                buktiKtmUploader.resetUploader();
+                // You might also want to reset other form fields or clear them
+                // $(this).find('form')[0].reset(); // This would clear all fields
+            });
+
+
         });
-    }
-    return { resetUploader, showPreview }; // Expose reset and showPreview for external use if needed
-}
-
-// Setup for Bukti Pembayaran
-const buktiBayarUploader = setupFileUpload(
-    'update-bukti-bayar-input',
-    'update-bukti-bayar-preview-area',
-    'update-bukti-bayar-default-icon',
-    'update-bukti-bayar-preview-img',
-    'update-bukti-bayar-filename',
-    'update-bukti-bayar-status',
-    'Bukti Pembayaran' // Initial text for filename span
-);
-window.triggerUpdateBuktiBayarInput = function() { document.getElementById('update-bukti-bayar-input').click(); }
-
-// Setup for Bukti KTM/KTP
-const buktiKtmUploader = setupFileUpload(
-    'update-bukti-ktm-input',
-    'update-bukti-ktm-preview-area',
-    'update-bukti-ktm-default-icon',
-    'update-bukti-ktm-preview-img',
-    'update-bukti-ktm-filename',
-    'update-bukti-ktm-status',
-    'Bukti KTM/KTP' // Initial text for filename span
-);
-window.triggerUpdateBuktiKtmInput = function() { document.getElementById('update-bukti-ktm-input').click(); }
-
-
-// --- Logic to populate and show the updatePenyewaanModal ---
-$('#updatePenyewaanModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var penyewaanId = button.data('id'); // Extract info like data-id="..."
-    var modal = $(this);
-
-    // @TODO: AJAX call to fetch penyewaan data by penyewaanId
-    // For demonstration, using placeholder data:
-    var existingData = {
-        id: penyewaanId,
-        no_wa: '08987654321',
-        nama_penyewa: 'Jane Doe',
-        alamat_penyewa: 'Jl. Merdeka No. 45',
-        total_harga: '250000',
-        nama_barang_id: 'barang_2', // Placeholder
-        bukti_pembayaran_url: null, // 'path/to/bukti_bayar.jpg', or null
-        bukti_pembayaran_filename: null, // 'bukti_bayar.jpg',
-        bukti_ktm_url: 'assets/img/ktm_placeholder.png',       // Placeholder path for existing KTM
-        bukti_ktm_filename: 'ktm_jane_doe.jpg',
-        tanggal_penyewaan: '2025-06-15',
-        waktu_sewa: '1 Minggu',
-        status_sewa: 'Berlangsung', // 'Selesai' or 'Berlangsung'
-        metode_pengiriman: 'diantar' // 'take_away' or 'diantar'
-    };
-
-    modal.find('#update-penyewaan-id').val(existingData.id);
-    modal.find('#update-penyewaan-no-wa').val(existingData.no_wa);
-    modal.find('#update-penyewaan-nama-penyewa').val(existingData.nama_penyewa);
-    modal.find('#update-penyewaan-alamat-penyewa').val(existingData.alamat_penyewa);
-    modal.find('#update-penyewaan-total-harga').val(existingData.total_harga);
-    modal.find('#update-penyewaan-nama-barang').val(existingData.nama_barang_id); // Make sure this option exists
-    modal.find('#update-tanggal-penyewaan').val(existingData.tanggal_penyewaan);
-    modal.find('#update-waktu-sewa').val(existingData.waktu_sewa);
-
-    // Set radio buttons for status_sewa
-    if (existingData.status_sewa === 'Selesai') {
-        modal.find('#update-status-selesai').prop('checked', true);
-    } else {
-        modal.find('#update-status-berlangsung').prop('checked', true);
-    }
-
-    // Set radio buttons for metode_pengiriman
-    if (existingData.metode_pengiriman === 'diantar') {
-        modal.find('#update-penyewaan-diantar').prop('checked', true);
-    } else {
-        modal.find('#update-penyewaan-take-away').prop('checked', true);
-    }
-
-    // Load existing file previews
-    buktiBayarUploader.resetUploader(existingData.bukti_pembayaran_url, existingData.bukti_pembayaran_filename);
-    buktiKtmUploader.resetUploader(existingData.bukti_ktm_url, existingData.bukti_ktm_filename);
-
-    // Update form action URL if needed
-    // modal.find('#updatePenyewaanForm').attr('action', '/penyewaan/update/' + existingData.id);
-});
-
-$('#updatePenyewaanModal').on('hidden.bs.modal', function () {
-    // Reset file inputs when modal is closed to avoid issues if reopened
-    // This will reset to the initial "no file chosen" or default icon state.
-    // If you need to retain the *original* loaded data state, more complex logic is needed.
-    buktiBayarUploader.resetUploader();
-    buktiKtmUploader.resetUploader();
-    // You might also want to reset other form fields or clear them
-    // $(this).find('form')[0].reset(); // This would clear all fields
-});
-});
     </script>
 @endsection
