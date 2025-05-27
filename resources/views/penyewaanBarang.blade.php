@@ -954,14 +954,6 @@
 
                                                         {{-- Update Button --}}
                                                         {{-- @TODO: Populate data-* attributes and set correct update URL for penyewaan --}}
-                                                        <button class="btn btn-sm btn-warning m-1 btn-update"
-                                                            data-id="{{ $item['id'] }}"
-                                                            data-penyewa="{{ $item['nama_penyewa'] }}"
-                                                            {{-- Add other fields to pre-fill the update form --}} data-url="{{-- route('penyewaan_barang.update', $item->id) --}}"
-                                                            {{-- Placeholder URL --}} data-toggle="modal"
-                                                            data-target="#updatePenyewaanModal ">
-                                                            Update
-                                                        </button>
 
                                                         {{-- Hapus Button --}}
                                                         <button class="btn btn-sm btn-danger m-1"
