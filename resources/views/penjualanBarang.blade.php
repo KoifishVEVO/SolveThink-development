@@ -725,7 +725,9 @@
 
                         {{-- Top Controls Row: Show Entries, Search, Filter, Tambah --}}
                         <div class="row mb-3 align-items-center">
-                            <div class="col-sm-12 col-md-auto"> {{-- Adjust columns for responsiveness --}}
+
+                            {{-- column left --}}
+                            <div class="col-sm-12 col-md-auto"> 
                                 <div class="dataTables_length" id="dataTable_length">
                                     <label class="mb-0">Show
                                         <select id="showEntries" name="dataTable_length" aria-controls="dataTable"
@@ -733,35 +735,21 @@
                                             style="width: auto; display: inline-block;">
                                             {{-- Placeholder: Link value to backend query limit --}}
                                             {{-- @TODO: Add JS to handle entry limit change and reload data --}}
-                                            <option value="10" {{-- @TODO: Check request('limit') == 10 ? 'selected' : '' --}}>10</option>
-                                            <option value="25" {{-- @TODO: Check request('limit') == 25 ? 'selected' : '' --}}>25</option>
-                                            <option value="50" {{-- @TODO: Check request('limit') == 50 ? 'selected' : '' --}}>50</option>
-                                            <option value="100" {{-- @TODO: Check request('limit') == 100 ? 'selected' : '' --}}>100</option>
+                                            <option value="10" >10</option>
+                                            <option value="25" >25</option>
+                                            <option value="50" >50</option>
+                                            <option value="100" >100</option>
                                         </select> entries
                                     </label>
                                 </div>
                             </div>
+                            
+                            {{-- center --}}
 
-                            <div class="col-sm-12 col-md"> {{-- Takes remaining space --}}
-                                <div id="dataTable_filter"
-                                    class="dataTables_filter d-flex justify-content-md-end align-items-center">
-                                    {{-- Search Form --}}
-                                    <label class="mr-2 mb-0">Search:
-                                        {{-- Placeholder: Link form to backend search --}}
-                                        {{-- @TODO: Point action to the correct route for penjualanBarang search --}}
-                                        <form id="searchForm" method="GET" action="{{-- route('penjualan_barang.index') --}}"
-                                            class="d-inline">
-                                            <input type="search" name="search" value="{{-- request()->search --}}"
-                                                class="form-control form-control-sm d-inline-block" style="width: auto;"
-                                                aria-controls="dataTable" placeholder="">
-                                            {{-- Add hidden input for limit if needed --}}
-                                            {{-- <input type="hidden" name="limit" value="{{ request()->limit ?? 10 }}"> --}}
-                                        </form>
-                                    </label>
-
-                                    {{-- Custom Searchable Dropdown for Periode Filter --}}
-                                    <div class="custom-search-select-container ml-2"
-                                        id="pilih-periode-table-filter-container" style="min-width: 180px;">
+                            {{-- Custom Searchable Dropdown for Periode Filter --}}
+                            <div class="col-sm-12 col-md d-flex justify-content-center">
+                                    <div class="custom-search-select-container"
+                                        id="pilih-periode-table-filter-container" style="width: 300px;">
                                         {{-- This div will display the selected value and trigger the dropdown --}}
                                         <div class="selected-value form-control form-control-sm" tabindex="0">-Pilih
                                             Periode-</div>
@@ -792,6 +780,26 @@
                                                 Periode</option>
                                         </select>
                                     </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-auto"> {{-- Takes remaining space --}}
+                                <div id="dataTable_filter"
+                                    class="dataTables_filter d-flex justify-content-md-end align-items-center">
+                                    {{-- Search Form --}}
+                                    <label class="mr-2 mb-0">Search:
+                                        {{-- Placeholder: Link form to backend search --}}
+                                        {{-- @TODO: Point action to the correct route for penjualanBarang search --}}
+                                        <form id="searchForm" method="GET" action="{{-- route('penjualan_barang.index') --}}"
+                                            class="d-inline">
+                                            <input type="search" name="search" value="{{-- request()->search --}}"
+                                                class="form-control form-control-sm d-inline-block" style="width: auto;"
+                                                aria-controls="dataTable" placeholder="">
+                                            {{-- Add hidden input for limit if needed --}}
+                                            {{-- <input type="hidden" name="limit" value="{{ request()->limit ?? 10 }}"> --}}
+                                        </form>
+                                    </label>
+
+                                    
                                 </div>
                             </div>
                         </div>

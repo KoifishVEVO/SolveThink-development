@@ -765,6 +765,8 @@
 
                         {{-- Top Controls Row: Show Entries, Search, Filter, Tambah --}}
                         <div class="row mb-3 align-items-center">
+
+                            {{-- keft --}}
                             <div class="col-sm-12 col-md-auto"> {{-- Adjust columns for responsiveness --}}
                                 <div class="dataTables_length" id="dataTable_length">
                                     <label class="mb-0">Show
@@ -783,26 +785,11 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md"> {{-- Takes remaining space --}}
-                                <div id="dataTable_filter"
-                                    class="dataTables_filter d-flex justify-content-md-end align-items-center">
-                                    {{-- Search Form --}}
-                                    <label class="mr-2 mb-0">Search:
-                                        {{-- Placeholder: Link form to backend search --}}
-                                        {{-- @TODO: Point action to the correct route for penyewaanBarang search --}}
-                                        <form id="searchForm" method="GET" action="{{-- route('penyewaan_barang.index') --}}"
-                                            class="d-inline">
-                                            <input type="search" name="search" value="{{-- request()->search --}}"
-                                                class="form-control form-control-sm d-inline-block" style="width: auto;"
-                                                aria-controls="dataTable" placeholder="">
-                                            {{-- Add hidden input for limit if needed --}}
-                                            {{-- <input type="hidden" name="limit" value="{{ request()->limit ?? 10 }}"> --}}
-                                        </form>
-                                    </label>
-
-                                    {{-- Custom Searchable Dropdown for Periode Filter --}}
-                                    <div class="custom-search-select-container ml-2"
-                                        id="pilih-periode-table-filter-container" style="min-width: 180px;">
+                            {{-- center --}}
+                            {{-- Custom Searchable Dropdown for Periode Filter --}}
+                            <div class="col-sm-12 col-md d-flex justify-content-center">
+                                <div class="custom-search-select-container"
+                                        id="pilih-periode-table-filter-container" style="width: 300px;">
                                         {{-- This div will display the selected value and trigger the dropdown --}}
                                         <div class="selected-value form-control form-control-sm" tabindex="0">-Pilih
                                             Periode-</div>
@@ -833,6 +820,28 @@
                                                 Periode</option>
                                         </select>
                                     </div>
+                            </div>
+
+                            {{-- right --}}
+                            <div class="col-sm-12 col-md-auto"> {{-- Takes remaining space --}}
+                                <div id="dataTable_filter"
+                                    class="dataTables_filter d-flex justify-content-md-end align-items-center">
+                                    {{-- Search Form --}}
+                                    <label class="mr-2 mb-0">Search:
+                                        {{-- Placeholder: Link form to backend search --}}
+                                        {{-- @TODO: Point action to the correct route for penyewaanBarang search --}}
+                                        <form id="searchForm" method="GET" action="{{-- route('penyewaan_barang.index') --}}"
+                                            class="d-inline">
+                                            <input type="search" name="search" value="{{-- request()->search --}}"
+                                                class="form-control form-control-sm d-inline-block" style="width: auto;"
+                                                aria-controls="dataTable" placeholder="">
+                                            {{-- Add hidden input for limit if needed --}}
+                                            {{-- <input type="hidden" name="limit" value="{{ request()->limit ?? 10 }}"> --}}
+                                        </form>
+                                    </label>
+
+                                  
+                                    
                                 </div>
                             </div>
                         </div>

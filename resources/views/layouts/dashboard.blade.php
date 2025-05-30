@@ -437,13 +437,6 @@
             </li>
 
             <li class="nav-item sidebar-item-color">
-                <a class="nav-link" href="{{ url('/rincianBarangBaru') }}">
-                    <!-- temporary small, use span later when icon exist -->
-                    <small>Rincian Belanja</small>
-                </a>
-            </li>
-
-            <li class="nav-item sidebar-item-color">
                 <a class="nav-link" href="{{ route('penjualan.show') }}">
                     <i class="fas fa-tags text-gray-400"></i>
                     <span>Penjualan Barang</span>
